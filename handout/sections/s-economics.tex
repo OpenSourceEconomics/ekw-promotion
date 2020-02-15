@@ -1,0 +1,25 @@
+%!TEX root = ../main.tex
+%-------------------------------------------------------------------------------
+\section{Economic motivation}
+%-------------------------------------------------------------------------------
+\paragraph{Basic setup} At time $t = 1, \hdots, T$ each individual observes the state of the economic environment $s\in S$ and chooses an action $a$ from the set of admissible actions $\mathcal{A}$. The decision has two consequences: an individual receives an immediate utility $u_t(s, a)$ and the economy evolves to a new state $s^\prime$. The transition from $s$ to $s^\prime$ is affected by the action.  Individuals are forward-looking, thus they do not simply choose the alternative with the highest immediate utility. Instead, they take the future consequences of their current action into account.
+
+\paragraph{Timing of events} Figure \ref{Timing} depicts the timing of events in the model for two generic time periods. At the beginning of time $t$ an individual fully learns about the immediate utility of each alternative, chooses one of them, and receives its immediate utility. Then the state evolves from $s$ to $s^\prime$ and the process is repeated in $t + 1$.
+%
+\begin{figure}\caption{Timing of events}\label{Timing}\vspace{1.0cm}\centering
+\input{material/fig-timing.tex}
+\end{figure}
+%
+\paragraph{Decision rule} A decision rule $d_t$ specifies the action at a particular time $t$ for any possible state. A policy $\pi \equiv(d_1, \hdots, d_T)$ provides the individual with a prescription for choosing an action in any possible future state. It is a sequence of decision rules and its implementation generates a sequence of utilities.  The evolution of states over time is at least partly unknown as future utilities depend on, for example, shocks to preferences. Let $X_t$ denote the random variable for the state at time $t$. Individuals use models about their economic environment to inform their beliefs about the future. For a given model, individuals thus face risk as each induces a unique objective transition probability distribution $p_t(s, a)$ for the evolution of state $s$ to $s^\prime$ that depends on the action $a$.
+
+\paragraph{Decision theory} Individuals make their decisions facing risk and have rational expectations \citep{Muth.1961,Lucas.1972} as their model about the future also turns out to be true. In this case, there is a consensus that rational choices are expressed by expected utility preferences \citep{Bernoulli.1738,Neumann.1944,Neumann.1947}.
+
+\paragraph{Formalization} Individuals maximize their expected total discounted utility \citep{Samuelson.1937,Koopmans.1960}. A constant discount factor ensures dynamic consistency of preferences as the individual's future actions agree with the planned-for contingencies. Beliefs are updated according to Bayes's rule.\footnote{See \citet{Frederick.2002} for a critical review of the literature on time discounting and time preference. \citet{Fang.2009}, \citet{Fang.2015}, and \citet{Chan.2017} are examples of hyperbolic discounting and thus potentially time-inconsistent preferences in settings similar to the one discussed here.}\\
+
+Equation (\ref{Objective Risk}) provides the formal representation of the individual's objective. Given an initial state $s$, individuals seek to implement the optimal policy $\pi^*$ from the set of all possible policies $\Pi$ that maximizes the expected total discounted utility over all $T$ decision periods $v^{\pi^*}_1(s)$ given the information available at the time $\mathcal{I}_1$.
+%
+\begin{align}\label{Objective Risk}
+v_1(s_t) = \max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a_t) \right\vert\,\mathcal{I}_1\,\right]
+\end{align}
+%
+The exponential discount factor $0 < \delta < 1$ captures a preference for immediate over future utility. The superscript of the expectation emphasizes that each policy $\pi$ induces a different unique probability distribution over the sequences of utilities.

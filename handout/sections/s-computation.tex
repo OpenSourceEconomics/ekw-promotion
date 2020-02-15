@@ -1,0 +1,49 @@
+%!TEX root = ../main.tex
+%-------------------------------------------------------------------------------
+\section{Computational challenges}\label{Computation}
+%-------------------------------------------------------------------------------
+The class of EKW models has several key characteristics that distinguish it from other classes of models but entail several computational complications. We will first discuss its key features and then describe some of the computational challenges.
+
+
+
+
+
+\paragraph{Structure of integral}
+
+To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in the second to last period. This allows to focus on action-specific rewards instead of future values.
+%
+\begin{align}
+v^{\pi^*}_{T-1}(s) & = \max_{a \in A}\bigg\{ u_{T-1}(s, a) + \delta \int_S v^{\pi^*}_{T}(u)\, p(u\mid a, s) \diff u\bigg\}\\
+& = \max_{a \in A}\bigg\{ u_{T-1}(s, a) + \delta \int_S \max_{a \in A}\{u(u, a)\}\, p(u\mid a, s) \diff u\bigg\}.
+\end{align}
+
+The evaluation of such an integral is required millions of times during the backward induction procedure. The current practice is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
+
+Let's consider a typical integral from \citet{Keane.1997}. There this integral has five dimensions and takes the following form.
+%
+\begin{align*}
+\mathcal{I}(x) = \int_{\epsilon_1} \dots \int_{\epsilon_5} \max \bigg\{ f_1(x, \epsilon_1), f_2(x, \epsilon_2), f_3(x, \epsilon_3), f_{4}(x) + \epsilon_{4}, f_{5}(x) + \epsilon_{5}\bigg\} \phi_{\mu, \Sigma}(\epsilon) \diff\epsilon.
+\end{align*}
+
+where $\epsilon = (\epsilon_1, \dots, \epsilon_5) \sim \mathcal{N}(\mu, \Sigma)\,$ follows a multivariate normal distribution with mean $\mu \in \mathbb{R}^{5}$, covariance matrix $ \Sigma \in \mathbb{R}^{5 \times 5}$, and probability density function $\phi_{\mu, \Sigma}(\epsilon)$.
+
+\paragraph{Global optimization} $\hdots$
+
+
+\begin{itemize}
+  \item \textbf{Likelihood-based estimation} This approach requires smoothing of the choice probabilities.
+
+  \begin{align*}
+    p_t(d_{it} \mid x_{it}, \theta) = \int \Ind [ \delta(x_{it}, \epsilon_{it}, \theta) = a_{it} ] g(\epsilon) \diff \epsilon
+  \end{align*}
+
+  \item \textbf{Simulation-based estimation} This approach requires the optimization of a noisy function.
+
+
+\end{itemize}
+
+\paragraph{Uncertainty quantification} $\hdots$
+
+\paragraph{Function approximation} $\hdots$
+
+\paragraph{Parallelization} $\hdots$

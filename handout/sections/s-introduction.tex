@@ -1,0 +1,13 @@
+%!TEX root = ../main.tex
+%-------------------------------------------------------------------------------
+\section{Introduction}
+%-------------------------------------------------------------------------------
+This handout provides an overview regarding our efforts in the implementation ...
+
+We now present the economic, mathematical, and computational model for the class of Eckstein-Keane-Wolpin (EKW) model. We will start with a discussion of the basic economic environment and then turn to the corresponding mathematical model of standard Markov decision process (MPD). We continue with a brief description of the estimation procedure before concluding this section with a discussion of some computational challenges when working with these models.
+
+Throughout, we will introduce acronyms and symbols as needed, but a full list of both is provided in Appendix \ref{List of Symbols}. The notation draws form the related work by \cite{Puterman.1994}, \cite{Aguirregabiria.2010}, and \cite{Arcidiacono.2011}.
+
+\paragraph{Computational challenges} The implementation and analysis of this class of models entails several computational challenges. Among them integration of a high-dimensional non-differentiable function, large-scale global optimization of a noisy and non-smooth criterion function, function approximation, and parallelization strategies. We briefly outline each of them.
+
+\paragraph{Stucture} The remainder of this handout is structured as follows. We first present the economic model with a discussion of the basic economic environment. In Section \ref{Mathematics} we present the corresponding mathematical model of a standard finite-horizon discrete Markov decision process (MPD) and outline its solution approach. When then outline the estimation step in Section \ref{Estimation}. With this overview at hand, we discuss selected computational challenges in Section \ref{Computation}. This note concludes with an example model in Section \ref{Example}.

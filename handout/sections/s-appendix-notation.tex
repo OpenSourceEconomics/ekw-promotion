@@ -1,0 +1,64 @@
+%!TEX root = ../main.tex
+%-------------------------------------------------------------------------------
+\section{Acronyms and Symbols}\label{List of Symbols}
+%-------------------------------------------------------------------------------
+\bgroup
+\def\arraystretch{1.5}%
+\tabulinesep=4.0mm
+\begin{longtabu} to \textwidth{CL}
+\caption{List of Acronyms}
+\setlength\extrarowheight{0pt}\\ % for a bit of visual "breathing space"
+\bottomrule
+\textbf{Acronym} & \textbf{Meaning} \\\midrule
+\endhead
+\bottomrule
+\endfoot
+MDP                 & standard Markov decision process
+\end{longtabu}
+\egroup
+
+\bgroup
+\def\arraystretch{1.5}%
+\tabulinesep=4.0mm
+\begin{longtabu} to \textwidth{CL}
+\caption{List of Symbols}
+\setlength\extrarowheight{0pt}\\ % for a bit of visual "breathing space"
+\bottomrule
+\textbf{Symbol} & \textbf{Meaning} \\\midrule
+\endhead
+\bottomrule
+\endfoot
+    $\mathbb{R}$                        & set of real numbers\\
+    $\Ind[\,A\,]$                       & indicator function that takes value one if event $A$ is true\\
+%-------------------------------------------------------------------------------
+    \midrule\mc{2}{c}{Economic Model}\\\midrule
+%-------------------------------------------------------------------------------
+    $t$                                 & decision period \\
+    $T$                                 & number of decision periods\\
+    $a \in \mathcal{A}$                 & set of admissible actions\\
+    $s \in \mathcal{S}$                 & set of possible states\\
+    $\Delta$                            & set of all probabilities on states \\
+    $p_t(s, a)$                         & conditional probability distributions for $s_{t + 1}$ when choosing action $a$ in state $s$ in period $t$\\
+    $d_t$                               & decision rule that specifies an action for all states $s$ in period $t$\\
+    $X_t$                               & random variable for the state at $t$ \\
+    $u_t(s, a)$                         & utility when choosing action $a$ in state $s$ in period $t$\\
+    $\delta$                            & discount factor\\
+    $v^\pi_t$                           & expected total discounted utility of adopting policy $\pi$ from period $t$ going forward\\
+    $\pi \in \Pi$                       & set of all policies\\
+%-------------------------------------------------------------------------------
+    \midrule\mc{2}{c}{Mathematical Model}\\\midrule
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+    \midrule\mc{2}{c}{Computational Model}\\\midrule
+%-------------------------------------------------------------------------------
+    $\epsilon_{at}$                     & random shock to utility of alternative $a$ in period $t$\\
+    $x_{jt}$                            & number of periods worked in occupation $j$ by the beginning of period $t$\\
+    $g_{t}$                             & number of periods enrolled in school by the beginning of period $t$\\
+    $\mathcal{N}_0$                     & true multivariate normal distribution for random shocks\\
+    $\Sigma$                            & covariance matrix of random shocks\\
+    $\upsilon$                          & admissible realization of means for future labor market shocks\\
+    $\alpha_j$                          & parameters for utility function when working in occupation $j$\\
+    $\beta$                             & parameters for utility function when enrolling in school\\
+    $\gamma$                            & parameter for utility function when staying at home\\
+\end{longtabu}
+\egroup
