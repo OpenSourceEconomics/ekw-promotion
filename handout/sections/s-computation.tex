@@ -2,7 +2,7 @@
 %-------------------------------------------------------------------------------
 \section{Computational challenges}\label{Computation}
 %-------------------------------------------------------------------------------
-The class of EKW models has several key characteristics that distinguish it from other classes of models but entail several computational complications. We will first discuss its key features and then describe some of the computational challenges.
+The implementation and analysis of this class of models entails several computational challenges. Among them integration of a high-dimensional non-differentiable function, large-scale global optimization of a noisy and non-smooth criterion function, function approximation, and parallelization strategies. We briefly outline each of them. 
 %-------------------------------------------------------------------------------
 \paragraph{Structure of integral} To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in the second to last period. This allows to focus on action-specific rewards instead of future values. Let $v^{\pi}_{T-1}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
 but sticking to the optimal policy $\pi^*$ going forward.
