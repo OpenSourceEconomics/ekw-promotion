@@ -2,29 +2,26 @@
 %-------------------------------------------------------------------------------
 \section{Mathematical formulation}\label{Mathematics}
 %-------------------------------------------------------------------------------
-EKW models are set up as a standard MDP where there is a unique transition probability distribution $p_t(s, a)$ associated with each state and action.\footnote{See \citet{Puterman.1994} and \citet{White.1993} for a textbook introduction to standard Markov decision processes and \citet{Rust.1994} for a review of its use in structural estimation.}\\
-
-When making sequential decisions, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted utility $v^{\pi^*}_1$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of utilities and the probability that each occurs. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\\
+EKW models are set up as a standard MDP.\footnote{See \citet{Puterman.1994} and \citet{White.1993} for a textbook introduction to standard Markov decision processes and \citet{Rust.1994} for a review of its use in structural estimation.} When making sequential decisions, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted utility $v^{\pi^*}_1$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of utilities and the probability that each occurs. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems. Note that in slight abuse of notation $s_{t + 1}$ is a random variable given the information available at $\mathcal{I}_t$.\\
 
 Let $v^\pi_t(s)$ denote the expected total discounted utility under $\pi$ from period $t$ onwards:
 %
 \begin{align*}
-v^\pi_t(s) = \E^\pi_{s}\left[ \sum^T_{\tau=t} \delta^{\tau - t}   u_\tau(X_\tau, d_\tau(X_\tau)) \right].
+  v^\pi_t(s_t) = \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, u(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right]
 \end{align*}
 %
-Then $v_1^\pi(s)$ can be determined for any policy by recursively evaluating equation (\ref{MDP Policy Equations}):
+Then $v_1^\pi(s_t)$ can be determined for any policy by recursively evaluating equation (\ref{MDP Policy Equations}):
 %
 \begin{align}\label{MDP Policy Equations}
-v^\pi_t(s) = u_t(s, d_t(s)) + \delta\E^p_{s} \left[v^\pi_{t + 1}(X_{t + 1})\right].
+v^\pi_t(s) = u(s_t,  a^\pi_t(s_t)) + \delta\,\E_{s_t} \left[\left.v^\pi_{t + 1}(s_{t + 1})  \,\right\vert\,\mathcal{I}_t\,\right].
 \end{align}
 %
-Equation (\ref{MDP Policy Equations}) expresses the utility $v^\pi_t(s)$ of adopting policy $\pi$ going forward as the sum of its immediate utility and all expected discounted future utilities.\\
+Equation (\ref{MDP Policy Equations}) expresses the utility $v^\pi_t(s_t)$ of adopting policy $\pi$ going forward as the sum of its immediate utility and all expected discounted future utilities.\\
 
 The principle of optimality \citep{Bellman.1957, Puterman.1994} allows to construct the optimal policy $\pi^*$ by solving the optimality equations for all $s$ and $t$ in equation (\ref{MPD Optimality}) recursively:
 %
 \begin{align}\label{MPD Optimality}
-v^{\pi^*}_t(s)  & = \max_{a \in A}\bigg\{ u_t(s, a) + \delta \E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\} \\
-                & = \max_{a \in A}\bigg\{ u_t(s, a) + \delta \int_S v^{\pi^*}_{t + 1}(u)\, p(u\mid a, s) \diff u\bigg\}.
+v^{\pi^*}_t(s_t)  & = \max_{a \in A}\bigg\{ u(s_t, a) + \delta\, \E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \bigg\}
 \end{align}
 
 The value function $v^{\pi^*}_t$ is the expected discounted utility in $t$ over the remaining time horizon assuming the optimal policy is implemented going forward.\\
@@ -32,7 +29,7 @@ The value function $v^{\pi^*}_t$ is the expected discounted utility in $t$ over 
 The optimal decision is simply the alternative with the highest value:
 %
 \begin{align*}
-d^{\pi^*}_t(s) = \underset{a\in A}{\argmax} \bigg\{ u_t(s, a) + \delta\E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}
+a^{\pi^*}_t(s_t) = \underset{a\in A}{\argmax} \bigg\{ u(s_t, a) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}
 \end{align*}
 
 \paragraph{Solution approach} Algorithm (\ref{Backward Induction Algorithm for MDP}) allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account and so the optimal decision is simply to choose the alternative with the highest immediate utility in each state. With the results for the final period at hand, the other optimal decisions can be determined recursively as the calculation of their expected future utility is straightforward given the relevant transition probability distribution.
@@ -42,20 +39,13 @@ d^{\pi^*}_t(s) = \underset{a\in A}{\argmax} \bigg\{ u_t(s, a) + \delta\E^p_{s} \
 \begin{algorithmic}\vspace{0.3cm}
 \For{$t = T, \hdots, 1$}
     \If{t == T}
-        \State $v^{\pi^*}_T(s) =  \underset{a\in A}{\max} \bigg\{ u_T(s, a) \bigg\}\qquad \forall\, s\in S$
+        \State $v^{\pi^*}_T(s_T) =  \underset{a\in A}{\max} \bigg\{ u(s_T, a) \bigg\}\qquad \forall\, s_T\in S$
     \Else
-        \State Compute $v^{\pi^*}_t(s)$ for each $s\in S$ by
-        \State $\qquad v^{\pi^*}_t(s) = \underset{a\in A}{\max} \bigg\{ u_t(s, a) + \delta\E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}$
+        \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
+        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a\in A}{\max} \bigg\{ u(s_t, a) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
         \State and set
-        \State $\qquad d^{\pi^*}_t(s) = \underset{a\in A}{\argmax} \bigg\{ u_t(s, a) + \delta\E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}$.
+        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a\in A}{\argmax} \bigg\{ u(s_t, a) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.
     \EndIf
 \EndFor
 \vspace{0.3cm}\end{algorithmic}
 \end{algorithm}
-
-\textbf{Issues to address}
-
-\begin{itemize}
-  \item The variable $X$ is the same as $x$ denoting the observable components of the state space.
-  \item The $p(u\mid\hdots)$ is misleading as $u$ is also the utility
-\end{itemize}

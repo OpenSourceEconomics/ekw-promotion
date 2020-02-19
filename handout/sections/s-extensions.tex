@@ -1,0 +1,18 @@
+%!TEX root = ../main.tex
+%-------------------------------------------------------------------------------
+\section{Extensions}\label{Extensions}
+%-------------------------------------------------------------------------------
+We briefly discuss selected extensions to the baseline model that are our active areas of research:
+
+\subsection{Robust decision-making} Individuals face ubiquitous uncertainties when faced with important decisions. Policy makers vote for climate change mitigation efforts facing uncertainty about future costs and benefits \citep{Barnett.2019}, while doctors decide on the timing of an organ transplant
+in light of uncertainty about future patient health \citep{Kaufman.2017}. Economic models formalize the objectives, trade-offs, and uncertainties for such decisions. In these models, the treatment of uncertainty is often limited to risk as the model induces a unique probability distribution over sequences of possible futures. There is no role for ambiguity about the true model \citep{Knight.1921,Arrow.1951} and thus no fear of model misspecification. However, limits to knowledge lead to considerable ambiguity about how the future unfolds \citep{Hayek.1975,Hansen.2015}.\\
+
+This creates the need for robust decision rules that work well over a whole range of different
+models, instead of a decision rule that is optimal for one particular model. Optimal decision rules are designed without any fear of misspecification, using a single model to inform decisions. They thus perform
+very well if that model turns out to be true. However, their performance is very sensitive and
+deteriorates rapidly in light of model misspecification. Robust decision rules explicitly account
+for such a possibility and their performance is less affected.\\
+
+Methods from distributionally robust optimization \citep{Ben-Tal.2009,Wiesemann.2014,Rahimian.2019} and robust Markov decision processes \citep{Iyengar.2005,Nilim.2005,Wiesemann.2014} allow to construct decision rules that explicitly take potential model misspecification into account.
+
+\subsection{Uncertainty quantification}

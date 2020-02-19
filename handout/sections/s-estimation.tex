@@ -2,7 +2,7 @@
 %-------------------------------------------------------------------------------
 \section{Estimation procedures}\label{Estimation}
 %-------------------------------------------------------------------------------
-\paragraph{Available information} The econometrician has access to panel data for $N$ individuals. For every observation $(i, t)$ in the panel data set, the researcher observes action $a_{it}$ and a subvector $x_{it}$ of the state vector. Therefore, from an econometricians point of view, it is useful to distinguish between two types of state variables $s = (x, \epsilon)$. Variables $x$ that are observed by the econometrician and the individual and those that are only observed by the individual $\epsilon$.  In addition, also some realizations of the rewards $r_{it} = r(x_{it}, \epsilon_{it}, a_{it})$.
+\paragraph{Available information} The econometrician has access to panel data for $N$ individuals. For every observation $(i, t)$ in the panel data set, the researcher observes action $a_{it}$ and a subvector $x_{it}$ of the state vector. Therefore, from an econometricians point of view, we need to distinguish between two types of state variables $s_{it} = (x_{it}, \epsilon_{it})$. Variables $x_{it}$ that are observed by the econometrician and the individual $i$ at time $t$ and those that are only observed by the individual $\epsilon_{it}$.  In addition, also some realizations of the rewards $r_{it} = r(x_{it}, \epsilon_{it}, a_{it})$.
 %
 \begin{align*}
   \mathcal{D} = \{a_{it}, x_{it}, r_{it}: i = 1,2, \hdots, N; t = 1, \hdots, T_i\}
@@ -14,10 +14,10 @@ where $T_i$ is the number of observations over which we observe individual $i$.
 
 \paragraph{Procedures} We briefly outline maximum likelihood estimation \citep{Fisher.1922} and the method of simulated moments \citep{McFadden.1989}.  Whatever the estimation criterion, in order to evaluate it for a particular value of $\theta$  it is necessary to know the optimal decision rules $d^{\pi^*}$. Therefore at each trial value of $\theta$ the dynamic programming model needs to be solved. More detailed information is available in the excellent textbooks by \citet{Davidson.2003} and \citet{Gourieroux.1996}.
 
-\paragraph{Likelihood-based estimation} The individual chooses the alternative with the highest total value $d^*(s)$ which is determined by the complete state space and rewards are also determined by $s$. However, the econometrician only observes the subset $x$ and thus can only determine the probability $p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)$ of individual $i$ at time $t$ choosing $d_{it}$ and receiving $r_{it}$ given $x_{it}$.
+\paragraph{Likelihood-based estimation} The individual chooses the alternative with the highest total value $a_t^*(s_t)$ which is determined by the complete state space and rewards are also determined by $s$. However, the econometrician only observes the subset $x$ and thus can only determine the probability $p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)$ of individual $i$ at time $t$ choosing $d_{it}$ and receiving $r_{it}$ given $x_{it}$.
 %
 \begin{align*}
-  \mathcal{L}(\theta\mid\mathcal{D}) = \prod^N_{i= 1} \prod^T_{t= 1} p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)
+  \mathcal{L}(\theta\mid\mathcal{D}) = \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)
 \end{align*}
 
 The goal of likelihood-based estimation is to find the value of the model parameters $\theta$ that maximize the likelihood function:
@@ -27,6 +27,3 @@ The goal of likelihood-based estimation is to find the value of the model parame
 \end{align*}
 
 \paragraph{Simulation-based estimation} ...
-
-
-The goal of simulation-based estimation

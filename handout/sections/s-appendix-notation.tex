@@ -36,17 +36,18 @@ MDP                 & standard Markov decision process
     $t$                                 & decision period \\
     $T$                                 & number of decision periods\\
     $a \in \mathcal{A}$                 & set of admissible actions\\
-    $s \in \mathcal{S}$                 & set of possible states\\
-    $\Delta$                            & set of all probabilities on states \\
+    $s \in \mathcal{S}$                 & set of possible states with generic state $s$\\
+    $s_t$                               & realization of state $s$ in period $t$\\
+    $a^\pi_t(s)$                        & decision rule that specifies an action for all states $s$ in period $t$ following $\pi$\\
+    $a^\pi_t(s_t)$                      & actual decision in period $t$ when in state $s_t$ following policy $\pi$\\
+    $a_{it}$                            & actual decision observed by individual $i$ at time $t$\\
     $p_t(s, a)$                         & conditional probability distributions for $s_{t + 1}$ when choosing action $a$ in state $s$ in period $t$\\
-    $d_t$                               & decision rule that specifies an action for all states $s$ in period $t$\\
-    $X_t$                               & random variable for the state at $t$ \\
-    $u_t(s, a)$                         & utility when choosing action $a$ in state $s$ in period $t$\\
+    $u(s, a)$                           & utility when choosing action $a$ in state $s$\\
     $\delta$                            & discount factor\\
     $v^\pi_t$                           & expected total discounted utility of adopting policy $\pi$ from period $t$ going forward\\
     $\pi \in \Pi$                       & set of all policies\\
 %-------------------------------------------------------------------------------
-    \midrule\mc{2}{c}{Mathematical Model}\\\midrule
+    \midrule\mc{2}{c}{Estimation procedure}\\\midrule
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
     \midrule\mc{2}{c}{Computational Model}\\\midrule
