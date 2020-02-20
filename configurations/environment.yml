@@ -1,0 +1,48 @@
+name: handout-eckstein-keane-wolpin
+
+channels:
+  - defaults
+  - conda-forge
+  - OpenSourceEconomics
+
+dependencies:
+  - python=3.7.3
+  - pip=19.0.3
+  - chaospy
+  - click
+  - codecov
+  - statsmodels
+  - pygraphviz>=1.5
+  - doc8
+  - deepdiff
+  - estimagic>=0.0.9
+  - jupyterlab
+  - matplotlib>=3.0.0
+  - mkl
+  - nbsphinx=0.4.2
+  - numba>=0.43.1
+  - numpydoc
+  - pandas<1.00
+  - pyaml
+  - seaborn
+  - numpy
+  - pytest
+  - respy
+  - pytest-cov
+  - pytest-xdist
+  - restructuredtext_lint
+  - scipy>=1.2.1
+  - Sphinx>=2.0.0
+  - black 
+  - flake8
+  - sphinx-autobuild
+  - tox-conda
+  - pip:
+    - apprise
+    - pre-commit
+    - pysftp 
+    - Py-BOBYQA
+    - DFO-LS
+    - PyPDF2
+    - jupyterlab
+    - pygmo
