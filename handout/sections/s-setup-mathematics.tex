@@ -2,12 +2,12 @@
 %-------------------------------------------------------------------------------
 \subsection{Mathematical formulation}\label{Mathematics}
 %-------------------------------------------------------------------------------
-EKW models are set up as a standard Markov decision processes (MDP) \citep{Puterman.1994,White.1993}. When making sequential decisions under risk, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted rewards $v^{\pi^*}_1$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of rewards and weight each by the probability that they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\\
+EKW models are set up as a standard Markov decision processes (MDP) \citep{Puterman.1994,White.1993}. When making sequential decisions under risk, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted rewards $v^{\pi^*}_1$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of rewards and to weight each by the probability that they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\\
 
 \noindent Note that in slight abuse of notation $s_{t + 1}$ is a random variable given the information available at $\mathcal{I}_t$ and $a^\pi_{t}(s_{t})$ denotes the actual action that an individual chooses in time $t$ if they encounter $s_{t}$ and follow policy $\pi$. Optimal decisions in a MDP are a deterministic function of the current state $s$ only, i.e. an optimal decision rule is always deterministic and Markovian. We
 restrict our notation to this special case right from the beginning.\\
 
-\noindent Let $v^\pi_t(s)$ denote the value function capturing the expected total discounted rewards under $\pi$ from period $t$ onwards:
+\noindent Let the value function $v^\pi_t(s)$ capture the expected total discounted rewards under $\pi$ from period $t$ onwards:
 %
 \begin{align*}
   v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, r(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right]
