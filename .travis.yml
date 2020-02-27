@@ -14,3 +14,5 @@ install:
 
 script:
   - source .envrc
+  - cd figures; python figures.py; cd ..
+  - create-content
