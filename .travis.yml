@@ -16,3 +16,8 @@ script:
   - source .envrc
   - cd figures; python figures.py; cd ..
   - create-content
+
+notifications:
+  email:
+     on_success: change
+     on_failure: change 
