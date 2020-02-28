@@ -1,4 +1,4 @@
-""" Figures for the handout.
+"""Figures for the handout.
 
 This module creates all figures for the handout. They are all used in the illustrative example.
 
