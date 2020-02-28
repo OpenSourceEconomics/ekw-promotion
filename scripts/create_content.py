@@ -20,11 +20,11 @@ if __name__ == '__main__':
 
     if args.figures or args.all:
 
-        os.chdir(os.environ["PROJECT_DIR"] + "/figures")
+        os.chdir(os.environ["PROJECT_DIR"] + "/replication")
 
         [os.remove(fname) for fname in glob.glob("../handout/material/*.png")]
 
-        sp.check_call(["python", "figures.py"])
+        sp.check_call(["python", "run.py"])
 
         [shutil.copy(fname, f"../handout/material/{fname}") for fname in glob.glob("*.png")]
 
