@@ -19,6 +19,9 @@ params, options = rp.get_example_model("kw_94_one", with_data=False)
 simulate = rp.get_simulate_func(params, options)
 df = simulate(params)
 
+stat = df.groupby("Identifier")["Experience_Edu"].max().mean()
+print(f"Average education in baseline: {stat}")
+
 df['Age'] = df['Period'] + 16
 df["Choice"].cat.categories = ['White', 'Blue', 'Schooling', 'Home']
 df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
@@ -66,14 +69,14 @@ fig, ax = plt.subplots(1, 1)
 ax.plot(subsidies, edu_level)
 
 ax.yaxis.get_major_ticks()[0].set_visible(False)
-ax.set_ylabel("Average schooling")
+ax.set_ylabel("Average final schooling")
 ax.set_ylim([10, 19])
 
 ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter('{x:,.0f}'))
 ax.set_xlabel("Tuition subsidy")
 ax.set_xlim([None, 1600])
 
-fig.savefig('fig-policy-evaluation')
+fig.savefig('fig-policy-forecast')
 
 
 def time_preference_wrapper_kw_94(simulate, params, value):
@@ -97,7 +100,7 @@ fig, ax = plt.subplots(1, 1)
 ax.plot(deltas, edu_level)
 
 ax.yaxis.get_major_ticks()[0].set_visible(False)
-ax.set_ylabel("Average schooling")
+ax.set_ylabel("Average final schooling")
 ax.set_ylim([10, 19])
 
 ax.set_xlabel(r"$\delta$")
