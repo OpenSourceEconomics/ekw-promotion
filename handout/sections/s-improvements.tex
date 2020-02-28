@@ -2,9 +2,11 @@
 %-------------------------------------------------------------------------------
 \section{Improvements}\label{Computation}
 %-------------------------------------------------------------------------------
-The implementation and analysis of this class of models entails several computational challenges. Among them integration of a high-dimensional non-differentiable function, large-scale global optimization of a noisy and non-smooth criterion function, function approximation, and parallelization strategies. We briefly outline each of them.
+The implementation and analysis of this class of models entails several computational challenges. Among them integration of a high-dimensional non-differentiable function, large-scale global optimization of a noisy and non-smooth criterion function, function approximation, and parallelization strategies. We now describe some of our own efforts to improve the current practice within economics. Given the advanced state of our projects, we now actively seek the input from domain experts for further improvement and subsequent joint publication.
 %-------------------------------------------------------------------------------
-\subsection{Numerical integration} We draw on the extensive literature in applied math on numerical integration \citep{Davis.2007}. To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in a generic time period $t$. This allows to focus on action-specific rewards instead of future values. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
+\subsection{Numerical integration} In \citet{Gabler.2020a} we draw on the extensive literature in applied math on numerical integration \citep{Davis.2007}.\\
+
+\noindent To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in a generic time period $t$. This allows to focus on action-specific rewards instead of future values. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
 but sticking to the optimal policy $\pi^*$ going forward.
 %
 \begin{align}
@@ -24,8 +26,9 @@ v^{\pi}_{t}(s_t, a_t) & = u(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{
 \noindent where $\epsilon = (\epsilon_1, \dots, \epsilon_5) \sim \mathcal{N}(\mu, \Sigma)\,$ follows a multivariate normal distribution with mean $\mu \in \mathbb{R}^{5}$, covariance matrix $ \Sigma \in \mathbb{R}^{5 \times 5}$, and probability density function $\phi_{\mu, \Sigma}$. A key features of this integral is the lack of general separability between the random and deterministic state variables. This makes the closed-form solutions impossible even under suitable distributional assumptions \citep{McFadden.1978,Rust.1987}.
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
-\begin{itemize}
-\item This issue is under active investigation in our group and this section will be fleshed out further as our work progresses. We draw on the specialized literature on global optimization to improve the reliability of calibrations \citep{Locatelli.2013}. Depending on the calibration procedure special challenges arise. Likelihood-based estimation requires smoothing of the choice probabilities, while simulation-based calibration requires the application of noisy function optimization. The further development of our groups optimization toolbox \verb+estimagic+ \citep{Gabler.2019} is part of this project.
-\end{itemize}
+
+In \citet{Gabler.2020} we draw on the specialized literature on global optimization to improve the reliability of calibrations \citep{Locatelli.2013}.\\
+
+\noindent Depending on the calibration procedure special challenges arise. Likelihood-based estimation requires smoothing of the choice probabilities, while simulation-based calibration requires the application of noisy function optimization. The further development of our groups optimization toolbox \verb+estimagic+ \citep{Gabler.2019} is part of this project.
 %-------------------------------------------------------------------------------
 \subsection{Miscellaneous} Other areas of improvement that require our future attention is the approximate solution of the model using function approximation techniques and the issue of using massive parallelism for the analysis of the models.

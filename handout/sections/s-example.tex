@@ -9,9 +9,9 @@ We now provide one concrete illustration of an EKW model. We start with an outli
 \paragraph{Setup} Individuals live for a total of $T$ periods and choose each period $t$ to either work in one of two occupations ($a_t = 1, 2$), attend school ($a_t = 3$), or stay at home ($a_t = 4$). The immediate reward from each alternative is the following:
 %
 \begin{align*}
-u_t(s, a) = \begin{cases} w_{1t} =
+r(s_t, a_t) = \begin{cases} w_{1t} =
 \exp\{\alpha_{10} + \alpha_{11}g_t + \alpha_{12}x_{1t} + \alpha_{13}x^2_{1t} + \alpha_{14}x_{2t} + \alpha_{15}x^2_{2t} + \epsilon_{1t}\} & \text{if}\; a_t = 1 \\
-w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}x_{1t} + \alpha_{23}x^2_{1t} + \alpha_{24}x_{2t} + \alpha_{25}x^2_{2t} + \epsilon_{2t}\}& \text{if}\;_t a = 2 \\
+w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}x_{1t} + \alpha_{23}x^2_{1t} + \alpha_{24}x_{2t} + \alpha_{25}x^2_{2t} + \epsilon_{2t}\}& \text{if}\; a_t = 2 \\
 \beta_0 - \beta_1 \Ind[\,g_t \geq 12\,] - \beta_2\Ind[\,a_{t - 1} \neq 3\,] + \epsilon_{3t}& \text{if}\; a_t = 3 \\
 \gamma_0 + \epsilon_{4t}& \text{if}\; a_t = 4. \\
 \end{cases}

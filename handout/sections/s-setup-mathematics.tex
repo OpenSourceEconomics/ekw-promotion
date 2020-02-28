@@ -35,7 +35,7 @@ v^{\pi^*}_t(s_t)  & = \max_{a \in A}\bigg\{ r(s_t, a) + \delta\, \E^{\pi^*}_{s_t
 a^{\pi^*}_t(s_t) \equiv \underset{a\in A}{\argmax} \bigg\{ r(s_t, a) + \delta\,\E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}
 \end{align*}
 
-\paragraph{Solution approach} Algorithm (\ref{Backward induction procedure}) allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account and so the optimal decision is simply to choose the alternative with the highest immediate rewards in each state. With the results for the final period at hand, the other optimal decisions can be determined recursively following equation (\ref{MPD Optimality}) as the calculation of their expected future rewards is straightforward given the relevant transition probabilities.
+\paragraph{Solution approach} Algorithm \ref{Backward induction procedure} allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account and so the optimal decision is simply to choose the alternative with the highest immediate rewards in each state. With the results for the final period at hand, the other optimal decisions can be determined recursively following equation (\ref{MPD Optimality}) as the calculation of their expected future rewards is straightforward given the relevant transition probabilities.
 
 \vspace{0.5cm}\begin{algorithm}
 \caption{\strut Backward induction procedure}\label{Backward induction procedure}
