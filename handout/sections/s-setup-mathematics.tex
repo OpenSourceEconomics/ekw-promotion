@@ -4,10 +4,10 @@
 %-------------------------------------------------------------------------------
 EKW models are set up as a standard Markov decision processes (MDP) \citep{Puterman.1994,White.1993}. When making sequential decisions under risk, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted rewards $v^{\pi^*}_1$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of rewards and to weight each by the probability that they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\\
 
-\noindent Note that in slight abuse of notation $s_{t + 1}$ is a random variable given the information available at $\mathcal{I}_t$ and $a^\pi_{t}(s_{t})$ denotes the actual action that an individual chooses in time $t$ if they encounter $s_{t}$ and follow policy $\pi$. Optimal decisions in a MDP are a deterministic function of the current state $s$ only, i.e. an optimal decision rule is always deterministic and Markovian. We
+\noindent Optimal decisions in a MDP are a deterministic function of the current state $s$ only, i.e. an optimal decision rule is always deterministic and Markovian. We
 restrict our notation to this special case right from the beginning.\\
 
-\noindent Let the value function $v^\pi_t(s)$ capture the expected total discounted rewards under $\pi$ from period $t$ onwards:
+\noindent The value function $v^\pi_t(s_t)$ captures the expected total discounted rewards under $\pi$ from period $t$ onwards when in $s_t$:
 %
 \begin{align*}
   v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, r(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right]
@@ -19,9 +19,9 @@ Then $v_1^\pi(s_t)$ can be determined for any policy by recursively evaluating e
 v^\pi_t(s_t) = r(s_t,  a^\pi_t(s_t)) + \delta\,\E^\pi_{s_t} \left[\left.v^\pi_{t + 1}(s_{t + 1})  \,\right\vert\,\mathcal{I}_t\,\right].
 \end{align}
 %
-Equation (\ref{MDP Policy Equations}) expresses the rewards $v^\pi_t(s_t)$ of adopting policy $\pi$ going forward as the sum of its immediate rewards and all expected discounted future rewards.\\
+Equation (\ref{MDP Policy Equations}) expresses the total value $v^\pi_t(s_t)$ of adopting policy $\pi$ going forward as the sum of its immediate rewards and all expected discounted future rewards.\\
 
-\noindent The principle of optimality allows to construct the optimal policy $\pi^*$ by solving the optimality equations for all $s$ and $t$ in equation (\ref{MPD Optimality}) recursively:
+\noindent The principle of optimality allows to construct the optimal policy $\pi^*$ by solving the optimality equations (\ref{MPD Optimality})  for all $s$ and $t$ recursively:
 %
 \begin{align}\label{MPD Optimality}
 v^{\pi^*}_t(s_t)  & = \max_{a \in A}\bigg\{ r(s_t, a) + \delta\, \E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \bigg\}.
@@ -29,7 +29,7 @@ v^{\pi^*}_t(s_t)  & = \max_{a \in A}\bigg\{ r(s_t, a) + \delta\, \E^{\pi^*}_{s_t
 
 \noindent The optimal value function $v^{\pi^*}_t$ is the expected discounted rewards in $t$ over the remaining time horizon assuming the optimal policy is implemented going forward.\\
 
-\noindent The optimal decision is simply the alternative with the highest value:
+\noindent The optimal decision is simply to choose the alternative with the highest total value:
 %
 \begin{align*}
 a^{\pi^*}_t(s_t) \equiv \underset{a\in A}{\argmax} \bigg\{ r(s_t, a) + \delta\,\E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}

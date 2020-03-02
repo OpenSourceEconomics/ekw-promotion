@@ -2,11 +2,11 @@
 %-------------------------------------------------------------------------------
 \section{Example}\label{Example}
 %-------------------------------------------------------------------------------
-We now provide one concrete illustration of an EKW model. We start with an outline and discussion of the seminal example of a model of occupational choice by \citet{Keane.1994} and then discuss our group's research code \verb+respy+ \citep{respy-1.0}.
+We now provide an illustration of an EKW model. We start with an outline and discussion of a model of occupational choice by \citet{Keane.1994}. We then discuss its analysis our group's research code \verb+respy+ \citep{respy-1.0}.
 %-------------------------------------------------------------------------------
 \subsection{Keane \& Wolpin (1994)}
 %-------------------------------------------------------------------------------
-\paragraph{Setup} Individuals live for a total of $T$ periods and choose each period $t$ to either work in one of two occupations ($a_t = 1, 2$), attend school ($a_t = 3$), or stay at home ($a_t = 4$). The immediate reward from each alternative is the following:
+\paragraph{Setup} Individuals live for a total of $T$ periods and choose each period $t$ to either work in one of two occupations ($a_t = 1, 2$), attend school ($a_t = 3$), or stay at home ($a_t = 4$). Immediate rewards are determined as follows:
 %
 \begin{align*}
 r(s_t, a_t) = \begin{cases} w_{1t} =
@@ -17,11 +17,11 @@ w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}x_{1t} + \alpha_{23}x^2
 \end{cases}
 \end{align*}
 %
-$g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $x_{1t}$ and $x_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption reward of schooling, and the reward of home time. They are serially uncorrelated.\\
+$g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $x_{1t}$ and $x_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. Turning to the rewards from school attendance, $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption reward of schooling, and the reward of home time.\\
 
 \noindent Given the structure of the reward functions and the lack of serial correlation, the state at time $t$ is $s_t = \{g_t,x_{1t},x_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
 %
-While an individual's stock of human capital is observable $\{g_t,x_{1t},x_{2t},a_{t - 1}\}$ to the individual and the econometrician, the $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual. The observable components evolve deterministically according to the following rules:
+While an individual's stock of human capital is observable $\{g_t,x_{1t},x_{2t},a_{t - 1}\}$ to the individual and the researcher, the $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual. The observable components evolve deterministically according to the following rules:
 %
 \begin{align*}
     x_{1,t+1}  &= x_{1t} + \Ind[\,a_t = 1\,] \\
@@ -29,22 +29,22 @@ x_{2,t+1} &= x_{2t} + \Ind[\,a_t = 2\,] \\
 g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,].
 \end{align*}
 %
-However, the unobservable components evolve randomly. They are jointly normally distributed  $[\epsilon_{1t}, \epsilon_{2t}, \epsilon_{3t}, \epsilon_{4t}]^T \sim \mathcal{N}(\vec{0}, \vec{\Sigma})$ with mean zero and covariance matrix $\vec{\Sigma}$.\\
+However, the unobservable components evolve randomly. They are jointly normally distributed  $[\epsilon_{1t}, \epsilon_{2t}, \epsilon_{3t}, \epsilon_{4t}]^T \sim \mathcal{N}(\vec{0}, \vec{\Sigma})$ with mean zero and covariance matrix $\vec{\Sigma}$.
 
-\noindent When entering the model, individuals have no labor market experience $(x_{11} = x_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. The idea is that individuals are about age 16 when entering the model in the first period and start identically, different choices over the life cycle are then simply the cumulative effects of different shocks.
+\paragraph{Parameterization} We follow \citet{Keane.1994} and study this model under the following parameterization. When entering the model, individuals are identical and have no labor market experience $(x_{11} = x_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. The basic idea is that individuals are about age 16 when entering the model and then follow it for $T = 40$ years until retirement. Different choices over the life cycle are then simply the cumulative effects of different shocks.
 
-\paragraph{Parameterization} We follow \citet{Keane.1994} and study this model under the following parameterization. Schooling increases wages by only 4\% in the first occupation compared to 8\% in the second. We will thus refer to the former as blue-collar and the latter as white-collar going forward. Starting wages are considerably lower in the white-collar sector, but wages increase more rapidly with occupation-specific experience compared to blue-collar wages. Own-work experience is highly valuable in both occupations. However, while white-collar wages increase with blue-collar experience as well, the opposite is not true. There is a consumption value of schooling of \$5,000, but the total cost of pursuing post-secondary education is considerable and amounts to \$5,000. Once leaving school, individuals incur a nearly prohibitive cost of \$15,000 for re-enrolling. Individuals are forward-looking with a discount factor of 0.95. The random shocks are uncorrelated across alternatives. Further details about the parameterization are available in our Appendix.
+Schooling increases wages by only 4\% in the first occupation compared to 8\% in the second. We will thus refer to the former as blue-collar and the latter as white-collar going forward. Starting wages are considerably lower in the white-collar sector, but wages increase more rapidly with occupation-specific experience compared to blue-collar wages. Own-work experience is highly valuable in both occupations. However, while white-collar wages increase with blue-collar experience as well, the opposite is not true. There is a consumption value of schooling of \$5,000, but the total cost of pursuing post-secondary education is considerable and amounts to \$5,000. Once leaving school, individuals incur a nearly prohibitive cost of \$15,000 for re-enrolling. Individuals are forward-looking with a discount factor of 0.95. The random shocks are uncorrelated across alternatives. Further details about the parameterization are available in our Appendix.
 
-\paragraph{Descriptives} We simulate the life cycle histories of 1,000 individuals for 40 periods. Figure \ref{Choices over the life cycle} shows the share of individuals choosing each of the four alternatives by period. Initially, roughly 52\% of individuals enroll in school, but this share declines rapidly and only 19\% attain any post-secondary education. Right away, about 35\% of individuals are working in the blue-collar occupation.  Blue-collar employment initially increases even further to peak at 67\% as individuals are leaving school and entering the labor market. White-collar employment steadily rises over the life cycle but never reaches more than 35\%. About 5\% of individuals stay at home each period.
+\paragraph{Descriptives} We simulate the life cycle histories of 1,000 individuals. Figure \ref{Choices over the life cycle} shows the share of individuals choosing each of the four alternatives by period. Initially, roughly 52\% of individuals enroll in school, but this share declines rapidly and only 19\% attain any post-secondary education. Right away, about 35\% of individuals are working in the blue-collar occupation.  Blue-collar employment initially increases even further to peak at 67\% as individuals are leaving school and entering the labor market. White-collar employment steadily rises over the life cycle but never reaches more than 35\%. About 5\% of individuals stay at home each period.
 
 \begin{figure}[ht!]\centering
 \caption{Choices over the life cycle}\label{Choices over the life cycle}
 \scalebox{0.35}{\includegraphics{fig-observed-choices}}
 \end{figure}\FloatBarrier
 
-\noindent Overall, the level of average final schooling is slightly above a high school degree with 12.6 years. Individuals incur the immediate costs of their schooling investments in the form of tuition and foregone earnings right at the beginning of their life cycle. Doing so allows them to get the most out of their increased wages in the future.
+\noindent Overall, the level of average final schooling is slightly above a high school degree with 12.6 years. Individuals incur the immediate costs of their schooling investments in the form of tuition and foregone earnings right at the beginning of their life cycle. Doing so maximizes their ability to reap the reward of increased rewards over the remaining time periods.
 
-\paragraph{Economic mechanisms and policy evaluation} Figure \ref{Economic mechanism and policy forecast} illustrates the ability of structural economic models to quantify the impact of economic mechanisms and to forecast the effect of public policies. For both cases, we are interested in the effect on average final schooling. On the left, we vary the discount factor $\delta$ between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to \$1.500.
+\paragraph{Economic mechanisms and policy evaluation} Figure \ref{Economic mechanism and policy forecast} illustrates the ability of structural economic models to quantify the impact of economic mechanisms and to forecast the effect of public policies. On the left, we vary the discount factor $\delta$ between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to $\$1,500$ on the right. In both cases, we are interested in the effect on average final schooling.
 
 \begin{figure}[h!]\centering
 \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
@@ -58,7 +58,7 @@ However, the unobservable components evolve randomly. They are jointly normally 
 %-------------------------------------------------------------------------------
 Our research group is actively developing the \verb+respy+ package, which allows for the flexible specification, simulation, and estimation of the typical EKW models. Instructions on how to use the package, obtain the source code, replicate several seminal papers, and details on the numerical methods are all available in its online documentation at \url{https://respy.readthedocs.io}.
 
-\paragraph{Workflow illustration} Figure \ref{Workflow example} illustrates the typical workflow with the \verb+respy+ package.\footnote{The complete set of replication codes for the material included in this handout is available at \url{http://bit.ly/ekw-handout-replication}.} The model is specified in the parameters and options specification.
+\paragraph{Workflow illustration} Figure \ref{Workflow example} illustrates the typical workflow with the \verb+respy+ package.
 
 \begin{figure}[ht!]\centering
 \caption{Workflow example}\label{Workflow example}
@@ -71,4 +71,14 @@ simulate = rp.get_simulate_func(params, options)
 df = simulate(params)
 
 \end{lstlisting}
-\end{figure}
+\end{figure}\FloatBarrier
+
+\noindent Figure \ref{Model specification} shows the specification files for the example. The file on the left deals with the parameterization of the model. It specifies the coefficient values for the the reward functions and the distribution of the unobservable state variables. On the right, the file contains details on the construction of the observed state variables and specifies tuning parameters for the numerical solution method. 
+
+\begin{figure}[h!]\centering
+\caption{Model specification}\label{Model specification}
+\subfloat[Parameterization]{\scalebox{0.25}{\includegraphics{fig-params}}}\hspace{0.3cm}
+\subfloat[Options]{\scalebox{0.25}{\includegraphics{fig-options}}}
+\end{figure}\FloatBarrier
+
+\noindent Details on all is available in the online documentation and the complete replication code for example is available at \url{http://bit.ly/ekw-handout-replication}.

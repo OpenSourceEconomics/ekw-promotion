@@ -2,14 +2,15 @@
 %-------------------------------------------------------------------------------
 \section{Extensions}\label{Extensions}
 %-------------------------------------------------------------------------------
-We briefly discuss selected extensions to the baseline model that are our active areas of research. Again, given the advanced state of efforts here projects, we now actively seek the input from domain experts for further improvement and subsequent joint publication.
-
+We briefly discuss selected extensions to the baseline model that are our active areas of research. While the first two projects discussed are method-focused, the latter two are data-driven. Again, given the advanced state of efforts here projects, we now actively seek the input from domain experts for further improvement and subsequent joint publication.
+%-------------------------------------------------------------------------------
 \subsection{Robust decision-making}
+%-------------------------------------------------------------------------------
 The uncertainties involved in human capital investments are ubiquitous \citep{Becker.1964}. Individuals usually make investments early in life when they are still uncertain about their own abilities and tastes. In addition, returns also depend on demographic, economic, and technological trends that only start to unfold years from now. However, the treatment of uncertainty in life cycle models of human capital investment is very narrow. A model provides individuals with a formalized view about their economic environment and implies unique probabilities for all possible future events. Individuals have no fear of model misspecification.\\
 
 \noindent In \citet{Eisenhauer.2020}, we address this shortcoming by formulating, implementing, and exploring a life cycle model of robust human capital investment where individuals face risk within a model and ambiguity about the model \citep{Arrow.1951}. Ambiguity arises as individuals simply do not know the true model and consider a whole set of models as reasonable descriptions of their economic environment. Individuals fear model misspecification and thus seek robust decisions, i.e. decisions that perform well over the whole range of models.\\
 
-\noindent We incoporate ethods from robust optimization \citep{Ben-Tal.2009,Wiesemann.2014,Rahimian.2019} and robust Markov decision processes \citep{Iyengar.2005,Nilim.2005} that allow us to construct decision rules that explicitly take potential model misspecification into account.
+\noindent We incorporate methods from robust optimization \citep{Ben-Tal.2009,Wiesemann.2014,Rahimian.2019} and robust Markov decision processes \citep{Iyengar.2005,Nilim.2005} that allow us to construct decision rules that explicitly take potential model misspecification into account.
 %-------------------------------------------------------------------------------
 \subsection{Uncertainty quantification}
 
@@ -17,5 +18,10 @@ We investigate this issue in \citet{Gabler.2020b} and this section will be flesh
 
 %-------------------------------------------------------------------------------
 \subsection{Model validation}
+%-------------------------------------------------------------------------------
 
-In \citet{Bhuller.2018}, we calibrate an EKW model on Norwegian population panel data with nearly career-long earnings histories. Due to the richness of the data, we can validate the model using a mandatory schooling reform. Our data includes substantial geographic variation in compulsory schooling across Norway between 1960 and 1975 as mandatory schooling increased from 7 to 9 years at different points in time across municipalities. We split our data in an estimation and validation sample. We only use pre-reform data in our estimation, predict the effect of increasing mandatory schooling by 2 years, and compare our forecast with the post-reform outcome. This allows us to assess the ability of our model to extrapolate outside the support of our estimation data. Such a validation of computational models is a prerequisite for their use in other disciplines \citep{Adams.2012,Oberkampf.2010}. It is extremely rare in economics as drastic regime shifts are seldom available in observational data and costly to implement in large-scale experiments.
+In \citet{Bhuller.2018}, we calibrate an EKW model on Norwegian population panel data with nearly career-long earnings histories. Due to the richness of the data, we can validate the model using a mandatory schooling reform. Our data includes substantial geographic variation in compulsory schooling across Norway between 1960 and 1975 as mandatory schooling increased from 7 to 9 years at different points in time across municipalities. We split our data in an estimation and validation sample. We only use pre-reform data in our estimation, forecast the effect of increasing mandatory schooling by 2 years, and compare our forecast with the post-reform outcome. This allows us to assess the ability of our model to extrapolate outside the support of our estimation data. Such a validation of computational models is a prerequisite for their use in other disciplines \citep{Adams.2012,Oberkampf.2010}. It is extremely rare in economics as drastic regime shifts are seldom available in observational data and costly to implement in large-scale experiments.
+%-------------------------------------------------------------------------------
+\subsection{Nonstandard expectations}
+%-------------------------------------------------------------------------------
+... to be added
