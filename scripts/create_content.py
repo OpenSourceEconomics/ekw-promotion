@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
         os.chdir(os.environ["PROJECT_DIR"] + "/replication")
 
-        [os.remove(fname) for fname in glob.glob("../handout/material/*.png")]
+        [os.remove(fname) for fname in glob.glob("../handout/material/fig-*.png")]
 
         sp.check_call(["python", "run.py"])
 

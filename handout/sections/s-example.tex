@@ -58,27 +58,38 @@ Schooling increases wages by only 4\% in the first occupation compared to 8\% in
 %-------------------------------------------------------------------------------
 Our research group is actively developing the \verb+respy+ package, which allows for the flexible specification, simulation, and estimation of the typical EKW models. Instructions on how to use the package, obtain the source code, replicate several seminal papers, and details on the numerical methods are all available in its online documentation at \url{https://respy.readthedocs.io}.
 
-\paragraph{Workflow illustration} Figure \ref{Workflow example} illustrates the typical workflow with the \verb+respy+ package.
+\paragraph{Workflow illustration} Figure \ref{Typical workflow} illustrates the typical workflow with the \verb+respy+ package. Initially, the user provides the observed data as well as the parameters and options that define the model's structure. Based on this input, we can construct the functionality for the evaluation of the likelihood function and the simulation of a data. Using our group's optimization toolbox \verb+estimagic+ \citep{Gabler.2019}, we can then calibrate the model and simulate the properties of data simulated based on the results.
 
 \begin{figure}[ht!]\centering
-\caption{Workflow example}\label{Workflow example}
-\lstset{language=python, morekeywords={as}, ndkeywords={=}, ndkeywordstyle=\color{blue}, keywordstyle=\color{red}, commentstyle=\color{darkgrey}, emph={get_example_model, get_crit_func, get_simulate_func}, emphstyle=\color{violet}, basicstyle=\footnotesize, frame=lines}
+\caption{Typical workflow}\label{Typical workflow}
+\lstset{language=python, morekeywords={as}, ndkeywords={=}, ndkeywordstyle=\color{blue}, keywordstyle=\color{red}, commentstyle=\color{blue}, emph={}, emphstyle=\color{violet}, basicstyle=\footnotesize, frame=lines,   showlines=true}
 \begin{lstlisting}
+from estimagic.optimization.optimize import maximize
 import respy as rp
 
-params, options, _ = rp.get_example_model("kw_94_one")
+# obtain model input
+df, params, options = get_model_input()
+
+# process model
+crit_func = rp.get_crit_func(params, options, df)
 simulate = rp.get_simulate_func(params, options)
-df = simulate(params)
+
+# perform likelihood-based calibration and simulate dataset
+results, params_rslt = maximize(crit_func, params, "nlopt_bobyqa")
+df_rslt = simulate(params_rslt)
+
+# conduct analysis
+...
 
 \end{lstlisting}
 \end{figure}\FloatBarrier
 
-\noindent Figure \ref{Model specification} shows the specification files for the example. The file on the left deals with the parameterization of the model. It specifies the coefficient values for the the reward functions and the distribution of the unobservable state variables. On the right, the file contains details on the construction of the observed state variables and specifies tuning parameters for the numerical solution method. 
+\noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left deals with the parameterization of the model. It specifies the coefficient values for the the reward functions and the distribution of the unobservable state variables. On the right, the file contains details on the construction of the observed state variables and specifies tuning parameters for the numerical solution method.
 
 \begin{figure}[h!]\centering
 \caption{Model specification}\label{Model specification}
-\subfloat[Parameterization]{\scalebox{0.25}{\includegraphics{fig-params}}}\hspace{0.3cm}
-\subfloat[Options]{\scalebox{0.25}{\includegraphics{fig-options}}}
+\subfloat[Parameterization]{\scalebox{0.25}{\includegraphics{crop-params}}}\hspace{0.3cm}
+\subfloat[Options]{\scalebox{0.25}{\includegraphics{crop-options}}}
 \end{figure}\FloatBarrier
 
 \noindent Details on all is available in the online documentation and the complete replication code for example is available at \url{http://bit.ly/ekw-handout-replication}.
