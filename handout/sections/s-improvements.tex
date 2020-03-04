@@ -10,11 +10,11 @@ In \citet{Gabler.2020a} we draw on the extensive literature in applied math on n
 
 \noindent To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in a generic time period $t$. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
 %
-\begin{align}
+\begin{align*}
 v^{\pi}_{t}(s_t, a_t) & = u(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \\
 & =  u(s_t, a_t) + \delta\, \int_S v^{\pi^*}_{t + 1}(s_{t + 1})\, \diff p_t(a_t, s_t)\\
 & =  u(s_t, a_t) + \delta\, \underbrace{\int_S \max_{a \in A}\bigg\{v^\pi_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t)}_{\mathcal{I}(a_{t + 1})}.
-\end{align}
+\end{align*}
 
 \noindent We need to solve the integral $\mathcal{I}(a_{t + 1})$ millions of times during the backward induction procedure. The current practice is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
 
@@ -28,6 +28,6 @@ v^{\pi}_{t}(s_t, a_t) & = u(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
 %-------------------------------------------------------------------------------
-In \citet{Gabler.2020}, we draw on the specialized literature on global optimization to assess and improve the reliability of the model calibration \citep{Nocedal.2006,Locatelli.2013}.\\
+In \citet{Gabler.2020}, we draw on the specialized literature on global optimization to assess and improve the reliability of the model calibration \citep{Locatelli.2013,Nocedal.2006}.\\
 
 \noindent We conduct a benchmarking exercise using \citet{Keane.1994,Keane.1997} as a well-known and empirically-grounded test case. Depending on the calibration procedure, particular challenges arise. For example, likelihood-based estimation requires smoothing of the choice probabilities, while simulation-based calibration involves noisy function optimization.

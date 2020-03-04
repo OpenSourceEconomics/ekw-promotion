@@ -29,14 +29,14 @@ df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
 fig, ax = plt.subplots()
 
 labels = ["Home", "Schooling", "White", "Blue"]
-shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels]
+shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
 shares.plot.bar(stacked=True, ax=ax, width=0.8)
 
 ax.legend(labels=labels, loc="lower center", bbox_to_anchor=(0.5, 1.04), ncol=4)
 
 ax.yaxis.get_major_ticks()[0].set_visible(False)
-ax.set_ylabel("Share of individuals")
-ax.set_ylim(0, 1)
+ax.set_ylabel("Share (in %)")
+ax.set_ylim(0, 100)
 
 ax.set_xticklabels(np.arange(16, 55, 5), rotation="horizontal")
 ax.xaxis.set_ticks(np.arange(0, 40, 5))
