@@ -23,12 +23,12 @@ stat = df.groupby("Identifier")["Experience_Edu"].max().mean()
 print(f"Average education in baseline: {stat}")
 
 df['Age'] = df['Period'] + 16
-df["Choice"].cat.categories = ['White', 'Blue', 'Schooling', 'Home']
+df["Choice"].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
 df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
 
 fig, ax = plt.subplots()
 
-labels = ["Home", "Schooling", "White", "Blue"]
+labels = ["Home", "Schooling", "Blue", "White"]
 shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
 shares.plot.bar(stacked=True, ax=ax, width=0.8)
 

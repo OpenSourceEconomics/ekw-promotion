@@ -35,5 +35,3 @@ if __name__ == '__main__':
         [sp.check_call([cmd, "main"]) for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]]
 
         os.chdir(os.environ["PROJECT_DIR"])
-
-        sp.check_call(["git", "clean", "-df"])
