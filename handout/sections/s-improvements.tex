@@ -2,21 +2,21 @@
 %-------------------------------------------------------------------------------
 \section{Improvements}\label{Computation}
 %-------------------------------------------------------------------------------
-The implementation of EKW models poses several computational challenges. Among them numerical integration, global optimization, function approximation, and efficient parallelization. We now describe some of our efforts to align \verb+respy+ and \verb+estimagic+ with the state-of-the-art in computational methods. We have concluded our preparatory work and actively seek input from domain experts for further improvements and joint publication.
+The implementation of EKW models poses several computational challenges. Among them are numerical integration, global optimization, function approximation, and efficient parallelization. We now describe some of our efforts to align \verb+respy+ and \verb+estimagic+ with the state-of-the-art in computational methods. We have concluded our preparatory work and actively seek input from domain experts for further improvements and joint publication.
 %-------------------------------------------------------------------------------
 \subsection{Numerical integration}
 %-------------------------------------------------------------------------------
-The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Gabler.2020a}, we draw on the extensive literature in applied math on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of the evaluation approach. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
+The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Gabler.2020a}, we draw on the extensive literature on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of the evaluation approach. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
 
-\noindent To clarify the structure of the integral determining the future value of a state, it is useful to consider the optimality equation in a generic time period $t$. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
+\noindent We consider the optimality equation in a generic time period $t$ to clarify the structure of the integral. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
 %
 \begin{align*}
-v^{\pi}_{t}(s_t, a_t) & = u(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \\
-& =  u(s_t, a_t) + \delta\, \int_S v^{\pi^*}_{t + 1}(s_{t + 1})\, \diff p_t(a_t, s_t)\\
-& =  u(s_t, a_t) + \delta\, \int_S \max_{a \in A}\bigg\{v^\pi_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t).
+v^{\pi}_{t}(s_t, a_t) & = r_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \\
+& =  r_t(s_t, a_t) + \delta\, \int_S v^{\pi^*}_{t + 1}(s_{t + 1})\, \diff p_t(a_t, s_t)\\
+& =  r_t(s_t, a_t) + \delta\, \int_S \max_{a \in A}\bigg\{v^\pi_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t).
 \end{align*}
 
-\noindent Let's consider an atemporal version of the typical integral from \citet{Keane.1994} as an example. As outlined earlier, individuals can choose among four alternatives. Each of the alternative-specific rewards is, in part, determined by a random continuous state variable $\epsilon$ that follows a normal distribution. The transition of all other state variables $x$ is deterministic. This results in a four-dimensional integral of the following form:
+\noindent Let's consider an atemporal version of the typical integral from \citet{Keane.1994} as an example. As outlined earlier, individuals can choose among four alternatives. Each of the alternative-specific rewards is, in part, determined by a stochastic continuous state variable $\epsilon$. The transition of all other state variables $x$ is deterministic. This results in a four-dimensional integral of the following form:
 %
 \begin{align*}
    \int_{\epsilon}\, \max_{a\in A} \bigg\{v^\pi(x, \epsilon, a)\bigg\} \phi_{\mu, \Sigma}(\epsilon) \diff\epsilon \quad\forall\, x \in X,
@@ -26,6 +26,6 @@ v^{\pi}_{t}(s_t, a_t) & = u(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
 %-------------------------------------------------------------------------------
-The calibration of EKW models is a challenging task due to a large number of parameters and multiplicity of local minima. In \citet{Gabler.2020}, we draw on the specialized literature on global optimization to assess and improve the reliability of the model calibration \citep{Locatelli.2013, Nocedal.2006}.\\
+The calibration of EKW models is challenging due to a large number of parameters and multiplicity of local minima. In \citet{Gabler.2020}, we draw on the literature on global optimization to assess and improve the reliability of the model calibration \citep{Locatelli.2013, Nocedal.2006}.\\
 
 \noindent We conduct a benchmarking exercise using \citet{Keane.1994, Keane.1997} as a well-known and empirically-grounded test case. Depending on the calibration procedure, particular challenges arise. While likelihood-based calibration requires smoothing of the choice probabilities, simulation-based calibration involves the optimization of a noisy function. We provide guidelines for the selection of the appropriate algorithm in each setting and showcase diagnostics to assess the reliability of the calibration results.
