@@ -34,6 +34,6 @@ if __name__ == '__main__':
 
         [sp.check_call([cmd, "main"]) for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]]
 
-        shutil.move("main.pdf", "../ekw-handout.pdf")
+        os.chdir(os.environ["PROJECT_DIR"])
 
-        sp.check_call(["git", "clean", "-xdf"])
+        sp.check_call(["git", "clean", "-df"])
