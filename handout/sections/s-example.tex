@@ -2,7 +2,7 @@
 %-------------------------------------------------------------------------------
 \section{Example}\label{Example}
 %-------------------------------------------------------------------------------
-We now provide an illustration of an EKW model. We start with an outline and discussion of a model of occupational choice by \citet{Keane.1994}. We then discuss its specification, simulation, and calibration using our group's research codes \verb+respy+ and \verb+estimagic+.
+We now analyze a canonical EKW model. We start with an outline and discussion of the occupational choice model presented in \citet{Keane.1994}. We then sketch its specification, simulation, and calibration using our group's research codes \verb+respy+ and \verb+estimagic+.
 %-------------------------------------------------------------------------------
 \subsection{Keane \& Wolpin (1994)}
 %-------------------------------------------------------------------------------
@@ -17,11 +17,11 @@ w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}e_{1t} + \alpha_{23}e^2
 \end{cases}
 \end{align*}
 %
-$g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $e_{1t}$ and $e_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. Turning to the rewards from school attendance, $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption value of schooling, and home time.\\
+$g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $e_{1t}$ and $e_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. Turning to the rewards from school attendance, $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school after dropping out. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption value of schooling, and home time.\\
 
-\noindent Given the structure of the reward functions and imposing that the shocks are not correlated across choices or time, the state at time $t$ is $s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
+\noindent Given the structure of the reward functions and imposing that the shocks are not correlated across alternatives or time, the state at time $t$ is $s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
 %
-The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\}$ to the individual and the researcher. It evolves deterministically according to the following rules:
+The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\}$ to the individual and the economist. It evolves deterministically according to the following rules:
 %
 \begin{align*}
     e_{1,t+1} &= e_{1t} + \Ind[\,a_t = 1\,] \\
@@ -29,7 +29,7 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
     g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,].
 \end{align*}
 
-\noindent The shocks $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual. They evolve stochastically according to a joint normal distribution  $\mathcal{N}(0, \Sigma)$ with mean zero and covariance matrix $\Sigma$.\\
+\noindent The shocks $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual. They evolve stochastically according to a joint normal distribution with mean $\mu$ zero and covariance matrix $\Sigma$.\\
 
 \noindent \citet{Keane.1994} analyze three different parameterizations of the model and we reproduce the second one for this example. The basic idea is that individuals are about age 16 when entering the model and then follow it for $T = 40$ years until retirement. Initially, individuals are identical and have no labor market experience $(e_{11} = e_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. Different choices over the life cycle are then simply the cumulative effects of different shocks.\\
 
@@ -42,7 +42,7 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
 \scalebox{0.35}{\includegraphics{fig-observed-choices}}
 \end{figure}\FloatBarrier
 
-\noindent Overall, the level of average final schooling is slightly above a high school degree with 12.5 years. Individuals choose to incur the immediate costs of their schooling investments in the form of tuition and foregone earnings right at the beginning of their life cycle. Doing so maximizes their ability to reap the reward of increased wages over the remaining time periods.\\
+\noindent Overall, average final schooling is slightly above a high school degree with 12.5 years. Individuals choose to incur the immediate costs of their schooling investments in the form of tuition and foregone wages right at the start. Doing so maximizes their ability to reap the reward of increased wages over the remaining time periods.\\
 
 \noindent Figure \ref{Economic mechanism and policy forecast} illustrates the ability of structural microeconometric models to quantify the impact of economic mechanisms and to forecast the effect of public policies. On the left, we vary the discount factor capturing time preferences between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to $\$1,500$ on the right. In both cases, we are interested in the changes to average final schooling.
 
@@ -52,13 +52,13 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
 \subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{fig-policy-forecast}}}
 \end{figure}\FloatBarrier
 
-\noindent Increases in the discount factor and the tuition subsidy both result in increased levels of average final schooling. However, they do so very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction in its immediate cost in the latter.
+\noindent Increases in the discount factor and the tuition subsidy both result in higher average final schooling. However, they do so very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction of its immediate cost in the latter.
 %-------------------------------------------------------------------------------
 \subsection{\texttt{respy} and \texttt{estimagic}}
 %-------------------------------------------------------------------------------
-Our research group is actively developing two research codes that allow to analyze EKW models using modern software development practices. \verb+respy+ allows for their flexible specification and simulation, and \verb+estimagic+ provides the infrastructure for their calibration. We briefly showcase the typical workflow of using both packages in our research. Tutorials, source code, testing harness, as well as implementation details are available in the respective online documentations at \url{https://respy.readthedocs.io} and \url{https://estimagic.readthedocs.io}.\\
+Our research group is actively developing two research codes that allow to analyze EKW models using modern software development practices. \verb+respy+ allows for their flexible specification and simulation, and \verb+estimagic+ provides the infrastructure for their calibration. We briefly showcase the typical workflow of using both packages in our research.\\
 
-\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the observed data, the parameterization of the model, and other options to \verb+respy+. All together define the structure of the model, and we can construct the functionality for the simulation of the data and the evaluation of the criterion function. \verb+estimagic+ provides the capabilities for the calibration of the model to the observed data. The results from the calibration steps are then used to analyze the economic mechanisms underlying the observed behaviors.
+\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the observed data, the parameterization of the model, and other options to \verb+respy+. All together define the structure of the model, and we can construct the functionality for the simulation of data and the evaluation of the criterion function. \verb+estimagic+ provides the capabilities for the calibration of the model to the observed data. The results from the calibration steps are then, for example, used to analyze the economic mechanisms underlying the observed behaviors.
 
 \begin{figure}[ht!]\centering
 \caption{Typical workflow}\label{Typical workflow}
@@ -70,7 +70,7 @@ import respy as rp
 # obtain model input
 df, params, options = get_model_input()
 
-# process model
+# process model specification
 crit_func = rp.get_crit_func(params, options, df)
 simulate = rp.get_simulate_func(params, options)
 
@@ -84,7 +84,7 @@ df_rslt = simulate(params_rslt)
 \end{lstlisting}
 \end{figure}\FloatBarrier
 
-\noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left deals with the parameterization of the model. We set the parameter values for the reward functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and numerous tuning parameters for the numerical solution of the model.
+\noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left sets the parameter values for the reward functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and numerous tuning parameters for the numerical solution of the model.
 
 \begin{figure}[h!]\centering
 \caption{Model specification}\label{Model specification}
@@ -98,3 +98,5 @@ df_rslt = simulate(params_rslt)
 \caption{Dashboard}\label{Dashboard}
 \scalebox{0.50}{\includegraphics{crop-dashboard}}
 \end{figure}\FloatBarrier
+
+\noindent We adopt a modern software engineering workflow in the development of both packages and tutorials, source code, testing harness, as well as implementation details are available in their respective online documentations at \url{https://respy.readthedocs.io} and \url{https://estimagic.readthedocs.io}.
