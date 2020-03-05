@@ -56,9 +56,9 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
 %-------------------------------------------------------------------------------
 \subsection{\texttt{respy} and \texttt{estimagic}}
 %-------------------------------------------------------------------------------
-Our research code \verb+respy+ allows to flexibly specify and simulate EKW models, while the can use our groups optimization toolbox  \verb+estimagic+ for their calibration. We briefly showcase a typical workflow for such an analysis. Instructions on how to use the packages, obtain the source code, assess the testing harness, replicate several seminal papers, and other implementation details are available in their respective online documentations at \url{https://respy.readthedocs.io} and \url{https://estimagic.readthedocs.io}.\\
+Our research group is actively developing two research codes that allow to analyze EKW models. \verb+respy+ allows for their flexible specification and simulation, and \verb+estimagic+ provides the infrastructure for their calibration. We briefly showcase the typical workflow of using both packages in our research. Tutorials, source code, testing harness, as well as implementation details are available in the respective online documentations at \url{https://respy.readthedocs.io} and \url{https://estimagic.readthedocs.io}.\\
 
-\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the observed data, the parameterization of the model, and other options. All together define the structure of the model, and we can construct the functionality for the evaluation of the likelihood function and the simulation of the data. We can use \verb+estimagic+ for the calibration of the the model and then study the properties of data simulated based on the results.
+\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the observed data, the parameterization of the model, and other options to \verb+respy+. All together define the structure of the model, and we can construct the functionality for the simulation of the data and the evaluation of the criterion function. \verb+estimagic+ provides the capabilities for the calibration of the model to the observed data. The results from the calibration steps are then used to analyze the economic mechanisms underlying the observed behaviors.
 
 \begin{figure}[ht!]\centering
 \caption{Typical workflow}\label{Typical workflow}
@@ -74,17 +74,17 @@ df, params, options = get_model_input()
 crit_func = rp.get_crit_func(params, options, df)
 simulate = rp.get_simulate_func(params, options)
 
-# perform likelihood-based calibration and simulate dataset
+# perform calibration
 results, params_rslt = maximize(crit_func, params, "nlopt_bobyqa")
-df_rslt = simulate(params_rslt)
 
 # conduct analysis
+df_rslt = simulate(params_rslt)
 ...
 
 \end{lstlisting}
 \end{figure}\FloatBarrier
 
-\noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left deals with the parameterization of the model. We set the coefficient values for the reward functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and tuning parameters for numerous numerical methods.
+\noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left deals with the parameterization of the model. We set the parameter values for the reward functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and numerous tuning parameters for the numerical solution of the model.
 
 \begin{figure}[h!]\centering
 \caption{Model specification}\label{Model specification}
@@ -92,8 +92,7 @@ df_rslt = simulate(params_rslt)
 \subfloat[Options]{\scalebox{0.25}{\includegraphics{crop-options}}}
 \end{figure}\FloatBarrier
 
-
-\noindent Figure \ref{Dashboard} depicts the online dashboard provided by \verb+estimagic+ to monitor convergence and analyze quality of optimization for individual model parameters.
+\noindent Figure \ref{Dashboard} depicts the dashboard provided by \verb+estimagic+ to monitor the progress and parameter values of the calibration in real time. This is very helpful for detecting problems during the calibration and facilitates the debugging process.
 
 \begin{figure}[h!]\centering
 \caption{Dashboard}\label{Dashboard}
