@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
         os.chdir(os.environ["PROJECT_DIR"] + "/replication")
 
-        [os.remove(fname) for fname in glob.glob("../handout/material/*.png")]
+        [os.remove(fname) for fname in glob.glob("../handout/material/fig-*.png")]
 
         sp.check_call(["python", "run.py"])
 
@@ -34,6 +34,4 @@ if __name__ == '__main__':
 
         [sp.check_call([cmd, "main"]) for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]]
 
-        shutil.move("main.pdf", "../ekw-handout.pdf")
-
-        sp.check_call(["git", "clean", "-xdf"])
+        os.chdir(os.environ["PROJECT_DIR"])

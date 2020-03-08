@@ -14,12 +14,12 @@
 	\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\large$t$};
 	\node[node distance=6cm, right of=bottom_left, yshift=-.5cm] (t2) {\large$t+1$};
 
-	\node[eqblock, above of=left, xshift=3cm] (eq1) {\large$\{u(s_t, a)\}_{a\in A}$};
+	\node[eqblock, above of=left, xshift=3cm] (eq1) {\large$\{r_t(s_t, a_t)\}_{a_t\in A}$};
 	\node[eqblock, above of=left, xshift=6cm] (eq2) {\large$a_t$};
-	\node[eqblock, above of=left, xshift=9cm] (eq3) {\large$u_t(s_t, a_t)$};
-	\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\large$\{u_{t + 1}(s_{t + 1}, a\noindent )\}_{a\in A}$};
+	\node[eqblock, above of=left, xshift=9cm] (eq3) {\large$r_t(s_t, a_t)$};
+	\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\large$\{r_{t + 1}(s_{t + 1}, a_{t + 1}\noindent )\}_{a_{t + 1}\in A}$};
 	\node[eqblock, above of=bottom_left, xshift=6cm] (eq6) {\large$a_{t + 1}$};
-	\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$u_{t + 1}(s_{t + 1}, a_{t + 1})$};
+	\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$r_{t + 1}(s_{t + 1}, a_{t + 1})$};
 
 	\node[above of=eq1, node distance=1cm] (text2) {\large Learn};
 	\node[above of=eq2, node distance=1cm] (text3) {\large Choose};

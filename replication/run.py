@@ -14,7 +14,7 @@ import respy as rp
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
 
-params, options = rp.get_example_model("kw_94_one", with_data=False)
+params, options = rp.get_example_model("kw_94_two", with_data=False)
 
 simulate = rp.get_simulate_func(params, options)
 df = simulate(params)
@@ -23,27 +23,29 @@ stat = df.groupby("Identifier")["Experience_Edu"].max().mean()
 print(f"Average education in baseline: {stat}")
 
 df['Age'] = df['Period'] + 16
-df["Choice"].cat.categories = ['White', 'Blue', 'Schooling', 'Home']
+df["Choice"].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
 df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
 
 fig, ax = plt.subplots()
 
-labels = ["Home", "Schooling", "White", "Blue"]
-shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels]
+labels = ["Home", "Schooling", "Blue", "White"]
+shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
 shares.plot.bar(stacked=True, ax=ax, width=0.8)
+
+print(shares)
 
 ax.legend(labels=labels, loc="lower center", bbox_to_anchor=(0.5, 1.04), ncol=4)
 
 ax.yaxis.get_major_ticks()[0].set_visible(False)
-ax.set_ylabel("Share of individuals")
-ax.set_ylim(0, 1)
+ax.set_ylabel("Share (in %)")
+ax.set_ylim(0, 100)
 
 ax.set_xticklabels(np.arange(16, 55, 5), rotation="horizontal")
 ax.xaxis.set_ticks(np.arange(0, 40, 5))
 
 fig.savefig("fig-observed-choices")
 
-params_sdcorr, options = rp.get_example_model("kw_94_one", with_data=False)
+params_sdcorr, options = rp.get_example_model("kw_94_two", with_data=False)
 simulate_func = rp.get_simulate_func(params_sdcorr, options)
 
 
