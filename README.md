@@ -1,6 +1,12 @@
 # Eckstein-Keane-Wolpin models
 
-We present background material for a particular class structural economic models to facilitate transdiciplinary collaboration in their future development. We describe the economic setup, mathematical formulation, and calibration procedures for so-called Eckstein-Keane-Wolpin models. We provide an example application using our group's research code `respy`. We review research outside economics to identify model components ripe for improvement and explore possible model extensions.
+We present background material on a particular class of structural microeconometric
+models to facilitate transdiciplinary collaboration in their future development. We
+describe the economic framework, mathematical formulation, and calibration pro-
+cedures for so-called Eckstein-Keane-Wolpin (EKW) models. We specify, simulate,
+and calibrate an example using our group’s research codes `respy` and `estimagic`.
+We summarize our efforts that draw on research outside economics to address their
+computational challenges and improve their usefulness.
 
 This handout is under constant development but you can access the most recent version [here
 ](https://github.com/OpenSourceEconomics/handout-eckstein-keane-wolpin-models/blob/master/promotion/ekw-handout.pdf).
