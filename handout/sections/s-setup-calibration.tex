@@ -23,6 +23,13 @@ where $T_i$ is the number of observations for which we observe individual $i$.\\
 
 \paragraph{Simulation-based}
 
-\begin{itemize}
-  \item This issue is under active investigation in our group, and this section will be fleshed out further by Annica Gehlen as our work progresses.
-\end{itemize}
+Simulation-based calibration involves the simulation of data using the parameter vector $\theta$. The model is simulated by drawing observations for individuals at one or multiple points in time, generating a series of shocks and wage measurement errors for each individual $i$ in each period $t$, and then solving the model based on the given inputs and $\theta$. Simulation-based calibration then targets the parameter specification that produces the closest simulated match to the observed data.\\
+
+\noindent A prevalent method for matching simulated and observed data is the Method of Simulated Moments (MSM) first developed by \citet{McFadden.1989}. The MSM calibrates parameters by minimizing the weighted squared difference between observed and simulated model moments. The objective is given by
+
+\begin{align*}
+	\hat{\theta} \equiv \argmin_{\theta in \Theta} (M(x) - M_S(\tilde{x}| \theta))' W (M(x) - M_S(\tilde{x}|\theta))
+\end{align*}
+
+where $M(x)$ denotes the $m \times 1$ vector of moments computed from the observed data $x$
+and $M_S(\tilde{x}| \theta)$ denotes the vector of moments computed from $S$ simulations $\tilde{x} = \{\tilde{x}_1, ... , \tilde{x}_S\}$ of the data based on $\theta$. $W$ denotes a $m \times m$ weighting matrix which impacts how each moment is weighted in the minimization problem.
