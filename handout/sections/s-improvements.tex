@@ -6,7 +6,7 @@ The implementation of EKW models poses several computational challenges. Among t
 %-------------------------------------------------------------------------------
 \subsection{Numerical integration}
 %-------------------------------------------------------------------------------
-The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Gabler.2020a}, we draw on the extensive literature on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of the evaluation approach. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
+The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Gabler.2020a}, we draw on the extensive literature on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of their solution. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
 
 \noindent We consider the optimality equation in a generic time period $t$ to clarify the structure of the integral. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a$ in state $s$ while continuing with the optimal policy going forward.
 %
@@ -26,6 +26,6 @@ v^{\pi}_{t}(s_t, a_t) & = r_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
 %-------------------------------------------------------------------------------
-The calibration of EKW models is challenging due to a large number of parameters and multiplicity of local minima. In \citet{Gabler.2020}, we draw on the literature on global optimization to assess and improve the reliability of the model calibration \citep{Locatelli.2013, Nocedal.2006}.\\
+The calibration of EKW models is challenging due to a large number of parameters and multiplicity of local minima. In \citet{Gabler.2020}, we draw on the literature on global optimization to assess and improve the reliability of the calibrations \citep{Locatelli.2013, Nocedal.2006}.\\
 
-\noindent We conduct a benchmarking exercise using \citet{Keane.1994, Keane.1997} as a well-known and empirically-grounded test case. Depending on the calibration procedure, particular challenges arise. While likelihood-based calibration requires smoothing of the choice probabilities, simulation-based calibration involves the optimization of a noisy function. We provide guidelines for the selection of the appropriate algorithm in each setting and showcase diagnostics to assess the reliability of the calibration results.
+\noindent We conduct a benchmarking exercise using \citet{Keane.1994, Keane.1997} as a well-known and empirically-grounded test case. Depending on the calibration procedure, particular challenges arise. For example, while likelihood-based calibration requires smoothing of the choice probabilities, simulation-based calibration involves the optimization of a noisy function. We provide guidelines for the selection of the appropriate algorithm in each setting and showcase diagnostics to assess the reliability of the calibration results.
