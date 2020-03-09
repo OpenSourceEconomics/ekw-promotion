@@ -21,9 +21,9 @@ where $T_i$ is the number of observations for which we observe individual $i$.\\
   \hat{\theta} \equiv \argmax_{\theta \in \Theta}  \underbrace{\prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)}_{\mathcal{L}(\theta\mid\mathcal{D})}.
 \end{align*}
 
-\paragraph{Simulation-based}
+\paragraph{Simulation-based} Simulation-based calibration involves the simulation of synthetic data from the model for different parameter vectors $\theta$. The goal is to find the parameterization that creats the clsoes
 
-Simulation-based calibration involves the simulation of data using the parameter vector $\theta$. The model is simulated by drawing observations for individuals at one or multiple points in time, generating a series of shocks and wage measurement errors for each individual $i$ in each period $t$, and then solving the model based on the given inputs and $\theta$. Simulation-based calibration then targets the parameter specification that produces the closest simulated match to the observed data.\\
+closest resembles the observed data.\\
 
 \noindent A prevalent method for matching simulated and observed data is the Method of Simulated Moments (MSM) first developed by \citet{McFadden.1989}. The MSM calibrates parameters by minimizing the weighted squared difference between observed and simulated model moments. The objective is given by
 
