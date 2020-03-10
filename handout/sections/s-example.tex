@@ -63,25 +63,7 @@ Our research group is actively developing two research codes that allow analyzin
 \begin{figure}[ht!]\centering
 \caption{Typical workflow}\label{Typical workflow}
 \lstset{language=python, morekeywords={as}, ndkeywords={=}, ndkeywordstyle=\color{black}, keywordstyle=\color{black}, commentstyle=\color{black}, emph={}, emphstyle=\color{violet}, basicstyle=\footnotesize, frame=lines,   showlines=true}
-\begin{lstlisting}
-from estimagic.optimization.optimize import maximize
-import respy as rp
-
-# obtain model input
-df, params, options = get_model_input()
-
-# process model specification
-crit_func = rp.get_crit_func(params, options, df)
-simulate = rp.get_simulate_func(params, options)
-
-# perform calibration
-results, params_rslt = maximize(crit_func, params, "nlopt_bobyqa")
-
-# conduct analysis
-df_rslt = simulate(params_rslt)
-...
-
-\end{lstlisting}
+\lstinputlisting{../material/workflow.py}
 \end{figure}\FloatBarrier
 
 \noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1994}. The file on the left sets the parameter values for the reward functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and numerous tuning parameters for the numerical solution of the model.
