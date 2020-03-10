@@ -14,7 +14,7 @@ import respy as rp
 PROJECT_DIR = Path(os.environ['PROJECT_DIR'])
 
 
-"""Thi is the set up for the coloring options for the figures."""
+"""This is the set up for the coloring options for the figures."""
 
 color_opts = ["colored", "black-white"]
 jet_color_map = [
@@ -32,7 +32,7 @@ jet_color_map = [
 spec_dict = {
     "colored": {"colors": [None] * 4, "line": ["-"] * 3, "hatch": [""] * 3, "file": ""},
     "black-white": {
-        "colors": ["#808080", "#d3d3d3", "#A9A9A9", "#C0C0C0", "k"],
+        "colors": ["#CCCCCC", "#808080", "k"],
         "line": ["-", "--", ":"],
         "hatch": ["", "OOO", "///"],
         "file": "-sw",
@@ -53,7 +53,7 @@ df['Age'] = df['Period'] + 16
 df['Choice'].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
 df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
 
-"""The following code creates the observed choices figure."""
+"""The following code creates the observed choices fsigure."""
 
 for color in color_opts:
 
@@ -67,12 +67,15 @@ for color in color_opts:
             ax=ax,
             width=0.8,
             color=[
+                spec_dict[color]["colors"][1],
                 spec_dict[color]["colors"][0],
-                spec_dict[color]["colors"][4],
-                spec_dict[color]["colors"][2],
-                spec_dict[color]["colors"][3]
+                spec_dict[color]["colors"][1],
+                spec_dict[color]["colors"][0]
             ]
         )
+        for container, hatch in zip(ax.containers, ("OO","..","//","oo")):
+            for patch in container.patches:
+                patch.set_hatch(hatch)
     else:
         shares.plot.bar(
         stacked=True,
@@ -96,7 +99,7 @@ for color in color_opts:
         f'fig-observed-choices'
         f'-{color}'
     )
-    
+
 """The following code creates the policy forecast figure."""
 
 params_sdcorr, options = rp.get_example_model('kw_94_two', with_data=False)
@@ -123,11 +126,15 @@ for i, subsidy in enumerate(subsidies):
 for color in color_opts:
 
     fig, ax = plt.subplots(1, 1)
-    ax.plot(
-        subsidies,
-        edu_level,
-        color=spec_dict[color]["colors"][1],
-    )
+
+    if color == 'black-white':
+        ax.plot(
+            subsidies,
+            edu_level,
+            color=spec_dict[color]["colors"][2],
+        )
+    else:
+        ax.plot(subsidies, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel('Average final schooling')
@@ -159,16 +166,19 @@ deltas = np.linspace(0.945, 0.955, num_points)
 for i, delta in enumerate(deltas):
     edu_level[i] = time_preference_wrapper_kw_94(simulate_func, params_sdcorr, delta)
 
-    
+
 for color in color_opts:
-    
+
     fig, ax = plt.subplots(1, 1)
-    ax.plot(
-        deltas,
-        edu_level,
-        color=spec_dict[color]["colors"][1],
-        ls=spec_dict[color]["line"][0],
-    )
+
+    if color == 'black-white':
+        ax.plot(
+            deltas,
+            edu_level,
+            color=spec_dict[color]["colors"][2],
+        )
+    else:
+        ax.plot(deltas, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel('Average final schooling')

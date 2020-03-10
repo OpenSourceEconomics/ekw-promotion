@@ -2,7 +2,7 @@
 %-------------------------------------------------------------------------------
 \section{Example}\label{Example}
 %-------------------------------------------------------------------------------
-We now analyze a canonical EKW model. We start with an outline and discussion of the occupational choice model presented in \citet{Keane.1994}. The model is deliberately simple, but already contains the core components required for serious research applications. We will parameterize it so that we can simulate a data set that mirrors the basic patterns often documented in actual data on observed individual decisions. We finally sketch its specification, simulation, and calibration using our group's research codes \verb+respy+ and \verb+estimagic+.
+We now analyze a canonical EKW model. We start with an outline and discussion of the occupational choice model presented in \citet{Keane.1994}. The model is deliberately simple, but already contains the core components required for serious research applications. We will parameterize it so that we can simulate a data set that mirrors the basic patterns often documented in actual data on observed individual decisions. We conclude by sketching its specification, simulation, and calibration using our group's research codes \verb+respy+ and \verb+estimagic+.
 %-------------------------------------------------------------------------------
 \subsection{Keane \& Wolpin (1994)}
 %-------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
     g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,].
 \end{align*}
 
-\noindent The shocks $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual and evolve stochastically according to a joint normal distribution with mean $\mu$ zero and covariance matrix $\Sigma$.\\
+\noindent The shocks $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual and evolve stochastically according to a joint normal distribution.\\
 
 \noindent \citet{Keane.1994} analyze three different parameterizations of the model, and we reproduce the second one for this example. Initially, individuals are identical and have no labor market experience $(e_{11} = e_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. Different choices over the life cycle are then simply the cumulative effects of different shocks.\\
 
@@ -52,7 +52,7 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
 \subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{fig-policy-forecast-black-white}}}
 \end{figure}\FloatBarrier
 
-\noindent Increases in the discount factor and the tuition subsidy both result in higher average final schooling. However, they do so very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction of its immediate cost in the latter.
+\noindent Increases in the discount factor and the tuition subsidy both result in higher average final schooling. However, they do so for very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction of its immediate cost in the latter.
 %-------------------------------------------------------------------------------
 \subsection{\texttt{respy} and \texttt{estimagic}}
 %-------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ Our research group is actively developing two research codes that allow analyzin
 
 \begin{figure}[ht!]\centering
 \caption{Typical workflow}\label{Typical workflow}
-\lstset{language=python, morekeywords={as}, ndkeywords={=}, ndkeywordstyle=\color{blue}, keywordstyle=\color{red}, commentstyle=\color{blue}, emph={}, emphstyle=\color{violet}, basicstyle=\footnotesize, frame=lines,   showlines=true}
+\lstset{language=python, morekeywords={as}, ndkeywords={=}, ndkeywordstyle=\color{black}, keywordstyle=\color{black}, commentstyle=\color{black}, emph={}, emphstyle=\color{violet}, basicstyle=\footnotesize, frame=lines,   showlines=true}
 \begin{lstlisting}
 from estimagic.optimization.optimize import maximize
 import respy as rp

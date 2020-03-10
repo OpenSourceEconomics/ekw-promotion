@@ -4,22 +4,22 @@
 %-------------------------------------------------------------------------------
 EKW models are calibrated to data on observed individual decisions and experiences under the hypothesis that the individual's behavior is generated from the solution to the model. The goal is to back out information on reward functions, preference parameters, and transition probabilities. This requires the full parameterization $\theta$ of the model.\\
 
-\noindent Economists have access to information for $i = 1, \hdots, N$ individuals in each time period $t$. For every observation $(i, t)$ in the data, we observe action $a_{it}$ and a subset $x_{it}$ of the state $s_{it}$. Therefore, from an economist's point of view, we need to distinguish between two types of state variables $s_{it} = (x_{it}, \epsilon_{it})$. At time $t$, the economist and individual both $i$ observe $x_{it}$ while $\epsilon_{it}$ is only observed by the individual. In summary, the data $\mathcal{D}$ has the following structure:
+\noindent Economists have access to information for $i = 1, \hdots, N$ individuals in each time period $t$. For every observation $(i, t)$ in the data, we observe action $a_{it}$ and a subset $x_{it}$ of the state $s_{it}$. Therefore, from an economist's point of view, we need to distinguish between two types of state variables $s_{it} = (x_{it}, \epsilon_{it})$. At time $t$, the economist and individual both observe $x_{it}$ while $\epsilon_{it}$ is only observed by the individual. In summary, the data $\mathcal{D}$ has the following structure:
 %
 \begin{align*}
   \mathcal{D} = \{a_{it}, x_{it}, r_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\},
 \end{align*}
 where $T_i$ is the number of observations for which we observe individual $i$.\\
 
-\noindent Numerous calibration procedures for different settings exist that \citep{Davidson.2003, Gourieroux.1996}. We briefly outline likelihood-based and simulation-based calibration. Whatever the calibration criterion, to evaluate it for every candidate parameterization of the model, it is necessary to solve the model again to construct the optimal policy $\pi^*$.\\
+\noindent Numerous calibration procedures for different settings exist \citep{Davidson.2003, Gourieroux.1996}. We briefly outline likelihood-based and simulation-based calibration. Independent of the calibration criterion, it is necessary to solve for the optimal policy $\pi^*$ at each candidate parameterization of the model.\\
 
-\noindent Likelihood-based calibration seeks to find the parameterization $\hat{\theta}$ that maximizes the likelihood function $\mathcal{L}(\theta\mid\mathcal{D})$, i.e. the probability of the observed data as a function of $\theta$. As we only observe a subset $x_t$ of the state, we can determine the probability $p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)$ of individual $i$ at time $t$ in $x_{it}$ choosing $a_{it}$ and receiving $r_{it}$ given parametric assumptions about the distribution of $\epsilon_{it}$. The criterion function takes the following form:
+\noindent Likelihood-based calibration seeks to find the parameterization $\hat{\theta}$ that maximizes the likelihood function $\mathcal{L}(\theta\mid\mathcal{D})$, i.e. the probability of observing the given data as a function of $\theta$. As we only observe a subset $x_t$ of the state, we can determine the probability $p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)$ of individual $i$ at time $t$ in $x_{it}$ choosing $a_{it}$ and receiving $r_{it}$ given parametric assumptions about the distribution of $\epsilon_{it}$. The objective function takes the following form:
 %
 \begin{align*}
   \hat{\theta} \equiv \argmax_{\theta \in \Theta}  \underbrace{\prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)}_{\mathcal{L}(\theta\mid\mathcal{D})}.
 \end{align*}
 
-\noindent In simulation-based calibration, our goal is to find the parameterization $\hat{\theta}$ that yields a simulated data set from the model that closest resembles the observed data. More precisely, the goal is often to minimize the weighted squared distance between a set of moments $M_D$ computed on the observed data and the same set of moments computed on the simulated data $M_S(\theta)$. The criterion function takes the following form:
+\noindent In simulation-based calibration, our goal is to find the parameterization $\hat{\theta}$ that yields a simulated data set from the model that closest resembles the observed data. More precisely, the goal is often to minimize the weighted squared distance between a set of moments $M_D$ computed on the observed data and the same set of moments computed on the simulated data $M_S(\theta)$. The objective function takes the following form:
 %
 \begin{align*}
     \hat{\theta} \equiv \argmin_{\theta \in \Theta} (M_D - M_S(\theta))' W (M_D - M_S(\theta)).
