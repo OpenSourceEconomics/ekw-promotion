@@ -167,6 +167,7 @@ for color in color_opts:
         deltas,
         edu_level,
         color=spec_dict[color]["colors"][1],
+        ls=spec_dict[color]["line"][0],
     )
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)

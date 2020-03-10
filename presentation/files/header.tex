@@ -14,6 +14,7 @@
 \usepackage{bigints}
 \usepackage{graphicx}
 \usepackage{dsfont}
+\usepackage{listings}
 
 \usepackage{relsize}
 \usepackage[natbibapa]{apacite}
@@ -73,6 +74,18 @@
   dummy/.style    = {circle,draw}
 }
 %\usepackage{cmbright}
+
+\newcommand*{\img}[1]{%
+    \raisebox{-.3\baselineskip}{%
+        \includegraphics[
+        height=\baselineskip,
+        width=\baselineskip,
+        keepaspectratio,
+        ]{#1}%
+    }%
+}
+
+
 \def\newblock{\hskip .11em plus .33em minus .07em}
 \newcommand{\bs}{\boldsymbol}
 \newcommand{\N}{\mathbb{N}}
