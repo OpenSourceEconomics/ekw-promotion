@@ -12,38 +12,69 @@
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}\textbf{Skill Production Function}\vspace{0.3cm}
+\begin{frame}\textbf{Model of occupational choice}\vspace{0.3cm}
+
+\begin{itemize}\setlength\itemsep{1em}
+\item 1,000 individuals starting at age 16
+\item life cycle histories \medskip
+\begin{itemize}\setlength\itemsep{1em}
+\item school attendance
+\item occupation-specific work status
+\item wages
+\end{itemize}
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{frame}
+
+  \begin{align*}
+  \text{\textbf{Labor market}}\qquad\quad & \\
+  & \\
+  r_t(s_t, 1) =  w_{1t} = \exp\{& \underbrace{\alpha_{10}}_{\text{endowment}} + \underbrace{\alpha_{11} g_t}_{\text{schooling}} + \underbrace{\alpha_{12}e_{1t} + \alpha_{13}e^2_{1t}}_{\text{own experience}} \\
+              & + \underbrace{\alpha_{14}e_{2t} + \alpha_{15}e^2_{2t}}_{\text{other experience}} + \underbrace{\epsilon_{1t}}_{\text{shock}}\}
+  \end{align*}
+  \end{frame}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{frame}
 
 \begin{align*}
-e_{j,k,t} & =  \exp\{ \underbrace{e_{j,k,16}}_{\text{endowment}}+ \underbrace{\alpha_{j,1} g_t + \alpha_{j,2} \Ind[g_t \geq 12] + \alpha_{j,3} \Ind[g_t \geq 16]}_{\text{schooling}}\\
-                & + \underbrace{\alpha_{j,4} x_{j,t} + \alpha_{j,5} x^2_{j, t} + \alpha_{j,6} \Ind[x_{j, t} > 0] + \alpha_{j,7} x_{j\neq j^\prime, t}}_{\text{work experience}}  \\
-                & + \underbrace{\alpha_{j,8}\Ind[a_{t - 1} \neq j] }_{\text{depreciation}} + \underbrace{\alpha_{j,9} (t - 16)}_{\text{age}} + \hdots + \underbrace{\epsilon_{j, t}}_{\text{risk}}\}
+\text{\textbf{Schooling}} & \\
+& \\
+r_t(s_t, 3) = & \underbrace{\beta_0}_{\text{taste}} - \underbrace{\beta_1 \Ind[\,g_t \geq 12\,]}_{\text{direct cost}} - \underbrace{\beta_2\Ind[\,a_{t - 1} \neq 3\,]}_{\text{reenrollment effort}} + \underbrace{\epsilon_{3t}}_{\text{shock}} \\
+& \\
+\text{\textbf{Home}}\qquad & \\
+& \\
+r_t(s_t, 3) = & \underbrace{\gamma_0}_{\text{taste}} + \underbrace{\epsilon_{4t}}_{\text{shock}}
+\end{align*}
+\end{frame}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{frame}
+
+\textbf{State space}\vspace{0.3cm}
+\begin{align*}
+	s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}
 \end{align*}
 
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 \begin{frame}
-  \textbf{Reward functions}\vspace{0.5cm}
-
-  \begin{align*}
-  r_t(s_t, a_t) = \begin{cases} w_{1t} =
-  \exp\{\alpha_{10} + \alpha_{11}g_t + \alpha_{12}e_{1t} + \alpha_{13}e^2_{1t} + \alpha_{14}e_{2t} + alpha_{15}e^2_{2t} + \epsilon_{1t}\} & \text{if}\; a_t = 1 \\
-  w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}e_{1t} + \alpha_{23}e^2_{1t} + \alpha_{24}e_{2t} + \alpha_{25}e^2_{2t} + \epsilon_{2t}\}& \text{if}\; a_t = 2 \\
-  \beta_0 - \beta_1 \Ind[\,g_t \geq 12\,] - \beta_2\Ind[\,a_{t - 1} \neq 3\,] + \epsilon_{3t}& \text{if}\; a_t = 3 \\
-  \gamma_0 + \epsilon_{4t}& \text{if}\; a_t = 4. \\
-  \end{cases}
-  \end{align*}
-\end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}
-  \textbf{Reward functions}\vspace{0.5cm}
+  \textbf{Transitions}\vspace{0.5cm}
+\begin{itemize}
+\item observed state variables
 \begin{align*}
     e_{1,t+1} &= e_{1t} + \Ind[\,a_t = 1\,] \\
     e_{2,t+1} &= e_{2t} + \Ind[\,a_t = 2\,] \\
-    g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,]
+    g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,]\\
 \end{align*}
+\item unobserved state variables
+\begin{align*}
+\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\} \sim N(0, \Sigma)
+\end{align*}
+\end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------

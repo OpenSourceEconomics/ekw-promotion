@@ -9,12 +9,12 @@
 \begin{frame}
 \textbf{Policy Evaluation}\vspace{0.3cm}
 \begin{align*}
-v^\pi_t(s) = \E^\pi_{s}\left[ \sum^T_{\tau=t} \delta^{\tau - t}   r_\tau(X_\tau, d_\tau(X_\tau)) \right]\\
+  v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, r_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right]\\
 \end{align*}
 
 Inductive Scheme
 \begin{align*}
-v^\pi_t(s) = r_t(s, d_t(s)) + \delta\E^\pi_{s} \left[v^\pi_{t + 1}(X_{t + 1})\right]
+v^\pi_t(s_t) = r_t(s_t,  a^\pi_t(s_t)) + \delta\,\E^\pi_{s_t} \left[\left.v^\pi_{t + 1}(s_{t + 1})  \,\right\vert\,\mathcal{I}_t\,\right]
 \end{align*}
 \end{frame}
 %-------------------------------------------------------------------------------
@@ -22,26 +22,25 @@ v^\pi_t(s) = r_t(s, d_t(s)) + \delta\E^\pi_{s} \left[v^\pi_{t + 1}(X_{t + 1})\ri
 \begin{frame}
 \textbf{Optimality Equations}\vspace{0.3cm}
 \begin{align*}\label{MPD Optimality}
-v^{\pi^*}_t(s) = \max_{a \in A}\bigg\{ r_t(s, a) + \delta \E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}.
+v^{\pi^*}_t(s_t)  & = \max_{a_t \in A}\bigg\{ r_t(s_t, a_t) + \delta\, \E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \bigg\}
 \end{align*}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}
-\textbf{Backward Induction Algorithm for MDP}\vspace{0.5cm}
+\begin{frame}\textbf{Backward induction algorithm}\vspace{0.5cm}
 
 \begin{algorithmic}\small
 \For{$t = T, \hdots, 1$}
     \If{t == T}
-        \State $v^{\pi^*}_T(s) = \underset{a \in A}{\max}\bigg\{ r_T(s, a) \bigg\}\qquad \forall\quad s\in S$
+        \State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ r_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
     \Else
-        \State Compute $v^{\pi^*}_t(s)$ for each $s\in S$ by
-        \State $\qquad v^{\pi^*}_t(s) = \underset{a \in A}{\max}\bigg\{ r_t(s, a) + \delta\E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}$
+        \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
+        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ r_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
         \State and set
-        \State $\qquad d^{\pi^*}_t(s) = \underset{a \in A}{\argmax}\bigg\{ r_t(s, a) + \delta\E^p_{s} \left[v^{\pi^*}_{t + 1}(X_{t + 1})\right] \bigg\}$
+        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ r_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
     \EndIf
 \EndFor
-\end{algorithmic}
+\vspace{0.3cm}\end{algorithmic}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------

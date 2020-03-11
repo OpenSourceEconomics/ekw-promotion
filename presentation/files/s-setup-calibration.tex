@@ -7,9 +7,33 @@
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 \begin{frame}
+
+\textbf{Data}\vspace{0.3cm}
+\begin{align*}
+	\mathcal{D} = \{a_{it}, x_{it}, r_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
+\end{align*}
+
+\textbf{State variables}\vspace{0.3cm}
+\begin{itemize}\setlength\itemsep{1em}
+\item $s_t = (x_t, \epsilon_t)$\medskip
+\begin{itemize}\setlength\itemsep{1em}
+	\item $x_t$ observed
+	\item $\epsilon_t$ unobserved
+\end{itemize}
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{frame}
 \textbf{Procedures}\vspace{0.5cm}
 \begin{itemize}\setlength\itemsep{1em}
 \item likelihood-based
+\begin{align*}
+  \hat{\theta} \equiv \argmax_{\theta \in \Theta}  \underbrace{\prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)}_{\mathcal{L}(\theta\mid\mathcal{D})}
+\end{align*}
 \item simulation-based
+\begin{align*}
+    \hat{\theta} \equiv \argmin_{\theta \in \Theta} (M_D - M_S(\theta))' W (M_D - M_S(\theta))
+\end{align*}
 \end{itemize}
 \end{frame}
