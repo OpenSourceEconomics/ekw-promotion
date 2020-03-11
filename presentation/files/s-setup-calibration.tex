@@ -29,7 +29,7 @@
 \begin{itemize}\setlength\itemsep{1em}
 \item likelihood-based
 \begin{align*}
-  \hat{\theta} \equiv \argmax_{\theta \in \Theta}  \underbrace{\prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)}_{\mathcal{L}(\theta\mid\mathcal{D})}
+  \hat{\theta} \equiv \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)
 \end{align*}
 \item simulation-based
 \begin{align*}
