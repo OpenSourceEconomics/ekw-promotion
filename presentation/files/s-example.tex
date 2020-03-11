@@ -7,11 +7,9 @@
 \begin{frame}\textbf{Seminal paper}\vspace{0.3cm}
 
 \begin{itemize}\setlength\itemsep{1em}
-  \item \bibentry{Keane.1994}
+\item Keane, M. P. \& Wolpin, K. I. (1994). The solution and estimation of discrete choice dynamic programming models by simulation and interpolation: Monte Carlo evidence. \textit{Review of Economics and Statistics},  76 (4), 648-672.
 \end{itemize}
 \end{frame}
-
-
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 \begin{frame}\textbf{Skill Production Function}\vspace{0.3cm}
@@ -28,9 +26,9 @@ e_{j,k,t} & =  \exp\{ \underbrace{e_{j,k,16}}_{\text{endowment}}+ \underbrace{\a
 \begin{frame}
   \textbf{Reward functions}\vspace{0.5cm}
 
-  \begin{align*}\tiny
+  \begin{align*}
   r_t(s_t, a_t) = \begin{cases} w_{1t} =
-  \exp\{\alpha_{10} + \alpha_{11}g_t + \alpha_{12}e_{1t} + \alpha_{13}e^2_{1t} + \alpha_{14}e_{2t} + \alpha_{15}e^2_{2t} + \epsilon_{1t}\} & \text{if}\; a_t = 1 \\
+  \exp\{\alpha_{10} + \alpha_{11}g_t + \alpha_{12}e_{1t} + \alpha_{13}e^2_{1t} + \alpha_{14}e_{2t} + alpha_{15}e^2_{2t} + \epsilon_{1t}\} & \text{if}\; a_t = 1 \\
   w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}e_{1t} + \alpha_{23}e^2_{1t} + \alpha_{24}e_{2t} + \alpha_{25}e^2_{2t} + \epsilon_{2t}\}& \text{if}\; a_t = 2 \\
   \beta_0 - \beta_1 \Ind[\,g_t \geq 12\,] - \beta_2\Ind[\,a_{t - 1} \neq 3\,] + \epsilon_{3t}& \text{if}\; a_t = 3 \\
   \gamma_0 + \epsilon_{4t}& \text{if}\; a_t = 4. \\
