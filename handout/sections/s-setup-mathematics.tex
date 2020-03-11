@@ -4,7 +4,7 @@
 %-------------------------------------------------------------------------------
 EKW models are set up as a standard Markov decision process (MDP) \citep{Puterman.1994,White.1993}. When making sequential decisions under uncertainty, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted rewards $v^{\pi^*}_1(s_1)$ as formalized in equation (\ref{Objective Risk}). In principle, this requires to evaluate the performance of all policies based on all possible sequences of rewards each weighted by the probability with which they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\footnote{Optimal decisions in a MDP are a deterministic function of the current state $s$ only, i.e. an optimal decision rule is always deterministic and Markovian. We restrict our notation to this special case right from the beginning.}\\
 
-\noindent The value function $v^\pi_t(s_t)$ captures the expected total discounted rewards under $\pi$ from period $t$ onwards for an individual experiencing $s_t$:
+\noindent The value function $v^\pi_t(s_t)$ captures the expected total discounted rewards under policy $\pi$ from period $t$ onwards for an individual experiencing state $s_t$:
 %
 \begin{align*}
   v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, r_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right].

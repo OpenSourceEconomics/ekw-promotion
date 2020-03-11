@@ -19,7 +19,7 @@ w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}e_{1t} + \alpha_{23}e^2
 %
 $g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $e_{1t}$ and $e_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. Turning to the rewards from school attendance, $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school after dropping out. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption value of schooling, and home time.\\
 
-\noindent Given the structure of the reward functions and imposing that the shocks are not correlated across alternatives or time, the state at time $t$ is $s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
+\noindent Given the structure of the reward functions and imposing that the shocks are not correlated across time, the state at time $t$ is $s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
 %
 The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\}$ to the individual and the economist. It evolves deterministically according to the following rules:
 %
@@ -33,7 +33,7 @@ The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\
 
 \noindent \citet{Keane.1994} analyze three different parameterizations of the model, and we reproduce the second one for this example. Initially, individuals are identical and have no labor market experience $(e_{11} = e_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. Different choices over the life cycle are then simply the cumulative effects of different shocks.\\
 
-\noindent Schooling increases wages by only 4\% in the first occupation compared to 8\% in the second. We will thus refer to the former as blue-collar and the latter as white-collar going forward. Starting wages are considerably lower in the white-collar sector, but wages increase more rapidly with occupation-specific experience compared to blue-collar wages. Own-work experience is highly valuable in both occupations. However, while white-collar wages increase with blue-collar experience as well, the opposite is not true. There is a consumption value of schooling of \$5,000, but the total cost of pursuing post-secondary education is considerable and amounts to \$5,000. Once leaving school, individuals incur a nearly prohibitive cost of \$15,000 for re-enrolling. Individuals are forward-looking with a discount factor $\delta$ of 0.95.\\
+\noindent One year of additional schooling increases wages by only 4\% in the first occupation compared to 8\% in the second. We will thus refer to the former as blue-collar and the latter as white-collar going forward. Starting wages are considerably lower in the white-collar sector, but wages increase more rapidly with occupation-specific experience compared to blue-collar wages. Own-work experience is highly valuable in both occupations. However, while white-collar wages increase with blue-collar experience as well, the opposite is not true. There is a consumption value of schooling of \$5,000, but the total cost of pursuing post-secondary education is considerable and amounts to \$5,000. Once leaving school, individuals incur a nearly prohibitive cost of \$15,000 for re-enrolling. Individuals are forward-looking with a discount factor $\delta$ of 0.95.\\
 
 \noindent We simulate the life cycle histories of 1,000 individuals. Figure \ref{Choices over the life cycle} shows the share of individuals choosing each of the four alternatives by period. Initially, roughly 60\% of individuals enroll in school, but this share declines rapidly, and only 19\% attain any post-secondary education. Right away, about 30\% of individuals are working in the blue-collar occupation.  Blue-collar employment initially increases even further to peak at 65\% as individuals are leaving school and entering the labor market. White-collar employment steadily rises over the life cycle but never reaches more than 40\%. About 5\% of individuals stay at home each period.
 
@@ -74,7 +74,7 @@ Our research group is actively developing two research codes that allow analyzin
 \subfloat[Options]{\scalebox{0.25}{\includegraphics{crop-options-black-white}}}
 \end{figure}\FloatBarrier
 
-\noindent Figure \ref{Dashboard} depicts the dashboard provided by \verb+estimagic+ to monitor the progress and parameter values of the calibration in real-time. This allows us to detect problems during calibration right away and facilitates our debugging process.
+\noindent Figure \ref{Dashboard} depicts the dashboard provided by \verb+estimagic+ to monitor the progress and parameter values of the calibration in real-time. This allows us to detect problems during calibration right away and facilitates the debugging process.
 
 \begin{figure}[h!]\centering
 \caption{Dashboard}\label{Dashboard}
