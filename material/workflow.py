@@ -2,7 +2,7 @@ from estimagic.optimization.optimize import maximize
 import respy as rp
 
 # obtain model input
-df, params, options = get_model_input()
+params, options, df = rp.get_example_model("kw_94_two")
 
 # process model specification
 crit_func = rp.get_crit_func(params, options, df)
