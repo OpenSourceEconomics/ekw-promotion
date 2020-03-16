@@ -13,7 +13,7 @@ The solution of EKW models requires the evaluation of millions of integrals to d
 \begin{align*}
 v^{\pi}_{t}(s_t, a_t) & = r_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \\
 & =  r_t(s_t, a_t) + \delta\, \int_S v^{\pi^*}_{t + 1}(s_{t + 1})\, \diff p_t(a_t, s_t)\\
-& =  r_t(s_t, a_t) + \delta\, \int_S \max_{a \in A}\bigg\{v^{\pi^*}_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t).
+& =  r_t(s_t, a_t) + \delta\, \int_S \max_{a_{t + 1} \in A}\bigg\{v^{\pi^*}_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t).
 \end{align*}
 
 \noindent Let's consider an atemporal version of the typical integral from \citet{Keane.1994} as an example. As outlined earlier, individuals can choose among four alternatives. Each of the alternative-specific rewards is, in part, determined by a stochastic continuous state variable $\epsilon$. The transition of all other state variables $x$ is deterministic. This results in a four-dimensional integral of the following form:
