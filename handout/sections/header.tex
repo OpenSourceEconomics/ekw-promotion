@@ -7,6 +7,10 @@
 \usepackage{apacite}
 \usepackage{bibentry}
 
+% Packages for OSE font
+\usepackage[semibold, scale=0.89]{plex-mono}  % To match the x-height of the Charter serif font
+\usepackage[semibold, scale=0.89]{plex-sans}[2018/12/31]
+
 \usepackage{footnote,placeins}
 \makesavenoteenv{tabular}
 %\usepackage{enumitem}
@@ -130,6 +134,9 @@
    \itshape}
   {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
 \makeatother
+
+% OSE font settings
+\input{sections/Preamble_Fonts_IBMPlex}
 
 \newenvironment{boenumerate}
 {\begin{enumerate}\renewcommand\labelenumi{\textbf{(\theenumi)}}}
