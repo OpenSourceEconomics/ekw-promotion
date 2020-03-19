@@ -44,7 +44,10 @@
 \let\Algorithm\algorithm
 \renewcommand\algorithm[1][]{\Algorithm[#1]\setstretch{1.5}}
 
-
+% OSE colors
+\definecolor{OSEBlue}	{RGB}{  0,  76, 141}
+\definecolor{OSEBlueLight}	{RGB}{ 48, 188, 237}
+% General colors
 \definecolor{lightgrey}{gray}{0.90}	%Farben mischen
 \definecolor{grey}{gray}{0.85}
 \definecolor{darkgrey}{gray}{0.65}
@@ -59,9 +62,9 @@
 \usepackage{bm}																									%matrix symbol
 \usepackage{setspace}																						%Fu�noten (allgm.
 \usepackage[colorlinks = true,
-            linkcolor = blue,
-            urlcolor  = blue,
-            citecolor = blue,
+            linkcolor = OSEBlue,
+            urlcolor  = OSEBlue,
+            citecolor = OSEBlue,
             anchorcolor = blue]{hyperref}%Zeilenabst�nde)
 \usepackage{threeparttable}
 \usepackage{lscape}																							%Querformat
@@ -127,6 +130,7 @@
    \itshape}
   {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
 \makeatother
+
 
 \newenvironment{boenumerate}
 {\begin{enumerate}\renewcommand\labelenumi{\textbf{(\theenumi)}}}
