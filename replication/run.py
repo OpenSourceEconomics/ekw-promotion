@@ -95,10 +95,11 @@ for color in color_opts:
     ax.set_xticklabels(np.arange(16, 55, 5), rotation='horizontal')
     ax.xaxis.set_ticks(np.arange(0, 40, 5))
 
-    fig.savefig(
-        f'fig-observed-choices'
-        f'-{color}'
-    )
+
+    if color == 'black-white':
+        fig.savefig('fig-observed-choices-bw')
+    else:
+        fig.savefig('fig-observed-choices')
 
 """The following code creates the policy forecast figure."""
 
@@ -144,10 +145,10 @@ for color in color_opts:
     ax.set_xlabel('Tuition subsidy')
     ax.set_xlim([None, 1600])
 
-    fig.savefig(
-        f'fig-policy-forecast'
-        f'-{color}'
-    )
+    if color == 'black-white':
+        fig.savefig('fig-policy-forecast-bw')
+    else:
+        fig.savefig('fig-policy-forecast')
 
 """The following code creates the economic mechanism figure."""
 
@@ -186,7 +187,8 @@ for color in color_opts:
 
     ax.set_xlabel(r'$\delta$')
 
-    fig.savefig(
-        f'fig-economic-mechanisms'
-        f'-{color}'
-    )
+
+    if color == 'black-white':
+        fig.savefig('fig-economic-mechanisms-bw')
+    else:
+        fig.savefig('fig-economic-mechanisms')
