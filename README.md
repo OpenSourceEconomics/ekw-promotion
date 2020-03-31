@@ -6,3 +6,4 @@ This material is under constant development but you can access its most recent v
 ](https://github.com/OpenSourceEconomics/handout-eckstein-keane-wolpin-models/blob/master/promotion).
 
 [![Build Status](https://travis-ci.org/OpenSourceEconomics/handout-eckstein-keane-wolpin-models.svg?branch=master)](https://travis-ci.org/OpenSourceEconomics/handout-eckstein-keane-wolpin-models)
+
