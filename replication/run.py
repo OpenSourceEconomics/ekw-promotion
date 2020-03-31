@@ -129,13 +129,13 @@ for color in color_opts:
     fig, ax = plt.subplots(1, 1)
 
     if color == 'black-white':
-        ax.plot(
+        ax.fill_between(
             subsidies,
             edu_level,
             color=spec_dict[color]["colors"][2],
         )
     else:
-        ax.plot(subsidies, edu_level)
+        ax.fill_between(subsidies, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel('Average final schooling')
@@ -173,13 +173,13 @@ for color in color_opts:
     fig, ax = plt.subplots(1, 1)
 
     if color == 'black-white':
-        ax.plot(
+        ax.fill_between(
             deltas,
             edu_level,
             color=spec_dict[color]["colors"][2],
         )
     else:
-        ax.plot(deltas, edu_level)
+        ax.fill_between(deltas, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel('Average final schooling')
