@@ -49,9 +49,8 @@ df = simulate(params)
 stat = df.groupby('Identifier')['Experience_Edu'].max().mean()
 print(f'Average education in baseline: {stat}')
 
-df['Age'] = df['Period'] + 16
+df['Age'] = df.index.get_level_values("Period") + 16
 df['Choice'].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
-df.set_index(['Identifier', 'Period'], inplace=True, drop=True)
 
 """The following code creates the observed choices fsigure."""
 
