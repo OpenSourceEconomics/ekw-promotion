@@ -49,7 +49,7 @@ df = simulate(params)
 stat = df.groupby('Identifier')['Experience_Edu'].max().mean()
 print(f'Average education in baseline: {stat}')
 
-df['Age'] = df['Age'] = df['Period'] + 16
+df['Age'] = df.index.get_level_values("Period") + 16
 df['Choice'].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
 
 """The following code creates the observed choices fsigure."""
