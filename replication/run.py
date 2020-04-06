@@ -49,7 +49,7 @@ df = simulate(params)
 stat = df.groupby('Identifier')['Experience_Edu'].max().mean()
 print(f'Average education in baseline: {stat}')
 
-df['Age'] = df.index.get_level_values("Period") + 16
+df['Age'] = df['Age'] = df['Period'] + 16
 df['Choice'].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
 
 """The following code creates the observed choices fsigure."""
@@ -131,7 +131,7 @@ for color in color_opts:
         ax.fill_between(
             subsidies,
             edu_level,
-            color=spec_dict[color]["colors"][2],
+            color=spec_dict[color]["colors"][1],
         )
     else:
         ax.fill_between(subsidies, edu_level)
@@ -175,7 +175,7 @@ for color in color_opts:
         ax.fill_between(
             deltas,
             edu_level,
-            color=spec_dict[color]["colors"][2],
+            color=spec_dict[color]["colors"][1],
         )
     else:
         ax.fill_between(deltas, edu_level)
