@@ -5,5 +5,5 @@ We present background material on a class of structural microeconometric models 
 This material is under constant development but you can access its most recent version [here
 ](https://github.com/OpenSourceEconomics/handout-eckstein-keane-wolpin-models/blob/master/promotion).
 
-[![Build Status](https://travis-ci.org/OpenSourceEconomics/handout-eckstein-keane-wolpin-models.svg?branch=master)](https://travis-ci.org/OpenSourceEconomics/handout-eckstein-keane-wolpin-models)
+[![Build Status](https://travis-ci.org/OpenSourceEconomics/ekw-promotion.svg?branch=master)](https://travis-ci.org/OpenSourceEconomics/ekw-promotion)
 
