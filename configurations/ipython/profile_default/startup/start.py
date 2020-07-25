@@ -2,9 +2,9 @@ from IPython.display import Image
 from IPython import get_ipython
 
 ipython = get_ipython()
-ipython.magic('matplotlib inline')
-ipython.magic('load_ext autoreload')
-ipython.magic('autoreload 2')
+ipython.magic("matplotlib inline")
+ipython.magic("load_ext autoreload")
+ipython.magic("autoreload 2")
 
 from functools import partial
 from pathlib import Path
@@ -29,7 +29,7 @@ import numpy as np
 
 import respy as rp
 
-pd.set_option('display.max_rows', 500)
+pd.set_option("display.max_rows", 500)
 
 from config import ABILITY_LABELS_EXT
 from config import ABILITY_LABELS

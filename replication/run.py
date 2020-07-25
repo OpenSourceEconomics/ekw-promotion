@@ -11,7 +11,7 @@ import matplotlib as mpl
 import numpy as np
 import respy as rp
 
-PROJECT_DIR = Path(os.environ['PROJECT_DIR'])
+PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
 
 """This is the set up for the coloring options for the figures."""
@@ -41,16 +41,16 @@ spec_dict = {
 
 """The following code produces data for the observed choices figure."""
 
-params, options = rp.get_example_model('kw_94_two', with_data=False)
+params, options = rp.get_example_model("kw_94_two", with_data=False)
 
 simulate = rp.get_simulate_func(params, options)
 df = simulate(params)
 
-stat = df.groupby('Identifier')['Experience_Edu'].max().mean()
-print(f'Average education in baseline: {stat}')
+stat = df.groupby("Identifier")["Experience_Edu"].max().mean()
+print(f"Average education in baseline: {stat}")
 
-df['Age'] = df.index.get_level_values("Period") + 16
-df['Choice'].cat.categories = ['Blue', 'White', 'Schooling', 'Home']
+df["Age"] = df.index.get_level_values("Period") + 16
+df["Choice"].cat.categories = ["Blue", "White", "Schooling", "Home"]
 
 """The following code creates the observed choices fsigure."""
 
@@ -58,9 +58,11 @@ for color in color_opts:
 
     fig, ax = plt.subplots()
 
-    labels = ['Home', 'Schooling', 'Blue', 'White']
-    shares = df.groupby('Age').Choice.value_counts(normalize=True).unstack()[labels] * 100
-    if color == 'black-white':
+    labels = ["Home", "Schooling", "Blue", "White"]
+    shares = (
+        df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    )
+    if color == "black-white":
         shares.plot.bar(
             stacked=True,
             ax=ax,
@@ -69,40 +71,32 @@ for color in color_opts:
                 spec_dict[color]["colors"][1],
                 spec_dict[color]["colors"][0],
                 spec_dict[color]["colors"][1],
-                spec_dict[color]["colors"][0]
-            ]
+                spec_dict[color]["colors"][0],
+            ],
         )
-        for container, hatch in zip(ax.containers, ("OO","..","//","oo")):
+        for container, hatch in zip(ax.containers, ("OO", "..", "//", "oo")):
             for patch in container.patches:
                 patch.set_hatch(hatch)
     else:
-        shares.plot.bar(
-        stacked=True,
-        ax=ax,
-        width=0.8
-    )
+        shares.plot.bar(stacked=True, ax=ax, width=0.8)
 
-    ax.legend(
-        labels=labels, loc='lower center',
-        bbox_to_anchor=(0.5, 1.04), ncol=4
-    )
+    ax.legend(labels=labels, loc="lower center", bbox_to_anchor=(0.5, 1.04), ncol=4)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel('Share (in %)')
+    ax.set_ylabel("Share (in %)")
     ax.set_ylim(0, 100)
 
-    ax.set_xticklabels(np.arange(16, 55, 5), rotation='horizontal')
+    ax.set_xticklabels(np.arange(16, 55, 5), rotation="horizontal")
     ax.xaxis.set_ticks(np.arange(0, 40, 5))
 
-
-    if color == 'black-white':
-        fig.savefig('fig-observed-choices-bw')
+    if color == "black-white":
+        fig.savefig("fig-observed-choices-bw")
     else:
-        fig.savefig('fig-observed-choices')
+        fig.savefig("fig-observed-choices")
 
 """The following code creates the policy forecast figure."""
 
-params_sdcorr, options = rp.get_example_model('kw_94_two', with_data=False)
+params_sdcorr, options = rp.get_example_model("kw_94_two", with_data=False)
 simulate_func = rp.get_simulate_func(params_sdcorr, options)
 num_points = 10
 edu_level = np.tile(np.nan, num_points)
@@ -111,10 +105,12 @@ edu_level = np.tile(np.nan, num_points)
 def tuition_policy_wrapper_kw_94(simulate, params, tuition_subsidy):
 
     policy_params = params.copy()
-    policy_params.loc[('nonpec_edu', 'at_least_twelve_exp_edu'), 'value'] += tuition_subsidy
+    policy_params.loc[
+        ("nonpec_edu", "at_least_twelve_exp_edu"), "value"
+    ] += tuition_subsidy
     policy_df = simulate(policy_params)
 
-    edu = policy_df.groupby('Identifier')['Experience_Edu'].max().mean()
+    edu = policy_df.groupby("Identifier")["Experience_Edu"].max().mean()
 
     return edu
 
@@ -127,37 +123,35 @@ for color in color_opts:
 
     fig, ax = plt.subplots(1, 1)
 
-    if color == 'black-white':
+    if color == "black-white":
         ax.fill_between(
-            subsidies,
-            edu_level,
-            color=spec_dict[color]["colors"][1],
+            subsidies, edu_level, color=spec_dict[color]["colors"][1],
         )
     else:
         ax.fill_between(subsidies, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel('Average final schooling')
+    ax.set_ylabel("Average final schooling")
     ax.set_ylim([10, 19])
 
-    ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter('{x:,.0f}'))
-    ax.set_xlabel('Tuition subsidy')
+    ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
+    ax.set_xlabel("Tuition subsidy")
     ax.set_xlim([None, 1600])
 
-    if color == 'black-white':
-        fig.savefig('fig-policy-forecast-bw')
+    if color == "black-white":
+        fig.savefig("fig-policy-forecast-bw")
     else:
-        fig.savefig('fig-policy-forecast')
+        fig.savefig("fig-policy-forecast")
 
 """The following code creates the economic mechanism figure."""
 
 
 def time_preference_wrapper_kw_94(simulate, params, value):
     policy_params = params.copy()
-    policy_params.loc[('delta', 'delta'), 'value'] = value
+    policy_params.loc[("delta", "delta"), "value"] = value
     policy_df = simulate(policy_params)
 
-    edu = policy_df.groupby('Identifier')['Experience_Edu'].max().mean()
+    edu = policy_df.groupby("Identifier")["Experience_Edu"].max().mean()
 
     return edu
 
@@ -171,23 +165,20 @@ for color in color_opts:
 
     fig, ax = plt.subplots(1, 1)
 
-    if color == 'black-white':
+    if color == "black-white":
         ax.fill_between(
-            deltas,
-            edu_level,
-            color=spec_dict[color]["colors"][1],
+            deltas, edu_level, color=spec_dict[color]["colors"][1],
         )
     else:
         ax.fill_between(deltas, edu_level)
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel('Average final schooling')
+    ax.set_ylabel("Average final schooling")
     ax.set_ylim([10, 19])
 
-    ax.set_xlabel(r'$\delta$')
+    ax.set_xlabel(r"$\delta$")
 
-
-    if color == 'black-white':
-        fig.savefig('fig-economic-mechanisms-bw')
+    if color == "black-white":
+        fig.savefig("fig-economic-mechanisms-bw")
     else:
-        fig.savefig('fig-economic-mechanisms')
+        fig.savefig("fig-economic-mechanisms")

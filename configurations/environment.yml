@@ -30,6 +30,8 @@ dependencies:
   - respy
   - pytest-cov
   - pytest-xdist
+  - pytest-black
+  - pytest-flake8
   - restructuredtext_lint
   - scipy>=1.2.1
   - Sphinx>=2.0.0

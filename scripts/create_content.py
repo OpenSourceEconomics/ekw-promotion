@@ -11,18 +11,25 @@ def compile_material(task):
 
     os.chdir(os.environ["PROJECT_DIR"] + f"/{task}")
 
-    [sp.check_call([cmd, "main"]) for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]]
+    [
+        sp.check_call([cmd, "main"])
+        for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    ]
 
     os.chdir(os.environ["PROJECT_DIR"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     parser = argparse.ArgumentParser("Create material for Eckstein-Keane-Wolpin models")
 
-    parser.add_argument("-f", "--figures", action="store_true", help="create and update figures")
+    parser.add_argument(
+        "-f", "--figures", action="store_true", help="create and update figures"
+    )
 
-    parser.add_argument("-p", "--presentation", action="store_true", help="create presentation")
+    parser.add_argument(
+        "-p", "--presentation", action="store_true", help="create presentation"
+    )
 
     parser.add_argument("-d", "--document", action="store_true", help="create document")
 
