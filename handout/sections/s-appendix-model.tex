@@ -17,13 +17,13 @@ $\left(\bm{e}_{a,1}\right)_{a\in\mathcal{A}} = \Big( \bm{e}_{j,a,1} \Big)_{\subs
 %-------------------------------------------------------------------------------
 \subsection{Utility for working alternatives}
 %-------------------------------------------------------------------------------
-The per-period utility for working alternatives is the sum of a non-pecuniary benefit and a wage component. The wage $w_{a}(s_t)$ is determined by the product of the market-equilibrium rental price $\rho_{a,t}$ and an occupation-specific skill level $x_{a,t}$. This specification leads to a standard logarithmic wage equation in which the constant term is given as sum of the skill rental price $\ln(r)$ and the initial skill endowment $\bm{e}_{a,1}$.\\
+The per-period utility for working alternatives is the sum of a non-pecuniary benefit and a wage component. The wage $w_{a}(s_t)$ is given by the product of the market-equilibrium rental price $\rho_{a,t}$ and an occupation-specific skill level $x_{a}(s_t)$. This specification leads to a standard logarithmic wage equation in which the constant term is given as sum of the skill rental price $\ln(r)$ and the initial skill endowment $\bm{e}_{a,1}$.\\
 
-The occupation-specific skill level is determined by a skill production function, which includes a deterministic component $\Gamma_a$ and a multiplicative stochastic productivity shock $\epsilon_{1,a}$
+The occupation-specific skill level is determined by a skill production function, which differs for civilian and military occupations. The general form of the skill production function includes a deterministic component $\Gamma_a$ and a multiplicative stochastic productivity shock $\epsilon_{a,t}$
 %
-\begin{align}\label{eq:WhiteCollarSkillLevel}
-    x_{1,t}(\bm{k_t}, h_t, t, a_{t-1}, e_{1,j}, \epsilon_{1,t}) & = \exp \big( \Gamma_{1}(\bm{k_t},  h_t, t, a_{t-1}, e_{1,j}) \cdot \epsilon_{1,t} \big) \\\nonumber
-                & = \exp \big( \Gamma_1(\bm{k_t},  h_t, t, a_{t-1}, e_{1,j}) \big) \cdot \exp \big( \epsilon_{1,t} \big)
+\begin{align}\label{eq:OccupationSpecificSkillLevel}
+    x_{a}(\bm{k_t}, h_t, t, a_{t-1}, \bm{e}_{a, 1}, \epsilon_{a,t}) & = \exp \big( \Gamma_{a}(\bm{k_t},  h_t, t, a_{t-1}, \bm{e}_{a,1}) \cdot \epsilon_{a,t} \big) \nonumber \\
+                & = \exp \big( \Gamma_a(\bm{k_t},  h_t, t, a_{t-1}, \bm{e}_{a,1}) \big) \cdot \exp \big( \epsilon_{a,t} \big).
 \end{align}
 %-------------------------------------------------------------------------------
 \subsubsection{Utility for civilian occupations}
