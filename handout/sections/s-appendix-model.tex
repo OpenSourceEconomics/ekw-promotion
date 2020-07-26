@@ -2,16 +2,15 @@
 %-------------------------------------------------------------------------------
 \subsection{Model}\label{Appendix model}
 %-------------------------------------------------------------------------------
-We now present the exact parameterization of the per-period utility functions. The per-period utility $u_a(s_t)$ of each alternative consists of a non-pecuniary benefit $\zeta_a(s_t)$ and has, at least for the working alternatives, an additional wage component $w_a(s_t)$. Each components depends on the level of human capital as measured by an alternative-specific skill endowment $\bm{e_1} = \left(\bm{e}_{a,1}\right)_{a\in\mathcal{A}}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. There is also an impact of last-period choice $a_{t -1}$ and alternative-specific productivity shocks
-$\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$.
-
+We now present the exact parameterization of the per-period utility functions. The per-period utility $u_a(s_t)$ of each alternative consists of a non-pecuniary benefit $\zeta_a(s_t)$ and has, at least for the working alternatives, an additional wage component $w_a(s_t)$. Each of the components depends on the level of human capital as measured by an alternative-specific skill endowment $\bm{e_1} = \left(\bm{e}_{a,1}\right)_{a\in\mathcal{A}}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. The per-period utility functions are also influenced by last-period choices $a_{t -1}$ and alternative-specific productivity shocks $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$. Throughout alternatives the general form of the per-period utility is given by
 \begin{align*}
 u_a(s_t) =
 \begin{cases}
-    \zeta_a(\bm{k_t}, h_t, t, a_{t -1})  + w_a(\bm{k_t}, h_t, t, a_{t -1}, e_{a,1}, \epsilon_{a,t})              & \text{if}\, a \in [1, 2, 3]  \\
-    \zeta_a(\bm{k_t}, h_t, t, a_{t-1}, e_{a,1}, \epsilon_{a,t})                                    & \text{otherwise}
+    \zeta_a(\bm{k_t}, h_t, t, a_{t -1})  + w_a(\bm{k_t}, h_t, t, a_{t -1}, e_{a,1}, \epsilon_{a,t})              & \text{if}\, a \in \{1, 2, 3\}  \\
+    \zeta_a(\bm{k_t}, h_t, t, a_{t-1}, e_{a,1}, \epsilon_{a,t})                                    & \text{otherwise.}
 \end{cases}
 \end{align*}
+
 %-------------------------------------------------------------------------------
 \subsection{Utility for working alternatives}
 %-------------------------------------------------------------------------------
