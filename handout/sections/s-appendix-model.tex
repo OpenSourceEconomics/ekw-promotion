@@ -63,7 +63,6 @@ The non-wage component includes mobility and search costs, which are higher for 
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1].
 \end{align*}
 
-\input{material/tab-model-parameters-civilian}
 
 %-------------------------------------------------------------------------------
 \FloatBarrier\subsubsection{Military}
@@ -93,11 +92,11 @@ The nonpecuniary benefit is specified as follows:
 
 There is no penalty for leaving the military prematurely ($\vartheta_3 = 0$), and no effect for never having served in the military before ($\gamma_{3,7} = 0$).\\
 
-\autoref{tab:ParametersMilitaryOccupation} summarizes the parameters prevalent in the military occupation.
+\autoref{tab:ModelParameters} summarizes the parameters prevalent in the military occupation.
 
-\input{material/tab-model-parameters-military}
+
 % ------------------------------------------------------------------------------
-\FloatBarrier\subsection*{Non-working alternatives}
+\FloatBarrier\subsection{Utility for Non-working alternatives}
 % ------------------------------------------------------------------------------
 The most distinctive feature towards the occupational reward function concerns the stochastic component which enters additively instead of multiplicatively. There is no wage component.
 %-------------------------------------------------------------------------------
@@ -115,9 +114,8 @@ Equation \ref{eq:RewardSchooling} shows the parameterization of the non-pecuniar
 %
 Type-heterogeneity in endowments $e_{4,j}$ translates into heterogeneity in utility derived from schooling. Attending highschool or college involves direct tuition costs ($\beta_{tc_1} < 0, \beta_{tc_2} <0$). Individual who return to school incur re-entry costs ($\beta_{rc_1} <0 , \beta_{rc_2} < 0$).
 
-Table \ref{tab:ParametersSchooling} summarizes the parameters prevalent in the school sector.
+Table \ref{tab:ModelParameters} summarizes the parameters prevalent in the school sector.
 
-\input{material/tab-model-parameters-school}
 
 %-------------------------------------------------------------------------------
 \FloatBarrier\subsubsection{Home}
@@ -131,6 +129,12 @@ The reward for staying at home only depends on the age of the individual
     							   & + \epsilon_{5,t}.
 \end{align}
 %
-\autoref{tab:ParametersHome} summarizes the parameters prevalent in the home sector.
+\autoref{tab:ModelParameters} summarizes the parameters prevalent in the home sector.
 
-\input{material/tab-model-parameters-home}
+\clearpage 
+
+%-------------------------------------------------------------------------------
+\FloatBarrier\subsection{Overview parameters}
+%-------------------------------------------------------------------------------
+
+\input{material/tab-model-parameters}
