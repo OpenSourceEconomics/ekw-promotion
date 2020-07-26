@@ -6,15 +6,18 @@ We now present the exact parameterization of the per-period utility functions. T
 \begin{align*}
 u_a(s_t) =
 \begin{cases}
-    \zeta_a(\bm{k_t}, h_t, t, a_{t -1})  + w_a(\bm{k_t}, h_t, t, a_{t -1}, e_{a,1}, \epsilon_{a,t})              & \text{if}\, a \in \{1, 2, 3\}  \\
-    \zeta_a(\bm{k_t}, h_t, t, a_{t-1}, e_{a,1}, \epsilon_{a,t})                                    & \text{otherwise.}
+    \zeta_a(\bm{k_t}, h_t, t, a_{t -1})  + w_a(\bm{k_t}, h_t, t, a_{t -1}, \bm{e}_{a,1}, \epsilon_{a,t})              & \text{if}\, a \in \{1, 2, 3\}  \\
+    \zeta_a(\bm{k_t}, h_t, t, a_{t-1}, \bm{e}_{a,1}, \epsilon_{a,t})                                    & \text{\textcolor{red}{otherwise }} \text{if}\, a \in \{4, 5\}.
 \end{cases}
 \end{align*}
+Individuals enter the model as a particular type $j \in \mathcal{J} = \{1, 2, 3, 4\}$ which is reflected through an initial skill endowment $\left(\bm{e}_{a,1}\right)_{a\in\mathcal{A}} = \left(e_{j,a,1}\right)_{a\in\mathcal{A}, j \in \mathcal{J}}$. Individuals are homogeneous with respect to their per-period utility functions but heterogeneous with respect to their initial skill endowments. 
+\vspace{20pt} \\
+$\left(\bm{e}_{a,1}\right)_{a\in\mathcal{A}} = \Big( \bm{e}_{j,a,1} \Big)_{\substack{a\in\mathcal{A}, \\ j \in \mathcal{J} }}$.
 
 %-------------------------------------------------------------------------------
 \subsection{Utility for working alternatives}
 %-------------------------------------------------------------------------------
-The wage $w_{a}$ is determined by the product of the market-equilibrium rental price $\rho_{a,t}$ and the occupation-specific skill level $x_{a,t}$. This specification leads to a standard logarithmic wage equation in which the constant term is the sum of the skill rental price $\ln(r)$ and the initial skill endowment $e_{a,1}$.\\
+The per-period utility for working alternatives is the sum of a non-pecuniary benefit and a wage component. The wage $w_{a}(s_t)$ is determined by the product of the market-equilibrium rental price $\rho_{a,t}$ and an occupation-specific skill level $x_{a,t}$. This specification leads to a standard logarithmic wage equation in which the constant term is given as sum of the skill rental price $\ln(r)$ and the initial skill endowment $\bm{e}_{a,1}$.\\
 
 The occupation-specific skill level is determined by a skill production function, which includes a deterministic component $\Gamma_a$ and a multiplicative stochastic productivity shock $\epsilon_{1,a}$
 %
