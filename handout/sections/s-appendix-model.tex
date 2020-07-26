@@ -122,18 +122,18 @@ Table \ref{tab:ModelParameters} summarizes the parameters prevalent in the schoo
 %-------------------------------------------------------------------------------
 \FloatBarrier\subsubsection{Home}
 %-------------------------------------------------------------------------------
-The reward for staying at home only depends on the age of the individual
+The reward for staying at home only depends in particular on the age of the individual
 %
 \begin{align}
-    u_5(s_t) =  e_{5,j} & + \beta_{5,2} \cdot \ind[h_t \geq 12] + \beta_{5,3} \cdot \ind[h_t \geq 16] 			 \nonumber \\
-    							   & + \gamma_{5,5} \cdot \ind[18 \leq t \leq 20] + \gamma_{5,6} \cdot \ind[t \geq 21] \nonumber \\
-    							   & + \vartheta_3 \cdot \ind[k_{3,t} = 1]  \nonumber \\
+    u_5(s_t) =  e_{5,j} & + \gamma_{5,5} \cdot \ind[18 \leq t \leq 20] + \gamma_{5,6} \cdot \ind[t \geq 21] \nonumber \\
+    							   & +\vartheta_{1} \cdot \ind[h_t \geq 12] + \vartheta_{2} \cdot \ind[h_t \geq 16] +  \vartheta_3 \cdot \ind[k_{3,t} = 1]  \nonumber \\
     							   & + \epsilon_{5,t}.
 \end{align}
 %
-\autoref{tab:ModelParameters} summarizes the parameters prevalent in the home sector.
+Staying at home as young adult ($\gamma_{5, 5} < 0$) is perceived to be less stigmatic as doing so while being already an adult ($\gamma_{5,6} < \gamma_{5, 5} <0$). Having a degree  ($\vartheta_1 > 0, \vartheta_2 > 0$) or having left the military prematurely  ($\vartheta_3 <0$) does influence the per-period utility.
 
-\clearpage 
+\autoref{tab:ModelParameters} summarizes the parameters prevalent in the home sector. 
+
 
 %-------------------------------------------------------------------------------
 \FloatBarrier\subsection{Overview parameters}
