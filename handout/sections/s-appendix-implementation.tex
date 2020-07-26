@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 %-------------------------------------------------------------------------------
-\subsection{Model}\label{Appendix model}
+\subsection{Model}\label{Computational implementation}
 %-------------------------------------------------------------------------------
 We now present the exact parameterization of the per-period utility functions. The per-period utility $u_a(s_t)$ of each alternative consists of a non-pecuniary benefit $\zeta_a(s_t)$ and has, at least for the working alternatives, an additional wage component $w_t(s_t)$. Each components depends on the level of human capital as measured by an alternative-specific skill endowment $\bm{e_1} = \left(e_{a,1}\right)_{a\in\mathcal{A}}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. There is also an impact of last-period choice $a_{t -1}$ and alternative-specific productivity shocks
 $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$.
@@ -52,7 +52,7 @@ The non-wage component includes mobility and search costs, which are higher for 
 
 \paragraph{Blue-collar occupation} The deterministic component and the nonpecuniary element in the blue-collar occupation follow the same line of reasoning.
 %
-\begin{align*} 
+\begin{align*}
     \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{2,j}) = e_{2,j} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\
     							 & + \gamma_{2, 2} \cdot  k_{2,t} + \gamma_{2,3} \cdot  (k_{2,t})^2 + \gamma_{2,4} \cdot  \ind[k_{2,t} > 0] \\
                                    & + \gamma_{2,5} \cdot  t + \gamma_{2,6} \cdot \ind[t < 18] \\
