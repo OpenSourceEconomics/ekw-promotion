@@ -28,38 +28,39 @@ The occupation-specific skill level is determined by a skill production function
 %-------------------------------------------------------------------------------
 \subsubsection{Utility for civilian occupations}
 %-------------------------------------------------------------------------------
-We now state the parameterization for the civilian occupations, we provide some economic reasoning behind their specification for the white collar occupation, the blue collar is defined analogously.
+We now illustrate the parameterization for the civilian occupations and provide economic reasoning for the specification of the white-collar occupation. The specification for the blue-collar occupation is defined analogously.
 
-\paragraph{White-collar occupation} Equation (\ref{eq:SkillLevelWhiteCollar}) provides the parameterization of the deterministic skill-production component in the white-collar occupation.
+\paragraph{White-collar occupation} Equation (\ref{eq:SkillLevelWhiteCollar}) provides the parameterization of the deterministic skill-production component in the white-collar occupation,
 %
 \begin{align}\label{eq:SkillLevelWhiteCollar}
     \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{1,j}) = e_{1,j} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16] \nonumber\\
                                  \nonumber & + \gamma_{1, 2} \cdot  k_{1,t} + \gamma_{1,3} \cdot  (k_{1,t})^2 + \gamma_{1,4} \cdot  \ind[k_{1,t} > 0] \\
                                   \nonumber & + \gamma_{1,5} \cdot  t + \gamma_{1,6} \cdot \ind[t < 18] \nonumber\\
-                                  & + \gamma_{1,7} \cdot  a_{t-1} + \gamma_{1,8} \cdot  k_{2,t} + \gamma_{1,9} \cdot  k_{3,t}.
+                                  & + \gamma_{1,7} \cdot \ind[a_{t-1} = 1] + \gamma_{1,8} \cdot  k_{2,t} + \gamma_{1,9} \cdot  k_{3,t}.
 \end{align}
 %
 
-given by years of completed schooling ($\beta_{1,1}$), graduation effects ($\beta_{1,2}, \beta_{1,3}$), occupation-specific experience ($\gamma_{1,2}, \gamma_{1,3},  \gamma_{1,8}, \gamma_{1,9}$), skill depreciation ($\gamma_{1,7}$), and age effects like being a minor ($\gamma_{1,5}, \gamma_{1,6}$). The coefficient $\gamma_{1,4}$ captures whether an individual has ever worked in the occupation before.\\
+Part of the skill-production function is motivated by \citet{Mincer.1958, Mincer.1974} and hence linear in years of completed schooling ($\beta_{1,1}$), quadratic in experience ($\gamma_{1,2}, \gamma_{1,3}$), and separable between both. The skill production-function respects sheep-skin effects ($\beta_{1,2}, \beta_{1,3}$) and the gain of having worked in the same occupation at least once before ($\gamma_{1,4})$ \citep{Spence.1973, Arrow.1973, Hungerford.1987}. Skill production depends linearly on the age ($\gamma_{1,5}$) and on being a minor ($\gamma_{1,6}$). Work experience depreciates when working in a different occupation\footnote{In \texttt{respy} there is a gain of staying in the same alternative} but is potentially transferable across occupations ($\gamma_{1,8}, \gamma_{1,9}$). \\
 
-Equation (\ref{eq:NonWageWhiteCollar}) provides the parameterization for the non-wage component in the white-collar occupation.
+Equation (\ref{eq:NonWageWhiteCollar}) provides the parameterization for the non-wage component in the white-collar occupation,
 %
 \begin{align}\label{eq:NonWageWhiteCollar}
-\zeta_{1}(\bm{k_t}, h_t, a_{t-1}) = &~c_{1,1} \cdot \ind[a_{t-1} \neq 1] + c_{1,2} \cdot \ind[k_{1,t} = 0] \nonumber \\
-                            & + \alpha_1 \nonumber \\
+\zeta_{1}(\bm{k_t}, h_t, a_{t-1}) = \alpha_1  & + c_{1,1} \cdot \ind[a_{t-1} \neq 1] + c_{1,2} \cdot \ind[k_{1,t} = 0] \nonumber \\
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1].
 \end{align}
 %
-The non-wage component includes mobility and search costs, which are higher for individuals who never worked in the occupation ($c_{1,1} < 0, c_{1,2}< 0)$. A constant $\alpha_1$ captures the net monetary-equivalent value of working conditions (either negative or positive). Adding coefficients for graduation and military effects ($\vartheta_{1}, \vartheta_{2}, \vartheta_{3}$).
+A constant $\alpha_1$ captures the net monetary-equivalent value of either favorable or poor working conditions ($\alpha_1 > 0$ or $\alpha_1 < 0$). The non-wage component includes mobility and search costs ($c_{1,1} < 0$), which are higher for individuals who never worked in a white-collar occupation before ($c_{1,2}< 0)$. The non-wage components captures non-pecuniary returns from having obtained a high school degree ($\vartheta_1 >0 $) and a college degree ($\vartheta_2 >0$). Additionally, there is a detrimental effect of leaving the military early, i.e. after one year ($\vartheta_3 < 0$).
 
-\paragraph{Blue-collar occupation} The deterministic component and the nonpecuniary element in the blue-collar occupation follow the same line of reasoning.
+\paragraph{Blue-collar occupation} The deterministic component and the nonpecuniary element in the blue-collar occupation follow the same line of reasoning. The deterministic skill-production component is given by
 %
 \begin{align*} 
     \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{2,j}) = e_{2,j} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\
     							 & + \gamma_{2, 2} \cdot  k_{2,t} + \gamma_{2,3} \cdot  (k_{2,t})^2 + \gamma_{2,4} \cdot  \ind[k_{2,t} > 0] \\
                                    & + \gamma_{2,5} \cdot  t + \gamma_{2,6} \cdot \ind[t < 18] \\
-                                  & + \gamma_{2,7} \cdot  a_{t-1} + \gamma_{2,8} \cdot  k_{1,t} + \gamma_{2,9} \cdot  k_{3,t}. \\
-                                  &\\
+                                  & + \gamma_{2,7} \cdot  \ind[a_{t-1} = 2]  + \gamma_{2,8} \cdot  k_{1,t} + \gamma_{2,9} \cdot  k_{3,t}. 
+\end{align*}
+The non-wage component for the blue-collar occupation is given by
+\begin{align*} 
 \zeta_{2}( \bm{k_t}, h_t, a_{t-1} ) = &~c_{2,1} \cdot \ind[a_{t-1} \neq 1] + c_{2,2} \cdot \ind[k_{2,t} = 0] \\
                             & + \alpha_2 \\
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1].
@@ -140,3 +141,5 @@ The reward for staying at home only depends on the age of the individual
 %-------------------------------------------------------------------------------
 
 \input{material/tab-model-parameters}
+
+\clearpage
