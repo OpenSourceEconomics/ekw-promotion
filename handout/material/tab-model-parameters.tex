@@ -1,0 +1,87 @@
+\begin{ThreePartTable}
+% Information available at https://ftp.agdsn.de/pub/mirrors/latex/dante/macros/latex/contrib/threeparttablex/threeparttablex.pdf
+
+\begin{TableNotes}
+	\item \textbf{Note:} Parameters with the subscript $a$ are assumed to hold for $a \in \{1, 2\}$.
+\end{TableNotes}
+
+\begin{longtable}{@{}cll@{}}
+\caption{Overview of parameters in the \citet{Keane.1997} extended model.}
+\label{tab:ModelParameters}
+
+\setlength\extrarowheight{2.5pt}
+
+% Settings longtable
+\\
+\toprule 
+\textbf{Parameter}            &  &  \multicolumn{1}{l}{\textbf{Description}}              \\ \midrule 
+\endfirsthead 
+
+% Alternative 1 header for the beginning on next page
+%\midrule
+%Parameter            &  &  \multicolumn{1}{l}{Description}     \\ \midrule
+
+% Alternative 2 header for the beginning on next page
+\multicolumn{3}{c}{\tikz\draw [thick,dash dot] (0,0) -- (15,0);} \vspace{-5pt} \\
+\multicolumn{3}{c}{continued from previous page} \vspace{-10pt} \\
+\multicolumn{3}{c}{\tikz\draw [thick,dash dot] (0,0) -- (15,0);} \\
+\endhead 
+
+\multicolumn{3}{c}{\tikz\draw [thick,dash dot] (0,0) -- (15,0);} \vspace{-5pt} \\
+\multicolumn{3}{c}{continued on next page } \vspace{-10pt} \\
+\multicolumn{3}{c}{\tikz\draw [thick,dash dot] (0,0) -- (15,0);} \\
+\endfoot
+
+\bottomrule 
+\insertTableNotes
+\endlastfoot 
+
+% Start table
+\midrule
+\multicolumn{3}{l}{Common parameters}																			 \\ \midrule
+$\alpha_a$           &  & return non-wage working conditions for $a \in \{1 ,2 ,3 \}$		   \\
+$\vartheta_1$        &  & premium finishing high-school                 								    \\
+$\vartheta_2$        &  & premium finishing college															    \\
+$\vartheta_3$        &  & premium military                              											  \\[7.5pt] \midrule 
+\multicolumn{3}{l}{Schooling-related parameters}															   \\ \midrule
+% Work
+$\beta_{a,1}$        &  & return additional year of completed schooling 							   \\
+$\beta_{a,2}$        &  & skill premium high-school graduate            									\\
+$\beta_{a,3}$        &  & skill premium college graduate													   	\\
+% Military
+$\beta_{3,1}$        &  & return additional year of completed schooling in military					\\
+% School
+$\beta_{tc_1}$       &  & tuition cost high-school                      											\\
+$\beta_{tc_2}$       &  & tuition cost college                          												\\
+$\beta_{rc_1}$       &  & re-entry cost high-school                     										   \\
+$\beta_{rc_2}$       &  & re-entry cost college                        												   \\
+% Home
+$\beta_{5,2}$        &  & skill premium high-school graduate            									\\
+$\beta_{5,3}$        &  & skill premium college graduate                									     \\ [7.5pt] \midrule
+\multicolumn{3}{l}{Experience-related parameters}           													 \\
+\midrule 
+$\gamma_{a,2}$       &  & return same-sector experience                 									 \\
+$\gamma_{a,3}$       &  & return squared same-sector experience         								\\
+$\gamma_{a,4}$       &  & premium having worked in sector before        							   \\
+$\gamma_{a,5}$       &  & return age effect                             											     \\
+$\gamma_{a,6}$       &  & return age effect being a minor               										\\
+$\gamma_{a,7}$       &  & premium remaining in same sector              								   \\
+$\gamma_{a,8}$       &  & return civilian cross-sector experience       								    \\
+$\gamma_{a,9}$       &  & return non-civilian sector experience       										 \\
+$\gamma_{3,2}$       &  & return same-sector experience                 									  \\
+$\gamma_{3,3}$       &  & return squared same-sector experience    										 \\
+$\gamma_{3,4}$       &  & premium having worked in sector before   										\\
+$\gamma_{3,5}$       &  & return age effect                             												 \\
+$\gamma_{3,6}$       &  & return age effect being a minor              	   										\\
+$\gamma_{4,5}$       &  & return age effect                             												 \\
+$\gamma_{4,6}$       &  & return age effect being a minor                  										\\
+$\gamma_{5,5}$       &  & return age between 17 and 21                 	  									   \\
+$\gamma_{5,6}$       &  & return age older than 20							   										\\[7.5pt] \midrule
+\multicolumn{3}{l}{Mobility and search parameters}          													  \\ \midrule 
+$c_{a,1}$            &  & premium switching to occupation $a$           									   \\
+$c_{a,2}$            &  & premium for working first time in $a$         										  \\
+$c_{3,2}$            &  & premium for serving first time in military    										  \\[7.5pt]
+
+
+\end{longtable}
+\end{ThreePartTable}
