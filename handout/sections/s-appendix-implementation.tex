@@ -4,7 +4,7 @@
 %-------------------------------------------------------------------------------
 We use the same computational implementation as in \citet{Keane.1997}. We outline the per-period utility functions for each of the five alternatives. We first focus on their common overall structure and then provide their parameterization. Throughout we provide the economic motivation for their specification.\\
 
-\noindent Individuals are initially heterogeneous. They differ with respect to their initial level of completed schooling $h_1$ and have one of four different $J = \{1, \hdots, 4\}$ alternative-specific skill endowments $\bm{e_{1}} = \left(e_{a,j}\right)_{\mathcal{A}\times\mathcal{J}}$.\\
+\noindent Individuals are initially heterogeneous. They differ with respect to their initial level of completed schooling $h_1$ and have one of four different $J = \{1, \hdots, 4\}$ alternative-specific skill endowments $\bm{e_{1}} = \left(e_{a,j}\right)_{\mathcal{A}\times\mathcal{J}}$. However, individuals share the same discounting parameter $\theta$. \\
 
 \noindent The per-period utility $u_a(\cdot)$ of each alternative consists of a non-pecuniary utility $\zeta_a(\cdot)$ and, at least for the working alternatives, an additional wage component $w_a(\cdot)$. Each of the components depends on the level of human capital as measured by their alternative-specific skill endowment $\bm{e_{1}}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. The per-period utility functions are also influenced by last-period choices $a_{t -1}$ and alternative-specific productivity shocks $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$. Throughout alternatives the general form of the per-period utility is given by:
 %
@@ -20,7 +20,7 @@ Work experience $\bm{k_t}$  and years of completed schooling $h_t$ evolve determ
 %
 \begin{align*}
 k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
-h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 3]  &\qquad
+h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
 \end{align*}
 %-------------------------------------------------------------------------------
 \subsubsection*{Utility for working alternatives}
@@ -35,7 +35,7 @@ This specification leads to a standard logarithmic wage equation in which the co
 
 \noindent The occupation-specific skill level $x_{a}(\cdot)$ is determined by a skill production function, which includes a deterministic component $\Gamma_a$ and a multiplicative stochastic productivity shock $\epsilon_{a,t}$.
 %
-\begin{align}\label{eq:OccupationSpecificSkillLevel}
+\begin{align}%\label{eq:OccupationSpecificSkillLevel}
     x_{a}(\bm{k_t}, h_t, t, a_{t-1}, e_{a, j}, \epsilon_{a,t}) & = \exp \big( \Gamma_{a}(\bm{k_t},  h_t, t, a_{t-1}, e_{a,j}) \cdot \epsilon_{a,t} \big) \nonumber
 \end{align}
 %
@@ -60,9 +60,9 @@ This specification leads to a standard logarithmic wage equation in which the co
 %
 A constant $\alpha_1$ captures the net monetary-equivalent of on the job amenities. The non-pecuniary utility includes mobility and search costs $c_{1,1}$, which are higher for individuals who never worked in a white-collar occupation before $c_{1,2}$. The non-pecuniary components capture returns from a high school degree $\vartheta_1$ and a college degree $\vartheta_2$. Additionally, there is a detrimental effect of leaving the military early, i.e., after one year $\vartheta_3$.\\
 
-\noindent\textbf{Blue-collar} The per-period utility from working in a blue-collar occupation is specified analogously. Equation (\ref{eq:SkillLevelWhiteCollar}) shows the parameterization of the deterministic component of the skill-production function.
+\noindent\textbf{Blue-collar} The per-period utility from working in a blue-collar occupation is specified analogously. Equation (\ref{eq:SkillLevelBlueCollar}) shows the parameterization of the deterministic component of the skill-production function.
 %
-\begin{align}\label{SkillLevelWhiteCollar}
+\begin{align}\label{eq:SkillLevelBlueCollar}
     \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{2,j}) = e_{2,j} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\\nonumber
     							 & + \gamma_{2, 2} \cdot  k_{2,t} + \gamma_{2,3} \cdot  (k_{2,t})^2 + \gamma_{2,4} \cdot  \ind[k_{2,t} > 0] \\\nonumber
                                    & + \gamma_{2,5} \cdot  t + \gamma_{2,6} \cdot \ind[t < 18] \\\nonumber
