@@ -43,12 +43,12 @@ This specification leads to a standard logarithmic wage equation in which the co
 %
 \begin{align}\label{eq:SkillLevelWhiteCollar}
     \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{1, j}) = e_{1,j} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16]\\ \nonumber
-                                  & + \gamma_{1, 2} \cdot  k_{1,t} + \gamma_{1,3} \cdot  (k_{1,t})^2 + \gamma_{1,4} \cdot  \ind[k_{1,t} > 0] \\ \nonumber
-                                & + \gamma_{1,5} \cdot  t + \gamma_{1,6} \cdot \ind[t < 18]\\ \nonumber
-                                  & + \gamma_{1,7} \cdot \ind[a_{t-1} = 1] + \gamma_{1,8} \cdot  k_{2,t} + \gamma_{1,9} \cdot  k_{3,t} \nonumber
+                                  & + \gamma_{1, 1} \cdot  k_{1,t} + \gamma_{1,2} \cdot  (k_{1,t})^2 + \gamma_{1,3} \cdot  \ind[k_{1,t} > 0] \\ \nonumber
+                                & + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\ \nonumber
+                                  & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} \nonumber
 \end{align}
 %
-\noindent Part of the skill-production function is motivated by \citet{Mincer.1958, Mincer.1974} and hence linear in years of completed schooling $\beta_{1,1}$, quadratic in experience ($\gamma_{1,2}, \gamma_{1,3}$), and separable between the two of them. The skill production-function respects sheep-skin effects ($\beta_{1,2}, \beta_{1,3}$) and the gain of having worked in the same occupation at least once before $\gamma_{1,4}$ \citep{Spence.1973, Jaeger.1996}. Skill production depends linearly on the age $\gamma_{1,5}$ and on being a minor $\gamma_{1,6}$. Work experience depreciates when working in a different occupation but is potentially transferable across occupations ($\gamma_{1,8}, \gamma_{1,9}$). \\
+\noindent Part of the skill-production function is motivated by \citet{Mincer.1958, Mincer.1974} and hence linear in years of completed schooling $\beta_{1,1}$, quadratic in experience ($\gamma_{1,1}, \gamma_{1,2}$), and separable between the two of them. The skill production-function respects sheep-skin effects ($\beta_{1,2}, \beta_{1,3}$) and the gain of having worked in the same occupation at least once before $\gamma_{1,3}$ \citep{Spence.1973, Jaeger.1996}. Skill production depends linearly on the age $\gamma_{1,4}$ and on being a minor $\gamma_{1,5}$. Work experience depreciates when working in a different occupation ($\gamma_{1,6}$) but is potentially transferable across occupations ($\gamma_{1,7}, \gamma_{1,8}$). \\
 
 
 \noindent Equation (\ref{eq:NonWageWhiteCollar}) shows the parameterization of the non-pecuniary utility from working in a white-collar occupation.
@@ -64,9 +64,9 @@ A constant $\alpha_1$ captures the net monetary-equivalent of on the job ameniti
 %
 \begin{align}\label{eq:SkillLevelBlueCollar}
     \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{2,j}) = e_{2,j} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\\nonumber
-    							 & + \gamma_{2, 2} \cdot  k_{2,t} + \gamma_{2,3} \cdot  (k_{2,t})^2 + \gamma_{2,4} \cdot  \ind[k_{2,t} > 0] \\\nonumber
-                                   & + \gamma_{2,5} \cdot  t + \gamma_{2,6} \cdot \ind[t < 18] \\\nonumber
-                                  & + \gamma_{2,7} \cdot  \ind[a_{t-1} = 2]  + \gamma_{2,8} \cdot  k_{1,t} + \gamma_{2,9} \cdot  k_{3,t}.
+    							 & + \gamma_{2, 1} \cdot  k_{2,t} + \gamma_{2,2} \cdot  (k_{2,t})^2 + \gamma_{2,3} \cdot  \ind[k_{2,t} > 0] \\\nonumber
+                                   & + \gamma_{2,4} \cdot  t + \gamma_{2,5} \cdot \ind[t < 18] \\\nonumber
+                                  & + \gamma_{2,6} \cdot  \ind[a_{t-1} = 2]  + \gamma_{2,7} \cdot  k_{1,t} + \gamma_{2,8} \cdot  k_{3,t}.
 \end{align}
 %
 \noindent Equation \ref{eq:UtilityBlueCollar} shows the parameterization of the non-pecuniary utilities from working in a blue-collar occupation.
@@ -80,11 +80,11 @@ A constant $\alpha_1$ captures the net monetary-equivalent of on the job ameniti
 %
 \begin{align}\label{eq:SkillLevelMilitary}
     \Gamma_3( k_{3,t}, h_t, t, e_{3,j}) = e_{3,j} & + \beta_{3,1} \cdot h_t \\\nonumber
-	               \nonumber &+ \gamma_{3,2} \cdot  k_{3,t} + \gamma_{3,3} \cdot (k_{3,t})^2 + \gamma_{3,4} \cdot \ind[k_{3,t} < 0]\\\nonumber
-									 & + \gamma_{3,5} \cdot t + \gamma_{3,6} \cdot \ind[t < 18].
+	               \nonumber &+ \gamma_{3,1} \cdot  k_{3,t} + \gamma_{3,2} \cdot (k_{3,t})^2 + \gamma_{3,3} \cdot \ind[k_{3,t} < 0]\\\nonumber
+									 & + \gamma_{3,4} \cdot t + \gamma_{3,5} \cdot \ind[t < 18].
 \end{align}
 %
-Contrary to the civilian sector there are no sheep-skin effects from graduation ($\beta_{3,2} = \beta_{3,3}= 0$). The previous occupation choice has no influence ($\gamma_{3,7}= 0$) and any experience other than military is non-transferable ($\gamma_{3,8} = \gamma_{3,9} = 0$).\\
+Contrary to the civilian sector there are no sheep-skin effects from graduation ($\beta_{3,2} = \beta_{3,3}= 0$). The previous occupation choice has no influence ($\gamma_{3,6}= 0$) and any experience other than military is non-transferable ($\gamma_{3,7} = \gamma_{3,7} = 0$).\\
 
 \noindent Equation (\ref{eq:UtilityMilitary}) shows the parameterization of the non-pecuniary utility from working in the military.
 %
@@ -109,7 +109,7 @@ Equation (\ref{eq:UtilitySchooling}) shows the parameterization of the non-pecun
 \begin{align}\label{eq:UtilitySchooling}
 	\zeta_4(k_{3,t}, h_t, t, a_{t-1}, e_{4,j}, \epsilon_{4,t})  = e_{4,j} & + \beta_{tc_1} \cdot \ind[h_t \geq 12] + \beta_{tc_2} \cdot \ind[h_t \geq 16]   \\\nonumber
     							  & + \beta_{rc_1} \cdot \ind[a_{t-1} \neq 4, h_t < 12] + \beta_{rc_2} \cdot \ind[a_{t-1} \neq 4, h_t \geq 12] \\\nonumber
-    							  & + \gamma_{4,5} \cdot t + \gamma_{4,6} \cdot \ind[t < 18] 																					  \\\nonumber
+    							  & + \gamma_{4,4} \cdot t + \gamma_{4,5} \cdot \ind[t < 18] 																					  \\\nonumber
      							  & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1)\\\nonumber
       							& + \epsilon_{4,t}
 \end{align}
@@ -121,12 +121,12 @@ Schooling costs include tuition and fees for continuing education after high sch
 Equation (\ref{eq:UtilityHome}) shows the parameterization of the non-pecuniary utility from staying at home.
 %
 \begin{align}\label{eq:UtilityHome}
-	\zeta_5(k_{3,t}, h_t, t, e_{5,j}, \epsilon_{5,1}) =  e_{5,j} & + \gamma_{5,5} \cdot \ind[18 \leq t \leq 20] + \gamma_{5,6} \cdot \ind[t \geq 21] \\ \nonumber
+	\zeta_5(k_{3,t}, h_t, t, e_{5,j}, \epsilon_{5,1}) =  e_{5,j} & + \gamma_{5,4} \cdot \ind[18 \leq t \leq 20] + \gamma_{5,5} \cdot \ind[t \geq 21] \\ \nonumber
     							   & +\vartheta_{1} \cdot \ind[h_t \geq 12] + \vartheta_{2} \cdot \ind[h_t \geq 16] +  \vartheta_3 \cdot \ind[k_{3,t} = 1]  \\ \nonumber
     							   & + \epsilon_{5,t}.
 \end{align}
 %
-Staying at home as a young adult $\gamma_{5, 5}$ is perceived to be less stigmatic as doing so while being already an adult ($\gamma_{5,5}, \gamma_{5, 6}$). Having a degree  $(\vartheta_1, \vartheta_2)$ or having left the military prematurely  $\vartheta_3$ does influence the per-period utility.
+Staying at home as a young adult $\gamma_{5, 4}$ is perceived to be less stigmatic as doing so while being already an adult ($\gamma_{5,5}$). Having a degree  $(\vartheta_1, \vartheta_2)$ or having left the military prematurely  $\vartheta_3$ does influence the per-period utility.
 
 \paragraph{Distribution of unobservables} The productivity shocks are uncorrelated across time and follow a multivariate normal distribution $\mathcal{N}$ with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
 
