@@ -5,180 +5,177 @@ This module creates all figures for the handout. They are all used in the illust
 """
 from pathlib import Path
 import os
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import seaborn as sns
+import numpy as np
+import pandas as pd
+from itertools import compress
+import colorsys
+import matplotlib.colors as mc
+from scipy.signal import savgol_filter
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 import respy as rp
-
+import pandas as pd
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
+from itertools import compress
 
 
-"""This is the set up for the coloring options for the figures."""
+def plot_decisions_by_age(df):
+    """Plot decisions by age.
 
-color_opts = ["colored", "black-white"]
-jet_color_map = [
-    "#1f77b4",
-    "#ff7f0e",
-    "#2ca02c",
-    "#d62728",
-    "#9467bd",
-    "#8c564b",
-    "#e377c2",
-    "#7f7f7f",
-    "#bcbd22",
-    "#17becf",
-]
-spec_dict = {
-    "colored": {"colors": [None] * 4, "line": ["-"] * 3, "hatch": [""] * 3, "file": ""},
-    "black-white": {
-        "colors": ["#CCCCCC", "#808080", "k"],
-        "line": ["-", "--", ":"],
-        "hatch": ["", "OOO", "///"],
-        "file": "-sw",
-    },
-}
+    Parameters:
+    -----------
+    df: pd.DataFrame
+        Dataframe consisting of decision data.
 
-"""The following code produces data for the observed choices figure."""
+    Returns:
+    --------
+    savefig: pdf
+        Figure saved as pdf file.
 
-params, options = rp.get_example_model("kw_94_two", with_data=False)
+    """
 
-simulate = rp.get_simulate_func(params, options)
-df = simulate(params)
-
-stat = df.groupby("Identifier")["Experience_Edu"].max().mean()
-print(f"Average education in baseline: {stat}")
-
-df["Age"] = df.index.get_level_values("Period") + 16
-df["Choice"].cat.categories = ["Blue", "White", "Schooling", "Home"]
-
-"""The following code creates the observed choices fsigure."""
-
-for color in color_opts:
-
+    labels = ["blue_collar", "white_collar", "military", "school", "home"]
+    coloring = {
+        "blue_collar": "tab:blue",
+        "white_collar": "tab:red",
+        "military": "tab:purple",
+        "school": "tab:orange",
+        "home": "tab:green",
+    }
     fig, ax = plt.subplots()
 
-    labels = ["Home", "Schooling", "Blue", "White"]
-    shares = (
-        df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
-    )
-    if color == "black-white":
-        shares.plot.bar(
-            stacked=True,
-            ax=ax,
-            width=0.8,
-            color=[
-                spec_dict[color]["colors"][1],
-                spec_dict[color]["colors"][0],
-                spec_dict[color]["colors"][1],
-                spec_dict[color]["colors"][0],
-            ],
-        )
-        for container, hatch in zip(ax.containers, ("OO", "..", "//", "oo")):
-            for patch in container.patches:
-                patch.set_hatch(hatch)
-    else:
-        shares.plot.bar(stacked=True, ax=ax, width=0.8)
+    shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(coloring.values()))
 
-    ax.legend(labels=labels, loc="lower center", bbox_to_anchor=(0.5, 1.04), ncol=4)
-
+    ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
+
     ax.set_ylabel("Share (in %)")
     ax.set_ylim(0, 100)
 
-    ax.set_xticklabels(np.arange(16, 55, 5), rotation="horizontal")
-    ax.xaxis.set_ticks(np.arange(0, 40, 5))
+    ax.legend(
+        labels=[label.split("_")[0].capitalize() for label in labels],
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.04),
+        ncol=5,
+    )
 
-    if color == "black-white":
-        fig.savefig("fig-observed-choices-bw")
-    else:
-        fig.savefig("fig-observed-choices")
+    plt.savefig("fig-observed-decisions-age")
 
-"""The following code creates the policy forecast figure."""
+def plot_wage_moments(df, savgol=True):
+    """Plot mean and std of observed wages in blue, white, and military.
 
-params_sdcorr, options = rp.get_example_model("kw_94_two", with_data=False)
-simulate_func = rp.get_simulate_func(params_sdcorr, options)
-num_points = 10
-edu_level = np.tile(np.nan, num_points)
+    Parameters:
+    -----------
+    df: pd.DataFrame
+        Dataframe consisting of sample data.
 
+    savgol: Boolean
+        Application of Savitzky Golay Filtering.
 
-def tuition_policy_wrapper_kw_94(simulate, params, tuition_subsidy):
+    References:
+    -----------
+    .. [1] A. Savitzky, M. J. E. Golay, Smoothing and Differentiation of
+       Data by Simplified Least Squares Procedures. Analytical
+       Chemistry, 1964, 36 (8), pp 1627-1639.
+    .. [2] Numerical Recipes 3rd Edition: The Art of Scientific Computing
+       W.H. Press, S.A. Teukolsky, W.T. Vetterling, B.P. Flannery
+       Cambridge University Press ISBN-13: 9780521880688
 
-    policy_params = params.copy()
-    policy_params.loc[
-        ("nonpec_edu", "at_least_twelve_exp_edu"), "value"
-    ] += tuition_subsidy
-    policy_df = simulate(policy_params)
+    """
 
-    edu = policy_df.groupby("Identifier")["Experience_Edu"].max().mean()
+    minimum_observations = 10
+    wage_categories = ["blue_collar", "white_collar", "military"]
+    wage_colors = {"blue_collar": "tab:blue", "white_collar": "tab:red", "military": "tab:purple"}
 
-    return edu
+    wage_moments = df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
 
+    for moment in ["mean", "std"]:
+        fig, ax = plt.subplots()
 
-subsidies = np.linspace(0, 1500, num=num_points, dtype=int, endpoint=True)
-for i, subsidy in enumerate(subsidies):
-    edu_level[i] = tuition_policy_wrapper_kw_94(simulate_func, params_sdcorr, subsidy)
+        if moment == "mean":
+            color_scale = 1
+            label_moment = "Average"
+        if moment == "std":
+            color_scale = 0.6
+            label_moment = "Standard deviation"
 
-for color in color_opts:
+        for wc in wage_categories:
 
-    fig, ax = plt.subplots(1, 1)
+            sufficient_boolean = list(
+                *[df.groupby(["Age"]).Choice.value_counts().unstack()[wc] >= minimum_observations]
+            )
+            non_sufficient_index = [i for i, bool in enumerate(sufficient_boolean) if bool is False]
+            _wage_moments = list(wage_moments[moment][wc])
+            sufficient_wage_moments = list(compress(_wage_moments, sufficient_boolean))
 
-    if color == "black-white":
-        ax.fill_between(
-            subsidies, edu_level, color=spec_dict[color]["colors"][1],
+            if savgol:
+                y = list(savgol_filter(sufficient_wage_moments, 7, 3))
+            else:
+                y = sufficient_wage_moments
+
+            for i, insertion in enumerate(non_sufficient_index):
+                y.insert(insertion + i, np.nan)
+
+            y_plot = pd.DataFrame(y, columns=[moment])
+            y_plot.index = list(wage_moments[moment].index)
+
+            ax.plot(
+                y_plot, color=make_color_lighter(wage_colors[wc], color_scale), label=wc,
+            )
+
+        ax.legend(
+            labels=[label.split("_")[0].capitalize() for label in wage_categories],
+            loc="upper left",
+            bbox_to_anchor=(0.2, 1.04),
+            ncol=3,
         )
-    else:
-        ax.fill_between(subsidies, edu_level)
 
-    ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel("Average final schooling")
-    ax.set_ylim([10, 19])
+        ax.set_xticks(df["Age"].unique())
+        ax.set_xlabel("Age")
 
-    ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
-    ax.set_xlabel("Tuition subsidy")
-    ax.set_xlim([None, 1600])
-
-    if color == "black-white":
-        fig.savefig("fig-policy-forecast-bw")
-    else:
-        fig.savefig("fig-policy-forecast")
-
-"""The following code creates the economic mechanism figure."""
-
-
-def time_preference_wrapper_kw_94(simulate, params, value):
-    policy_params = params.copy()
-    policy_params.loc[("delta", "delta"), "value"] = value
-    policy_df = simulate(policy_params)
-
-    edu = policy_df.groupby("Identifier")["Experience_Edu"].max().mean()
-
-    return edu
-
-
-deltas = np.linspace(0.945, 0.955, num_points)
-for i, delta in enumerate(deltas):
-    edu_level[i] = time_preference_wrapper_kw_94(simulate_func, params_sdcorr, delta)
-
-
-for color in color_opts:
-
-    fig, ax = plt.subplots(1, 1)
-
-    if color == "black-white":
-        ax.fill_between(
-            deltas, edu_level, color=spec_dict[color]["colors"][1],
+        ax.set_ylabel(f"{label_moment} wage (in $ 1,000)", labelpad=20)
+        ax.get_yaxis().set_major_formatter(
+            plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
         )
-    else:
-        ax.fill_between(deltas, edu_level)
 
-    ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel("Average final schooling")
-    ax.set_ylim([10, 19])
+        fig.savefig(f"{label_moment}-wages.png")
 
-    ax.set_xlabel(r"$\delta$")
 
-    if color == "black-white":
-        fig.savefig("fig-economic-mechanisms-bw")
-    else:
-        fig.savefig("fig-economic-mechanisms")
+def make_color_lighter(color, amount=0.5):
+    """Returns a brightened (darkened) color.
+
+    Parameters:
+    -----------
+    color: matplotlib color string, hex string, RGB tuple
+        Name of color that will be brightened.
+
+    amount: positive float
+        Amount the color should be brightened (<1) or darkened (>1).
+
+    Returns:
+    --------
+    _color: matplotlib color string, hex string, RGB tuple
+        Brightened-up color (same format).
+
+    """
+
+    try:
+        _color = mc.cnames[color]
+    except Exception:
+        _color = color
+    _color = colorsys.rgb_to_hls(*mc.to_rgb(_color))
+
+    return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
+
+
+df = pd.read_pickle("data-empirical.pkl")
+df["Age"] = df.index.get_level_values(1) + 16
+
+plot_decisions_by_age(df)
+plot_wage_moments(df)

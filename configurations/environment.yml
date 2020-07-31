@@ -27,7 +27,7 @@ dependencies:
   - seaborn
   - numpy
   - pytest
-  - respy
+  - pyarrow
   - pytest-cov
   - pytest-xdist
   - pytest-black
@@ -40,11 +40,12 @@ dependencies:
   - sphinx-autobuild
   - tox-conda
   - pip:
-    - apprise
-    - pre-commit
-    - pysftp 
-    - Py-BOBYQA
-    - DFO-LS
-    - PyPDF2
-    - jupyterlab
-    - pygmo
+      - git+https://github.com/OpenSourceEconomics/respy
+      - apprise
+      - pre-commit
+      - pysftp
+      - Py-BOBYQA
+      - DFO-LS
+      - PyPDF2
+      - jupyterlab
+      - pygmo
