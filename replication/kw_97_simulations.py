@@ -15,9 +15,12 @@ NUM_POINTS = 10
 IS_DEBUG = True
 
 
-def mechanism_wrapper(simulate, params, tuition_subsidy, label):
+def mechanism_wrapper(simulate, params, label, change):
     policy_params = params.copy()
-    policy_params.loc[label, "value"] += tuition_subsidy
+    if label == "delta":
+        policy_params.loc[("delta", "delta"), "value"] = change
+    elif label == "suibsidy":
+        policy_params.loc[("nonpec_school", "hs_graduate"), "value"] += change
     policy_df = simulate(policy_params)
 
     return policy_df.groupby("Identifier")["Experience_School"].max().mean()
@@ -67,29 +70,16 @@ for label, df in [("empirical", df_emp), ("simulated", df_sim)]:
 
 df_descriptives.to_pickle("data-descriptives.pkl")
 
-# We evaluate the effect of a chance in time preferences.
-label = ("delta", "delta")
+# We evaluate the effect of a change in time preferences and a tuition subsidy.
+subsidies = np.linspace(0, 2000, num=NUM_POINTS, dtype=int, endpoint=True)
 deltas = np.linspace(0.910, 0.950, NUM_POINTS)
 
-df = pd.DataFrame(columns=["Level"], index=deltas)
-df.index.name = "Delta"
+columns = ["level"]
+index = list(product(["delta"], deltas)) + list(product(["subsidy"], subsidies))
+index = pd.MultiIndex.from_tuples(index, names=["Experiment", "Change"])
+df_mechanisms = pd.DataFrame(columns=columns, index=index)
 
-for delta in df.index.values:
-    df.loc[delta, "Level"] = mechanism_wrapper(simulate_func, params, delta, label)
-
-df.sort_index()
-pd.to_pickle(df, "mechanisms-time.pkl")
-
-
-# We evaluate the effect of tuition subsidy.
-label = ("nonpec_school", "hs_graduate")
-subsidies = np.linspace(0, 2000, num=NUM_POINTS, dtype=int, endpoint=True)
-
-df = pd.DataFrame(columns=["Level"], index=subsidies)
-df.index.name = "Subsidy"
-
-for subsidy in df.index.values:
-    df.loc[subsidy, "Level"] = mechanism_wrapper(simulate_func, params, subsidy, label)
-
-df.sort_index()
-pd.to_pickle(df, "mechanisms-subsidy.pkl")
+for label, change in df_mechanisms.index:
+    args = (simulate_func, params, label, change)
+    df_mechanisms.loc[(label, change), :] = mechanism_wrapper(*args)
+df_mechanisms.to_pickle("model-exploration.pkl")

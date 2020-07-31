@@ -10,14 +10,11 @@ from pathlib import Path
 import os
 import colorsys
 import matplotlib.colors as mc
-from scipy.signal import savgol_filter
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import respy as rp
 
-from itertools import compress
 import matplotlib as mpl
 
 color_opts = ["colored", "black-white"]
@@ -71,9 +68,8 @@ def plot_decisions_by_age(df):
     }
     fig, ax = plt.subplots()
 
-    shares = (
-        df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
-    )
+    shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
+
     shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(coloring.values()))
 
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
@@ -93,96 +89,16 @@ def plot_decisions_by_age(df):
 
 
 def plot_wage_moments(df, savgol=True):
-    """Plot mean and std of observed wages in blue, white, and military.
 
-    Parameters:
-    -----------
-    df: pd.DataFrame
-        Dataframe consisting of sample data.
+    # TODO: Add filter feature.
+    fig, ax = plt.subplots()
 
-    savgol: Boolean
-        Application of Savitzky Golay Filtering.
+    y = df.loc[("empirical", slice(None)), "mean"].values
+    ax.plot(y, label="Mean")
 
-    References:
-    -----------
-    .. [1] A. Savitzky, M. J. E. Golay, Smoothing and Differentiation of
-       Data by Simplified Least Squares Procedures. Analytical
-       Chemistry, 1964, 36 (8), pp 1627-1639.
-    .. [2] Numerical Recipes 3rd Edition: The Art of Scientific Computing
-       W.H. Press, S.A. Teukolsky, W.T. Vetterling, B.P. Flannery
-       Cambridge University Press ISBN-13: 9780521880688
+    ax.legend()
 
-    """
-
-    minimum_observations = 10
-    wage_categories = ["blue_collar", "white_collar", "military"]
-    wage_colors = {
-        "blue_collar": "tab:blue",
-        "white_collar": "tab:red",
-        "military": "tab:purple",
-    }
-
-    wage_moments = (
-        df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
-    )
-
-    for moment in ["mean", "std"]:
-        fig, ax = plt.subplots()
-
-        if moment == "mean":
-            color_scale = 1
-            label_moment = "Average"
-        if moment == "std":
-            color_scale = 0.6
-            label_moment = "Standard deviation"
-
-        for wc in wage_categories:
-
-            sufficient_boolean = list(
-                *[
-                    df.groupby(["Age"]).Choice.value_counts().unstack()[wc]
-                    >= minimum_observations
-                ]
-            )
-            non_sufficient_index = [
-                i for i, bool in enumerate(sufficient_boolean) if bool is False
-            ]
-            _wage_moments = list(wage_moments[moment][wc])
-            sufficient_wage_moments = list(compress(_wage_moments, sufficient_boolean))
-
-            if savgol:
-                y = list(savgol_filter(sufficient_wage_moments, 7, 3))
-            else:
-                y = sufficient_wage_moments
-
-            for i, insertion in enumerate(non_sufficient_index):
-                y.insert(insertion + i, np.nan)
-
-            y_plot = pd.DataFrame(y, columns=[moment])
-            y_plot.index = list(wage_moments[moment].index)
-
-            ax.plot(
-                y_plot,
-                color=make_color_lighter(wage_colors[wc], color_scale),
-                label=wc,
-            )
-
-        ax.legend(
-            labels=[label.split("_")[0].capitalize() for label in wage_categories],
-            loc="upper left",
-            bbox_to_anchor=(0.2, 1.04),
-            ncol=3,
-        )
-
-        ax.set_xticks(df["Age"].unique())
-        ax.set_xlabel("Age")
-
-        ax.set_ylabel(f"{label_moment} wage (in $ 1,000)", labelpad=20)
-        ax.get_yaxis().set_major_formatter(
-            plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
-        )
-
-        fig.savefig(f"fig-data-wages-{moment}")
+    fig.savefig("fig-data-wages-mean")
 
 
 def plot_mechanism_subsidy(subsidies, levels):
@@ -263,6 +179,7 @@ def make_color_lighter(color, amount=0.5):
 
 
 def plot_model_fit(df):
+    # TODO: Add filter feature.
 
     for label in ["blue_collar", "mean"]:
 
@@ -280,29 +197,33 @@ def plot_model_fit(df):
         fig.savefig(fname.replace("_", "-"))
 
 
-_, _, df_emp = rp.get_example_model("kw_97_extended")
-df_emp["Age"] = df_emp.index.get_level_values(1) + 16
-
-plot_decisions_by_age(df_emp)
-plot_wage_moments(df_emp)
-
+# We plot the model fit in and out of the support.
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
 
-df = pd.read_pickle("mechanisms-subsidy.pkl")
-subsidies = df.index.to_numpy(dtype=np.float)
-levels = df.loc[:, "Level"].to_numpy(dtype=np.float)
-plot_mechanism_subsidy(subsidies, levels)
+# We start with the observed data only.
+plot_decisions_by_age(df_descriptives)
+plot_wage_moments(df_descriptives)
 
-df = pd.read_pickle("mechanisms-time.pkl")
-deltas = df.index.to_numpy(dtype=np.float)
-levels = df.loc[:, "Level"].to_numpy(dtype=np.float)
-plot_mechanism_time(deltas, levels)
-
+# We than combine the descriptives from the observed and simulated data.
 plot_model_fit(df_descriptives)
 
-# We need all figures as bw version, this is just to prototype workflow.
+# We plot the counterfactual predictions of the model.
+df_exploration = pd.read_pickle("model-exploration.pkl")
+
+subsidies = (
+    df_exploration.loc["subsidy", :].index.get_level_values("Change").to_numpy(np.float)
+)
+levels = df_exploration.loc[("subsidy", slice(None)), "level"].to_numpy(np.float)
+plot_mechanism_subsidy(subsidies, levels)
+
+deltas = (
+    df_exploration.loc["delta", :].index.get_level_values("Change").to_numpy(np.float)
+)
+levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
+plot_mechanism_time(deltas, levels)
+
+# TODO: We need all figures as bw version, this is just to prototype workflow.
 for fname in glob.glob("*.png"):
     if "bw" in fname:
         continue
-
     shutil.copy(fname, fname.replace(".png", "-bw.png"))
