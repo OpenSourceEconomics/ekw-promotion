@@ -120,11 +120,11 @@ def plot_wage_moments(df, savgol=False, color="colors"):
     y = df.loc[("empirical", slice(None)), "mean"].values
     ext = ""
     if savgol:
-        y = savgol_filter(y, 7, 3)
+        y = savgol_filter(y, 5, 3)
         ext = "-savgol"
     ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
 
-    ax.legend()
+    #ax.legend()
 
     ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
     ax.get_yaxis().set_major_formatter(
@@ -168,14 +168,18 @@ def plot_mechanism_time(deltas, levels, color="color"):
     fig.savefig(f"fig-economic-mechanisms{color_scheme[color]['extension']}")
 
 
-def plot_model_fit(df, color="color"):
-    # TODO: Add filter feature.
+def plot_model_fit(df, savgol=False, color="color"):
 
     for label in ["blue_collar", "mean"]:
 
         fig, ax = plt.subplots(1, 1)
 
         y = df.loc[("empirical", slice(None)), label].values
+        ext = ""
+        if savgol:
+            y = savgol_filter(y, 5, 4)
+            ext = "-savgol"
+
         ax.plot(
             range(50), y, label="Observed", color=color_scheme[color]["blue_collar"]
         )
@@ -183,9 +187,21 @@ def plot_model_fit(df, color="color"):
         y = df.loc[("simulated", slice(None)), label].values
         ax.plot(range(50), y, label="Simulated", color=color_scheme[color]["school"])
 
-        ax.legend()
+        ax.legend(loc="upper left")
 
-        fname = f"fig-model-fit-{label}{color_scheme[color]['extension']}"
+        if label == "blue_collar":
+            ax.set_ylim(0, 0.5)
+            ax.set_ylabel("Share blue collar")
+
+        if label == "mean":
+            ax.set_ylim(5_000, 30_000)
+            ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+            ax.get_yaxis().set_major_formatter(
+                plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
+            )
+
+
+        fname = f"fig-model-fit-{label}{ext}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
 
 
@@ -225,7 +241,8 @@ for col_scheme in ["color", "bw"]:
     plot_wage_moments(df_descriptives, savgol=False, color=col_scheme)
 
     # We than combine the descriptives from the observed and simulated data.
-    plot_model_fit(df_descriptives, color=col_scheme)
+    plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
+    plot_model_fit(df_descriptives, savgol=False, color=col_scheme)
 
 # We plot the counterfactual predictions of the model.
 df_exploration = pd.read_pickle("model-exploration.pkl")
