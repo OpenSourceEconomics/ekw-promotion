@@ -3,8 +3,8 @@
 This module creates all figures for the handout. They are all used in the illustrative example.
 
 """
-import shutil
-import glob
+# import shutil
+# import glob
 
 from pathlib import Path
 import os
@@ -18,6 +18,7 @@ import pandas as pd
 import matplotlib as mpl
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
+
 
 def make_grayscale_cmap(cmap):
     """Return a grayscale version of given colormap.
@@ -94,7 +95,9 @@ def plot_decisions_by_age(df, color="color"):
 
     shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
 
-    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1])
+    shares.plot.bar(
+        stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
+    )
 
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
@@ -145,33 +148,24 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 
 
 def plot_mechanism_time(deltas, levels, color="color"):
-    for color in color_opts:
 
-        fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots(1, 1)
 
-        if color == "black-white":
-            ax.fill_between(
-                deltas, levels, color=spec_dict[color]["colors"][1],
-            )
-        else:
-            ax.fill_between(deltas, levels)
+    print("COLOR", color)
+    print("COLOR_SCHEME", color_scheme[color]["blue_collar"])
 
-        ax.yaxis.get_major_ticks()[0].set_visible(False)
-        ax.set_ylabel("Average final schooling")
-        ax.set_ylim([10, 19])
+    ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
 
-        ax.set_xlabel(r"$\delta$")
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
+    ax.set_ylabel("Average final schooling")
+    ax.set_ylim([10, 19])
 
-        if color == "black-white":
-            fig.savefig("fig-economic-mechanisms-bw")
-        else:
-            fig.savefig("fig-economic-mechanisms")
+    ax.set_xlabel(r"$\delta$")
+
+    fig.savefig(f"fig-economic-mechanisms{color_scheme[color]['extension']}")
 
 
-
-
-
-def plot_model_fit(df):
+def plot_model_fit(df, color="color"):
     # TODO: Add filter feature.
 
     for label in ["blue_collar", "mean"]:
@@ -179,14 +173,16 @@ def plot_model_fit(df):
         fig, ax = plt.subplots(1, 1)
 
         y = df.loc[("empirical", slice(None)), label].values
-        ax.plot(range(50), y, label="Observed")
+        ax.plot(
+            range(50), y, label="Observed", color=color_scheme[color]["blue_collar"]
+        )
 
         y = df.loc[("simulated", slice(None)), label].values
-        ax.plot(range(50), y, label="Simulated")
+        ax.plot(range(50), y, label="Simulated", color=color_scheme[color]["school"])
 
         ax.legend()
 
-        fname = f"fig-model-fit-{label}"
+        fname = f"fig-model-fit-{label}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
 
 
@@ -210,10 +206,9 @@ color_scheme = {
         "extension": "",
     },
 }
+
 # Ordering OSE convention: blue-collar, white-collar, military, school, home
 labels = ["blue_collar", "white_collar", "military", "school", "home"]
-
-
 
 # We plot the model fit in and out of the support.
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
@@ -226,6 +221,7 @@ plot_wage_moments(df_descriptives)
 
 # We than combine the descriptives from the observed and simulated data.
 plot_model_fit(df_descriptives)
+plot_model_fit(df_descriptives, "bw")
 
 # We plot the counterfactual predictions of the model.
 df_exploration = pd.read_pickle("model-exploration.pkl")
@@ -242,9 +238,10 @@ deltas = (
 )
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_time(deltas, levels)
+plot_mechanism_time(deltas, levels, "bw")
 
-# TODO: We need all figures as bw version, this is just to prototype workflow.
-for fname in glob.glob("*.png"):
-    if "bw" in fname:
-        continue
-    shutil.copy(fname, fname.replace(".png", "-bw.png"))
+# # TODO: We need all figures as bw version, this is just to prototype workflow.
+# for fname in glob.glob("*.png"):
+#     if "bw" in fname:
+#         continue
+#     shutil.copy(fname, fname.replace(".png", "-bw.png"))
