@@ -3,20 +3,17 @@
 This module creates all figures for the handout. They are all used in the illustrative example.
 
 """
-# import shutil
-# import glob
-
-from pathlib import Path
 import os
 import colorsys
-import matplotlib.colors as mc
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from scipy.signal import savgol_filter
-
 import matplotlib as mpl
+import matplotlib.colors as mc
+import matplotlib.pyplot as plt
+
+from pathlib import Path
+from scipy.signal import savgol_filter
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
@@ -123,7 +120,7 @@ def plot_wage_moments(df, savgol=False, color="colors"):
     y = df.loc[("empirical", slice(None)), "mean"].values
     ext = ""
     if savgol:
-        y =  savgol_filter(y, 7, 3)
+        y = savgol_filter(y, 7, 3)
         ext = "-savgol"
     ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
 
@@ -246,9 +243,3 @@ deltas = (
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_time(deltas, levels)
 plot_mechanism_time(deltas, levels, "bw")
-
-# # TODO: We need all figures as bw version, this is just to prototype workflow.
-# for fname in glob.glob("*.png"):
-#     if "bw" in fname:
-#         continue
-#     shutil.copy(fname, fname.replace(".png", "-bw.png"))
