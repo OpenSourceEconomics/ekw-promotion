@@ -3,6 +3,9 @@
 This module creates all figures for the handout. They are all used in the illustrative example.
 
 """
+import shutil
+import glob
+
 from pathlib import Path
 import os
 import colorsys
@@ -86,7 +89,7 @@ def plot_decisions_by_age(df):
         ncol=5,
     )
 
-    plt.savefig("fig-observed-decisions-age")
+    plt.savefig("fig-data-choices")
 
 
 def plot_wage_moments(df, savgol=True):
@@ -179,7 +182,7 @@ def plot_wage_moments(df, savgol=True):
             plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
         )
 
-        fig.savefig(f"{label_moment}-wages.png")
+        fig.savefig(f"fig-data-wages-{moment}")
 
 
 def plot_mechanism_subsidy(subsidies, levels):
@@ -259,6 +262,24 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
+def plot_model_fit(df):
+
+    for label in ["blue_collar", "mean"]:
+
+        fig, ax = plt.subplots(1, 1)
+
+        y = df.loc[("empirical", slice(None)), label].values
+        ax.plot(range(50), y, label="Observed")
+
+        y = df.loc[("simulated", slice(None)), label].values
+        ax.plot(range(50), y, label="Simulated")
+
+        ax.legend()
+
+        fname = f"fig-model-fit-{label}"
+        fig.savefig(fname.replace("_", "-"))
+
+
 _, _, df_emp = rp.get_example_model("kw_97_extended")
 df_emp["Age"] = df_emp.index.get_level_values(1) + 16
 
@@ -276,3 +297,12 @@ df = pd.read_pickle("mechanisms-time.pkl")
 deltas = df.index.to_numpy(dtype=np.float)
 levels = df.loc[:, "Level"].to_numpy(dtype=np.float)
 plot_mechanism_time(deltas, levels)
+
+plot_model_fit(df_descriptives)
+
+# We need all figures as bw version, this is just to prototype workflow.
+for fname in glob.glob("*.png"):
+    if "bw" in fname:
+        continue
+
+    shutil.copy(fname, fname.replace(".png", "-bw.png"))

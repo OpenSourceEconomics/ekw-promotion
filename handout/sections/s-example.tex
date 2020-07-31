@@ -89,8 +89,8 @@ h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
 %
 \begin{figure}[h!]\centering
 \caption{Data overview}\label{Overview}
-\subfloat[Choices]{\scalebox{0.25}{\includegraphics{material/fig-observed-data-choices-bw-TMP}}}\hspace{0.3cm}
-\subfloat[Wages]{\scalebox{0.25}{\includegraphics{material/fig-observed-wage-mean-bw-TMP}}}
+\subfloat[Choices]{\scalebox{0.25}{\includegraphics{material/fig-data-choices-bw}}}\hspace{0.3cm}
+\subfloat[Wages]{\scalebox{0.25}{\includegraphics{material/fig-data-wages-mean-bw}}}
 \begin{center}
 \begin{minipage}[t]{0.80\columnwidth}
 \item \scriptsize{\textbf{Notes:} The wage is a full-time equivalent deflated by the gross national product deflator, with 1987 as the base year. We apply a Savitzky-Golay filter \citep{Savitzky.1964} to smooth the wage functions. We do not report wages if fewer than ten observations.}
@@ -103,16 +103,22 @@ The average wages in the blue-collar occupation are initially highest with about
 
 \paragraph{Calibration} The model is calibrated using maximum likelihood Estimation.
 
+\begin{figure}[h!]\centering
+\caption{Model fit}\label{Economic mechanism and policy forecast}
+\subfloat[Choice]{\scalebox{0.25}{\includegraphics{material/fig-model-fit-blue-collar-bw}}}\hspace{0.3cm}
+\subfloat[Wages]{\scalebox{0.25}{\includegraphics{material/fig-model-fit-mean-bw.png}}}
+\end{figure}\FloatBarrier
+
 The model reproduces the basic patterns in the data well.
 
 
 Figure \ref{Economic mechanism and policy forecast} illustrates the ability of the model to quantify the impact of economic mechanisms and to forecast the effect of public policies. On the left, we vary the discount factor capturing time preferences between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to $\$1,500$ on the right. In both cases, we are interested in the changes to average final schooling.
 
-%\begin{figure}[h!]\centering
-%\caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
-%\subfloat[Time preference]{\scalebox{0.25}{\includegraphics{fig-economic-mechanisms-bw}}}\hspace{0.3cm}
-%\subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{fig-policy-forecast-bw}}}
-%\end{figure}\FloatBarrier
+\begin{figure}[h!]\centering
+\caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
+\subfloat[Time preference]{\scalebox{0.25}{\includegraphics{material/fig-economic-mechanisms-bw}}}\hspace{0.3cm}
+\subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{material/fig-policy-forecast-bw}}}
+\end{figure}\FloatBarrier
 
 \noindent Increases in the discount factor and the tuition subsidy both result in higher average final schooling. However, they do so for very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction of its immediate cost in the latter.
 %-------------------------------------------------------------------------------
