@@ -17,30 +17,62 @@ import pandas as pd
 
 import matplotlib as mpl
 
-color_opts = ["colored", "black-white"]
-jet_color_map = [
-    "#1f77b4",
-    "#ff7f0e",
-    "#2ca02c",
-    "#d62728",
-    "#9467bd",
-    "#8c564b",
-    "#e377c2",
-    "#7f7f7f",
-    "#bcbd22",
-    "#17becf",
-]
-spec_dict = {
-    "colored": {"colors": [None] * 4, "line": ["-"] * 3, "hatch": [""] * 3, "file": ""},
-    "black-white": {
-        "colors": ["#CCCCCC", "#808080", "k"],
-        "line": ["-", "--", ":"],
-        "hatch": ["", "OOO", "///"],
-        "file": "-sw",
-    },
-}
-
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
+
+def make_grayscale_cmap(cmap):
+    """Return a grayscale version of given colormap.
+
+    Parameters:
+    -----------
+    cmap: matplotlib.colors.LinearSegmentedColormap
+        Matplotlib color map (see
+        https://matplotlib.org/tutorials/colors/colormaps.html for available
+        color maps).
+
+    Returns:
+    --------
+    cmap: 'matplotlib.colors.LinearSegmentedColormap
+        Grayscale version color map of the given non-grayscale color map.
+
+    """
+
+    cmap = plt.cm.get_cmap(cmap)
+    colors = cmap(np.arange(cmap.N))
+
+    # Conversion of RGBA to grayscale lum by RGB_weight
+    # RGB_weight given by http://alienryderflex.com/hsp.html
+    RGB_weight = [0.299, 0.587, 0.114]
+    lum = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
+    colors[:, :3] = lum[:, np.newaxis]
+
+    return cmap.from_list(cmap.name + "_grayscale", colors, cmap.N)
+
+
+def make_color_lighter(color, amount=0.5):
+    """Returns a brightened (darkened) color.
+
+    Parameters:
+    -----------
+    color: matplotlib color string, hex string, RGB tuple
+        Name of color that will be brightened.
+
+    amount: positive float
+        Amount the color should be brightened (<1) or darkened (>1).
+
+    Returns:
+    --------
+    _color: matplotlib color string, hex string, RGB tuple
+        Brightened-up color (same format).
+
+    """
+
+    try:
+        _color = mc.cnames[color]
+    except Exception:
+        _color = color
+    _color = colorsys.rgb_to_hls(*mc.to_rgb(_color))
+
+    return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
 def plot_decisions_by_age(df):
@@ -151,31 +183,7 @@ def plot_mechanism_time(deltas, levels):
             fig.savefig("fig-economic-mechanisms")
 
 
-def make_color_lighter(color, amount=0.5):
-    """Returns a brightened (darkened) color.
 
-    Parameters:
-    -----------
-    color: matplotlib color string, hex string, RGB tuple
-        Name of color that will be brightened.
-
-    amount: positive float
-        Amount the color should be brightened (<1) or darkened (>1).
-
-    Returns:
-    --------
-    _color: matplotlib color string, hex string, RGB tuple
-        Brightened-up color (same format).
-
-    """
-
-    try:
-        _color = mc.cnames[color]
-    except Exception:
-        _color = color
-    _color = colorsys.rgb_to_hls(*mc.to_rgb(_color))
-
-    return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
 def plot_model_fit(df):
