@@ -14,6 +14,7 @@ import matplotlib.colors as mc
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.signal import savgol_filter
 
 import matplotlib as mpl
 
@@ -115,17 +116,25 @@ def plot_decisions_by_age(df, color="color"):
     plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
 
 
-def plot_wage_moments(df, savgol=True):
+def plot_wage_moments(df, savgol=False, color="colors"):
 
-    # TODO: Add filter feature.
     fig, ax = plt.subplots()
 
     y = df.loc[("empirical", slice(None)), "mean"].values
-    ax.plot(y, label="Mean")
+    ext = ""
+    if savgol:
+        y =  savgol_filter(y, 7, 3)
+        ext = "-savgol"
+    ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
 
     ax.legend()
 
-    fig.savefig("fig-data-wages-mean")
+    ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+    ax.get_yaxis().set_major_formatter(
+        plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
+    )
+
+    fig.savefig(f"fig-data-wages-mean{ext}{color_scheme[color]['extension']}")
 
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
@@ -150,9 +159,6 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 def plot_mechanism_time(deltas, levels, color="color"):
 
     fig, ax = plt.subplots(1, 1)
-
-    print("COLOR", color)
-    print("COLOR_SCHEME", color_scheme[color]["blue_collar"])
 
     ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
 
@@ -214,14 +220,15 @@ labels = ["blue_collar", "white_collar", "military", "school", "home"]
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
 
 # We start with the observed data only.
-plot_decisions_by_age(df_descriptives)
-plot_decisions_by_age(df_descriptives, "bw")
+for col_scheme in ["color", "bw"]:
 
-plot_wage_moments(df_descriptives)
+    plot_decisions_by_age(df_descriptives, color=col_scheme)
 
-# We than combine the descriptives from the observed and simulated data.
-plot_model_fit(df_descriptives)
-plot_model_fit(df_descriptives, "bw")
+    plot_wage_moments(df_descriptives, savgol=True, color=col_scheme)
+    plot_wage_moments(df_descriptives, savgol=False, color=col_scheme)
+
+    # We than combine the descriptives from the observed and simulated data.
+    plot_model_fit(df_descriptives, color=col_scheme)
 
 # We plot the counterfactual predictions of the model.
 df_exploration = pd.read_pickle("model-exploration.pkl")
