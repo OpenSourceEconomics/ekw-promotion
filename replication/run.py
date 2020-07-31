@@ -89,7 +89,7 @@ def plot_decisions_by_age(df, color="color"):
         Figure saved as pdf file.
 
     """
-    
+
     fig, ax = plt.subplots()
 
     shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
@@ -125,33 +125,26 @@ def plot_wage_moments(df, savgol=True):
     fig.savefig("fig-data-wages-mean")
 
 
-def plot_mechanism_subsidy(subsidies, levels):
-    for color in color_opts:
+def plot_mechanism_subsidy(subsidies, levels, color="color"):
 
-        fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots(1, 1)
 
-        if color == "black-white":
-            ax.fill_between(
-                subsidies, levels, color=spec_dict[color]["colors"][1],
-            )
-        else:
-            ax.fill_between(subsidies, levels)
+    ax.fill_between(
+        subsidies, levels, color=color_scheme[color]["blue_collar"],
+    )
 
-        ax.yaxis.get_major_ticks()[0].set_visible(False)
-        ax.set_ylabel("Average final schooling")
-        ax.set_ylim([10, 19])
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
+    ax.set_ylabel("Average final schooling")
+    ax.set_ylim([10, 19])
 
-        ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
-        ax.set_xlabel("Tuition subsidy")
-        ax.set_xlim([None, 2000])
+    ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
+    ax.set_xlabel("Tuition subsidy")
+    ax.set_xlim([None, 2000])
 
-        if color == "black-white":
-            fig.savefig("fig-policy-forecast-bw")
-        else:
-            fig.savefig("fig-policy-forecast")
+    fig.savefig(f"fig-policy-forecast{color_scheme[color]['extension']}")
 
 
-def plot_mechanism_time(deltas, levels):
+def plot_mechanism_time(deltas, levels, color="color"):
     for color in color_opts:
 
         fig, ax = plt.subplots(1, 1)
@@ -228,6 +221,7 @@ df_descriptives = pd.read_pickle("data-descriptives.pkl")
 # We start with the observed data only.
 plot_decisions_by_age(df_descriptives)
 plot_decisions_by_age(df_descriptives, "bw")
+
 plot_wage_moments(df_descriptives)
 
 # We than combine the descriptives from the observed and simulated data.
@@ -241,6 +235,7 @@ subsidies = (
 )
 levels = df_exploration.loc[("subsidy", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_subsidy(subsidies, levels)
+plot_mechanism_subsidy(subsidies, levels, "bw")
 
 deltas = (
     df_exploration.loc["delta", :].index.get_level_values("Change").to_numpy(np.float)
