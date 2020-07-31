@@ -75,7 +75,7 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
-def plot_decisions_by_age(df):
+def plot_decisions_by_age(df, color="color"):
     """Plot decisions by age.
 
     Parameters:
@@ -89,20 +89,12 @@ def plot_decisions_by_age(df):
         Figure saved as pdf file.
 
     """
-
-    labels = ["blue_collar", "white_collar", "military", "school", "home"]
-    coloring = {
-        "blue_collar": "tab:blue",
-        "white_collar": "tab:red",
-        "military": "tab:purple",
-        "school": "tab:orange",
-        "home": "tab:green",
-    }
+    
     fig, ax = plt.subplots()
 
     shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
 
-    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(coloring.values()))
+    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1])
 
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
@@ -117,7 +109,7 @@ def plot_decisions_by_age(df):
         ncol=5,
     )
 
-    plt.savefig("fig-data-choices")
+    plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
 
 
 def plot_wage_moments(df, savgol=True):
@@ -205,11 +197,37 @@ def plot_model_fit(df):
         fig.savefig(fname.replace("_", "-"))
 
 
+# Define the color schemes for "color" and "bw"
+_cmap = make_grayscale_cmap("copper")
+color_scheme = {
+    "bw": {
+        "blue_collar": _cmap(0.29),
+        "white_collar": _cmap(0.16),
+        "military": _cmap(0.51),
+        "school": _cmap(0.93),
+        "home": _cmap(0.76),
+        "extension": "-bw",
+    },
+    "color": {
+        "blue_collar": "tab:blue",
+        "white_collar": "tab:red",
+        "military": "tab:purple",
+        "school": "tab:orange",
+        "home": "tab:green",
+        "extension": "",
+    },
+}
+# Ordering OSE convention: blue-collar, white-collar, military, school, home
+labels = ["blue_collar", "white_collar", "military", "school", "home"]
+
+
+
 # We plot the model fit in and out of the support.
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
 
 # We start with the observed data only.
 plot_decisions_by_age(df_descriptives)
+plot_decisions_by_age(df_descriptives, "bw")
 plot_wage_moments(df_descriptives)
 
 # We than combine the descriptives from the observed and simulated data.
