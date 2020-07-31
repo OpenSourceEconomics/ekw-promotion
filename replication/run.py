@@ -12,8 +12,33 @@ from scipy.signal import savgol_filter
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import respy as rp
 
 from itertools import compress
+import matplotlib as mpl
+
+color_opts = ["colored", "black-white"]
+jet_color_map = [
+    "#1f77b4",
+    "#ff7f0e",
+    "#2ca02c",
+    "#d62728",
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+    "#7f7f7f",
+    "#bcbd22",
+    "#17becf",
+]
+spec_dict = {
+    "colored": {"colors": [None] * 4, "line": ["-"] * 3, "hatch": [""] * 3, "file": ""},
+    "black-white": {
+        "colors": ["#CCCCCC", "#808080", "k"],
+        "line": ["-", "--", ":"],
+        "hatch": ["", "OOO", "///"],
+        "file": "-sw",
+    },
+}
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
@@ -157,6 +182,56 @@ def plot_wage_moments(df, savgol=True):
         fig.savefig(f"{label_moment}-wages.png")
 
 
+def plot_mechanism_subsidy(subsidies, levels):
+    for color in color_opts:
+
+        fig, ax = plt.subplots(1, 1)
+
+        if color == "black-white":
+            ax.fill_between(
+                subsidies, levels, color=spec_dict[color]["colors"][1],
+            )
+        else:
+            ax.fill_between(subsidies, levels)
+
+        ax.yaxis.get_major_ticks()[0].set_visible(False)
+        ax.set_ylabel("Average final schooling")
+        ax.set_ylim([10, 19])
+
+        ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
+        ax.set_xlabel("Tuition subsidy")
+        ax.set_xlim([None, 2000])
+
+        if color == "black-white":
+            fig.savefig("fig-policy-forecast-bw")
+        else:
+            fig.savefig("fig-policy-forecast")
+
+
+def plot_mechanism_time(deltas, levels):
+    for color in color_opts:
+
+        fig, ax = plt.subplots(1, 1)
+
+        if color == "black-white":
+            ax.fill_between(
+                deltas, levels, color=spec_dict[color]["colors"][1],
+            )
+        else:
+            ax.fill_between(deltas, levels)
+
+        ax.yaxis.get_major_ticks()[0].set_visible(False)
+        ax.set_ylabel("Average final schooling")
+        ax.set_ylim([10, 19])
+
+        ax.set_xlabel(r"$\delta$")
+
+        if color == "black-white":
+            fig.savefig("fig-economic-mechanisms-bw")
+        else:
+            fig.savefig("fig-economic-mechanisms")
+
+
 def make_color_lighter(color, amount=0.5):
     """Returns a brightened (darkened) color.
 
@@ -184,8 +259,20 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
-df = pd.read_pickle("data-empirical.pkl")
-df["Age"] = df.index.get_level_values(1) + 16
+_, _, df_emp = rp.get_example_model("kw_97_extended")
+df_emp["Age"] = df_emp.index.get_level_values(1) + 16
 
-plot_decisions_by_age(df)
-plot_wage_moments(df)
+plot_decisions_by_age(df_emp)
+plot_wage_moments(df_emp)
+
+df_descriptives = pd.read_pickle("data-descriptives.pkl")
+
+df = pd.read_pickle("mechanisms-subsidy.pkl")
+subsidies = df.index.to_numpy(dtype=np.float)
+levels = df.loc[:, "Level"].to_numpy(dtype=np.float)
+plot_mechanism_subsidy(subsidies, levels)
+
+df = pd.read_pickle("mechanisms-time.pkl")
+deltas = df.index.to_numpy(dtype=np.float)
+levels = df.loc[:, "Level"].to_numpy(dtype=np.float)
+plot_mechanism_time(deltas, levels)
