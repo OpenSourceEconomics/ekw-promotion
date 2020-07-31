@@ -75,19 +75,7 @@ def make_color_lighter(color, amount=0.5):
 
 
 def plot_decisions_by_age(df, color="color"):
-    """Plot decisions by age.
-
-    Parameters:
-    -----------
-    df: pd.DataFrame
-        Dataframe consisting of decision data.
-
-    Returns:
-    --------
-    savefig: pdf
-        Figure saved as pdf file.
-
-    """
+    """Share of individuals in each occupation at any period (age)."""
 
     fig, ax = plt.subplots()
 
@@ -97,11 +85,12 @@ def plot_decisions_by_age(df, color="color"):
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
     )
 
+    ax.set_xlabel("Period")
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
-    ax.yaxis.get_major_ticks()[0].set_visible(False)
 
     ax.set_ylabel("Share (in %)")
     ax.set_ylim(0, 100)
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
 
     ax.legend(
         labels=[label.split("_")[0].capitalize() for label in labels],
@@ -113,18 +102,19 @@ def plot_decisions_by_age(df, color="color"):
     plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
 
 
-def plot_wage_moments(df, savgol=False, color="colors"):
+def plot_mean_wage(df, savgol=False, color="colors"):
+    """Mean of wages at any period."""
 
     fig, ax = plt.subplots()
 
     y = df.loc[("empirical", slice(None)), "mean"].values
     ext = ""
     if savgol:
-        y = savgol_filter(y, 5, 3)
+        y = savgol_filter(y, 3, 2)
         ext = "-savgol"
     ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
 
-    #ax.legend()
+    ax.set_xlabel("Period")
 
     ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
     ax.get_yaxis().set_major_formatter(
@@ -135,6 +125,7 @@ def plot_wage_moments(df, savgol=False, color="colors"):
 
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
+    """Effect tuition subsidy on average final schooling."""
 
     fig, ax = plt.subplots(1, 1)
 
@@ -154,6 +145,7 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 
 
 def plot_mechanism_time(deltas, levels, color="color"):
+    """Effect time preferences on average final schooling."""
 
     fig, ax = plt.subplots(1, 1)
 
@@ -161,7 +153,7 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel("Average final schooling")
-    ax.set_ylim([10, 19])
+    ax.set_ylim([10, 12])
 
     ax.set_xlabel(r"$\delta$")
 
@@ -189,6 +181,8 @@ def plot_model_fit(df, savgol=False, color="color"):
 
         ax.legend(loc="upper left")
 
+        ax.set_xlabel("Period")
+
         if label == "blue_collar":
             ax.set_ylim(0, 0.5)
             ax.set_ylabel("Share blue collar")
@@ -199,7 +193,6 @@ def plot_model_fit(df, savgol=False, color="color"):
             ax.get_yaxis().set_major_formatter(
                 plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
             )
-
 
         fname = f"fig-model-fit-{label}{ext}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
@@ -237,8 +230,8 @@ for col_scheme in ["color", "bw"]:
 
     plot_decisions_by_age(df_descriptives, color=col_scheme)
 
-    plot_wage_moments(df_descriptives, savgol=True, color=col_scheme)
-    plot_wage_moments(df_descriptives, savgol=False, color=col_scheme)
+    plot_mean_wage(df_descriptives, savgol=True, color=col_scheme)
+    plot_mean_wage(df_descriptives, savgol=False, color=col_scheme)
 
     # We than combine the descriptives from the observed and simulated data.
     plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
