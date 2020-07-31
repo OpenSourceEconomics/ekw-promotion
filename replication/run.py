@@ -5,23 +5,17 @@ This module creates all figures for the handout. They are all used in the illust
 """
 from pathlib import Path
 import os
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mtick
-import seaborn as sns
-import numpy as np
-import pandas as pd
-from itertools import compress
 import colorsys
 import matplotlib.colors as mc
 from scipy.signal import savgol_filter
 
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 import numpy as np
-import respy as rp
 import pandas as pd
-PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
+
 from itertools import compress
+
+PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
 
 def plot_decisions_by_age(df):
@@ -49,7 +43,9 @@ def plot_decisions_by_age(df):
     }
     fig, ax = plt.subplots()
 
-    shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    shares = (
+        df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    )
     shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(coloring.values()))
 
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
@@ -66,6 +62,7 @@ def plot_decisions_by_age(df):
     )
 
     plt.savefig("fig-observed-decisions-age")
+
 
 def plot_wage_moments(df, savgol=True):
     """Plot mean and std of observed wages in blue, white, and military.
@@ -91,9 +88,15 @@ def plot_wage_moments(df, savgol=True):
 
     minimum_observations = 10
     wage_categories = ["blue_collar", "white_collar", "military"]
-    wage_colors = {"blue_collar": "tab:blue", "white_collar": "tab:red", "military": "tab:purple"}
+    wage_colors = {
+        "blue_collar": "tab:blue",
+        "white_collar": "tab:red",
+        "military": "tab:purple",
+    }
 
-    wage_moments = df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
+    wage_moments = (
+        df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
+    )
 
     for moment in ["mean", "std"]:
         fig, ax = plt.subplots()
@@ -108,9 +111,14 @@ def plot_wage_moments(df, savgol=True):
         for wc in wage_categories:
 
             sufficient_boolean = list(
-                *[df.groupby(["Age"]).Choice.value_counts().unstack()[wc] >= minimum_observations]
+                *[
+                    df.groupby(["Age"]).Choice.value_counts().unstack()[wc]
+                    >= minimum_observations
+                ]
             )
-            non_sufficient_index = [i for i, bool in enumerate(sufficient_boolean) if bool is False]
+            non_sufficient_index = [
+                i for i, bool in enumerate(sufficient_boolean) if bool is False
+            ]
             _wage_moments = list(wage_moments[moment][wc])
             sufficient_wage_moments = list(compress(_wage_moments, sufficient_boolean))
 
@@ -126,7 +134,9 @@ def plot_wage_moments(df, savgol=True):
             y_plot.index = list(wage_moments[moment].index)
 
             ax.plot(
-                y_plot, color=make_color_lighter(wage_colors[wc], color_scale), label=wc,
+                y_plot,
+                color=make_color_lighter(wage_colors[wc], color_scale),
+                label=wc,
             )
 
         ax.legend(
