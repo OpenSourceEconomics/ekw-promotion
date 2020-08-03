@@ -38,6 +38,7 @@ def calc_choice_frequencies(df, source):
 def calc_wage_distribution(df, source):
     """Compute choice frequencies."""
     df = df.groupby(["Period"])["Wage"].describe()[["mean", "std"]]
+    df.rename({"mean": "average"}, inplace=True)
     df["Data"] = source
     df.set_index(["Data"], append=True, inplace=True)
     df = df.reorder_levels(["Data", "Period"])
@@ -57,7 +58,7 @@ df_sim = simulate_func(params)
 # We store all needed descriptives about the simulated dataset.
 index = list(product(["empirical", "simulated"], range(50)))
 index = pd.MultiIndex.from_tuples(index, names=["Data", "Period"])
-columns = ["blue_collar", "home", "military", "white_collar", "school", "mean", "std"]
+columns = ["blue_collar", "home", "military", "white_collar", "school", "average", "std"]
 df_descriptives = pd.DataFrame(columns=columns, index=index)
 df_descriptives.head()
 

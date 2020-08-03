@@ -74,7 +74,7 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
-def plot_decisions_by_age(df, color="color"):
+def plot_decisions_by_age(df_descriptives, color="color"):
     """Share of individuals in each occupation at any period (age)."""
 
     fig, ax = plt.subplots()
@@ -85,7 +85,7 @@ def plot_decisions_by_age(df, color="color"):
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
     )
 
-    ax.set_xlabel("Period")
+    ax.set_xlabel("Age")
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 
     ax.set_ylabel("Share (in %)")
@@ -102,32 +102,37 @@ def plot_decisions_by_age(df, color="color"):
     plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
 
 
-def plot_mean_wage(df, savgol=False, color="colors"):
-    """Mean of wages at any period."""
+def plot_average_wage(df, savgol=False, color="colors"):
+    """Average of wages at any period."""
 
     fig, ax = plt.subplots()
 
-    y = df.loc[("empirical", slice(None)), "mean"].values
+    y = df.loc[("empirical", slice(10)), "average"].values
     ext = ""
     if savgol:
         y = savgol_filter(y, 3, 2)
         ext = "-savgol"
-    ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
 
-    ax.set_xlabel("Period")
+    ax.plot(range(11), y, color=color_scheme[color]["blue_collar"])
 
-    ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+    ax.set_ylim(5_000, 30_000)
+
+    ax.set_xlabel("Age")
+    ax.xaxis.set_ticks(range(11))
+    ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+
+    ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
     ax.get_yaxis().set_major_formatter(
         plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
     )
 
-    fig.savefig(f"fig-data-wages-mean{ext}{color_scheme[color]['extension']}")
+    fig.savefig(f"fig-data-wages-average{ext}{color_scheme[color]['extension']}")
 
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
     """Effect tuition subsidy on average final schooling."""
 
-    fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots()
 
     ax.fill_between(
         subsidies, levels, color=color_scheme[color]["blue_collar"],
@@ -147,7 +152,7 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 def plot_mechanism_time(deltas, levels, color="color"):
     """Effect time preferences on average final schooling."""
 
-    fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots()
 
     ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
 
@@ -162,34 +167,39 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
 def plot_model_fit(df, savgol=False, color="color"):
 
-    for label in ["blue_collar", "mean"]:
+    for label in ["blue_collar", "average"]:
 
-        fig, ax = plt.subplots(1, 1)
+        fig, ax = plt.subplots()
 
-        y = df.loc[("empirical", slice(None)), label].values
+        y = df.loc[("empirical", slice(10)), label].values
+        if label == "blue_collar":
+            y = y * 100
+
         ext = ""
         if savgol:
             y = savgol_filter(y, 5, 4)
             ext = "-savgol"
 
         ax.plot(
-            range(50), y, label="Observed", color=color_scheme[color]["blue_collar"]
+            range(11), y, label="Observed", color=color_scheme[color]["blue_collar"]
         )
 
-        y = df.loc[("simulated", slice(None)), label].values
-        ax.plot(range(50), y, label="Simulated", color=color_scheme[color]["school"])
+        y = df.loc[("simulated", slice(10)), label].values
+        ax.plot(range(11), y, label="Simulated", color=color_scheme[color]["school"])
 
         ax.legend(loc="upper left")
 
-        ax.set_xlabel("Period")
+        ax.set_xlabel("Age")
+        ax.xaxis.set_ticks(range(11))
+        ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 
         if label == "blue_collar":
-            ax.set_ylim(0, 0.5)
-            ax.set_ylabel("Share blue collar")
+            ax.set_ylabel("Share (in %)")
+            ax.set_ylim(0, 100)
 
-        if label == "mean":
+        if label == "average":
             ax.set_ylim(5_000, 30_000)
-            ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+            ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
             ax.get_yaxis().set_major_formatter(
                 plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
             )
@@ -230,8 +240,8 @@ for col_scheme in ["color", "bw"]:
 
     plot_decisions_by_age(df_descriptives, color=col_scheme)
 
-    plot_mean_wage(df_descriptives, savgol=True, color=col_scheme)
-    plot_mean_wage(df_descriptives, savgol=False, color=col_scheme)
+    plot_average_wage(df_descriptives, savgol=True, color=col_scheme)
+    plot_average_wage(df_descriptives, savgol=False, color=col_scheme)
 
     # We than combine the descriptives from the observed and simulated data.
     plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
