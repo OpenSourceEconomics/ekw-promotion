@@ -28,3 +28,4 @@ jobs:
         source .envrc
         update-repository
         create-content -a
+        pytest
