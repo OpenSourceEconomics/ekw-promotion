@@ -7,6 +7,9 @@
 .. image:: https://github.com/OpenSourceEconomics/ekw-promotion/workflows/Continuous%20Integration/badge.svg
   :target: https://github.com/OpenSourceEconomics/ekw-promotion/actions
 
+.. image:: material/code-style-black.svg
+  :target: https://github.com/psf/black
+
 .. image:: material/License-MIT.svg
   :target: https://opensource.org/licenses/MIT
 
