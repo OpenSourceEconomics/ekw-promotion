@@ -2,63 +2,119 @@
 %-------------------------------------------------------------------------------
 \section{Example}\label{Example}
 %-------------------------------------------------------------------------------
-We now analyze a canonical EKW model. We start with an outline and discussion of the occupational choice model presented in \citet{Keane.1994}. The model is deliberately simple, but already contains the core components required for serious research applications. We will parameterize it so that we can simulate a data set that mirrors the basic patterns often documented in actual data on observed individual decisions. We conclude by sketching its specification, simulation, and calibration using our group's research codes \verb+respy+ and \verb+estimagic+.
+We now turn to the exemplifying analysis of a canonical EKW model on human capital investment analyzed in \citet{Keane.1997}. This provides us with a well-known and empirically motivated setting. We first outline the basic setup, provide some descriptive statistics of the empirical data used for the calibration, and then explore the economic insights provided by the model.
 %-------------------------------------------------------------------------------
-\subsection{Keane \& Wolpin (1994)}
+\subsection{The career decisions of young men}
 %-------------------------------------------------------------------------------
-We study individuals over their working life for $T = 40$ years from age 16 to 55. Individuals can choose to either work in one of two occupations ($a_t = 1, 2$), attend school ($a_t = 3$), or stay at home ($a_t = 4$). Immediate rewards are determined as follows:
+%
+% What are core differences to Appendix given the target audience?
+%   * no references to econ papers,
+%   * need to explain sheep-skin effects
+%
+We follow individuals over their working life from young adulthood at age 16 to retirement at age 65. The decision period $t = 16, \dots, 65$  is a school year and individuals decide $a\in\mathcal{A}$ whether to work in a blue-collar or white-collar occupation ($a = 1, 2$), to serve in the military $(a = 3)$, to attend school $(a = 4)$, or to stay at home $(a = 5)$.\\
+
+\noindent Individuals are initially heterogeneous. They differ with respect to their initial level of completed schooling $h_1$ and have one of four different $\mathcal{J} = \{1, \hdots, 4\}$ alternative-specific skill endowments $\bm{e} = \left(e_{j,a}\right)_{\mathcal{J} \times \mathcal{A}}$.\\
+
+\noindent The per-period utility $u_a(\cdot)$ of each alternative consists of a non-pecuniary utility $\zeta_a(\cdot)$ and, at least for the working alternatives, an additional wage component $w_a(\cdot)$. Each of the components depends on the level of human capital as measured by their alternative-specific skill endowment $\bm{e}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. The per-period utility functions are also influenced by last-period choices $a_{t -1}$ and alternative-specific productivity shocks $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$. Throughout alternatives the general form of the per-period utility is given by:
 %
 \begin{align*}
-r_t(s_t, a_t) = \begin{cases} w_{1t} =
-\exp\{\alpha_{10} + \alpha_{11}g_t + \alpha_{12}e_{1t} + \alpha_{13}e^2_{1t} + \alpha_{14}e_{2t} + \alpha_{15}e^2_{2t} + \epsilon_{1t}\} & \text{if}\; a_t = 1 \\
-w_{2t} = \exp\{\alpha_{20} + \alpha_{21}g_t + \alpha_{22}e_{1t} + \alpha_{23}e^2_{1t} + \alpha_{24}e_{2t} + \alpha_{25}e^2_{2t} + \epsilon_{2t}\}& \text{if}\; a_t = 2 \\
-\beta_0 - \beta_1 \Ind[\,g_t \geq 12\,] - \beta_2\Ind[\,a_{t - 1} \neq 3\,] + \epsilon_{3t}& \text{if}\; a_t = 3 \\
-\gamma_0 + \epsilon_{4t}& \text{if}\; a_t = 4. \\
+u_a(\cdot) =
+\begin{cases}
+    \zeta_a(\bm{k_t}, h_t, t, a_{t -1})  + w_a(\bm{k_t}, h_t, t, a_{t -1}, e_{j, a}, \epsilon_{a,t})                & \text{if}\, a \in \{1, 2, 3\}  \\
+    \zeta_a(\bm{k_t}, h_t, t, a_{t-1}, e_{j,a}, \epsilon_{a,t})                                                  &  \text{if}\, a \in \{4, 5\}.
 \end{cases}
 \end{align*}
 %
-$g_t$ is the number of periods of schooling obtained by the beginning of period $t$, $e_{1t}$ and $e_{2t}$ are the number of periods that the individual worked in the two occupations respectively. The reward for each labor market alternative corresponds to its wage $(w_{1t}, w_{2t})$ and $\alpha_{1}$ and $\alpha_{2}$ are thus parameters associated with the wage functions. They capture the returns to schooling and occupation-specific human capital. Turning to the rewards from school attendance, $\beta_0$ is the consumption reward of schooling, $\beta_1$ is the post-secondary cost of schooling, and $\beta_2$ is an adjustment cost associated with returning to school after dropping out. The mean reward of the home alternative is denoted $\gamma_0$. The $\epsilon_{at}$'s are alternative-specific shocks to occupational productivity, the consumption value of schooling, and home time.\\
+\paragraph{Exemplary discussion} As an example, we only provide the exact specification for the per-period utility in the white collar occupation. All details are available in Appendix \ref{Computational implementation}.\\
 
-\noindent Given the structure of the reward functions and imposing that the shocks are not correlated across time, the state at time $t$ is $s_t = \{g_t,e_{1t},e_{2t},a_{t - 1},\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$.
-%
-The current stock of human capital is observable $\{g_t,e_{1t},e_{2t},a_{t - 1}\}$ to the individual and the economist. It evolves deterministically according to the following rules:
+\noindent The wage component $w_{a}(\cdot)$ is given by the product of the market-equilibrium rental price $r_{a}$ and an occupation-specific skill level $x_{a}(\cdot)$. The overall level of human capital determines the latter.
 %
 \begin{align*}
-    e_{1,t+1} &= e_{1t} + \Ind[\,a_t = 1\,] \\
-    e_{2,t+1} &= e_{2t} + \Ind[\,a_t = 2\,] \\
-    g_{t+1}   &= g_{t\phantom{2}}    +  \Ind[\,a_t = 3\,].
+w_{a}(\cdot) = r_{a} \, x_{a}(\cdot)
 \end{align*}
+%
+This specification leads to a standard logarithmic wage equation in which the constant term is the skill rental price $\ln(r_{a})$.\\
 
-\noindent The shocks $\{\epsilon_{1t},\epsilon_{2t},\epsilon_{3t},\epsilon_{4t}\}$ are only observable by the individual and evolve stochastically according to a joint normal distribution.\\
+\noindent The occupation-specific skill level $x_{a}(\cdot)$ is determined by a skill production function, which includes a deterministic component $\Gamma_a$ and a multiplicative stochastic productivity shock $\epsilon_{a,t}$.
+%
+\begin{align}
+    x_{a}(\bm{k_t}, h_t, t, a_{t-1}, e_{j, a}, \epsilon_{a,t}) & = \exp \big( \Gamma_{a}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,a}) \cdot \epsilon_{a,t} \big) \nonumber
+\end{align}
+%
+\noindent\textbf{White-collar} Equation (\ref{Skill-production function}) shows the parameterization of the deterministic component of the skill-production function.
+%
+\begin{align}\label{Skill-production function}
+    \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{j, 1}) = e_{j,1} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16]\\ \nonumber
+                                  & + \gamma_{1, 1} \cdot  k_{1,t} + \gamma_{1,2} \cdot  (k_{1,t})^2 + \gamma_{1,3} \cdot  \ind[k_{1,t} > 0] \\ \nonumber
+                                & + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\ \nonumber
+                                  & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} \nonumber
+\end{align}
+%
+\noindent Part of the skill-production function is linear in years of completed schooling $\beta_{1,1}$, quadratic in experience ($\gamma_{1,1}, \gamma_{1,2}$), and separable between the two of them. The skill production-function shows sheep-skin effects ($\beta_{1,2}, \beta_{1,3}$) that capture the effect of completing a degree in addition to just an additional year of education. Skill production depends on whether an individual worked in the same occupation at least once before $\gamma_{1,3}$, depends linearly on the age $\gamma_{1,4}$ and on being a minor $\gamma_{1,5}$. Work experience depreciates when working in a different occupation ($\gamma_{1,6}$) but is potentially transferable across occupations ($\gamma_{1,7}, \gamma_{1,8}$). \\
 
-\noindent \citet{Keane.1994} analyze three different parameterizations of the model, and we reproduce the second one for this example. Initially, individuals are identical and have no labor market experience $(e_{11} = e_{21} = 0)$ but ten years of schooling $(g_1 = 10)$. Different choices over the life cycle are then simply the cumulative effects of different shocks.\\
+\noindent Equation (\ref{Non-pecuniary benefits}) shows the parameterization of the non-pecuniary utility from working in a white-collar occupation.
+%
+\begin{align}\label{Non-pecuniary benefits}
+\zeta_{1}(\bm{k_t}, h_t, a_{t-1})  = \alpha_1  &+ c_{1,1} \cdot \ind[a_{t-1} \neq 1] + c_{1,2} \cdot \ind[k_{1,t} = 0] \\ \nonumber
+                            & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1]
+\end{align}
+%
+A constant $\alpha_1$ captures the net monetary-equivalent of on the job amenities. The non-pecuniary utility includes mobility and search costs $(c_{1,1}, c_{1,2})$ that capture the effort cost of finding a job in different occupation. The non-pecuniary components capture returns from a high school degree $\vartheta_1$ and a college degree $\vartheta_2$. Additionally, there is a detrimental effect of leaving the military early, i.e., after one year $\vartheta_3$.
+%
+\paragraph{Wrapping up} Work experience $\bm{k_t}$  and years of completed schooling $h_t$ evolve deterministically.
+%
+\begin{align*}
+k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
+h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
+\end{align*}
+%
+\noindent The productivity shocks are uncorrelated across time and follow a multivariate normal distribution $\mathcal{N}$ with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$. Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k_t}, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon_t}\}$.
+%-------------------------------------------------------------------------------
+\subsection{Empirical data}
+%-------------------------------------------------------------------------------
+\paragraph{Data} We analyze the original dataset used by \citet{Keane.1997} and thus only provide a rough description here.\footnote{We provide additional details in Appendix \ref{Empirical data}.} \citet{Keane.1997} construct their sample based on the National Longitudinal Survey of Youth 1979 (NLSY79). The NLSY79 is a nationally representative sample of young men and women living in the United States in 1979 and born between 1957 and 1964. Individuals were followed from 1979 onwards and repeatedly interviewed about their educational decisions and labor market experiences. Based on this information, individuals are assigned to either working in one of the three occupations, attending school, or simply staying at home.
 
-\noindent One year of additional schooling increases wages by only 4\% in the first occupation compared to 8\% in the second. We will thus refer to the former as blue-collar and the latter as white-collar going forward. Starting wages are considerably lower in the white-collar sector, but wages increase more rapidly with occupation-specific experience compared to blue-collar wages. Own-work experience is highly valuable in both occupations. However, while white-collar wages increase with blue-collar experience as well, the opposite is not true. There is a consumption value of schooling of \$5,000, but the total cost of pursuing post-secondary education is considerable and amounts to \$5,000. Once leaving school, individuals incur a nearly prohibitive cost of \$15,000 for re-enrolling. Individuals are forward-looking with a discount factor $\delta$ of 0.95.\\
+\paragraph{Descriptives} Figure \ref{Overview} summarizes our information about choices and wages by age. We show the distribution of choices on the left, and report average wages by occupation on the right. Initially, roughly 86\% of individuals are enrolled in school, but this share steadily declines with age. Nevertheless, about 39\% obtain more than a high school degree and continue their education for more than twelve years. As individuals leave school, most of them initially pursue a blue-collar occupation. But the relative share of the white-collar occupation increases as individuals entering the labor market later have higher levels of schooling. At age 26, about 48\% work in a white-collar occupation and 34\% in a blue-collar occupation. The share of individuals in the military peaks around age 20 with 8 \%. At its maximum around age 18, approximately 20\% of individuals stay at home.
+%
+\begin{figure}[h!]\centering
+\caption{Data overview}\label{Overview}
+\subfloat[Choices]{\scalebox{0.25}{\includegraphics{material/fig-data-choices-bw}}}\hspace{0.3cm}
+\subfloat[Average wage]{\scalebox{0.25}{\includegraphics{material/fig-data-wages-average-bw}}}
+\begin{center}
+\begin{minipage}[t]{0.80\columnwidth}
+\item \scriptsize{\textbf{Notes:} The wage is a full-time equivalent deflated by the gross national product deflator, with 1987 as the base year. We apply a Savitzky-Golay filter \citep{Savitzky.1964} to smooth the wage functions. We do not report wages if fewer than ten observations.}
+\end{minipage}
+\end{center}
+\end{figure}\FloatBarrier
+%
+\noindent Overall average wages start out with about \$ 10,000 at age 16 but increase considerably up to about \$ 25,000 at age 26. While wages in the blue-collar occupation are initially highest with about \$ 10,286, while wages in the white-collar occupation and military start around \$ 9,000. However, wages in the white-collar occupation increase steeper over time and overtake blue-collar wages around age 21. At the end of the observation period, wages in the white-collar occupation are about 50\% higher compared to blue-collar wages with \$ 32,756 as opposed to only \$ 20,739. Military wages remain lowest throughout.
 
-\noindent We simulate the life cycle histories of 1,000 individuals. Figure \ref{Choices over the life cycle} shows the share of individuals choosing each of the four alternatives by period. Initially, roughly 60\% of individuals enroll in school, but this share declines rapidly, and only 19\% attain any post-secondary education. Right away, about 30\% of individuals are working in the blue-collar occupation.  Blue-collar employment initially increases even further to peak at 65\% as individuals are leaving school and entering the labor market. White-collar employment steadily rises over the life cycle but never reaches more than 40\%. About 5\% of individuals stay at home each period.
+\paragraph{Calibration} The model is calibrated using maximum likelihood estimation. Figure \ref{Model fit} shows overall agreement between the empirical data and a dataset simulated using the results from the calibration within the support of the data by age. On the left we show the choice probability by for working in a blue-collar occupation, while we plot the average wages on the right.
 
-\begin{figure}[ht!]\centering
-\caption{Choices over the life cycle}\label{Choices over the life cycle}
-\scalebox{0.35}{\includegraphics{fig-observed-choices-bw}}
+\begin{figure}[h!]\centering
+\caption{Model fit}\label{Model fit}
+\subfloat[Blue-collar]{\scalebox{0.25}{\includegraphics{material/fig-model-fit-blue-collar-bw}}}\hspace{0.3cm}
+\subfloat[Average wage]{\scalebox{0.25}{\includegraphics{material/fig-model-fit-average-bw}}}
 \end{figure}\FloatBarrier
 
-\noindent Overall, average final schooling is slightly above a high school degree with 12.5 years. Individuals choose to incur the immediate costs of their schooling investments in the form of tuition and foregone wages right at the start. Doing so maximizes their ability to reap the reward of increased wages over the remaining time periods.\\
-
-\noindent Figure \ref{Economic mechanism and policy forecast} illustrates the ability of the model to quantify the impact of economic mechanisms and to forecast the effect of public policies. On the left, we vary the discount factor capturing time preferences between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to $\$1,500$ on the right. In both cases, we are interested in the changes to average final schooling.
+%-------------------------------------------------------------------------------
+\subsection{Insights}
+%-------------------------------------------------------------------------------
+Figure \ref{Economic mechanism and policy forecast} illustrates the ability of the model to quantify the impact of economic mechanisms and to forecast the effect of public policies. On the left, we vary the discount factor capturing time preferences between $0.945$ and $0.955$ while we reduce $\beta_1$ by the size of a tuition subsidy of up to $\$1,500$ on the right. In both cases, we are interested in the changes to average final schooling.
 
 \begin{figure}[h!]\centering
 \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
-\subfloat[Time preference]{\scalebox{0.25}{\includegraphics{fig-economic-mechanisms-bw}}}\hspace{0.3cm}
-\subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{fig-policy-forecast-bw}}}
+\subfloat[Time preference]{\scalebox{0.25}{\includegraphics{material/fig-economic-mechanisms-bw}}}\hspace{0.3cm}
+\subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{material/fig-policy-forecast-bw}}}
 \end{figure}\FloatBarrier
 
 \noindent Increases in the discount factor and the tuition subsidy both result in higher average final schooling. However, they do so for very different reasons. While individuals put more emphasis on the future benefits of their schooling investment in the former, they react to a reduction of its immediate cost in the latter.
 %-------------------------------------------------------------------------------
-\subsection{\texttt{respy} and \texttt{estimagic}}
+\section{Analysis pipeline}
 %-------------------------------------------------------------------------------
 Our research group is actively developing two research codes that allow analyzing EKW models. \verb+respy+ allows for their flexible specification and simulation, and \verb+estimagic+ provides the infrastructure for their calibration. We briefly showcase the typical workflow of using both packages in our research.\\
 
-\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the observed data, the parameterization of the model, and other options to \verb+respy+. All together define the structure of the model, and we can construct the functionality for the simulation of data and the evaluation of the criterion function. \verb+estimagic+ allows calibrating the model to the observed data. The results from the calibration steps are used to, for example, analyze the economic mechanisms underlying the observed behaviors.
+\noindent Figure \ref{Typical workflow} illustrates a typical workflow. Initially, the user provides the empirical data, the parameterization of the model, and other options to \verb+respy+. All together define the structure of the model, and we can construct the functionality for the simulation of data and the evaluation of the criterion function. \verb+estimagic+ allows calibrating the model to the empirical data. The results from the calibration steps are used to, for example, analyze the economic mechanisms underlying the observed behaviors.
 
 \begin{figure}[ht!]\centering
 \caption{Typical workflow}\label{Typical workflow}
