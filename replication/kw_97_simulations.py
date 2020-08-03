@@ -58,7 +58,15 @@ df_sim = simulate_func(params)
 # We store all needed descriptives about the simulated dataset.
 index = list(product(["empirical", "simulated"], range(50)))
 index = pd.MultiIndex.from_tuples(index, names=["Data", "Period"])
-columns = ["blue_collar", "home", "military", "white_collar", "school", "average", "std"]
+columns = [
+    "blue_collar",
+    "home",
+    "military",
+    "white_collar",
+    "school",
+    "average",
+    "std",
+]
 df_descriptives = pd.DataFrame(columns=columns, index=index)
 df_descriptives.head()
 
