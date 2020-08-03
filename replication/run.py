@@ -3,152 +3,48 @@
 This module creates all figures for the handout. They are all used in the illustrative example.
 
 """
-import shutil
-import glob
-
-from pathlib import Path
 import os
 import colorsys
-import matplotlib.colors as mc
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 import matplotlib as mpl
+import matplotlib.colors as mc
+import matplotlib.pyplot as plt
 
-color_opts = ["colored", "black-white"]
-jet_color_map = [
-    "#1f77b4",
-    "#ff7f0e",
-    "#2ca02c",
-    "#d62728",
-    "#9467bd",
-    "#8c564b",
-    "#e377c2",
-    "#7f7f7f",
-    "#bcbd22",
-    "#17becf",
-]
-spec_dict = {
-    "colored": {"colors": [None] * 4, "line": ["-"] * 3, "hatch": [""] * 3, "file": ""},
-    "black-white": {
-        "colors": ["#CCCCCC", "#808080", "k"],
-        "line": ["-", "--", ":"],
-        "hatch": ["", "OOO", "///"],
-        "file": "-sw",
-    },
-}
+from pathlib import Path
+from scipy.signal import savgol_filter
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
 
-def plot_decisions_by_age(df):
-    """Plot decisions by age.
+def make_grayscale_cmap(cmap):
+    """Return a grayscale version of given colormap.
 
     Parameters:
     -----------
-    df: pd.DataFrame
-        Dataframe consisting of decision data.
+    cmap: matplotlib.colors.LinearSegmentedColormap
+        Matplotlib color map (see
+        https://matplotlib.org/tutorials/colors/colormaps.html for available
+        color maps).
 
     Returns:
     --------
-    savefig: pdf
-        Figure saved as pdf file.
+    cmap: 'matplotlib.colors.LinearSegmentedColormap
+        Grayscale version color map of the given non-grayscale color map.
 
     """
 
-    labels = ["blue_collar", "white_collar", "military", "school", "home"]
-    coloring = {
-        "blue_collar": "tab:blue",
-        "white_collar": "tab:red",
-        "military": "tab:purple",
-        "school": "tab:orange",
-        "home": "tab:green",
-    }
-    fig, ax = plt.subplots()
+    cmap = plt.cm.get_cmap(cmap)
+    colors = cmap(np.arange(cmap.N))
 
-    shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
+    # Conversion of RGBA to grayscale lum by RGB_weight
+    # RGB_weight given by http://alienryderflex.com/hsp.html
+    RGB_weight = [0.299, 0.587, 0.114]
+    lum = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
+    colors[:, :3] = lum[:, np.newaxis]
 
-    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(coloring.values()))
-
-    ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
-    ax.yaxis.get_major_ticks()[0].set_visible(False)
-
-    ax.set_ylabel("Share (in %)")
-    ax.set_ylim(0, 100)
-
-    ax.legend(
-        labels=[label.split("_")[0].capitalize() for label in labels],
-        loc="lower center",
-        bbox_to_anchor=(0.5, 1.04),
-        ncol=5,
-    )
-
-    plt.savefig("fig-data-choices")
-
-
-def plot_wage_moments(df, savgol=True):
-
-    # TODO: Add filter feature.
-    fig, ax = plt.subplots()
-
-    y = df.loc[("empirical", slice(None)), "mean"].values
-    ax.plot(y, label="Mean")
-
-    ax.legend()
-
-    fig.savefig("fig-data-wages-mean")
-
-
-def plot_mechanism_subsidy(subsidies, levels):
-    for color in color_opts:
-
-        fig, ax = plt.subplots(1, 1)
-
-        if color == "black-white":
-            ax.fill_between(
-                subsidies, levels, color=spec_dict[color]["colors"][1],
-            )
-        else:
-            ax.fill_between(subsidies, levels)
-
-        ax.yaxis.get_major_ticks()[0].set_visible(False)
-        ax.set_ylabel("Average final schooling")
-        ax.set_ylim([10, 19])
-
-        ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
-        ax.set_xlabel("Tuition subsidy")
-        ax.set_xlim([None, 2000])
-
-        if color == "black-white":
-            fig.savefig("fig-policy-forecast-bw")
-        else:
-            fig.savefig("fig-policy-forecast")
-
-
-def plot_mechanism_time(deltas, levels):
-    for color in color_opts:
-
-        fig, ax = plt.subplots(1, 1)
-
-        if color == "black-white":
-            ax.fill_between(
-                deltas, levels, color=spec_dict[color]["colors"][1],
-            )
-        else:
-            ax.fill_between(deltas, levels)
-
-        ax.yaxis.get_major_ticks()[0].set_visible(False)
-        ax.set_ylabel("Average final schooling")
-        ax.set_ylim([10, 19])
-
-        ax.set_xlabel(r"$\delta$")
-
-        if color == "black-white":
-            fig.savefig("fig-economic-mechanisms-bw")
-        else:
-            fig.savefig("fig-economic-mechanisms")
+    return cmap.from_list(cmap.name + "_grayscale", colors, cmap.N)
 
 
 def make_color_lighter(color, amount=0.5):
@@ -178,34 +74,168 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
-def plot_model_fit(df):
-    # TODO: Add filter feature.
+def plot_decisions_by_age(df, color="color"):
+    """Share of individuals in each occupation at any period (age)."""
+
+    fig, ax = plt.subplots()
+
+    shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
+
+    shares.plot.bar(
+        stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
+    )
+
+    ax.set_xlabel("Period")
+    ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+
+    ax.set_ylabel("Share (in %)")
+    ax.set_ylim(0, 100)
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
+
+    ax.legend(
+        labels=[label.split("_")[0].capitalize() for label in labels],
+        loc="lower center",
+        bbox_to_anchor=(0.5, 1.04),
+        ncol=5,
+    )
+
+    plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
+
+
+def plot_mean_wage(df, savgol=False, color="colors"):
+    """Mean of wages at any period."""
+
+    fig, ax = plt.subplots()
+
+    y = df.loc[("empirical", slice(None)), "mean"].values
+    ext = ""
+    if savgol:
+        y = savgol_filter(y, 3, 2)
+        ext = "-savgol"
+    ax.plot(y, label="Mean", color=color_scheme[color]["blue_collar"])
+
+    ax.set_xlabel("Period")
+
+    ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+    ax.get_yaxis().set_major_formatter(
+        plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
+    )
+
+    fig.savefig(f"fig-data-wages-mean{ext}{color_scheme[color]['extension']}")
+
+
+def plot_mechanism_subsidy(subsidies, levels, color="color"):
+    """Effect tuition subsidy on average final schooling."""
+
+    fig, ax = plt.subplots(1, 1)
+
+    ax.fill_between(
+        subsidies, levels, color=color_scheme[color]["blue_collar"],
+    )
+
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
+    ax.set_ylabel("Average final schooling")
+    ax.set_ylim([10, 19])
+
+    ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
+    ax.set_xlabel("Tuition subsidy")
+    ax.set_xlim([None, 2000])
+
+    fig.savefig(f"fig-policy-forecast{color_scheme[color]['extension']}")
+
+
+def plot_mechanism_time(deltas, levels, color="color"):
+    """Effect time preferences on average final schooling."""
+
+    fig, ax = plt.subplots(1, 1)
+
+    ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
+
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
+    ax.set_ylabel("Average final schooling")
+    ax.set_ylim([10, 12])
+
+    ax.set_xlabel(r"$\delta$")
+
+    fig.savefig(f"fig-economic-mechanisms{color_scheme[color]['extension']}")
+
+
+def plot_model_fit(df, savgol=False, color="color"):
 
     for label in ["blue_collar", "mean"]:
 
         fig, ax = plt.subplots(1, 1)
 
         y = df.loc[("empirical", slice(None)), label].values
-        ax.plot(range(50), y, label="Observed")
+        ext = ""
+        if savgol:
+            y = savgol_filter(y, 5, 4)
+            ext = "-savgol"
+
+        ax.plot(
+            range(50), y, label="Observed", color=color_scheme[color]["blue_collar"]
+        )
 
         y = df.loc[("simulated", slice(None)), label].values
-        ax.plot(range(50), y, label="Simulated")
+        ax.plot(range(50), y, label="Simulated", color=color_scheme[color]["school"])
 
-        ax.legend()
+        ax.legend(loc="upper left")
 
-        fname = f"fig-model-fit-{label}"
+        ax.set_xlabel("Period")
+
+        if label == "blue_collar":
+            ax.set_ylim(0, 0.5)
+            ax.set_ylabel("Share blue collar")
+
+        if label == "mean":
+            ax.set_ylim(5_000, 30_000)
+            ax.set_ylabel("Mean wage (in $ 1,000)", labelpad=20)
+            ax.get_yaxis().set_major_formatter(
+                plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
+            )
+
+        fname = f"fig-model-fit-{label}{ext}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
 
+
+# Define the color schemes for "color" and "bw"
+_cmap = make_grayscale_cmap("copper")
+color_scheme = {
+    "bw": {
+        "blue_collar": _cmap(0.29),
+        "white_collar": _cmap(0.16),
+        "military": _cmap(0.51),
+        "school": _cmap(0.93),
+        "home": _cmap(0.76),
+        "extension": "-bw",
+    },
+    "color": {
+        "blue_collar": "tab:blue",
+        "white_collar": "tab:red",
+        "military": "tab:purple",
+        "school": "tab:orange",
+        "home": "tab:green",
+        "extension": "",
+    },
+}
+
+# Ordering OSE convention: blue-collar, white-collar, military, school, home
+labels = ["blue_collar", "white_collar", "military", "school", "home"]
 
 # We plot the model fit in and out of the support.
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
 
 # We start with the observed data only.
-plot_decisions_by_age(df_descriptives)
-plot_wage_moments(df_descriptives)
+for col_scheme in ["color", "bw"]:
 
-# We than combine the descriptives from the observed and simulated data.
-plot_model_fit(df_descriptives)
+    plot_decisions_by_age(df_descriptives, color=col_scheme)
+
+    plot_mean_wage(df_descriptives, savgol=True, color=col_scheme)
+    plot_mean_wage(df_descriptives, savgol=False, color=col_scheme)
+
+    # We than combine the descriptives from the observed and simulated data.
+    plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
+    plot_model_fit(df_descriptives, savgol=False, color=col_scheme)
 
 # We plot the counterfactual predictions of the model.
 df_exploration = pd.read_pickle("model-exploration.pkl")
@@ -215,15 +245,11 @@ subsidies = (
 )
 levels = df_exploration.loc[("subsidy", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_subsidy(subsidies, levels)
+plot_mechanism_subsidy(subsidies, levels, "bw")
 
 deltas = (
     df_exploration.loc["delta", :].index.get_level_values("Change").to_numpy(np.float)
 )
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_time(deltas, levels)
-
-# TODO: We need all figures as bw version, this is just to prototype workflow.
-for fname in glob.glob("*.png"):
-    if "bw" in fname:
-        continue
-    shutil.copy(fname, fname.replace(".png", "-bw.png"))
+plot_mechanism_time(deltas, levels, "bw")
