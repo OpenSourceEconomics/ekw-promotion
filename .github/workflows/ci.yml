@@ -26,4 +26,5 @@ jobs:
       run: |
         export PATH="$PATH:/usr/share/miniconda/bin"
         source .envrc
+        update-repository
         create-content -a
