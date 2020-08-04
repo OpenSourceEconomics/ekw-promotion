@@ -4,7 +4,6 @@
 |logo| EKW promotion
 ====================
 
-
 .. image:: https://github.com/OpenSourceEconomics/ekw-promotion/workflows/Continuous%20Integration/badge.svg
   :target: https://github.com/OpenSourceEconomics/ekw-promotion/actions
 
