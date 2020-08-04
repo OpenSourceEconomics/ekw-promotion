@@ -6,6 +6,7 @@ import shutil
 import glob
 import os
 
+from PyPDF2 import PdfFileMerger
 
 def compile_material(task):
 
@@ -24,20 +25,22 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Create material for Eckstein-Keane-Wolpin models")
 
     parser.add_argument(
-        "-f", "--figures", action="store_true", help="create and update figures"
+        "-g", "--graphs", action="store_true", help="create and update graphs"
     )
 
     parser.add_argument(
-        "-p", "--presentation", action="store_true", help="create presentation"
+        "-s", "--slides", action="store_true", help="create slides"
     )
 
-    parser.add_argument("-p", "-paper", action="store_true", help="create paper")
+    parser.add_argument("-p", "--paper", action="store_true", help="create paper")
 
-    parser.add_argument("-a", "--all", action="store_true", help="create all content")
+    parser.add_argument("-f", "--full", action="store_true", help="create full content")
+
+    parser.add_argument("-a", "--appendix", action="store_true", help="create appendix")
 
     args = parser.parse_args()
 
-    if args.figures or args.all:
+    if args.graphs or args.full:
 
         os.chdir(os.environ["PROJECT_DIR"] + "/replication")
 
@@ -48,14 +51,31 @@ if __name__ == "__main__":
 
         [shutil.copy(fname, f"../material/{fname}") for fname in glob.glob("*.png")]
 
-    if args.appendix or args.all:
+    if args.appendix or args.full:
 
         compile_material("appendix")
 
-    if args.paper or args.all:
+        shutil.copy("appendix/main.pdf", "ekw-appendix.pdf")
+
+    if args.paper or args.full:
 
         compile_material("paper")
 
-    if args.presentation or args.all:
+        shutil.copy("paper/main.pdf", "ekw-paper.pdf")
 
-        compile_material("presentation")
+    try:
+        pdf_merger = PdfFileMerger()
+        file_handles = []
+
+        for path in ["ekw-paper.pdf", "ekw-appendix.pdf"]:
+            pdf_merger.append(path)
+        with open("ekw-promotion.pdf", 'wb') as fileobj:
+            pdf_merger.write(fileobj)
+    except:
+        pass
+
+    if args.slides or args.full:
+
+        compile_material("slides")
+
+        shutil.copy("slides/main.pdf", "ekw-slides.pdf")
