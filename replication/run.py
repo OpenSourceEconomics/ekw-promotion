@@ -195,7 +195,6 @@ def plot_model_fit(df, savgol=False, color="color"):
             ax.set_ylim(0, 100)
 
         if label == "average":
-            print(y)
             ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
 

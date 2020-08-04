@@ -38,7 +38,7 @@ def calc_choice_frequencies(df, source):
 def calc_wage_distribution(df, source):
     """Compute choice frequencies."""
     df = df.groupby(["Period"])["Wage"].describe()[["mean", "std"]]
-    df.rename({"mean": "average"}, inplace=True)
+    df.rename(columns={"mean": "average"}, inplace=True)
     df["Data"] = source
     df.set_index(["Data"], append=True, inplace=True)
     df = df.reorder_levels(["Data", "Period"])
@@ -50,7 +50,7 @@ params, options, df_emp = rp.get_example_model("kw_97_extended")
 # We want to reduce the computational burden for debugging purposes and our continuous
 # integration pipeline.
 if IS_DEBUG:
-    options["n_periods"] = 10
+    options["n_periods"] = 12
 
 simulate_func = rp.get_simulate_func(params, options)
 df_sim = simulate_func(params)
