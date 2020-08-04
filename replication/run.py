@@ -115,8 +115,9 @@ def plot_average_wage(df, color="colors"):
     ax.set_xlabel("Age")
     ax.xaxis.set_ticks(range(11))
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+    ax.yaxis.get_major_ticks()[0].set_visible(False)
 
-    ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
+    ax.set_ylabel("Wage (in $1,000)", labelpad=20)
 
     fig.savefig(f"fig-data-wages-average{color_scheme[color]['extension']}")
 
@@ -191,6 +192,7 @@ def plot_model_fit(df, color="color"):
         ax.set_xlabel("Age")
         ax.xaxis.set_ticks(range(11))
         ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+        ax.yaxis.get_major_ticks()[0].set_visible(False)
 
         if label == "blue_collar":
             ax.set_ylabel("Share (in %)")
@@ -198,7 +200,7 @@ def plot_model_fit(df, color="color"):
 
         if label == "average":
             ax.set_ylim(5, 30)
-            ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
+            ax.set_ylabel("Wage (in $1,000)", labelpad=20)
 
         fname = f"fig-model-fit-{label}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
