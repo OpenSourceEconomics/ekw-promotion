@@ -115,16 +115,13 @@ def plot_average_wage(df, savgol=False, color="colors"):
 
     ax.plot(range(11), y, color=color_scheme[color]["blue_collar"])
 
-    ax.set_ylim(5_000, 30_000)
+    ax.set_ylim(5, 30)
 
     ax.set_xlabel("Age")
     ax.xaxis.set_ticks(range(11))
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 
     ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
-    ax.get_yaxis().set_major_formatter(
-        plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
-    )
 
     fig.savefig(f"fig-data-wages-average{ext}{color_scheme[color]['extension']}")
 
@@ -181,7 +178,7 @@ def plot_model_fit(df, savgol=False, color="color"):
             ext = "-savgol"
 
         ax.plot(
-            range(11), y, label="Observed", color=color_scheme[color]["blue_collar"]
+            range(11), y, label="Empirical", color=color_scheme[color]["blue_collar"]
         )
 
         y = df.loc[("simulated", slice(10)), label].values
@@ -198,11 +195,9 @@ def plot_model_fit(df, savgol=False, color="color"):
             ax.set_ylim(0, 100)
 
         if label == "average":
-            ax.set_ylim(5_000, 30_000)
+            print(y)
+            ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
-            ax.get_yaxis().set_major_formatter(
-                plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
-            )
 
         fname = f"fig-model-fit-{label}{ext}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
@@ -235,7 +230,7 @@ labels = ["blue_collar", "white_collar", "military", "school", "home"]
 # We plot the model fit in and out of the support.
 df_descriptives = pd.read_pickle("data-descriptives.pkl")
 
-# We start with the observed data only.
+# We start with the empirical data only.
 for col_scheme in ["color", "bw"]:
 
     plot_decisions_by_age(df_descriptives, color=col_scheme)
@@ -243,7 +238,7 @@ for col_scheme in ["color", "bw"]:
     plot_average_wage(df_descriptives, savgol=True, color=col_scheme)
     plot_average_wage(df_descriptives, savgol=False, color=col_scheme)
 
-    # We than combine the descriptives from the observed and simulated data.
+    # We than combine the descriptives from the empirical and simulated data.
     plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
     plot_model_fit(df_descriptives, savgol=False, color=col_scheme)
 
