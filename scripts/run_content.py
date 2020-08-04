@@ -31,7 +31,7 @@ if __name__ == "__main__":
         "-p", "--presentation", action="store_true", help="create presentation"
     )
 
-    parser.add_argument("-d", "--document", action="store_true", help="create document")
+    parser.add_argument("-p", "-paper", action="store_true", help="create paper")
 
     parser.add_argument("-a", "--all", action="store_true", help="create all content")
 
@@ -48,9 +48,13 @@ if __name__ == "__main__":
 
         [shutil.copy(fname, f"../material/{fname}") for fname in glob.glob("*.png")]
 
-    if args.document or args.all:
+    if args.appendix or args.all:
 
-        compile_material("handout")
+        compile_material("appendix")
+
+    if args.paper or args.all:
+
+        compile_material("paper")
 
     if args.presentation or args.all:
 
