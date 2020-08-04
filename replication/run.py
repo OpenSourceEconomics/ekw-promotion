@@ -107,7 +107,8 @@ def plot_average_wage(df, savgol=False, color="colors"):
 
     fig, ax = plt.subplots()
 
-    y = df.loc[("empirical", slice(10)), "average"].values
+    y = df.loc[("empirical", slice(10)), "average"].values / 1000
+
     ext = ""
     if savgol:
         y = savgol_filter(y, 3, 2)
@@ -168,21 +169,26 @@ def plot_model_fit(df, savgol=False, color="color"):
 
         fig, ax = plt.subplots()
 
-        y = df.loc[("empirical", slice(10)), label].values
-        if label == "blue_collar":
-            y = y * 100
+        y_empirical = df.loc[("empirical", slice(10)), label].values
+        y_simulation = df.loc[("simulated", slice(10)), label].values
 
+
+        if label == "blue_collar":
+            y_empirical = y_empirical * 100
+            y_simulation *= 100
+        else:
+            y_empirical = y_empirical / 1000
+            y_simulation /= 1_000
         ext = ""
         if savgol:
-            y = savgol_filter(y, 5, 4)
+            y = savgol_filter(y_empirical, 5, 4)
             ext = "-savgol"
 
         ax.plot(
-            range(11), y, label="Empirical", color=color_scheme[color]["blue_collar"]
+            range(11), y_empirical, label="Empirical", color=color_scheme[color]["blue_collar"]
         )
 
-        y = df.loc[("simulated", slice(10)), label].values
-        ax.plot(range(11), y, label="Simulated", color=color_scheme[color]["school"])
+        ax.plot(range(11), y_simulation, label="Simulated", color=color_scheme[color]["school"])
 
         ax.legend(loc="upper left")
 

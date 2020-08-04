@@ -28,5 +28,5 @@ jobs:
         source .envrc
         git submodule init
         git submodule update
-        create-content -a
+        run-content -f
         pytest
