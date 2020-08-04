@@ -13,7 +13,6 @@ import matplotlib.colors as mc
 import matplotlib.pyplot as plt
 
 from pathlib import Path
-from scipy.signal import savgol_filter
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
@@ -102,17 +101,12 @@ def plot_decisions_by_age(df_descriptives, color="color"):
     plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
 
 
-def plot_average_wage(df, savgol=False, color="colors"):
+def plot_average_wage(df, color="colors"):
     """Average of wages at any period."""
 
     fig, ax = plt.subplots()
 
     y = df.loc[("empirical", slice(10)), "average"].values / 1000
-
-    ext = ""
-    if savgol:
-        y = savgol_filter(y, 3, 2)
-        ext = "-savgol"
 
     ax.plot(range(11), y, color=color_scheme[color]["blue_collar"])
 
@@ -124,7 +118,7 @@ def plot_average_wage(df, savgol=False, color="colors"):
 
     ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
 
-    fig.savefig(f"fig-data-wages-average{ext}{color_scheme[color]['extension']}")
+    fig.savefig(f"fig-data-wages-average{color_scheme[color]['extension']}")
 
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
@@ -163,7 +157,7 @@ def plot_mechanism_time(deltas, levels, color="color"):
     fig.savefig(f"fig-economic-mechanisms{color_scheme[color]['extension']}")
 
 
-def plot_model_fit(df, savgol=False, color="color"):
+def plot_model_fit(df, color="color"):
 
     for label in ["blue_collar", "average"]:
 
@@ -172,23 +166,25 @@ def plot_model_fit(df, savgol=False, color="color"):
         y_empirical = df.loc[("empirical", slice(10)), label].values
         y_simulation = df.loc[("simulated", slice(10)), label].values
 
-
         if label == "blue_collar":
             y_empirical = y_empirical * 100
             y_simulation *= 100
         else:
             y_empirical = y_empirical / 1000
             y_simulation /= 1_000
-        ext = ""
-        if savgol:
-            y = savgol_filter(y_empirical, 5, 4)
-            ext = "-savgol"
-
         ax.plot(
-            range(11), y_empirical, label="Empirical", color=color_scheme[color]["blue_collar"]
+            range(11),
+            y_empirical,
+            label="Empirical",
+            color=color_scheme[color]["blue_collar"],
         )
 
-        ax.plot(range(11), y_simulation, label="Simulated", color=color_scheme[color]["school"])
+        ax.plot(
+            range(11),
+            y_simulation,
+            label="Simulated",
+            color=color_scheme[color]["school"],
+        )
 
         ax.legend(loc="upper left")
 
@@ -204,7 +200,7 @@ def plot_model_fit(df, savgol=False, color="color"):
             ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $ 1,000)", labelpad=20)
 
-        fname = f"fig-model-fit-{label}{ext}{color_scheme[color]['extension']}"
+        fname = f"fig-model-fit-{label}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
 
 
@@ -238,14 +234,12 @@ df_descriptives = pd.read_pickle("data-descriptives.pkl")
 # We start with the empirical data only.
 for col_scheme in ["color", "bw"]:
 
-    plot_decisions_by_age(df_descriptives, color=col_scheme)
+    plot_decisions_by_age(df_descriptives, col_scheme)
 
-    plot_average_wage(df_descriptives, savgol=True, color=col_scheme)
-    plot_average_wage(df_descriptives, savgol=False, color=col_scheme)
+    plot_average_wage(df_descriptives, col_scheme)
 
     # We than combine the descriptives from the empirical and simulated data.
-    plot_model_fit(df_descriptives, savgol=True, color=col_scheme)
-    plot_model_fit(df_descriptives, savgol=False, color=col_scheme)
+    plot_model_fit(df_descriptives, col_scheme)
 
 # We plot the counterfactual predictions of the model.
 df_exploration = pd.read_pickle("model-exploration.pkl")

@@ -2,7 +2,7 @@
 %-------------------------------------------------------------------------------
 \subsection{Calibration procedure}
 %-------------------------------------------------------------------------------
-EKW models are calibrated to data on observed individual decisions and experiences under the hypothesis that the individual's behavior is generated from the solution to the model. The goal is to back out information on reward functions, preference parameters, and transition probabilities. This requires the full parameterization $\theta$ of the model.\\
+EKW models are calibrated to data on observed individual decisions and experiences under the hypothesis that the individual behaves according to the model. The goal is to back out information on reward functions, preference parameters, and transition probabilities. This requires the full parameterization $\theta$ of the model.\\
 
 \noindent Economists have access to information for $i = 1, \hdots, N$ individuals in each time period $t$. For every observation $(i, t)$ in the data, we observe action $a_{it}$, reward $r_{it}$, and a subset $x_{it}$ of the state $s_{it}$. Therefore, from an economist's point of view, we need to distinguish between two types of state variables $s_{it} = (x_{it}, \epsilon_{it})$. At time $t$, the economist and individual both observe $x_{it}$ while $\epsilon_{it}$ is only observed by the individual. In summary, the data $\mathcal{D}$ has the following structure:
 %

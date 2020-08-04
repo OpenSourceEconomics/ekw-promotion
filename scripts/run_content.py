@@ -8,6 +8,7 @@ import os
 
 from PyPDF2 import PdfFileMerger
 
+
 def compile_material(task):
 
     os.chdir(os.environ["PROJECT_DIR"] + f"/{task}")
@@ -28,9 +29,7 @@ if __name__ == "__main__":
         "-g", "--graphs", action="store_true", help="create and update graphs"
     )
 
-    parser.add_argument(
-        "-s", "--slides", action="store_true", help="create slides"
-    )
+    parser.add_argument("-s", "--slides", action="store_true", help="create slides")
 
     parser.add_argument("-p", "--paper", action="store_true", help="create paper")
 
@@ -63,16 +62,14 @@ if __name__ == "__main__":
 
         shutil.copy("paper/main.pdf", "ekw-paper.pdf")
 
-    try:
+    if os.path.exists("ekw-paper.pdf") and os.path.exists("ekw-appendix.pdf"):
         pdf_merger = PdfFileMerger()
         file_handles = []
 
         for path in ["ekw-paper.pdf", "ekw-appendix.pdf"]:
             pdf_merger.append(path)
-        with open("ekw-promotion.pdf", 'wb') as fileobj:
+        with open("ekw-promotion.pdf", "wb") as fileobj:
             pdf_merger.write(fileobj)
-    except:
-        pass
 
     if args.slides or args.full:
 
