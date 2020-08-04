@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 %-------------------------------------------------------------------------------
-\subsection{Computational implementation}\label{Computational implementation}
+\section{Computational implementation}\label{Computational implementation}
 %-------------------------------------------------------------------------------
 We use the same computational implementation as in \citet{Keane.1997}. We outline the per-period utility functions for each of the five alternatives. We first focus on their common overall structure and then provide their parameterization. Throughout we provide the economic motivation for their specification.\\
 
@@ -29,7 +29,7 @@ h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
 
 \noindent Empirical and theoretical research from specialized disciplines within economics informs the exact specification of each $u_a(\cdot)$. We now discuss each in detail.
 %-------------------------------------------------------------------------------
-\subsubsection*{Per-period utility for working alternatives}
+\subsection{Per-period utility for working alternatives}
 %-------------------------------------------------------------------------------
 The per-period utility for working alternatives is the sum of a non-pecuniary utility and a wage component. The wage component $w_{a}(\cdot)$ is given by the product of the market-equilibrium rental price $r_{a}$ and an occupation-specific skill level $x_{a}(\cdot)$. The overall level of human capital determines the latter.
 %
@@ -44,8 +44,10 @@ This specification leads to a standard logarithmic wage equation in which the co
 \begin{align}%\label{eq:OccupationSpecificSkillLevel}
     x_{a}(\bm{k_t}, h_t, t, a_{t-1}, e_{j, a}, \epsilon_{a,t}) & = \exp \big( \Gamma_{a}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,a}) \cdot \epsilon_{a,t} \big) \nonumber
 \end{align}
-%
-\noindent\textbf{White-collar} Equation (\ref{eq:SkillLevelWhiteCollar}) shows the parameterization of the deterministic component of the skill-production function.
+%-------------------------------------------------------------------------------
+\subsubsection*{White-collar}
+%-------------------------------------------------------------------------------
+Equation (\ref{eq:SkillLevelWhiteCollar}) shows the parameterization of the deterministic component of the skill-production function.
 %
 \begin{align}\label{eq:SkillLevelWhiteCollar}
     \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{j, 1}) = e_{j,1} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16]\\ \nonumber
@@ -65,8 +67,10 @@ This specification leads to a standard logarithmic wage equation in which the co
 \end{align}
 %
 A constant $\alpha_1$ captures the net monetary-equivalent of on the job amenities. The non-pecuniary utility includes mobility and search costs $c_{1,1}$, which are higher for individuals who never worked in a white-collar occupation before $c_{1,2}$. The non-pecuniary components capture returns from a high school degree $\vartheta_1$ and a college degree $\vartheta_2$. Additionally, there is a detrimental effect of leaving the military early, i.e., after one year $\vartheta_3$.\\
-
-\noindent\textbf{Blue-collar} The per-period utility from working in a blue-collar occupation is specified analogously. Equation (\ref{eq:SkillLevelBlueCollar}) shows the parameterization of the deterministic component of the skill-production function.
+%-------------------------------------------------------------------------------
+\subsubsection*{Blue-collar}
+%-------------------------------------------------------------------------------
+The per-period utility from working in a blue-collar occupation is specified analogously. Equation (\ref{eq:SkillLevelBlueCollar}) shows the parameterization of the deterministic component of the skill-production function.
 %
 \begin{align}\label{eq:SkillLevelBlueCollar}
     \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{j,2}) = e_{j,2} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\\nonumber
@@ -81,8 +85,10 @@ A constant $\alpha_1$ captures the net monetary-equivalent of on the job ameniti
 \zeta_{2}( \bm{k_t}, h_t, a_{t-1} ) = \,\alpha_2 & + c_{2,1} \cdot \ind[a_{t-1} \neq 2] + c_{2,2} \cdot \ind[k_{2,t} = 0]\\\nonumber
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1].
 \end{align}
-%
-\noindent\textbf{Military} Equation (\ref{eq:SkillLevelMilitary}) shows the parameterization of the deterministic component of the skill-production function.
+%-------------------------------------------------------------------------------
+\subsubsection*{Military}
+%-------------------------------------------------------------------------------
+Equation (\ref{eq:SkillLevelMilitary}) shows the parameterization of the deterministic component of the skill-production function.
 %
 \begin{align}\label{eq:SkillLevelMilitary}
     \Gamma_3( k_{3,t}, h_t, t, e_{j,3}) = e_{j,3} & + \beta_{3,1} \cdot h_t \\\nonumber
@@ -104,11 +110,11 @@ Search costs $(c_{1, 1} = c_{1, 2} = 0)$ are absent but it is costly if an indiv
 \begin{Remark} Our parameterization for the per-period utility of serving in the military differs from \citet{Keane.1997} as we remain unsure about their exact specification. The authors state in Footnote 31 (p.498) that the constant for the non-pecuniary utility $\alpha_{3,t}$ depends on age. However, we are unable to determine the precise nature of the relationship. Also, Equation (C3) (p.521) indicates no productivity shock $\epsilon_{a,t}$ in the wage component. However, Table 7 (p.500) reports such estimates.
 \end{Remark}
 % ------------------------------------------------------------------------------
-\FloatBarrier\subsubsection*{Per-period utility for non-working alternatives}
+\FloatBarrier\subsection{Per-period utility for non-working alternatives}
 % ------------------------------------------------------------------------------
 The per-period utility for the non-working alternatives does not contain a wage component. Also, the productivity shock enters in an additive instead of a multiplicative fashion.
 %-------------------------------------------------------------------------------
-\FloatBarrier\paragraph*{School}
+\subsubsection*{School}
 %-------------------------------------------------------------------------------
 Equation (\ref{eq:UtilitySchooling}) shows the parameterization of the non-pecuniary utility from schooling.
 %
@@ -122,7 +128,7 @@ Equation (\ref{eq:UtilitySchooling}) shows the parameterization of the non-pecun
 %
 Costs include tuition and fees for continuing schooling after high school $(\beta_{tc_1}, \beta_{tc_2})$. Leaving the schooling alternative is reversible but returning entails adjustment cost that differs by schooling category ($\beta_{rc_1}, \beta_{rc_2}$). Although schooling is defined as time spent in school, individuals value completion of high-school and graduate school ($\vartheta_1, \vartheta_2$). Once individuals reach a certain amount of schooling, they obtain a grade, i.e., there is no uncertainty about grade completion \citep{Altonji.1993}. Choices are mutually exclusive, and so there is no part-time enrollment.
 %-------------------------------------------------------------------------------
-\FloatBarrier\paragraph*{Home}
+\subsubsection*{Home}
 %-------------------------------------------------------------------------------
 Equation (\ref{eq:UtilityHome}) shows the parameterization of the non-pecuniary utility from staying at home.
 %
@@ -134,7 +140,7 @@ Equation (\ref{eq:UtilityHome}) shows the parameterization of the non-pecuniary 
 %
 Staying at home as a young adult $\gamma_{5, 4}$ is perceived to be less stigmatic as doing so while being already an adult ($\gamma_{5,5}$). Having a degree  $(\vartheta_1, \vartheta_2)$ or having left the military prematurely  $\vartheta_3$ does influence the per-period utility.
 %-------------------------------------------------------------------------------
-\FloatBarrier\subsubsection*{Overview parameters}
+\FloatBarrier\subsection{Overview parameters}
 %-------------------------------------------------------------------------------
 
-\input{material/tab-model-parameters}
+\input{../material/tab-model-parameters}

@@ -7,6 +7,7 @@ channels:
 
 dependencies:
   - python=3.7.3
+  - pypdf2 
   - pip=19.0.3
   - chaospy
   - click
@@ -35,7 +36,7 @@ dependencies:
   - restructuredtext_lint
   - scipy>=1.2.1
   - Sphinx>=2.0.0
-  - black 
+  - black
   - flake8
   - sphinx-autobuild
   - tox-conda
