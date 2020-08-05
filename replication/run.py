@@ -109,6 +109,11 @@ def plot_average_wage(df_subset, color="colors"):
     for label in ["blue_collar", "white_collar", "military"]:
 
         y = df_subset.loc[("empirical", slice(10)), label].values / 1000
+
+        # We do not report wages if less than ten observations.
+        if label == "military":
+            y[-1] = np.nan
+
         str_ = label.replace("_", "-").capitalize()
         ax.plot(range(11), y, color=color_scheme[color][label], label=str_)
 
@@ -208,7 +213,7 @@ def plot_model_fit(df, color="color"):
             ax.set_ylabel("Share (in %)")
             ax.set_ylim(0, 100)
 
-        if label == "average":
+        if label == "all":
             ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $1,000)", labelpad=20)
 

@@ -83,7 +83,7 @@ df_descriptives.to_pickle("data-descriptives.pkl")
 
 # We evaluate the effect of a change in time preferences and a tuition subsidy.
 subsidies = np.linspace(0, 2000, num=NUM_POINTS, dtype=int, endpoint=True)
-deltas = np.linspace(0.910, 0.950, NUM_POINTS)
+deltas = np.linspace(0.910, 0.960, NUM_POINTS)
 
 columns = ["level"]
 index = list(product(["delta"], deltas)) + list(product(["subsidy"], subsidies))
