@@ -141,11 +141,11 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel("Average final schooling")
-    ax.set_ylim([10, 19])
+    ax.set_ylim([10, 16])
 
     ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
     ax.set_xlabel("Tuition subsidy")
-    ax.set_xlim([None, 2000])
+    ax.set_xlim([None, 4000])
 
     fig.savefig(f"fig-policy-forecast{color_scheme[color]['extension']}")
 
@@ -157,9 +157,10 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
     ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
 
+    ax.xaxis.set_major_locator(plt.MaxNLocator(5))
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel("Average final schooling")
-    ax.set_ylim([10, 12])
+    ax.set_ylim([10, 16])
 
     ax.set_xlabel(r"$\delta$")
 
