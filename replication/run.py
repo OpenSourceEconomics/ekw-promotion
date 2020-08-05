@@ -73,12 +73,12 @@ def make_color_lighter(color, amount=0.5):
     return colorsys.hls_to_rgb(_color[0], 1 - amount * (1 - _color[1]), _color[2])
 
 
-def plot_decisions_by_age(df_descriptives, color="color"):
+def plot_decisions_by_age(df_subset, color="color"):
     """Share of individuals in each occupation at any period (age)."""
 
     fig, ax = plt.subplots()
 
-    shares = df_descriptives.loc[("empirical", slice(0, 10)), labels] * 100
+    shares = df_subset.loc[("empirical", slice(10)), labels] * 100
 
     shares.plot.bar(
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
@@ -98,28 +98,31 @@ def plot_decisions_by_age(df_descriptives, color="color"):
         ncol=5,
     )
 
-    plt.savefig(f"fig-data-choices{color_scheme[color]['extension']}")
+    plt.savefig(f"fig-data-choice-all{color_scheme[color]['extension']}")
 
 
-def plot_average_wage(df, color="colors"):
+def plot_average_wage(df_subset, color="colors"):
     """Average of wages at any period."""
 
     fig, ax = plt.subplots()
 
-    y = df.loc[("empirical", slice(10)), "average"].values / 1000
+    for label in ["blue_collar", "white_collar", "military"]:
 
-    ax.plot(range(11), y, color=color_scheme[color]["blue_collar"])
+        y = df_subset.loc[("empirical", slice(10)), label].values / 1000
+        str_ = label.replace("_", "-").capitalize()
+        ax.plot(range(11), y, color=color_scheme[color][label], label=str_)
 
     ax.set_ylim(5, 30)
 
     ax.set_xlabel("Age")
+    ax.legend()
     ax.xaxis.set_ticks(range(11))
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
 
     ax.set_ylabel("Wage (in $1,000)", labelpad=20)
 
-    fig.savefig(f"fig-data-wages-average{color_scheme[color]['extension']}")
+    fig.savefig(f"fig-data-wage-occupations{color_scheme[color]['extension']}")
 
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
@@ -155,17 +158,24 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
     ax.set_xlabel(r"$\delta$")
 
-    fig.savefig(f"fig-economic-mechanisms{color_scheme[color]['extension']}")
+    fig.savefig(f"fig-economic-mechanism{color_scheme[color]['extension']}")
 
 
 def plot_model_fit(df, color="color"):
 
-    for label in ["blue_collar", "average"]:
+    for label in ["blue_collar", "all"]:
 
         fig, ax = plt.subplots()
 
-        y_empirical = df.loc[("empirical", slice(10)), label].values
-        y_simulation = df.loc[("simulated", slice(10)), label].values
+        if label == "blue_collar":
+            df_subset = df["probs"]
+            fname = f"fig-model-fit-choice-blue{color_scheme[color]['extension']}"
+        else:
+            df_subset = df["mean"]
+            fname = f"fig-model-fit-wage-all{color_scheme[color]['extension']}"
+
+        y_empirical = df_subset.loc[("empirical", slice(10)), label].values
+        y_simulation = df_subset.loc[("simulated", slice(10)), label].values
 
         if label == "blue_collar":
             y_empirical = y_empirical * 100
@@ -202,7 +212,6 @@ def plot_model_fit(df, color="color"):
             ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $1,000)", labelpad=20)
 
-        fname = f"fig-model-fit-{label}{color_scheme[color]['extension']}"
         fig.savefig(fname.replace("_", "-"))
 
 
@@ -236,9 +245,8 @@ df_descriptives = pd.read_pickle("data-descriptives.pkl")
 # We start with the empirical data only.
 for col_scheme in ["color", "bw"]:
 
-    plot_decisions_by_age(df_descriptives, col_scheme)
-
-    plot_average_wage(df_descriptives, col_scheme)
+    plot_decisions_by_age(df_descriptives["probs"], col_scheme)
+    plot_average_wage(df_descriptives["mean"], col_scheme)
 
     # We than combine the descriptives from the empirical and simulated data.
     plot_model_fit(df_descriptives, col_scheme)

@@ -26,26 +26,34 @@ def mechanism_wrapper(simulate, params, label, change):
     return policy_df.groupby("Identifier")["Experience_School"].max().mean()
 
 
-def calc_choice_frequencies(df, source):
+def calc_choice_frequencies(df):
     """Compute choice frequencies."""
-    df = df.groupby("Period").Choice.value_counts(normalize=True).unstack()
-    df["Data"] = source
-    df.set_index(["Data"], append=True, inplace=True)
-    df = df.reorder_levels(["Data", "Period"])
-    return df
+    df_choice = df.groupby("Period").Choice.value_counts(normalize=True).unstack()
+    index = list(product(["probs"], df_choice.columns))
+    df_choice.columns = pd.MultiIndex.from_tuples(index)
+    return df_choice
 
 
-def calc_wage_distribution(df, source):
+def calc_wage_distribution_occupation(df):
     """Compute choice frequencies."""
-    df = df.groupby(["Period"])["Wage"].describe()[["mean", "std"]]
-    df.rename(columns={"mean": "average"}, inplace=True)
-    df["Data"] = source
-    df.set_index(["Data"], append=True, inplace=True)
-    df = df.reorder_levels(["Data", "Period"])
-    return df
+    df_occ = df.groupby(["Period", "Choice"])["Wage"].describe()[["mean", "std"]]
+    cond = df_occ.index.get_level_values("Choice").isin(["school", "home"])
+    df_occ = df_occ[~cond]
+    df_occ = df_occ.unstack()
+    return df_occ
 
 
-params, options, df_emp = rp.get_example_model("kw_97_extended")
+def calc_wage_distribution_overall(df):
+    """Compute choice frequencies."""
+    df_ove = df.groupby(["Period"])["Wage"].describe()[["mean", "std"]]
+    df_ove["Choice"] = "all"
+    df_ove.set_index(["Choice"], append=True, inplace=True)
+    df_ove = df_ove.reorder_levels(["Period", "Choice"])
+    df_ove = df_ove.unstack()
+    return df_ove
+
+
+params, options, df_emp = rp.get_example_model("kw_97_extended_respy")
 
 # We want to reduce the computational burden for debugging purposes and our continuous
 # integration pipeline.
@@ -55,28 +63,22 @@ if IS_DEBUG:
 simulate_func = rp.get_simulate_func(params, options)
 df_sim = simulate_func(params)
 
-# We store all needed descriptives about the simulated dataset.
-index = list(product(["empirical", "simulated"], range(50)))
-index = pd.MultiIndex.from_tuples(index, names=["Data", "Period"])
-columns = [
-    "blue_collar",
-    "home",
-    "military",
-    "white_collar",
-    "school",
-    "average",
-    "std",
-]
-df_descriptives = pd.DataFrame(columns=columns, index=index)
-df_descriptives.head()
+df_descriptives = None
 
 for label, df in [("empirical", df_emp), ("simulated", df_sim)]:
-    df_choice = calc_choice_frequencies(df, label)
-    df_descriptives.update(df_choice)
 
-    df_wage = calc_wage_distribution(df, label)
-    df_descriptives.update(df_wage)
+    df_occ = calc_wage_distribution_occupation(df)
+    df_ove = calc_wage_distribution_overall(df)
+    df_choice = calc_choice_frequencies(df)
 
+    df_all = pd.concat([df_choice, df_occ, df_ove], axis=1)
+
+    df_all["Data"] = label
+    df_all.set_index(["Data"], append=True, inplace=True)
+    df_all = df_all.reorder_levels(["Data", "Period"])
+    df_descriptives = pd.concat([df_descriptives, df_all])
+
+df_descriptives.index = df_descriptives.index.sort_values()
 df_descriptives.to_pickle("data-descriptives.pkl")
 
 # We evaluate the effect of a change in time preferences and a tuition subsidy.
