@@ -48,7 +48,7 @@ if __name__ == "__main__":
         sp.check_call(["python", "run.py"])
         sp.check_call(["python", "kw_97_simulations.py"])
 
-        [shutil.copy(fname, f"../material/{fname}") for fname in glob.glob("*.png")]
+        [shutil.copy(fname, f"../material/{fname}") for fname in glob.glob("*.pdf")]
 
     if args.appendix or args.full:
 
