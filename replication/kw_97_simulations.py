@@ -19,8 +19,10 @@ def mechanism_wrapper(simulate, params, label, change):
     policy_params = params.copy()
     if label == "delta":
         policy_params.loc[("delta", "delta"), "value"] = change
-    elif label == "suibsidy":
+    elif label == "subsidy":
         policy_params.loc[("nonpec_school", "hs_graduate"), "value"] += change
+    else:
+        raise NotImplementedError
     policy_df = simulate(policy_params)
 
     return policy_df.groupby("Identifier")["Experience_School"].max().mean()
