@@ -2,22 +2,22 @@
 %-------------------------------------------------------------------------------
 \subsection{Economic framework}
 %-------------------------------------------------------------------------------
-EKW models describe sequential decision-making under uncertainty \citep{Gilboa.2009, Machina.2014}. At time $t = 1, \hdots, T$ each individual observes the state of the economic environment $s_t\in S$ and chooses an action $a_t$ from the set of admissible actions $\mathcal{A}$. The decision has two consequences: an individual receives an immediate reward $r_t(s_t, a_t)$ and the economy evolves to a new state $s_{t + 1}$. The transition from $s_t$ to $s_{t + 1}$ is affected by the action but remains uncertain. Individuals are forward-looking. Thus they do not simply choose the alternative with the highest immediate reward. Instead, they take the future consequences of their current action into account.\\
+EKW models describe sequential decision-making under uncertainty \citep{Gilboa.2009, Machina.2014}. At time $t = 1, \hdots, T$ each individual observes the state of the economic environment $s_t\in S$ and chooses an action $a_t$ from the set of admissible actions $\mathcal{A}$. The decision has two consequences: an individual receives an immediate utility $u_t(s_t, a_t)$ and the economy evolves to a new state $s_{t + 1}$. The transition from $s_t$ to $s_{t + 1}$ is affected by the action but remains uncertain. Individuals are forward-looking. Thus they do not simply choose the alternative with the highest immediate utility. Instead, they take the future consequences of their current action into account.\\
 
-\noindent A policy $\pi \equiv(a^\pi_1(s_1), \hdots, a^\pi_T(s_T))$ provides the individual with instructions for choosing an action in any possible future state. It is a sequence of decision rules $a^\pi_t(s_t)$ that specify the action at a particular time $t$ for any possible state $s_t$ under $\pi$. The implementation of a policy generates a sequence of rewards that depends on the objective transition probability distribution $p_t(s_t, a_t)$ for the evolution of state $s_t$ to $s_{t + 1}$ induced by the model. Individuals have rational expectations \citep{Muth.1961} so their subjective beliefs about the future agree with the objective transition probabilities of the model.\\
+\noindent A policy $\pi \equiv(a^\pi_1(s_1), \hdots, a^\pi_T(s_T))$ provides the individual with instructions for choosing an action in any possible future state. It is a sequence of decision rules $a^\pi_t(s_t)$ that specify the action at a particular time $t$ for any possible state $s_t$ under $\pi$. The implementation of a policy generates a sequence of utilities that depends on the objective transition probability distribution $p_t(s_t, a_t)$ for the evolution of state $s_t$ to $s_{t + 1}$ induced by the model. Individuals have rational expectations \citep{Muth.1961} so their subjective beliefs about the future agree with the objective transition probabilities of the model.\\
 
-\noindent Figure \ref{Timing} depicts the timing of events in the model for two generic periods. At the beginning of period $t$, an individual fully learns about the immediate reward of each alternative, chooses one of them, and receives its immediate reward. Then the state evolves from $s_t$ to $s_{t + 1}$ and the process is repeated in $t + 1$.
+\noindent Figure \ref{Timing} depicts the timing of events in the model for two generic periods. At the beginning of period $t$, an individual fully learns about the immediate utility of each alternative, chooses one of them, and receives its immediate utility. Then the state evolves from $s_t$ to $s_{t + 1}$ and the process is repeated in $t + 1$.
 %
 \begin{figure}\caption{Timing of events}\label{Timing}\vspace{1.0cm}\centering
 \input{../material/fig-timing-handout.tex}
 \end{figure}
 %
-\noindent Individuals face uncertainty and they seek to maximize the expected total discounted rewards. An exponential discount factor $0 < \delta < 1$ parameterizes their time preference and captures a taste for immediate over future rewards.\\
+\noindent Individuals face uncertainty and they seek to maximize the expected total discounted utilities. An exponential discount factor $0 < \delta < 1$ parameterizes their time preference and captures a taste for immediate over future utilities.\\
 
-\noindent Equation (\ref{Objective Risk}) provides the formal representation of the individual's objective. Given an initial state $s_1$, individuals implement the policy $\pi$ from the set of all possible policies $\Pi$ that maximizes the expected total discounted rewards over all $T$ decision periods given the information $\mathcal{I}_1$ available in the first period.
+\noindent Equation (\ref{Objective Risk}) provides the formal representation of the individual's objective. Given an initial state $s_1$, individuals implement the policy $\pi$ from the set of all possible policies $\Pi$ that maximizes the expected total discounted utilities over all $T$ decision periods given the information $\mathcal{I}_1$ available in the first period.
 %
 \begin{align}\label{Objective Risk}
-\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} r_t(s_t, a^\pi_t(s_t))\,\right\vert\,\mathcal{I}_1\,\right]
+\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a^\pi_t(s_t))\,\right\vert\,\mathcal{I}_1\,\right]
 \end{align}
 %
-The superscript of the expectation emphasizes that each policy $\pi$ induces a different probability distribution over the sequences of rewards.
+The superscript of the expectation emphasizes that each policy $\pi$ induces a different probability distribution over the sequences of utilities.

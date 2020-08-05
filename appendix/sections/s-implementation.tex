@@ -2,13 +2,13 @@
 %-------------------------------------------------------------------------------
 \section{Computational implementation}\label{Computational implementation}
 %-------------------------------------------------------------------------------
-We use the same computational implementation as in \citet{Keane.1997}. We outline the per-period utility functions for each of the five alternatives. We first focus on their common overall structure and then present their parameterization. Throughout we provide the economic motivation for their specification.\\
+We use the same computational implementation as in \citet{Keane.1997}. We outline the immediate utility functions for each of the five alternatives. We first focus on their common overall structure and then present their parameterization. Throughout we provide the economic motivation for their specification.\\
 
 \noindent We follow individuals over their working life from young adulthood at age 16 to retirement at age 65. The decision period $t = 16, \dots, 65$  is a school year and individuals decide $a\in\mathcal{A}$ whether to work in a blue-collar or white-collar occupation ($a = 1, 2$), to serve in the military $(a = 3)$, to attend school $(a = 4)$, or to stay at home $(a = 5)$.\\
 
 \noindent Individuals are initially heterogeneous. They differ with respect to their initial level of completed schooling $h_{16}$ and have one of four different $\mathcal{J} = \{1, \hdots, 4\}$ alternative-specific skill endowments $\bm{e} = \left(e_{j,a}\right)_{\mathcal{J} \times \mathcal{A}}$.\\
 
-\noindent The per-period utility $u_a(\cdot)$ of each alternative consists of a non-pecuniary utility $\zeta_a(\cdot)$ and, at least for the working alternatives, an additional wage component $w_a(\cdot)$. Both depend on the level of human capital as measured by their alternative-specific skill endowment $\bm{e}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. The per-period utility functions are influenced by last-period choices $a_{t -1}$ and alternative-specific productivity shocks $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$ as well. Their general form is given by:
+\noindent The immediate utility $u_a(\cdot)$ of each alternative consists of a non-pecuniary utility $\zeta_a(\cdot)$ and, at least for the working alternatives, an additional wage component $w_a(\cdot)$. Both depend on the level of human capital as measured by their alternative-specific skill endowment $\bm{e}$, years of completed schooling $h_t$, and occupation-specific work experience $\bm{k_t} = \left(k_{a,t}\right)_{a\in\{1, 2, 3\}}$. The immediate utility functions are influenced by last-period choices $a_{t -1}$ and alternative-specific productivity shocks $\bm{\epsilon_t} = \left(\epsilon_{a,t}\right)_{a\in\mathcal{A}}$ as well. Their general form is given by:
 %
 \begin{align*}
 u_a(\cdot) =
@@ -89,7 +89,7 @@ Equation (\ref{eq:UtilityHome}) shows the parameterization of the non-pecuniary 
     							   & + \epsilon_{5,t}
 \end{align}
 %
-Staying at home as a young adult $\gamma_{5, 4}$ is less stigmatic as doing so while already being an adult $\gamma_{5,5}$. Additionally, possessing a degree  $(\vartheta_1, \vartheta_2)$ or leaving the military prematurely $\vartheta_3$ influences the per-period utility.
+Staying at home as a young adult $\gamma_{5, 4}$ is less stigmatic as doing so while already being an adult $\gamma_{5,5}$. Additionally, possessing a degree  $(\vartheta_1, \vartheta_2)$ or leaving the military prematurely $\vartheta_3$ influences the immediate utility.
 %-------------------------------------------------------------------------------
 \subsection{Wage component}
 %-------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ Equation (\ref{eq:SkillLevelMilitary}) shows the parameterization of the determi
 %
 Contrary to the civilian sector there are no sheep-skin effects from graduation ($\beta_{3,2} = \beta_{3,3}= 0$). The previous occupational choice has no influence ($\gamma_{3,6}= 0$) and any experience other than military is non-transferable ($\gamma_{3,7} = \gamma_{3,8} = 0$).
 
-\begin{Remark} Our parameterization for the per-period utility of serving in the military differs from \citet{Keane.1997} as we remain unsure about their exact specification. The authors state in Footnote 31 (p.498) that the constant for the non-pecuniary utility $\alpha_{3,t}$ depends on age. However, we are unable to determine the precise nature of the relationship. Equation (C3) (p.521) also indicates no productivity shock $\epsilon_{a,t}$ in the wage component. Table 7 (p.500) reports such estimates.
+\begin{Remark} Our parameterization for the immediate utility of serving in the military differs from \citet{Keane.1997} as we remain unsure about their exact specification. The authors state in Footnote 31 (p.498) that the constant for the non-pecuniary utility $\alpha_{3,t}$ depends on age. However, we are unable to determine the precise nature of the relationship. Equation (C3) (p.521) also indicates no productivity shock $\epsilon_{a,t}$ in the wage component. Table 7 (p.500) reports such estimates.
 \end{Remark}
 %-------------------------------------------------------------------------------
 \FloatBarrier\subsection{Overview parameters}
