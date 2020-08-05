@@ -17,4 +17,4 @@ legend.frameon: False
 legend.shadow: False
 
 savefig.dpi: 300
-savefig.format: png
+savefig.format: pdf
