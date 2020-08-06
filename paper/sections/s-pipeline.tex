@@ -15,9 +15,10 @@ We are actively developing an ensemble of research codes that provide an analysi
 \noindent Figure \ref{Model specification} shows the model specification files for \citet{Keane.1997}. The file on the left sets the parameter values for the utility functions and the distribution of the unobservable state variables. On the right, we provide details on the construction of the observed state variables and numerous tuning parameters for the numerical solution of the model.
 
 \begin{figure}[h!]\centering
+	\captionsetup[subfloat]{captionskip=12pt}
 	\caption{Model specification}\label{Model specification}
-	\subfloat[Parameterization]{\scalebox{0.48}{\includegraphics{params-crop.pdf}}}\hspace{0.3cm}
-	\subfloat[Options]{\scalebox{0.48}{\includegraphics{options.pdf}}}
+	\subfloat[Parameterization]{\scalebox{0.55}{\includegraphics{params-crop.pdf}}}\hfill
+	\subfloat[Options]{\scalebox{0.55}{\includegraphics{options.pdf}}}
 \end{figure}\FloatBarrier
 
 \noindent Figure \ref{Dashboard} depicts the dashboard provided by \verb+estimagic+ to monitor the progress and parameter values of the calibration in real-time. This allows us to detect problems during calibration right away and facilitates the debugging process.
