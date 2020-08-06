@@ -6,11 +6,6 @@ We now present an exemplifying analysis of a canonical EKW model on human capita
 %-------------------------------------------------------------------------------
 \subsection{Basic setup}
 %-------------------------------------------------------------------------------
-%
-% What are the core differences to the Appendix given the target audience?
-%   * no references to econ papers,
-%   * need to explain sheep-skin effects
-%
 We follow individuals over their working life from young adulthood at age 16 to retirement at age 65. The decision period $t = 16, \dots, 65$  is a school year and individuals decide $a\in\mathcal{A}$ whether to work in a blue-collar or white-collar occupation ($a = 1, 2$), to serve in the military $(a = 3)$, to attend school $(a = 4)$, or to stay at home $(a = 5)$.\\
 
 \noindent Individuals are already heterogeneous when entering the model. They differ with respect to their level of completed schooling $h_{16}$ and have one of four different $\mathcal{J} = \{1, \hdots, 4\}$ alternative-specific skill endowments $\bm{e} = \left(e_{j,a}\right)_{\mathcal{J} \times \mathcal{A}}$.\\
@@ -43,7 +38,7 @@ h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1]
 \end{align}
 %
-A constant $\alpha_1$ captures the net monetary-equivalent of on the job amenities. The non-pecuniary utility includes mobility and search costs $(c_{1,1}, c_{1,2})$ that capture the extended effort for individuals who only recently started working in a white-collar occupation. Additional components specify returns from a high school $\vartheta_1$ and a college $\vartheta_2$ degree. Additionally, there is a detrimental effect of leaving the military after a single year $\vartheta_3$.\\
+It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_{1,2})$ that capture the extra effort for individuals who only recently started working in a white-collar occupation. Additional components depend on whether an individual has a high school $\vartheta_1$ or college $\vartheta_2$ degree. There is a detrimental impact of leaving the military after a single year $\vartheta_3$.\\
 
 \noindent The wage component $w_{1}(\cdot)$ is given by the product of the market-equilibrium rental price $r_{1}$ and an occupation-specific skill level $x_{1}(\cdot)$. The latter is determined by the overall level of human capital. This specification leads to a standard logarithmic wage equation in which the constant term is the skill rental price $\ln(r_{1})$ and wages follow a log-normal distribution.\\
 
@@ -62,7 +57,7 @@ A constant $\alpha_1$ captures the net monetary-equivalent of on the job ameniti
                                   & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} \nonumber
 \end{align}
 %
-\noindent Part of the skill production function is linear in years of completed schooling $\beta_{1,1}$, quadratic in experience ($\gamma_{1,1}, \gamma_{1,2}$), and separable between both. The skill production function shows sheep-skin effects ($\beta_{1,2}, \beta_{1,3}$) that capture the impact of completing a high school or graduate degree above just the associated years of schooling. Skill production depends on having worked in the same occupation at least once before $\gamma_{1,3}$, linearly on age $\gamma_{1,4}$, and on being a minor $\gamma_{1,5}$. Work experience depreciates when working in a different occupation ($\gamma_{1,6}$) but is potentially transferable across occupations ($\gamma_{1,7}, \gamma_{1,8}$).
+\noindent There are several notable features. Skills increase with schooling $\beta_{1,1}$ and white-collar work experience ($\gamma_{1,1}, \gamma_{1,2}$). There are so-called sheep-skin effects associated with completing a high school $\beta_{1,2}$ and graduate $\beta_{1,3}$ education that capture the impact of completing a degree beyond just the associated years of schooling. Also, skills depreciate when working in a different occupation $\gamma_{1,6}$ but other work experience ($\gamma_{1,7}, \gamma_{1,8}$) is transferable.
 %-------------------------------------------------------------------------------
 \subsection{Empirical data}
 %-------------------------------------------------------------------------------
