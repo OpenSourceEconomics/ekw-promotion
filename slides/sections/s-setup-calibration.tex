@@ -10,14 +10,14 @@
 
 \textbf{Data}\vspace{0.3cm}
 \begin{align*}
-	\mathcal{D} = \{a_{it}, x_{it}, r_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
+	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
 \end{align*}
 
 \textbf{State variables}\vspace{0.3cm}
 \begin{itemize}\setlength\itemsep{1em}
-\item $s_t = (x_t, \epsilon_t)$\medskip
+\item $s_t = (\bar{s}_t, \epsilon_t)$\medskip
 \begin{itemize}\setlength\itemsep{1em}
-	\item $x_t$ observed
+	\item $\bar{s}_t$ observed
 	\item $\epsilon_t$ unobserved
 \end{itemize}
 \end{itemize}
@@ -29,7 +29,7 @@
 \begin{itemize}\setlength\itemsep{1em}
 \item likelihood-based
 \begin{align*}
-  \hat{\theta} \equiv \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, r_{it} \mid x_{it}, \theta)
+  \hat{\theta} \equiv \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
 \end{align*}
 \item simulation-based
 \begin{align*}

@@ -27,7 +27,7 @@ k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
 h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
 \end{align*}
 %
-\noindent The productivity shocks are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$. Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k_t}, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon_t}\}$.\\
+\noindent The productivity shocks $\bm{\epsilon_t}$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$. Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k_t}, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon_t}\}$.\\
 
 \noindent Theoretical and empirical research from specialized disciplines within economics informs the specification of each $u_a(\cdot)$ and we discuss the exact functional form of the immediate utility function in the blue-collar occupation as an example.\footnote{All additional details are available in Appendix \ref{Computational implementation}.}\\
 
@@ -62,6 +62,8 @@ It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_
 \subsection{Empirical data}
 %-------------------------------------------------------------------------------
 We analyze the original dataset used by \citet{Keane.1997} and thus only provide a brief description here.\footnote{We provide additional details in Appendix \ref{Empirical data}.} The authors construct their sample based on the National Longitudinal Survey of Youth 1979 (NLSY79). The NLSY79 is a nationally representative sample of young men and women living in the United States in 1979 and born between 1957 and 1964. Individuals were followed from 1979 onwards and repeatedly interviewed about their schooling decisions and labor market experiences. Based on this information, individuals are assigned to either working in one of the three occupations, attending school, or simply staying at home.\\
+
+\noindent \citet{Keane.1997} restrict attention to white males that turn 16 between 1977 and 1981 and exploit the information collected between 1979 and 1987. Thus individuals in the sample are all between 16 and 26 years old. While the sample initially consists of 1,373 individuals at age 16, this number drops to 256 at the age of 26 due to sample attrition, missing data, and the short observation period. Overall, the final sample consists of 12,359 person-period observations.\\
 
 \noindent Figure \ref{Overview} summarizes our information about choices and wages by age. We show the distribution of choices on the left, and report average wages on the right. Initially, roughly 86\% of individuals enroll in school, but this share steadily declines with age. Nevertheless, about 39\% obtain more than a high school degree and continue their schooling for more than twelve years. As individuals leave school, most of them initially pursue a blue-collar occupation. But the relative share of the white-collar occupation increases as individuals entering the labor market later have higher levels of schooling. At age 26, about 48\% work in a white-collar occupation and 34\% in a blue-collar occupation. The share of individuals in the military peaks around age 20 when it amounts to 8\%. At its maximum around age 18, approximately 20\% of individuals stay at home.
 %
