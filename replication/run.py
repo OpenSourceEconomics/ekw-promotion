@@ -114,7 +114,7 @@ def plot_average_wage(df_subset, color="colors"):
         if label == "military":
             y[-1] = np.nan
 
-        str_ = label.replace("_", "-").capitalize()
+        str_ = label.replace("_collar", "").capitalize()
         ax.plot(range(11), y, color=color_scheme[color][label], label=str_)
 
     ax.set_ylim(5, 30)
