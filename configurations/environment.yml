@@ -36,7 +36,7 @@ dependencies:
   - black
   - flake8
   - pytest-flake8
-  - pytest-black
+  - pytest
   - sphinx-autobuild
   - tox-conda
   - pip:
@@ -44,7 +44,7 @@ dependencies:
       - apprise
       - pre-commit
       - pysftp
-      - pytest
+      - pytest-black
       - Py-BOBYQA
       - DFO-LS
       - PyPDF2
