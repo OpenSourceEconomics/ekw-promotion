@@ -43,7 +43,7 @@ h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
                             & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1]
 \end{align}
 %
-It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_{1,2})$ that capture the extra effort for individuals who only recently started working in a white-collar occupation. Additional components depend on whether an individual has a high school $\vartheta_1$ or college $\vartheta_2$ degree. There is a detrimental impact of leaving the military after a single year $\vartheta_3$.\\
+It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_{1,2})$ that capture the extra effort for individuals who only recently started working in a blue-collar occupation. Additional components depend on whether an individual has a high school $\vartheta_1$ or college $\vartheta_2$ degree. There is a detrimental impact of leaving the military after a single year $\vartheta_3$.\\
 
 \noindent The wage component $w_{1}(\cdot)$ is given by the product of the market-equilibrium rental price $r_{1}$ and an occupation-specific skill level $x_{1}(\cdot)$. The latter is determined by the overall level of human capital. This specification leads to a standard logarithmic wage equation in which the constant term is the skill rental price $\ln(r_{1})$ and wages follow a log-normal distribution.\\
 
@@ -62,7 +62,7 @@ It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_
                                   & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} \nonumber
 \end{align}
 %
-\noindent There are several notable features. Skills increase with schooling $\beta_{1,1}$ and white-collar work experience ($\gamma_{1,1}, \gamma_{1,2}$). There are so-called sheep-skin effects associated with completing a high school $\beta_{1,2}$ and graduate $\beta_{1,3}$ education that capture the impact of completing a degree beyond just the associated years of schooling. Also, skills depreciate when working in a different occupation $\gamma_{1,6}$ but other work experience ($\gamma_{1,7}, \gamma_{1,8}$) is transferable.
+\noindent There are several notable features. Skills increase with schooling $\beta_{1,1}$ and blue-collar work experience ($\gamma_{1,1}, \gamma_{1,2}$). There are so-called sheep-skin effects associated with completing a high school $\beta_{1,2}$ and graduate $\beta_{1,3}$ education that capture the impact of completing a degree beyond just the associated years of schooling. Also, skills depreciate when the individual was not employed in a blue-collar occupation in the preceding period $\gamma_{1,6}$. Other work experience ($\gamma_{1,7}, \gamma_{1,8}$) is transferable.
 %-------------------------------------------------------------------------------
 \subsection{Empirical data}
 %-------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ We analyze the original dataset used by \citet{Keane.1997} and thus only provide
 
 \noindent \citet{Keane.1997} restrict attention to white males that turn 16 between 1977 and 1981 and exploit the information collected between 1979 and 1987. Thus individuals in the sample are all between 16 and 26 years old. While the sample initially consists of 1,373 individuals at age 16, this number drops to 256 at the age of 26 due to sample attrition, missing data, and the short observation period. Overall, the final sample consists of 12,359 person-period observations.\\
 
-\noindent Figure \ref{Overview} summarizes our information about choices and wages by age. We show the distribution of choices on the left, and report average wages on the right. Initially, roughly 86\% of individuals enroll in school, but this share steadily declines with age. Nevertheless, about 39\% obtain more than a high school degree and continue their schooling for more than twelve years. As individuals leave school, most of them initially pursue a blue-collar occupation. But the relative share of the white-collar occupation increases as individuals entering the labor market later have higher levels of schooling. At age 26, about 48\% work in a white-collar occupation and 34\% in a blue-collar occupation. The share of individuals in the military peaks around age 20 when it amounts to 8\%. At its maximum around age 18, approximately 20\% of individuals stay at home.
+\noindent Figure \ref{Overview} summarizes our information about choices and wages by age. We show the distribution of choices on the left, and report average wages on the right. Initially, roughly 86\% of individuals enroll in school, but this share steadily declines with age. Nevertheless, about 39\% obtain more than a high school degree and continue their schooling for more than twelve years. As individuals leave school, most of them initially pursue a blue-collar occupation. But the relative share of the white-collar occupation increases as individuals entering the labor market later have higher levels of schooling. At age 26, about 48\% work in a blue-collar occupation and 34\% in a white-collar occupation. The share of individuals in the military peaks around age 20 when it amounts to 8\%. At its maximum around age 18, approximately 20\% of individuals stay at home.
 %
 \begin{figure}[h!]\centering
 \caption{Data overview}\label{Overview}
@@ -105,8 +105,8 @@ Figure \ref{Economic mechanism and policy forecast} illustrates the ability of t
 
 \begin{figure}[h!]\centering
 \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
-\subfloat[Time preference]{\scalebox{0.25}{\includegraphics{fig-economic-mechanism-bw}}}\hspace{0.3cm}
-\subfloat[Tuition subsidy]{\scalebox{0.25}{\includegraphics{fig-policy-forecast-bw}}}
+\subfloat[Time preference]{\scalebox{0.20}{\includegraphics{fig-economic-mechanism-bw}}}\hspace{0.3cm}
+\subfloat[Tuition subsidy]{\scalebox{0.20}{\includegraphics{fig-policy-forecast-bw}}}
 \begin{center}
 \begin{minipage}[t]{0.60\columnwidth}
 \item \scriptsize{\textbf{Notes:} We simulate a sample of 1,000 individuals using the calibrated model.}
