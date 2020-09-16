@@ -1,6 +1,22 @@
-\input{../material/header}
+\documentclass[a4paper, 10pt]{article}
 
-\input{sections/title}
+\newcommand{\papertitle}{Eckstein-Keane-Wolpin models \\
+	\large An invitation for transdisciplinary collaboration}
+\input{../material/preamble/Preamble_Fundamental_packages}
+\hypersetup{
+	pdftitle={\papertitle},
+	pdfauthor={\\\Huge{\textbf{Appendix}}}
+}
+\input{../material/preamble/Preamble_Page_layout_general}
+\input{../material/preamble/Preamble_Page_layout_paper}
+\input{../material/preamble/Preamble_Fonts_Charter_FiraSans}
+\input{../material/preamble/Preamble_Sansserif_math}
+\input{../material/preamble/Preamble_BibLaTeX_APA}
+\input{../material/preamble/Preamble_Commenting_and_highlighting}
+\input{../material/preamble/Preamble_Miscellaneous}
+
+%\input{sections/title}
+\bibliography{../submodules/bibliography/literature}
 
 \begin{document}
 
@@ -15,7 +31,8 @@
 
 \end{appendices}\newpage
 
-\bibliographystyle{apacite}
-\bibliography{../submodules/bibliography/literature}
+\begin{refcontext}[sorting=nyt]  % Sort BIBLIOGRAPHY by alphabet (while CITATIONS are sorted by year)
+	\printbibliography[heading=bibintoc]
+\end{refcontext}
 
 \end{document}

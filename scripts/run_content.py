@@ -15,7 +15,7 @@ def compile_material(task):
 
     [
         sp.check_call([cmd, "main"])
-        for cmd in ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+        for cmd in ["pdflatex", "biber", "pdflatex", "pdflatex"]
     ]
 
     os.chdir(os.environ["PROJECT_DIR"])

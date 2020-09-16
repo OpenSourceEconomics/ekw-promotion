@@ -21,8 +21,8 @@ u_a(\cdot) =
 Work experience $\bm{k_t}$  and years of completed schooling $h_t$ evolve deterministically.
 %
 \begin{align*}
-k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
-h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
+	k_{a,t+1} = k_{a,t} + \ind[a_t = a]  & \qquad \text{if}\, a \in \{1, 2, 3\} \\
+	h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  & \qquad
 \end{align*}
 %
 \noindent The productivity shocks are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$. Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k_t}, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon_t}\}$.\\
