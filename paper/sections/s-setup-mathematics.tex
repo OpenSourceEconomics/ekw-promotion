@@ -47,3 +47,20 @@ a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,
 %\EndFor
 %\vspace{0.3cm}\end{algorithmic}
 %\end{algorithm}\FloatBarrier
+%\begin{algorithm}[h!]
+%	\caption{Value function iteration -- standard human capital model.}
+%	\label{alg:HumanCapital}
+%\begin{algorithmic}\vspace{0.3cm}
+%	\For{$t = T, \hdots, 1$}
+%	\If{t == T}
+%	\State $v^{\pi^*}_T(s_T) =  \underset{a_T\in \mathcal{A}}{\max} \bigg\{ u(s_T, a_T) \bigg\}\qquad \forall\, s_T\in \mathcal{S}_T$
+%	\Else
+%	\State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in \mathcal{S}_t$ by
+%	\State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in \mathcal{A}}{\max} \bigg\{ u(s_t, a_t) + \delta\,\mathbb{E}_{p^{\pi^*}} \big[ v^{\pi^*}_{t + 1}(s_{t + 1})  \, \big| \, s_t \big] \bigg\}$
+%	\State and set
+%	\State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t \in \mathcal{A}} {\arg \max} \bigg\{ u(s_t, a_t) + \delta\,\mathbb{E}_{p^{\pi^*}}  \big[ v^{\pi^*}_{t + 1}(s_{t + 1}) \,\big|\, s_t \big] \bigg\}$.
+%	\EndIf
+%	\EndFor
+%	\vspace{0.3cm}
+%\end{algorithmic}
+%\end{algorithm}

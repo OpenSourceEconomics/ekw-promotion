@@ -1,0 +1,70 @@
+%!TEX root = ../main.tex
+\begin{tikzpicture}[every node/.style={scale=0.7}]
+
+\tikzset{
+	eqblock/.style={text width=3.5cm,align=center}
+}
+
+% Nodes
+\node[xshift=-4.85cm, yshift=-1.75cm] (left) {};
+\node[below=3cm, xshift=6cm] (bottom_left) {};
+\node[node distance=5cm, right of=left, xshift=6cm] (right) {};
+\node[node distance=6cm, right of=bottom_left, xshift=6cm] (bottom_right) {};
+
+\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\large$t$};
+\node[node distance=6cm, right of=bottom_left, yshift=-0.5cm] (t2) {\large$t+1$};
+
+\node[eqblock, above of=left, xshift=2.5cm] (eq1) {\large$\{u(s_t, a_t)\}_{a_t \in \mathcal{A}}$};
+\node[eqblock, above of=left, xshift=5.5cm, yshift=0.75cm] (eq2) {\large$a_t$};
+\node[eqblock, above of=left, xshift=8.5cm] (eq3) {\large$u(s_t, a_t)$};
+\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\large$\{u(s_{t+1}, a_{t+1})\}_{a_{t+1} \in \mathcal{A}}$};
+\node[eqblock, above of=bottom_left, xshift=6cm, yshift=0.75cm] (eq6) {\large$a_{t+1}$};
+\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$u(s_{t+1}, a_{t+1})$};
+
+\node[above of=eq1, node distance=1cm] (text2) {\large Learn};
+\node[above of=eq2, node distance=1cm] (text3) {\large Choose};
+\node[above of=eq3, node distance=1cm] (text1) {\large Receive};
+\node[above of=eq4, node distance=1cm] (text4) {\large Learn};
+\node[above of=eq6, node distance=1cm] (text5) {\large Choose};
+\node[above of=eq5, node distance=1cm] (text6) {\large Receive};
+
+% Lines
+\draw[|-|] (left) -- (right);
+\draw[|-|] (bottom_left.center) -- (bottom_right);
+
+\end{tikzpicture}
+
+%\begin{tikzpicture}[every node/.style={scale=0.7}]
+%
+%\tikzset{
+%eqblock/.style={text width=3.5cm,align=center}
+%}
+%
+%% Nodes
+%\node[xshift=-4.85cm, yshift=-1.75cm] (left) {};
+%\node[below=3cm, xshift=6cm] (bottom_left) {};
+%\node[node distance=5cm, right of=left, xshift=6cm] (right) {};
+%\node[node distance=6cm, right of=bottom_left, xshift=6cm] (bottom_right) {};
+%
+%\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\large$t$};
+%\node[node distance=6cm, right of=bottom_left, yshift=-0.5cm] (t2) {\large$t+1$};
+%
+%\node[eqblock, above of=left, xshift=2.5cm] (eq1) {\large$\{u_a(s_t)\}_{a \in \mathcal{A}}$};
+%\node[eqblock, above of=left, xshift=5.5cm, yshift=0.75cm] (eq2) {\large$a_t^{\pi}(s_t)$};
+%\node[eqblock, above of=left, xshift=8.5cm] (eq3) {\large$u_{a^{\pi}_t(s_t)}(s_t)$};
+%\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\large$\{u_a(s_{t+1})\}_{a \in \mathcal{A}}$};
+%\node[eqblock, above of=bottom_left, xshift=6cm, yshift=0.75cm] (eq6) {\large$a_{t+1}^{\pi}(s_{t+1})$};
+%\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$u_{a^{\pi}_{t+1}(s_{t+1})}(s_{t+1})$};
+%
+%\node[above of=eq1, node distance=1cm] (text2) {\large Learn};
+%\node[above of=eq2, node distance=1cm] (text3) {\large Choose};
+%\node[above of=eq3, node distance=1cm] (text1) {\large Receive};
+%\node[above of=eq4, node distance=1cm] (text4) {\large Learn};
+%\node[above of=eq6, node distance=1cm] (text5) {\large Choose};
+%\node[above of=eq5, node distance=1cm] (text6) {\large Receive};
+%
+%% Lines
+%\draw[|-|] (left) -- (right);
+%\draw[|-|] (bottom_left.center) -- (bottom_right);
+%
+%\end{tikzpicture}
