@@ -1,48 +1,62 @@
 % !TEX root = ../main.tex
 
-\beginbackup\appendix
-\begin{frame}\begin{center}
-\LARGE\textbf{Appendix}
-\end{center}\end{frame}
+%\beginbackup
+\appendix
+%\begin{frame}\begin{center}
+%\LARGE\textbf{Appendix}
+%\end{center}\end{frame}
+\section{Appendix}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}
-\textbf{Content}\medskip
+\begin{frame}{Appendix - Content}
+%\textbf{Content}\medskip
 \begin{itemize}\setlength\itemsep{1em}
+\thispagestyle{empty}
 \item Contact
 \item References
 \end{itemize}
 \end{frame}
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
-\begin{frame}\begin{center}
-\LARGE\textit{Contact}
-\end{center}\end{frame}
+%\begin{frame}\begin{center}
+%\LARGE\textit{Contact}
+%\end{center}\end{frame}
+\section{\textit{Contact}}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}
-\textbf{Philipp Eisenhauer}\\\vspace{0.5cm}
-\begin{tabular}{ll}
-Mail		    & \href{mailto:peisenha@uni-bonn.de}{peisenha@uni-bonn.de}\\
-Web     	  & \url{http://peisenha.github.io} \\
-GitHub      & \url{https://github.com/peisenha}\\
-\end{tabular}
+\begin{frame}{Contact - Philipp Eisenhauer}
+	\thispagestyle{empty}
+%\textbf{Philipp Eisenhauer}\\\vspace{0.5cm}
+\vspace{2cm}
+	\begin{tabular}{ll}
+		Mail		    & \href{mailto:peisenha@uni-bonn.de}{peisenha@uni-bonn.de}\\
+		Web     	  & \url{http://peisenha.github.io} \\
+		GitHub      & \url{https://github.com/peisenha}\\
+	\end{tabular}
+
+
 \end{frame}
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
-\begin{frame}\begin{center}
-\LARGE\textit{References}
-\end{center}\end{frame}
+%\begin{frame}\begin{center}
+%\LARGE\textit{References}
+%\end{center}\end{frame}
+\section{References}
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 \newgeometry{margin=1cm}
-\begin{frame}[allowframebreaks]\frametitle{}
-
-
-\bibliography{../submodules/bibliography/literature}
-
+\begin{frame}[allowframebreaks]\frametitle{References}
+	\thispagestyle{empty}
+%\citestyle
+\printbibliography
+%\bibliography{../submodules/bibliography/literature}
+%\begin{frame}[allowframebreaks]{\insertsection}
+	
+%	\begin{refcontext}[sorting=nyt]
+	%	\printbibliography[heading=none]
+	%\end{refcontext}
 
 
 \end{frame}
 
-\backupend
+%\backupend

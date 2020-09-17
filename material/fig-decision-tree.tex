@@ -17,8 +17,9 @@
 	baseline=-120pt,
 	grow                    = right,
 	edge from parent/.style = {draw, -latex},
-	%every node/.style       = {font=\footnotesize, minimum width={width("Magnetometer")+2pt}},
-	every node/.style = {font=\footnotesize, minimum width={2cm}},
+	%every node/.style       = {font=\footnotesize, minimum width={width%("Magnetometer")
+			%+2pt}},
+			every node/.style       = {font=\footnotesize, minimum width={2cm}},
 	sloped
 ]
 
@@ -90,7 +91,7 @@
 \draw[->] (3) edge (31);
 \node [env, top color = tabred, bottom color=tabred, scale = 0.55] (32) at (0,-0.4) {White};
 \draw[->] (3) edge (32);
-\node [env, top color = tabpurple, bottom color = tabpurple, scale = 0.55] (33) at (0,0) {Military};
+\node [env, top color = tabpurple, bottom color = tabpurple, scale = 0.55] (33) at (0,0.0) {Military};
 \draw[->] (3) edge (33);
 \node [env, top color = taborange, bottom color = taborange, scale = 0.55] (34)  at (0,0.4) {School};
 \draw[->] (3) edge (34);
