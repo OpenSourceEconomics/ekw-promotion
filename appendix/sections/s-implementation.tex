@@ -69,10 +69,10 @@ Equation (\ref{eq:UtilitySchooling}) shows the parameterization of the non-pecun
 %
 \begin{align}\label{eq:UtilitySchooling}
 	\zeta_4(k_{3,t}, h_t, t, a_{t-1}, e_{j,4}, \epsilon_{4,t})  = e_{j,4} & + \beta_{tc_1} \cdot \ind[h_t \geq 12] + \beta_{tc_2} \cdot \ind[h_t \geq 16]   \\\nonumber
-    							  & + \beta_{rc_1} \cdot \ind[a_{t-1} \neq 4, h_t < 12] + \beta_{rc_2} \cdot \ind[a_{t-1} \neq 4, h_t \geq 12] \\\nonumber
-    							  & + \gamma_{4,4} \cdot t + \gamma_{4,5} \cdot \ind[t < 18] 																					  \\\nonumber
-     							  & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1]\\\nonumber
-      							& + \epsilon_{4,t}
+    							  & + \beta_{rc_1} \cdot \ind[a_{t-1} \neq 4, h_t < 12]  \\\nonumber
+    							  & + \beta_{rc_2} \cdot \ind[a_{t-1} \neq 4, h_t \geq 12]+ \gamma_{4,4} \cdot t  \\\nonumber
+     							  & + \gamma_{4,5} \cdot \ind[t < 18] + \vartheta_1 \cdot \ind[h_t \geq 12]  \\\nonumber
+      							& + \vartheta_2 \cdot \ind[h_t \geq 16]+ \vartheta_3 \cdot \ind[k_{3,t} = 1] + \epsilon_{4,t}
 \end{align}
 %
 There is a direct cost of attending school such as tuition for continuing education after high school $\beta_{tc_1}$ and college $\beta_{tc_2}$. The decision to leave school is reversible, but entails adjustment costs that differ by schooling category ($\beta_{rc_1}, \beta_{rc_2}$). Schooling is defined as time spent in school and not by formal credentials acquired. Once individuals reach a certain amount of schooling, they acquire a degree. There is no uncertainty about grade completion \citep{Altonji.1993} and no part-time enrollment. Individuals value the completion of high-school and graduate school ($\vartheta_1, \vartheta_2$).
@@ -83,8 +83,8 @@ Equation (\ref{eq:UtilityHome}) shows the parameterization of the non-pecuniary 
 %
 \begin{align}\label{eq:UtilityHome}
 	\zeta_5(k_{3,t}, h_t, t, e_{j,5}, \epsilon_{5,1}) =  e_{j,5} & + \gamma_{5,4} \cdot \ind[18 \leq t \leq 20] + \gamma_{5,5} \cdot \ind[t \geq 21] \\ \nonumber
-    							   & +\vartheta_{1} \cdot \ind[h_t \geq 12] + \vartheta_{2} \cdot \ind[h_t \geq 16] +  \vartheta_3 \cdot \ind[k_{3,t} = 1]  \\ \nonumber
-    							   & + \epsilon_{5,t}
+    							   & +\vartheta_{1} \cdot \ind[h_t \geq 12] + \vartheta_{2} \cdot \ind[h_t \geq 16] \\ \nonumber
+    							   & +  \vartheta_3 \cdot \ind[k_{3,t} = 1]+ \epsilon_{5,t}
 \end{align}
 %
 Staying at home as a young adult $\gamma_{5, 4}$ is less stigmatic as doing so while already being an adult $\gamma_{5,5}$. Additionally, possessing a degree  $(\vartheta_1, \vartheta_2)$ or leaving the military prematurely $\vartheta_3$ influences the immediate utility.
@@ -123,9 +123,9 @@ There are several notable features. The first part of the skill production funct
 The wage component from working in a white-collar occupation is specified analogously. Equation (\ref{eq:SkillLevelWhiteCollar}) shows the parameterization of the deterministic component of the skill production function.
 %
 \begin{align}\label{eq:SkillLevelWhiteCollar}
-    \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{j,2}) = e_{j,2} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12] + \beta_{2,3} \cdot \ind[h_t\geq 16] \\\nonumber
-    							 & + \gamma_{2, 1} \cdot  k_{2,t} + \gamma_{2,2} \cdot  (k_{2,t})^2 + \gamma_{2,3} \cdot  \ind[k_{2,t} > 0] \\\nonumber
-                                   & + \gamma_{2,4} \cdot  t + \gamma_{2,5} \cdot \ind[t < 18] \\\nonumber
+    \Gamma_2(\bm{k_t}, h_t, t, a_{t-1}, e_{j,2}) = e_{j,2} & + \beta_{2,1} \cdot h_t + \beta_{2, 2} \cdot \ind[h_t \geq 12]  \\\nonumber
+    							 & + \beta_{2,3} \cdot \ind[h_t\geq 16]+ \gamma_{2, 1} \cdot  k_{2,t} + \gamma_{2,2} \cdot  (k_{2,t})^2  \\\nonumber
+                                   & + \gamma_{2,3} \cdot  \ind[k_{2,t} > 0]+ \gamma_{2,4} \cdot  t + \gamma_{2,5} \cdot \ind[t < 18] \\\nonumber
                                   & + \gamma_{2,6} \cdot  \ind[a_{t-1} = 2]  + \gamma_{2,7} \cdot  k_{1,t} + \gamma_{2,8} \cdot  k_{3,t}
 \end{align}
 %-------------------------------------------------------------------------------

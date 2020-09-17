@@ -56,10 +56,10 @@ It includes job amenities $\alpha_1$ and mobility and search costs $(c_{1,1}, c_
 \noindent Equation (\ref{Skill production function}) shows the parameterization of the deterministic component of the skill production function.
 %
 \begin{align}\label{Skill production function}
-    \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{j, 1}) = e_{j,1} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16] \nonumber \\ \nonumber
-                                  & + \gamma_{1, 1} \cdot  k_{1,t} + \gamma_{1,2} \cdot  (k_{1,t})^2 + \gamma_{1,3} \cdot  \ind[k_{1,t} > 0] \\ \nonumber
-                                & + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\
-                                  & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} 
+    \Gamma_1(\bm{k_t}, h_t, t, a_{t-1}, e_{j, 1}) = e_{j,1} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12]   \\ \nonumber
+                                  & + \gamma_{1, 1} \cdot  k_{1,t} + \gamma_{1,2} \cdot  (k_{1,t})^2  \\ \nonumber
+                                & + \gamma_{1,3} \cdot  \ind[k_{1,t} > 0] + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\
+                                  & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t} \nonumber
 \end{align}
 %
 \noindent There are several notable features. Skills increase with schooling $\beta_{1,1}$ and blue-collar work experience ($\gamma_{1,1}, \gamma_{1,2}$). There are so-called sheep-skin effects associated with completing a high school $\beta_{1,2}$ and graduate $\beta_{1,3}$ education that capture the impact of completing a degree beyond just the associated years of schooling. Also, skills depreciate when not employed in a blue-collar occupation in the preceding period $\gamma_{1,6}$. Other work experience ($\gamma_{1,7}, \gamma_{1,8}$) is transferable.
@@ -83,7 +83,7 @@ We analyze the original dataset used by \citet{Keane.1997} and thus only provide
 \end{center}
 \end{figure}\FloatBarrier
 %
-\noindent Overall, average wages start at about \$10,000 at age 16 but increase considerably up to about \$25,000 at age 26. While wages in the blue-collar occupation are initially highest with about \$10,286, wages in the white-collar occupation and military start around \$9,000. However, wages in the white-collar occupation increase steeper over time and overtake blue-collar wages around age 21. At the end of the observation period, wages in the white-collar occupation are about 50\% higher than blue-collar wages with \$32,756 as opposed to only \$20,739. Military wages remain lowest throughout.\\
+\noindent Overall, average wages start at about \$\,10,000 at age 16 but increase considerably up to about \$\,25,000 at age 26. While wages in the blue-collar occupation are initially highest with about \$\,10,286, wages in the white-collar occupation and military start around \$\,9,000. However, wages in the white-collar occupation increase steeper over time and overtake blue-collar wages around age 21. At the end of the observation period, wages in the white-collar occupation are about 50\,\% higher than blue-collar wages with \$\,32,756 as opposed to only \$\,20,739. Military wages remain lowest throughout.\\
 
 \noindent We fit the model to the empirical data using maximum likelihood calibration. Figure \ref{Model fit} shows the overall agreement between the empirical data and a dataset simulated using the calibrated parameters within the support of the data. On the left, we show the choice probability of working in a blue-collar occupation, while we plot the average wage across all occupations on the right.
 %
@@ -97,7 +97,7 @@ We analyze the original dataset used by \citet{Keane.1997} and thus only provide
 \end{minipage}\end{center}
 \end{figure}\FloatBarrier
 %
-\noindent Overall, the values of the calibrated parameters of the model are in broad agreement with the relevant literature. For example, individuals discount future utilities by $6\%$ per year, and wages increase by about $7\%$ with each additional year of schooling.
+\noindent Overall, the values of the calibrated parameters of the model are in broad agreement with the relevant literature. For example, individuals discount future utilities by $6\,\%$ per year, and wages increase by about $7\,\%$ with each additional year of schooling.
 %-------------------------------------------------------------------------------
 \subsection{Economic insights}
 %-------------------------------------------------------------------------------
