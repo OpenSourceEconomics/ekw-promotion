@@ -188,7 +188,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\usepackage[multiple, bottom, norule, splitrule, marginal]{footmisc}
+\usepackage[symbol, multiple, bottom, norule, splitrule, marginal]{footmisc}
 % \renewcommand{\multfootsep}{,\,}
 % AER-like style: no regular footnote rule, half-page splitrule
 % ==>
@@ -203,6 +203,7 @@
 	\renewcommand{\splitfootnoterule}{{\hrule width 0.5\textwidth}}%
 	\renewcommand{\footnoterule}{\oldfootnoterule\medskip}%
 }
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 % <==
 %\setlength{\footnotesep}{0.8\baselineskip}
 
@@ -215,18 +216,7 @@
 \newlength{\textparindent}
 \setlength{\textparindent}{\parindent}
 \newlength{\templength}
-\makeatletter
-\let \@makefntextorig \@makefntext
-    % Saving the original definition so we can reuse it if necessary.
-\newcommand{\@makefntextcustom}[1]{%
-	\parindent 2\textparindent%
-	\hspace{-\textparindent}%
-	\settowidth{\templength}{0}%
-	\ifnum\value{footnote}<10 \hspace{\templength}\else\fi%
-	\thefootnote.\enskip #1%
-}
-\renewcommand{\@makefntext}[1]{\@makefntextcustom{#1}}
-\makeatother
+
 %\usepackage{scrextend}
 %\newlength{\footnoteflmargin}
 %\setlength{\footnoteflmargin}{\parindent}
@@ -274,7 +264,7 @@
 %\usepackage{subfig} 
 % Justus says this is the newer and preferable package.
 % However, see https://tex.stackexchange.com/questions/13625/subcaption-vs-subfig-best-package-for-referencing-a-subfigure:
-\usepackage{subcaption}
+%\usepackage{subcaption}
 
 % Packages for creating better-looking tables
 \usepackage{booktabs}
@@ -677,3 +667,4 @@
 \definecolor{bwtabgreen}{RGB}{187 ,187 ,187} 
 \usepackage{listings}
 \graphicspath{{../material/}}
+

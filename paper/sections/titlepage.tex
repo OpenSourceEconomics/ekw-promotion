@@ -1,12 +1,15 @@
 %!TEX root = ../main.tex
 
 \title{Eckstein-Keane-Wolpin models\\
-	\large An invitation for transdisciplinary collaboration\vspace{0.25cm}\\
+	\large An invitation for transdisciplinary collaboration \thanks{Corresponding author: Philipp Eisenhauer, peisenha@uni-bonn.de. We thank  Jano\'s Gabler, Annica Gehlen, Boryana Ilieva, Fedor Ishakov, Lena Janys, Moritz Mendel, Tim Mensinger, Tobias Raabe, Klara R\"ohrl, John Rust, and Rafael Suchy for their valuable input. Luis Wardenbach provided outstanding research assistance.} \\
 	\\
 	\\
 	\\
 	\includegraphics[height=2.5cm]{../material/crop-ose-logo-black-white.pdf}
 }
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 
 \vspace{2.5cm}
 \renewcommand{\baselinestretch}{1.3}\normalsize
@@ -17,11 +20,12 @@
 
 \begin{center}\textbf{Abstract}\end{center}
 \begin{abstract}
-\noindent We\footnote{Corresponding author: Philipp Eisenhauer, peisenha@uni-bonn.de. We thank  Jano\'s Gabler, Annica Gehlen, Boryana Ilieva, Fedor Ishakov, Lena Janys, Moritz Mendel, Tim Mensinger, Tobias Raabe, Klara R\"ohrl, John Rust, and Rafael Suchy for their valuable input. Luis Wardenbach provided outstanding research assistance.}‚ present background material on a class of structural microeconometric models to facilitate transdisciplinary collaboration in their future development. We describe the economic framework, mathematical formulation, and calibration procedures for the so-called Eckstein-Keane-Wolpin (EKW) models. We provide an exemplifying analysis of the seminal model outlined in \citet{Keane.1997} and present our group's ensemble of research codes that allow for its specification, simulation, and calibration. We summarize our efforts drawing on research outside economics to
+\noindent We \footnotetext[1]{Corresponding author: Philipp Eisenhauer, peisenha@uni-bonn.de. We thank  Jano\'s Gabler, Annica Gehlen, Boryana Ilieva, Fedor Ishakov, Lena Janys, Moritz Mendel, Tim Mensinger, Tobias Raabe, Klara R\"ohrl, John Rust, and Rafael Suchy for their valuable input. Luis Wardenbach provided outstanding research assistance.} present background material on a class of structural microeconometric models to facilitate transdisciplinary collaboration in their future development. We describe the economic framework, mathematical formulation, and calibration procedures for the so-called Eckstein-Keane-Wolpin (EKW) models. We provide an exemplifying analysis of the seminal model outlined in \citet{Keane.1997} and present our group's ensemble of research codes that allow for its specification, simulation, and calibration. We summarize our efforts drawing on research outside economics to
 address the computational challenges in applying EKW models and improve the reliability and interpretability of their results.
 \end{abstract}
 
-%{\let\thefootnote\relax\footnote{Corresponding author: Philipp Eisenhauer, peisenha@uni-bonn.de. We thank  Jano\'s Gabler, Annica Gehlen, Boryana Ilieva, Fedor Ishakov, Lena Janys, Moritz Mendel, Tim Mensinger, Tobias Raabe, Klara R\"ohrl, John Rust, and Rafael Suchy for their valuable input. Luis Wardenbach provided outstanding research assistance.}}
+%{\footnote[1]{Corresponding author: Philipp Eisenhauer, peisenha@uni-bonn.de. We thank  Jano\'s Gabler, Annica Gehlen, Boryana Ilieva, Fedor Ishakov, Lena Janys, Moritz Mendel, Tim Mensinger, Tobias Raabe, Klara R\"ohrl, John Rust, and Rafael Suchy for their valuable input. Luis Wardenbach provided outstanding research assistance.}}
+
 
 \setcounter{page}{1}
  %\setcounter{footnote}{0}
