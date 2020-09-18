@@ -32,12 +32,28 @@ a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,
 
 \noindent Algorithm \ref{Backward induction procedure} allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account, and the optimal action is choosing the alternative with the highest immediate utilities in each state. With the decision rule for the final period at hand, the other optimal decisions can be determined recursively following equation (\ref{MPD Optimality}) as the calculation of their expected future utilities is straightforward given the relevant transition probabilities.
 
-\begin{algorithm}[h!]
-	\For{$t = T, \hdots, 1$}{\eIf{t == T}{$v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$}{Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by \\
-	$\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$\\
-	and set \\
-	$\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.\\
-	}}
+%\begin{algorithm}[h!]
+%	\For{$t = T, \hdots, 1$}{\eIf{t == T}{$v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$}{Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by \\
+%	$\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$\\
+%	and set \\
+%	$\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.\\
+%	}}
+%	\caption{\strut Backward induction procedure}\label{Backward induction procedure}
+%	\label{alg:HumanCapital}
+%\end{algorithm}
+
+\vspace{0.5cm}\begin{algorithm}
 	\caption{\strut Backward induction procedure}\label{Backward induction procedure}
-	\label{alg:HumanCapital}
-\end{algorithm}
+	\begin{algorithmic}\vspace{0.3cm}
+		\For{$t = T, \hdots, 1$}
+		\If{t == T}
+		\State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
+		\Else
+		\State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
+		\State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
+		\State and set
+		\State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.
+		\EndIf
+		\EndFor
+		\vspace{0.3cm}\end{algorithmic}
+\end{algorithm}\FloatBarrier

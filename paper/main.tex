@@ -25,6 +25,26 @@
 
 \input{sections/titlepage}
 
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+\makeatletter
+\let \@makefntextorig \@makefntext
+% Saving the original definition so we can reuse it if necessary.
+\newcommand{\@makefntextcustom}[1]{%
+	\parindent 2\textparindent%
+	\hspace{-\textparindent}%
+	\settowidth{\templength}{0}%
+	\ifnum\value{footnote}<10 \hspace{\templength}\else\fi%
+	\thefootnote.\enskip #1%
+}
+\renewcommand{\@makefntext}[1]{\@makefntextcustom{#1}}
+\makeatother
+
+
+\clearpage
+
+
+
 \input{sections/s-introduction}
 
 \input{sections/s-setup}
