@@ -9,10 +9,10 @@
 %-------------------------------------------------------------------------------
 \begin{frame}{Calibration procedure - Data}
 
-\textbf{Data}\vspace{0.3cm}
-\begin{flalign*}
-	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
-\end{flalign*}
+\textbf{Data}\vspace{0.3cm}\\
+\begin{lfalign*}
+	$\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\$
+\end{lfalign*}
 
 \textbf{State variables}\vspace{0.3cm}
 \begin{itemize}\setlength\itemsep{1em}
@@ -26,15 +26,15 @@
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 \begin{frame}{Calibration procedure - Procedures}
-\textbf{Procedures}\vspace{0.5cm}
+\textbf{Procedures}\vspace{0.5cm}\\
 \begin{itemize}\setlength\itemsep{1em}
-\item Likelihood-based
-\begin{align*}
-  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
-\end{align*}
-\item Simulation-based
-\begin{align*}
-    \hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \big(M_D - M_S(\theta)\big)
-\end{align*}
+\item Likelihood-based\\\vspace{0.5cm}
+\begin{lfalign*}
+  $\hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)$
+\end{lfalign*}\\
+\item Simulation-based\\\vspace{0.5cm}
+\begin{lfalign*}
+    $\hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \big(M_D - M_S(\theta)\big)$
+\end{lfalign*}
 \end{itemize}
 \end{frame}
