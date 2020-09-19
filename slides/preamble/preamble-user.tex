@@ -1,0 +1,62 @@
+
+\makeatletter
+\newcommand{\Tw}{\strip@pt\textwidth}
+\makeatother
+\titlegraphic{%
+	\makebox(\Tw,0)[rt]{%
+		\makebox(\Tw,185.5)[rb]{%
+			\includegraphics[height=1.33cm]{material/ose-logo-rgb.pdf}\:\:%
+		}%
+	}%
+	\vspace{-12pt}%
+}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
+
+
+\usepackage{subfloat}
+\usepackage{subfig}
+\usepackage{multicol}
+
+
+\newcommand{\explanation}[1]{%
+        \raisebox{0pt}[0pt][0pt]{%
+                \parbox[t]{0.75\textwidth}{%
+                        \textcolor{OSEBlue}{#1}%
+                }%
+        }%
+}
+
+
+
+
+\AtBeginSection[]{{%
+	\setbeamercolor{background canvas}{bg=OSEBlue, fg=white}%
+	\colorlet{SpotColor}{white}%
+	\begin{frame}[standout, c]{~}
+		%\vfill
+		\usebeamerfont{title}\hypersetup{linkcolor=white}%
+		\insertsection
+		%\vfill
+	\end{frame}%
+	\colorlet{SpotColor}{OSEBlue}%
+}}
+
+
+\newcommand{\E}{\mathrm{E}}		%Expectation
+\newcommand{\Ind}{\,\mathbb{I}\,}	%Indicator Function
+
+
+\usepackage{tikz}
+\usetikzlibrary{trees,shapes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+\tikzset{forestyle/.style = {rectangle, thick, minimum width = 5cm, minimum height = 0.5cm, text width = 4.5cm, outer sep = 1mm},
+	pre/.style={<-, shorten <=1pt, >=stealth, ultra thick},
+	extend/.style={<-,dashed, shorten <=1pt, >=stealth, ultra thick}}

@@ -29,25 +29,25 @@
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \SetSymbolFont{operators}   {sans}{OT1}{mdbch}{m}{n}
 \SetSymbolFont{letters}     {sans}{OML}{jkpss}{m}{it}
-% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
+	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}     {sans}{OML}{cmbrm}{m}{it}
 %\SetSymbolFont{symbols}     {sans}{OMS}{cmbrs}{m}{n}
 \SetSymbolFont{symbols}     {sans}{OMS}{jkp}  {m}{n}
-% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
+	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \DeclareSymbolFont{extrasymbols}  {OMS}{cmbrs}{m}{n}
 \SetSymbolFont{extrasymbols}{sans}{OMS}{cmbrs}{m}{n}
-% Some symbols (e.g., \prime) look weird in kpfonts.
-% This provides the option to replace them by symbols from mathdesign-charter.
+	% Some symbols (e.g., \prime) look weird in kpfonts.
+	% This provides the option to replace them by symbols from mathdesign-charter.
 
 \SetMathAlphabet{\mathit} {sans}{OT1}{\savesffamily}{\savesfmdseries}{it}
 \SetMathAlphabet{\mathbf} {sans}{OT1}{\savesffamily}{\savesfbfseries}{n}
 \SetMathAlphabet{\mathtt} {sans}{OT1}{cmtl}{m}{n}
 \SetMathAlphabet{\mathcal}{sans}{OMS}{ntxsy}{m}{n}
-% See https://tex.stackexchange.com/questions/231583/import-mathcal-symbols-from-txfonts
+	% See https://tex.stackexchange.com/questions/231583/import-mathcal-symbols-from-txfonts
 %\SetSymbolFont{largesymbols}{sans}{OMX}{jkpss}{m}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \SetSymbolFont{largesymbols} {sans}{OMX}{mdbch}{m}{n}
-% Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
+	% Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
 
 \DeclareMathVersion{sansup}
 \SetSymbolFont{letters}  {sansup}{OML}{jkpss}{m}{it}
@@ -58,11 +58,11 @@
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \SetSymbolFont{operators}{boldsans}{OT1}{mdbch}{bx}{n}
 \SetSymbolFont{letters}  {boldsans}{OML}{jkpss}{bx}{it}
-% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
+	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}  {boldsans}{OML}{mdbch}{bx}{it}
 %\SetSymbolFont{letters}{boldsans}{OML}{cmbrm}{b}{it}
 \SetSymbolFont{symbols}  {boldsans}{OMS}{jkp}  {bx}{n}
-% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
+	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetMathAlphabet{\mathrm}{boldsans}{OT1}{\savesffamily}{\savesfbfseries}{n}
 \SetMathAlphabet{\mathit} {boldsans}{OT1}{\savesffamily}{\savesfbfseries}{it}
 \SetMathAlphabet{\mathtt} {boldsans}{OT1}{cmtl}{b}{n}
@@ -70,7 +70,7 @@
 %\SetSymbolFont{largesymbols}{boldsans}{OMX}{jkpss}{bx}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \SetSymbolFont{largesymbols}{boldsans}{OMX}{mdbch}{bx}{n}
-% Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
+	% Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
 
 \DeclareMathVersion{boldsansup}
 \SetSymbolFont{letters}{boldsansup}{OML}{jkpss}{bx}{it}
@@ -123,9 +123,9 @@
 \DeclareMathSymbol{9}{\mathalpha}{uprightglyphs}{`9}
 % Operators and punctuation
 \DeclareMathSymbol{+}{\mathbin}  {operators}    {`+}
-% Not from uprightglyphs due to bad spacing
+	% Not from uprightglyphs due to bad spacing
 \DeclareMathSymbol{=}{\mathrel}  {operators}    {`=}
-% Not from uprightglyphs due to bad spacing
+	% Not from uprightglyphs due to bad spacing
 \DeclareMathSymbol{.}{\mathord}  {uprightglyphs}{`.}
 \DeclareMathSymbol{,}{\mathpunct}{uprightglyphs}{`,}
 \DeclareMathSymbol{;}{\mathpunct}{uprightglyphs}{`;}
@@ -137,7 +137,7 @@
 %\DeclareMathSymbol{[}{\mathopen} {uprightglyphs}{`[}
 %\DeclareMathSymbol{]}{\mathclose}{uprightglyphs}{`]}
 \DeclareMathSymbol{\prime}{\mathord}{extrasymbols}{"30}
-% Use \prime from mathdesign-charter because it looks better than the one in kpfonts
+	% Use \prime from mathdesign-charter because it looks better than the one in kpfonts
 \DeclareMathDelimiter{(}      {\mathopen} {uprightglyphs}{`(} {largesymbols}{"00}
 \DeclareMathDelimiter{)}      {\mathclose}{uprightglyphs}{`)} {largesymbols}{"01}
 \DeclareMathDelimiter{[}      {\mathopen} {uprightglyphs}{`[} {largesymbols}{"02}
@@ -230,14 +230,14 @@
 % ==>
 \makeatletter
 \@for\@tempa:=%
-alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
-omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
-Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
-Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
-\do{%
-	\expandafter\let\csname\@tempa orig\expandafter\endcsname\csname\@tempa\endcsname%
-	\expandafter\let\csname\@tempa uporig\expandafter\endcsname\csname\@tempa up\endcsname%
-}%
+	alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
+	omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
+	Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
+	Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
+	\do{%
+		\expandafter\let\csname\@tempa orig\expandafter\endcsname\csname\@tempa\endcsname%
+		\expandafter\let\csname\@tempa uporig\expandafter\endcsname\csname\@tempa up\endcsname%
+	}%
 \makeatother
 % <==
 
@@ -245,9 +245,9 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 % ==>
 \newcommand{\textformath}[1]{%
 	\IfInBoldMode%
-	\IfInUpMode\textbf{#1}\else\textit{\bfseries #1}\fi\relax%
+		\IfInUpMode\textbf{#1}\else\textit{\bfseries #1}\fi\relax%
 	\else
-	\IfInUpMode\textup{#1}\else\textit{#1}\fi\relax%
+		\IfInUpMode\textup{#1}\else\textit{#1}\fi\relax%
 	\fi\relax%
 }
 % The double curly braces in this section are necessary to be able to use Greek letters
@@ -298,8 +298,8 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \newcommand{\piLGR}      {{\mathord{\textformath{\fontencoding{LGR}\selectfont p}}}}
 \newcommand{\rhoLGR}     {{\mathord{\textformath{\fontencoding{LGR}\selectfont r}}}}
 \newcommand{\sigmaLGR}   {{\mathord{\textformath{\fontencoding{LGR}\selectfont s\noboundary}}}}
-% \noboundary prevents sigma from being replaced by the word-end sigma (varsigma),
-% see http://mirrors.ctan.org/macros/latex/contrib/textgreek/textgreek.pdf
+	% \noboundary prevents sigma from being replaced by the word-end sigma (varsigma),
+	% see http://mirrors.ctan.org/macros/latex/contrib/textgreek/textgreek.pdf
 \newcommand{\varsigmaLGR}{{\mathord{\textformath{\fontencoding{LGR}\selectfont c}}}}
 \newcommand{\tauLGR}     {{\mathord{\textformath{\fontencoding{LGR}\selectfont t}}}}
 \newcommand{\upsilonLGR} {{\mathord{\textformath{\fontencoding{LGR}\selectfont u}}}}
@@ -353,8 +353,8 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \newcommand{\piupLGR}      {{\mathord{\textup{\fontencoding{LGR}\selectfont p}}}}
 \newcommand{\rhoupLGR}     {{\mathord{\textup{\fontencoding{LGR}\selectfont r}}}}
 \newcommand{\sigmaupLGR}   {{\mathord{\textup{\fontencoding{LGR}\selectfont s\noboundary}}}}
-% \noboundary prevents sigma from being replaced by the word-end sigma (varsigma),
-% see http://mirrors.ctan.org/macros/latex/contrib/textgreek/textgreek.pdf
+	% \noboundary prevents sigma from being replaced by the word-end sigma (varsigma),
+	% see http://mirrors.ctan.org/macros/latex/contrib/textgreek/textgreek.pdf
 \newcommand{\varsigmaupLGR}{{\mathord{\textup{\fontencoding{LGR}\selectfont c}}}}
 \newcommand{\tauupLGR}     {{\mathord{\textup{\fontencoding{LGR}\selectfont t}}}}
 \newcommand{\upsilonupLGR} {{\mathord{\textup{\fontencoding{LGR}\selectfont u}}}}
@@ -382,15 +382,15 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 
 \newcommand*{\sansmath}{%
 	\@for\@tempa:=%
-	alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
-	omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
-	Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
-	Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
-	\do{%
-		\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa LGR\endcsname%
-		\expandafter\let\csname\@tempa up\expandafter\endcsname\csname\@tempa upLGR\endcsname%
-		\expandafter\let\csname up\@tempa\expandafter\endcsname\csname\@tempa upLGR\endcsname%
-	}%
+		alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
+		omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
+		Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
+		Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
+		\do{%
+			\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa LGR\endcsname%
+			\expandafter\let\csname\@tempa up\expandafter\endcsname\csname\@tempa upLGR\endcsname%
+			\expandafter\let\csname up\@tempa\expandafter\endcsname\csname\@tempa upLGR\endcsname%
+		}%
 	%\renewcommand{\pm}{\pmsf}%
 	%\renewcommand{\times}{\timessf}%
 	%\renewcommand{\div}{\divsf}%
@@ -401,15 +401,15 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 % ==>
 \newcommand*{\unsansmath}{%
 	\@for\@tempa:=%
-	alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
-	omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
-	Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
-	Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
-	\do{%
-		\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa orig\endcsname%
-		\expandafter\let\csname\@tempa up\expandafter\endcsname\csname\@tempa uporig\endcsname%
-		\expandafter\let\csname up\@tempa\expandafter\endcsname\csname\@tempa uporig\endcsname%
-	}%
+		alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
+		omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
+		Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
+		Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
+		\do{%
+			\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa orig\endcsname%
+			\expandafter\let\csname\@tempa up\expandafter\endcsname\csname\@tempa uporig\endcsname%
+			\expandafter\let\csname up\@tempa\expandafter\endcsname\csname\@tempa uporig\endcsname%
+		}%
 	%\renewcommand{\pm}{\oldpm}%
 	%\renewcommand{\times}{\oldtimes}%
 	%\renewcommand{\div}{\olddiv}%
@@ -437,23 +437,23 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 
 \newcommand*{\upgreekletters}{%
 	\@for\@tempa:=%
-	alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
-	omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
-	Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
-	Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
-	\do{%
-		\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa up\endcsname%
-	}%
+		alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
+		omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
+		Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
+		Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
+		\do{%
+			\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa up\endcsname%
+		}%
 }
 \newcommand*{\itgreekletters}{%
 	\@for\@tempa:=%
-	alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
-	omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
-	Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
-	Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
-	\do{%
-		\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa orig\endcsname%
-	}%
+		alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,%
+		omicron,pi,rho,sigma,varsigma,tau,upsilon,phi,chi,psi,omega,digamma,%
+		Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,Mu,Nu,Xi,%
+		Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
+		\do{%
+			\expandafter\let\csname\@tempa\expandafter\endcsname\csname\@tempa orig\endcsname%
+		}%
 }
 
 \makeatother
@@ -471,9 +471,9 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \let \bmorig \bm
 \renewcommand{\bm}[1]{%
 	\IfInSansMode%
-	\textbf{\mathversion{boldsans}\(#1\)}%
+		\textbf{\mathversion{boldsans}\(#1\)}%
 	\else%
-	\bmorig{#1}%
+		\bmorig{#1}%
 	\fi\relax%
 }
 % <==
@@ -519,15 +519,15 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \let \mathnormalorig \mathnormal
 \renewcommand{\mathnormal}[1]{%
 	\IfInSansMode%
-	\IfInBoldMode%
-	\mathversion{boldsans}%
-	{\textbf{\(#1\)}}%
+		\IfInBoldMode%
+			\mathversion{boldsans}%
+			{\textbf{\(#1\)}}%
+		\else%
+			\mathversion{sans}%
+			{\textmd{\(#1\)}}%
+		\fi\relax%	
 	\else%
-	\mathversion{sans}%
-	{\textmd{\(#1\)}}%
-	\fi\relax%	
-	\else%
-	\mathnormalorig{#1}%
+		\mathnormalorig{#1}%
 	\fi\relax%
 }
 % <==
@@ -538,17 +538,17 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \let \mathrmorig \mathrm
 \renewcommand{\mathrm}[1]{%
 	\IfInSansMode%
-	{\textrm{%
+		{\textrm{%
 			\IfInBoldMode%
-			\mathversion{bold}%
-			\(\mathrmorig{#1}\)%
+				\mathversion{bold}%
+				\(\mathrmorig{#1}\)%
 			\else%
-			\mathversion{normal}%
-			\(\mathrmorig{#1}\)%
+				\mathversion{normal}%
+				\(\mathrmorig{#1}\)%
 			\fi\relax%
-	}}%
+		}}%
 	\else%
-	\mathrmorig{#1}%
+		\mathrmorig{#1}%
 	\fi\relax%
 }
 % <==
@@ -558,25 +558,25 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 % ==>
 \newcommand{\mathup}[1]{%
 	\IfInSansMode%
-	{\textup{%
+		{\textup{%
 			\InUpModetrue%
 			\IfInBoldMode%
-			\mathversion{boldsansup}%
-			\(#1\)%
+				\mathversion{boldsansup}%
+				\(#1\)%
 			\else%
-			\mathversion{sansup}%
-			\(#1\)%
+				\mathversion{sansup}%
+				\(#1\)%
 			\fi\relax%
-	}}%
+		}}%
 	\else%
-	{\upgreekletters\mathrm{#1}\itgreekletters}%
+		{\upgreekletters\mathrm{#1}\itgreekletters}%
 	\fi\relax%
 }
 \newcommand{\mathbfup}[1]{%
 	\IfInSansMode%
-	{\mathbf{\mathup{#1}}}%
+		{\mathbf{\mathup{#1}}}%
 	\else%
-	{\upgreekletters\mathbf{\mathrm{#1}}\itgreekletters}%
+		{\upgreekletters\mathbf{\mathrm{#1}}\itgreekletters}%
 	\fi\relax%
 }
 % <==
@@ -625,12 +625,12 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 }
 \makeatletter
 \@for\@tempa:=%
-arccos,arccot,arccsc,arcsec,arcsin,arctan,arg,cos,cosh,cot,coth,csc,%
-deg,det,dim,exp,gcd,hom,inf,ker,lg,lim,liminf,limsup,ln,log,max,min,%
-Pr,sec,sin,sinh,sup,tan,tanh%
-\do{%
-	\expandafter\let\csname\@tempa\endcsname\relax%
-}%
+	arccos,arccot,arccsc,arcsec,arcsin,arctan,arg,cos,cosh,cot,coth,csc,%
+	deg,det,dim,exp,gcd,hom,inf,ker,lg,lim,liminf,limsup,ln,log,max,min,%
+	Pr,sec,sin,sinh,sup,tan,tanh%
+	\do{%
+		\expandafter\let\csname\@tempa\endcsname\relax%
+	}%
 \makeatother
 \DeclareMathOperator {\arccos}{\mathup{arccos}}
 \DeclareMathOperator {\arccot}{\mathup{arccot}}
