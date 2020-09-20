@@ -498,10 +498,6 @@
 \makeatletter
 \setbeamertemplate{title page}{
 	\begin{minipage}[c][6.75cm]{\textwidth}%
-		\raggedright%
-		\ifx\inserttitlegraphic\@empty\else%
-			\inserttitlegraphic%
-		\fi
 		\vfill
 		\begingroup
 			\ifx\inserttitle\@empty\else%
@@ -523,8 +519,14 @@
 				\vspace{\fill}
 				\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
 			\fi
+			\vfill
+			\raggedright%
+			\ifx\inserttitlegraphic\@empty\else%
+			\inserttitlegraphic%
+			\fi
 		\endgroup
-		\vfill
+		
+		
 		\vspace{0cm}  % For the \vfill to actually have an effect
 	\end{minipage}%
 }
