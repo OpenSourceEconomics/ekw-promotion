@@ -478,56 +478,56 @@
 
 % \setbeamerfont{title} and \setbeamerfont{subtitle} already executed above!
 \setbeamerfont{author}
-	{parent=normal text, size=\large, series=\mdseries, shape=\upshape}
+{parent=normal text, size=\large, series=\mdseries, shape=\upshape}
 \setbeamercolor{author}
-	{parent=normal text}
+{parent=normal text}
 \setbeamerfont{institute}
-	{parent=normal text, size=\small, series=\mdseries, shape=\itshape}
+{parent=normal text, size=\small, series=\mdseries, shape=\itshape}
 \setbeamercolor{institute}
-	{parent=normal text}
+{parent=normal text}
 \ifnum \serifheadingfont=0
-	\setbeamerfont{date}
-		{parent=structure, size=\normalsize, series=\bfseries}
+\setbeamerfont{date}
+{parent=structure, size=\normalsize, series=\bfseries}
 \else
-	\setbeamerfont{date}
-		{parent=structure, size=\normalsize, series=\fontseries{semibold}}
+\setbeamerfont{date}
+{parent=structure, size=\normalsize, series=\fontseries{semibold}}
 \fi
 \setbeamercolor{date}
-	{parent=normal text}
+{parent=normal text}
 
 \makeatletter
 \setbeamertemplate{title page}{
-	\begin{minipage}[c][6.75cm]{\textwidth}%
+	\begin{minipage}[c][7.50cm]{\textwidth}%
 		\vfill
 		\begingroup
-			\ifx\inserttitle\@empty\else%
-				\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
-			\fi
-			\ifx\insertsubtitle\@empty\else%
-				\medskip
-				\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par%
-			\fi
-			\ifx\beamer@shortauthor\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
-			\fi
-			\ifx\insertinstitute\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par%
-			\fi
-			\ifx\insertdate\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
-			\fi
-			\vfill
-			\raggedright%
-			\ifx\inserttitlegraphic\@empty\else%
-			\inserttitlegraphic%
-			\fi
+		\ifx\inserttitle\@empty\else%
+		\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
+		\fi
+		\ifx\insertsubtitle\@empty\else%
+		\medskip
+		\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par%
+		\fi
+		\ifx\beamer@shortauthor\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
+		\fi
+		\ifx\insertinstitute\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par%
+		\fi
+		\ifx\insertdate\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
+		\fi
 		\endgroup
 		
-		
-		\vspace{0cm}  % For the \vfill to actually have an effect
+		%\vspace{0cm}
+		\hspace{2.00cm}  
+		\raggedright%
+		\ifx\inserttitlegraphic\@empty\else%
+		\inserttitlegraphic%
+		\fi
+		%\vfill% For the \vfill to actually have an effect
 	\end{minipage}%
 }
 \makeatother
