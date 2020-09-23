@@ -7,7 +7,7 @@ EKW models are set up as a standard Markov decision process (MDP) \citep{Puterma
 \noindent The value function $v^\pi_t(s_t)$ captures the expected total discounted utilities under policy $\pi$ from period $t$ onwards for an individual experiencing state $s_t$:
 %
 \begin{align*}
-  v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right].
+  v^\pi_t(s_t) = \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right].
 \end{align*}
 %
 Then we can determine $v_1^\pi(s_1)$ for any policy by recursively evaluating equation (\ref{MDP Policy Equations}):
@@ -47,3 +47,4 @@ a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,
 		\EndFor
 		\vspace{0.3cm}\end{algorithmic}
 \end{algorithm}\FloatBarrier
+
