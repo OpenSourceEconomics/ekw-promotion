@@ -25,9 +25,11 @@
 \DeclareMathVersion{boldup}
 \DeclareMathVersion{sans}
 
+\SetSymbolFont{operators}   {normal}{OT1}{ntxtlf}{m}{n}
+
 %\SetSymbolFont{operators}{sans}{OT1}{jkpss}{m}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
-\SetSymbolFont{operators}   {sans}{OT1}{mdbch}{m}{n}
+\SetSymbolFont{operators}   {sans}{OT1}{ntxtlf}{m}{n}
 \SetSymbolFont{letters}     {sans}{OML}{jkpss}{m}{it}
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}     {sans}{OML}{cmbrm}{m}{it}
@@ -56,7 +58,7 @@
 \DeclareMathVersion{boldsans}
 %\SetSymbolFont{operators}{boldsans}{OT1}{jkpss}{b}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
-\SetSymbolFont{operators}{boldsans}{OT1}{mdbch}{bx}{n}
+\SetSymbolFont{operators}{boldsans}{OT1}{ntxtlf}{bx}{n}
 \SetSymbolFont{letters}  {boldsans}{OML}{jkpss}{bx}{it}
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}  {boldsans}{OML}{mdbch}{bx}{it}
@@ -132,6 +134,11 @@
 \DeclareMathSymbol{/}{\mathord}  {uprightglyphs}{`/}
 %\DeclareMathSymbol{/}{\mathop}   {uprightglyphs}{`/}
 %	% This would icrease the spacing around the division slash slightly
+\DeclareMathSymbol{\mathdollar}{\mathord}{uprightglyphs}{`\$}
+\DeclareRobustCommand{\$}{\ifmmode\mathdollar\else\symbol{`\$}\fi}
+\DeclareMathSymbol{\mathpercent}{\mathord}{uprightglyphs}{`\%}
+\DeclareRobustCommand{\%}{\ifmmode\mathpercent\else\symbol{`\%}\fi}
+\DeclareMathSymbol{&}{\mathbin}{uprightglyphs}{`&}
 %\DeclareMathSymbol{(}{\mathopen} {uprightglyphs}{`(}
 %\DeclareMathSymbol{)}{\mathclose}{uprightglyphs}{`)}
 %\DeclareMathSymbol{[}{\mathopen} {uprightglyphs}{`[}
@@ -480,7 +487,8 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \renewcommand{\mathbf}[1]{\bm{#1}}
 \renewcommand{\boldsymbol}[1]{\bm{#1}}
 \newcommand{\mathbfit}[1]{\mathbf{\mathit{#1}}}
-\renewcommand{\mathcal}[1]{\mathscr{#1}}
+%\renewcommand{\mathcal}[1]{\mathscr{#1}}
+\renewcommand{\mathscr}[1]{\mathcal{#1}}
 
 % Apply sansmath etc. automagically
 % ==>
@@ -519,15 +527,15 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \let \mathnormalorig \mathnormal
 \renewcommand{\mathnormal}[1]{%
 	\IfInSansMode%
-	\IfInBoldMode%
-	\mathversion{boldsans}%
-	{\textbf{\(#1\)}}%
+		\IfInBoldMode%
+			\mathversion{boldsans}%
+			{\textbf{\(#1\)}}%
+		\else%
+			\mathversion{sans}%
+			{\textmd{\(#1\)}}%
+		\fi\relax%	
 	\else%
-	\mathversion{sans}%
-	{\textmd{\(#1\)}}%
-	\fi\relax%	
-	\else%
-	\mathnormalorig{#1}%
+		\mathnormalorig{#1}%
 	\fi\relax%
 }
 % <==
@@ -538,17 +546,17 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 \let \mathrmorig \mathrm
 \renewcommand{\mathrm}[1]{%
 	\IfInSansMode%
-	{\textrm{%
+		{\textrm{%
 			\IfInBoldMode%
-			\mathversion{bold}%
-			\(\mathrmorig{#1}\)%
+				\mathversion{bold}%
+				\(\mathrmorig{#1}\)%
 			\else%
-			\mathversion{normal}%
-			\(\mathrmorig{#1}\)%
+				\mathversion{normal}%
+			\	(\mathrmorig{#1}\)%
 			\fi\relax%
-	}}%
+		}}%
 	\else%
-	\mathrmorig{#1}%
+		\mathrmorig{#1}%
 	\fi\relax%
 }
 % <==
@@ -558,64 +566,64 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 % ==>
 \newcommand{\mathup}[1]{%
 	\IfInSansMode%
-	{\textup{%
+		{\textup{%
 			\InUpModetrue%
-			\IfInBoldMode%
-			\mathversion{boldsansup}%
-			\(#1\)%
+				\IfInBoldMode%
+				\mathversion{boldsansup}%
+				\(#1\)%
 			\else%
-			\mathversion{sansup}%
-			\(#1\)%
+				\mathversion{sansup}%
+				\(#1\)%
 			\fi\relax%
-	}}%
+		}}%
 	\else%
-	{\upgreekletters\mathrm{#1}\itgreekletters}%
+		{\upgreekletters\mathrm{#1}\itgreekletters}%
 	\fi\relax%
 }
 \newcommand{\mathbfup}[1]{%
 	\IfInSansMode%
-	{\mathbf{\mathup{#1}}}%
+		{\mathbf{\mathup{#1}}}%
 	\else%
-	{\upgreekletters\mathbf{\mathrm{#1}}\itgreekletters}%
+		{\upgreekletters\mathbf{\mathrm{#1}}\itgreekletters}%
 	\fi\relax%
 }
 % <==
 
-%% If you would like to redefine \mathup also for the serif font:
-%% ==>
-%\renewcommand{\mathup}[1]{%
-%	\IfInSansMode%
-%		{\textup{%
-%			\InUpModetrue%
-%			\IfInBoldMode%
-%				\mathversion{boldsansup}%
-%				\(#1\)%
-%			\else%
-%				\mathversion{sansup}%
-%				\(#1\)%
-%			\fi\relax%
-%		}}%
-%	\else%
-%		{\textup{%
-%			\InUpModetrue%
-%			\IfInBoldMode%
-%				\mathversion{boldup}%
-%				\(#1\)%
-%			\else%
-%				\mathversion{normalup}%
-%				\(#1\)%
-%			\fi\relax%
-%		}}%
-%	\fi\relax%
-%}
-%\renewcommand{\mathbfup}[1]{%
-%	\IfInSansMode%
-%		{\mathbf{\mathup{#1}}}%
-%	\else%
-%		{\upgreekletters\mathbf{\mathup{#1}}\itgreekletters}%
-%	\fi\relax%
-%}
-%% <==
+% If you would like to redefine \mathup also for the serif font:
+% ==>
+\renewcommand{\mathup}[1]{%
+	\IfInSansMode%
+		{\textup{%
+			\InUpModetrue%
+			\IfInBoldMode%
+				\mathversion{boldsansup}%
+				\(#1\)%
+			\else%
+				\mathversion{sansup}%
+				\(#1\)%
+			\fi\relax%
+		}}%
+	\else%
+		{\textup{%
+			\InUpModetrue%
+			\IfInBoldMode%
+				\mathversion{boldup}%
+				\(#1\)%
+			\else%
+				\mathversion{normalup}%
+				\(#1\)%
+			\fi\relax%
+		}}%
+	\fi\relax%
+}
+\renewcommand{\mathbfup}[1]{%
+	\IfInSansMode%
+		{\mathbf{\mathup{#1}}}%
+	\else%
+		{\upgreekletters\mathbf{\mathup{#1}}\itgreekletters}%
+	\fi\relax%
+}
+% <==
 
 % Make the LaTeX-defined operators obey sansserif math
 % ==>
@@ -625,9 +633,9 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 }
 \makeatletter
 \@for\@tempa:=%
-arccos,arccot,arccsc,arcsec,arcsin,arctan,arg,cos,cosh,cot,coth,csc,%
-deg,det,dim,exp,gcd,hom,inf,ker,lg,lim,liminf,limsup,ln,log,max,min,%
-Pr,sec,sin,sinh,sup,tan,tanh%
+	arccos,arccot,arccsc,arcsec,arcsin,arctan,arg,cos,cosh,cot,coth,csc,%
+	deg,det,dim,exp,gcd,hom,inf,ker,lg,lim,liminf,limsup,ln,log,max,min,%
+	Pr,sec,sin,sinh,sup,tan,tanh%
 \do{%
 	\expandafter\let\csname\@tempa\endcsname\relax%
 }%

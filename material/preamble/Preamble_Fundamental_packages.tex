@@ -9,6 +9,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  FUNDAMENTAL PACKAGES AND COMMANDS  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \usepackage{ifxetex}  % Detect if engine is XeTeX/XeLaTeX
 \usepackage{ifthen}
 
@@ -117,6 +119,15 @@
 %\renewcommand*{\backref}[1]{[\backrefold{#1}]}
 
 % \usepackage{cleveref}	% Provides \cref{...} etc. for flexible referencing.
+
+%% Make \autoref include parentheses around equation nunmbers -->
+%% See https://tex.stackexchange.com/questions/191376/autoref-and-braces-around-equation-number
+%\makeatletter
+%\let\oldtheequation\theequation
+%\renewcommand\tagform@[1]{\maketag@@@{\ignorespaces#1\unskip\@@italiccorr}}
+%\renewcommand\theequation{(\oldtheequation)}
+%\makeatother
+%% <--
 
 \usepackage{verbatim}
 \let\ignore=\comment

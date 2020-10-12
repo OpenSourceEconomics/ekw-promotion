@@ -119,7 +119,7 @@
 % Since math mode uses a different font encoding, issuing \euro/\texteuro in math mode
 % produces an incorrect sign. We fix this. ==>
 \AtBeginDocument{%
-	\newcommand*{\euro}[1]{%
+	\providecommand{\euro}[1]{%
 		\relax\ifmmode\text{\texteuro}#1\else\texteuro #1\fi%
 	}%
 }
