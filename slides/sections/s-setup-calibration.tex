@@ -7,17 +7,17 @@
 \section{Calibration procedure}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Calibration procedure - Data}
+\begin{frame}{\insertsection: Data}
 
-\textbf{Data}\vspace{0.3cm}\\
+\textbf{Data}
 \begin{align*}
-	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
+	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}
 \end{align*}
 
-\textbf{State variables}\vspace{0.3cm}
-\begin{itemize}\setlength\itemsep{1em}
-\item $s_t = (\bar{s}_t, \epsilon_t)$\medskip
-\begin{itemize}\setlength\itemsep{1em}
+\textbf{State variables}
+\begin{itemize}
+\item $s_t = (\bar{s}_t, \epsilon_t)$
+\begin{itemize}
 	\item $\bar{s}_t$ observed
 	\item $\epsilon_t$ unobserved
 \end{itemize}
@@ -25,16 +25,16 @@
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Calibration procedure - Procedures}
-\textbf{Procedures}\vspace{0.5cm}\\
-\begin{itemize}\setlength\itemsep{1em}
-\item Likelihood-based\\\vspace{0.5cm}
-\begin{align*}
-  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
-\end{align*}\\
-\item Simulation-based\\\vspace{0.5cm}
-\begin{align*}
-    \hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \big(M_D - M_S(\theta)\big)
-\end{align*}
+\begin{frame}{\insertsection: Procedures}
+\textbf{Procedures}
+\begin{itemize}
+\item Likelihood-based
+	\begin{align*}
+	  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
+	\end{align*}
+\item Simulation-based
+	\begin{align*}
+	    \hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \, \big(M_D - M_S(\theta)\big)
+	\end{align*}
 \end{itemize}
 \end{frame}

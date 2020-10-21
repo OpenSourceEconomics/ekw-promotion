@@ -6,13 +6,15 @@
 
 \documentclass[aspectratio=169, 11pt, t]{beamer}
 
-\input{preamble/Preamble_Miscellaneous}
-\input{preamble/Preamble_Presentation}
+
+\input{../material/preamble/Preamble_Presentation}
+\input{../material/preamble/Preamble_Miscellaneous}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  MISCELLANEOUS SETTINGS/COMMANDS  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 
 % Add separator slide to the beginning of each section ==>
@@ -45,10 +47,6 @@
 %}
 %% <==
 
-\title{Eckstein-Keane-Wolpin models}
-
-\subtitle{An Invitation for transdisciplinary collaboration}
-
 %\subtitle{I~Prefer to Avoid Subtitles}
 
 \author[The OSE team]{%
@@ -73,37 +71,19 @@
 %}
 
 
+\begin{document}
 
 
 %%%%%%%%%%%%%%%%%%%
 %%  TITLE SLIDE  %%
 %%%%%%%%%%%%%%%%%%%
 
-
-%\begin{frame}[standout]{~}
-
-%	\titlepage%
-
-%\end{frame}
-
-
-%\begin{frame}[standout]{Outline}
-
-%	\medskip
-%	\tableofcontents
-
-%\end{frame}
-
-\begin{document}
-	
-
+\input{sections/s-title}
 
 
 %%%%%%%%%%%%%%%%%
 %%  MAIN PART  %%
 %%%%%%%%%%%%%%%%%
-
-\input{sections/s-title}
 
 \input{sections/s-introduction}
 
@@ -119,41 +99,12 @@
 
 \input{sections/s-conclusion}
 
-\input{sections/s-appendix}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%
-%%  REFERENCES  %%
-%%%%%%%%%%%%%%%%%%
-
-
-%\section{\refname}
-%\renewcommand\bibsection{}
-%	% To prevent ``References'' from appearing twice in the navigation bar
-
-%\begin{frame}[allowframebreaks]{\insertsection}
-
-%	\begin{refcontext}[sorting=nyt]
-		% Sort BIBLIOGRAPHY by alphabet (while CITATIONS are sorted by year)
-%	\printbibliography[heading=none]
-%	\end{refcontext}
-
-	%% Only when using BibTeX instead of BibLaTeX ==>
-	%\bibliographystyle{0_0_Preamble/aea_doi_url_href}
-	%\bibliography{Library}
-	%% <==
-	
-%\end{frame}
-
-
-
 
 %%%%%%%%%%%%%%%%
 %%  APPENDIX  %%
 %%%%%%%%%%%%%%%%
 
-\end{document}
+\input{sections/s-appendix}
 
+
+\end{document}

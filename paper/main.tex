@@ -1,3 +1,7 @@
+% !TeX TS-program = pdflatex
+% !BIB program = biber
+
+
 \documentclass[a4paper, 10pt]{article}
 
 \newcommand{\papertitle}{Eckstein--Keane--Wolpin models \\
@@ -16,9 +20,10 @@
 
 %\input{sections/title}
 
-\externaldocument{../appendix/main}
+%\externaldocument{../appendix/main}
 
 \bibliography{../submodules/bibliography/literature}
+
 
 \begin{document}
 
@@ -60,8 +65,24 @@
 \input{sections/s-extensions}
 
 \clearpage 
+
 \begin{refcontext}[sorting=nyt]  % Sort BIBLIOGRAPHY by alphabet (while CITATIONS are sorted by year)
 	\printbibliography[heading=bibintoc]
 \end{refcontext}
+
+\clearpage 
+
+\begin{appendices}
+\setcounter{page}{1}
+\renewcommand{\thepage}{\thesection-\arabic{page}}
+
+\FloatBarrier\input{../appendix/sections/s-implementation}
+
+\clearpage
+\setcounter{page}{1}
+\FloatBarrier\input{../appendix/sections/s-data}
+\newpage
+
+\end{appendices}
 
 \end{document}

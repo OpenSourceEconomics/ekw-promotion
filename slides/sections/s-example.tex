@@ -5,22 +5,20 @@
 \section{Example}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Seminal paper}
+\begin{frame}{\insertsection: Seminal paper}
 	%\textbf{Seminal paper}\vspace{0.3cm}
 \begin{itemize}
-\item \textbf{Keane, Michael P, and Kenneth I Wolpin.} 1997. "The Career Decisions of Young Men." \textit{Journal of Political Economy} 105(3): 473-522.
-%\bibentry{Keane.1997}
-\nocite{Keane.1997}
+	\item \fullcite{Keane.1997}.
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Model of occupational choice}
+\begin{frame}{\insertsection: Model of occupational choice}
 	%\textbf{Model of occupational choice}\vspace{0.3cm}
 
-\begin{itemize}\setlength\itemsep{1em}
-\item Life cycle histories \medskip
-\begin{itemize}\setlength\itemsep{1em}
+\begin{itemize}
+\item Life cycle histories
+\begin{itemize}
 \item School attendance
 \item Occupation-specific work status
 \item Wages
@@ -30,15 +28,15 @@
 
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Decision tree}
+\begin{frame}{\insertsection: Decision tree}
 \begin{figure}
-  \caption{Decision tree}
   \scalebox{0.55}{\input{../material/fig-decision-tree}}
+  \caption{Decision tree}
 \end{figure}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Immediate utility}
+\begin{frame}{\insertsection: Immediate utility}
 	%\textbf{Immediate utility}\vspace{0.3cm}
 
   \begin{align*}
@@ -57,25 +55,28 @@
 	\end{tabular}
 \end{table}
 
+%\textbf{\textcolor{red}{Mention that $A = \{1, 2, 3, 4, 5\}$ (why not $\mathcal{A}$ as in the paper?) and that $1 = \text{blue-collar}$, $2 = \dots$!}}
+
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Transitions}
+\begin{frame}{\insertsection: Transitions}
 	%\textbf{Transitions}\vspace{0.3cm}
 
-  Work experience $\bm{k_t}$  and years of completed schooling $h_t$ evolve deterministically.
-
+  Work experience $\bm{k}_t$  and years of completed schooling $h_t$ evolve deterministically.
   \begin{align*}
   k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
-  h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad\\
+  h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
   \end{align*}
 
-  Productivity shocks $\bm{e_t}$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
+  Productivity shocks $\bm{e}_t$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
+  
+ % \textbf{\textcolor{red}{The $\bm{e}_t$s only appear on slides~28/29. Why mention them here?!}}
 
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Non-pecuniary utility of blue-collar occupation}
+\begin{frame}{\insertsection: Non-pecuniary utility of blue-collar occupation}
 	%\textbf{Non-pecuniary utility of blue-collar occupation}\vspace{0.3cm}
 %
   \begin{align*}
@@ -85,22 +86,21 @@
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Wage component}
+\begin{frame}{\insertsection: Wage component}
 	%\textbf{Wage component}\vspace{0.3cm}
 %
 \begin{align*}
 w_{a}(\cdot) & = r_{a} \, x_{a}(\cdot)
 \end{align*}
-
 with skill production function
-
 \begin{align*}
-x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,1}) \cdot \epsilon_{1,t} \big).
+x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k}_t,  h_t, t, a_{t-1}, e_{j,1}) \cdot \epsilon_{1,t} \big).
 \end{align*}
+%\textbf{\textcolor{red}{What is $\epsilon_{1,t}$ all of a~sudden? It has been mentioned as a~``state variable'' before, but what is it?}}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Example - Skill production for blue-collar occupation}
+\begin{frame}{\insertsection: Skill production for blue-collar occupation}
 	%\textbf{Skill production for blue-collar occupation}\vspace{0.3cm}
 %
 \begin{align*}
@@ -109,7 +109,7 @@ x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,1}) \cdo
                                  & + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\
                                    & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t}
 \end{align*}
-%
+%\textbf{\textcolor{red}{As already mentioned, the use of the indicator function is nonstandard.}}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
@@ -119,34 +119,34 @@ x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,1}) \cdo
 \section{Empirical data}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Empirical data - National Longitudinal Survey of Youth 1979}
+\begin{frame}{\insertsection: National Longitudinal Survey of Youth 1979}
 	%\textbf{National Longitudinal Survey of Youth 1979}\vspace{0.3cm}
 
-\begin{itemize}\setlength\itemsep{1em}
-\item 1,373 individuals starting at age 16
-\item Life cycle histories \medskip
-\begin{itemize}\setlength\itemsep{1em}
-\item School attendance
-\item Occupation-specific work status
-\item Wages
-\end{itemize}
+\begin{itemize}
+	\item 1,373 individuals starting at age 16
+	\item Life cycle histories
+	\begin{itemize}
+		\item School attendance
+		\item Occupation-specific work status
+		\item Wages
+	\end{itemize}
 \end{itemize}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Empirical data - Choices}
+\begin{frame}{\insertsection: Choices}
   \begin{figure}
-  \caption{Choices}
   \scalebox{0.25}{\includegraphics{fig-data-choice-all}}
+  \caption{Choices}
   \end{figure}
 \end{frame}
 
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Empirical data - Average wage}
+\begin{frame}{\insertsection: Average wage}
   \begin{figure}
-  \caption{Average wage}
   \scalebox{0.25}{\includegraphics{fig-data-wage-occupations}}
+  \caption{Average wage}
   \end{figure}
 \end{frame}
 %-------------------------------------------------------------------------------
@@ -157,10 +157,10 @@ x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k_t},  h_t, t, a_{t-1}, e_{j,1}) \cdo
 \section{Economic insights}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{Economic insights}
+\begin{frame}{\insertsection}
   \begin{figure}[h!]\centering
-  \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
   \subfloat[Time preference]{\scalebox{0.175}{\includegraphics{fig-economic-mechanism}}}\hspace{0.5cm}
   \subfloat[Tuition subsidy]{\scalebox{0.175}{\includegraphics{fig-policy-forecast}}}
+  \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
   \end{figure}
 \end{frame}

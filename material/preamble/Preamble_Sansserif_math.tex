@@ -44,12 +44,15 @@
 \SetMathAlphabet{\mathit} {sans}{OT1}{\savesffamily}{\savesfmdseries}{it}
 \SetMathAlphabet{\mathbf} {sans}{OT1}{\savesffamily}{\savesfbfseries}{n}
 \SetMathAlphabet{\mathtt} {sans}{OT1}{cmtl}{m}{n}
-\SetMathAlphabet{\mathcal}{sans}{OMS}{ntxsy}{m}{n}
+\SetMathAlphabet{\mathcal}{sans}{LMS}{ntxsy}{m}{n}
 % See https://tex.stackexchange.com/questions/231583/import-mathcal-symbols-from-txfonts
 %\SetSymbolFont{largesymbols}{sans}{OMX}{jkpss}{m}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
-\SetSymbolFont{largesymbols} {sans}{OMX}{mdbch}{m}{n}
+%\SetSymbolFont{largesymbols} {sans}{OMX}{mdbch}{m}{n}
 % Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
+% Using symbols like \int, \left(, etc. from newtxmath:
+%\DeclareSymbolFont{largesymbols}{LMX}{ntxexx}{m}{n}
+\SetSymbolFont{largesymbols}{sans}{LMX}{ntxexx}{m}{n}
 
 \DeclareMathVersion{sansup}
 \SetSymbolFont{letters}  {sansup}{OML}{jkpss}{m}{it}
@@ -68,11 +71,13 @@
 %\SetMathAlphabet{\mathrm}{boldsans}{OT1}{\savesffamily}{\savesfbfseries}{n}
 \SetMathAlphabet{\mathit} {boldsans}{OT1}{\savesffamily}{\savesfbfseries}{it}
 \SetMathAlphabet{\mathtt} {boldsans}{OT1}{cmtl}{b}{n}
-\SetMathAlphabet{\mathcal}{boldsans}{OMS}{ntxsy}{b}{n}
+\SetMathAlphabet{\mathcal}{boldsans}{LMS}{ntxsy}{b}{n}
 %\SetSymbolFont{largesymbols}{boldsans}{OMX}{jkpss}{bx}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
-\SetSymbolFont{largesymbols}{boldsans}{OMX}{mdbch}{bx}{n}
+%\SetSymbolFont{largesymbols}{boldsans}{OMX}{mdbch}{bx}{n}
 % Using symbols like \int, \left(, etc. from mathdesign-charter because they look better than the ones included in kpfonts
+% Using symbols like \int, \left(, etc. from newtxmath:
+\SetSymbolFont{largesymbols}{boldsans}{LMX}{ntxexx}{b}{n}
 
 \DeclareMathVersion{boldsansup}
 \SetSymbolFont{letters}{boldsansup}{OML}{jkpss}{bx}{it}
@@ -552,7 +557,7 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 				\(\mathrmorig{#1}\)%
 			\else%
 				\mathversion{normal}%
-			\	(\mathrmorig{#1}\)%
+				\(\mathrmorig{#1}\)%
 			\fi\relax%
 		}}%
 	\else%

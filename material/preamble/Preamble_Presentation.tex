@@ -7,8 +7,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  FUNDAMENTAL SETTINGS  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\graphicspath{{../material/}}
-%\usepackage{apacite}
+
+
 \newcommand{\serifbodyfont}{0}
 % 0: Body is set in sans-serif font
 % 1: Body is set in serif font
@@ -22,35 +22,8 @@
 %      with the current section being highlighted.
 
 
-\newcommand{\bs}{\boldsymbol}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\cov}{\mathrm{cov}\thin}
-\newcommand{\thin}{\thinspace}
-\newcommand{\thick}{\thickspace}
 
-\newcommand{\vect}[1]{\mathbf{#1}}
-\newcommand{\myfrac}[3][0pt]{\genfrac{}{}{}{}{\raisebox{#1}{$#2$}}{\raisebox{-#1}{$#3$}}}
-\newcommand{\U}{\mathrm{U}}	%Uniform Distribution
-\newcommand{\D}{\mathrm{D}}	%Dirichlet Distribution
-\newcommand{\W}{\mathrm{W}}	%Wishart Distribution
-\newcommand{\E}{\mathrm{E}}		%Expectation
-\newcommand{\Prob}{\mbox{Pr}}		%Expectation
-\newcommand{\Iden}{\mathbb{I}}	%Identity Matrix
-\newcommand{\Ind}{\,\mathbb{I}\,}	%Indicator Function
-\newcommand{\Tau}{\mathcal{T}\thin
-}
-%\newcolumntype{g}{>{\columncolor{Gray}}c}
-\newcommand{\ind}{{\textbf{I}}}
 
-\newcommand{\var}{\mathrm{var}\thin}
-\newcommand{\plim}{\mathrm{plim}\thin}
-\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
-\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern5mu{#1#2}}}
-\newcommand{\notindep}{\ensuremath{\perp\!\!\!\!\!\!\diagup\!\!\!\!\!\!\perp}}%
-
-\newcommand{\mc}{\multicolumn}
-
-\newcommand{\ph}{\phantom}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  FUNDAMENTAL PACKAGES  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,52 +48,9 @@
 \fi
 % The microtype package enables so-called hanging punctuation. That is, when a punctuation sign like ":", ".", "-", etc. is found at the beginning or end of a line, it is protruded a little into the page margin. This results in "optical margin alignment," because the protrusion makes the margin alignment look straighter.
 
-% OSE colors
-\definecolor{OSEBlue}	{RGB}{  0,  76, 141}
-\definecolor{OSEBlueLight}	{RGB}{ 48, 188, 237}
-% General colors
-\definecolor{lightgrey}{gray}{0.90}	%Farben mischen
-\definecolor{grey}{gray}{0.85}
-\definecolor{darkgrey}{gray}{0.65}
-\definecolor{lightblue}{rgb}{0.8,0.85,1}
+
 \definecolor{darkgray}{rgb}{0.4,0.4,0.4}
-\definecolor{darkblue}{rgb}{0,.35,.62}
-\definecolor{lightblue}{rgb}{0.8,0.85,1}
-\definecolor{lightgrey}{gray}{0.1}	%Farben mischen
-\definecolor{Gray}{gray}{0.9}
-\definecolor{mplorange}{HTML}{FF7F0E}
-\definecolor{mplred}{HTML}{D62728}
-\definecolor{mplblue}{HTML}{1F77B4}
-\definecolor{mplgreen}{HTML}{2CA02C}
-\definecolor{tabblue}{RGB}{31,119,180}  % usage: blue-collar occupation
-\definecolor{taborange}{RGB}{255, 127, 14}  % usage: school
-\definecolor{tabgreen}{RGB}{44, 160, 44}  % usage: home
-\definecolor{tabred}{RGB}{214, 39, 40}  % usage: white-collar occupation
-\definecolor{tabpurple}{RGB}{148, 103, 189}  % usage: military
-\definecolor{tabbrown}{RGB}{140, 86, 75}
-\definecolor{tabrose}{RGB}{227, 119, 194}
-\definecolor{tabgrey}{RGB}{127, 127, 127}
-\definecolor{tablime}{RGB}{188, 189, 34}
-\definecolor{tabcyan}{RGB}{23, 190, 207}
-\usepackage{bibentry}
-\usepackage[T1]{fontenc}
-%\usepackage{bm}
-%\usepackage{bigints}
-\usepackage{graphicx}
-%\usepackage{dsfont}
-\usepackage{listings}
 
-\usepackage{relsize}
-%\usepackage[natbibapa]{apacite}
-\usepackage{subfig,float}
-\usepackage{algpseudocode}
-\usepackage{algorithmicx}
-%\usepackage{verbatim}
-\usepackage{setspace}																					\usepackage{hyperref}
-
-\usepackage{multicol}
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\argmax}{arg\,max}
 \usepackage[absolute, overlay]{textpos}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -140,7 +70,7 @@
 \usepackage{pgf}%,pgfarrows,pgfnodes,pgfshade}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{mindmap, trees, patterns}
+\usetikzlibrary{mindmap, trees, patterns, arrows.meta}
 
 \usepackage{xspace}
 
@@ -153,7 +83,6 @@
 % Enables manipulating LaTeX commmands via \xpatchcmd etc.
 
 \hypersetup{%
-	pdfpagemode=FullScreen,
 	colorlinks, linkcolor=, urlcolor=SpotColor, citecolor=%
 }
 \urlstyle{same}
@@ -167,13 +96,15 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 
-\input{../material/preamble//Preamble_Fonts_Charter_FiraSans}
+\input{../material/preamble/Preamble_Fonts_IBMPlex}
 
 \ifnum \serifbodyfont=0
 	\setbeamerfont{normal text}{family=\sffamily}
 	\renewcommand{\familydefault}{\savesffamily}
+	\renewcommand{\rmdefault}{\savesffamily}
 	\renewcommand{\mddefault}{\savesfmdseries}
 	\renewcommand{\bfdefault}{\savesfbfseries}
+	\AtBeginDocument{\sffamily}
 \else
 	\usefonttheme{serif}
 	\setbeamerfont{normal text}{family=\rmfamily}
@@ -188,15 +119,20 @@
 \usefonttheme{structurebold}
 \usefonttheme{professionalfonts}
 
-\setbeamerfont{footline}
-	{parent=structure, size=\tiny, series=\mdseries}
+\ifnum \serifheadingfont=0
+	\setbeamerfont{footline}
+		{parent=structure, size=\tiny, series=\mdseries}
+\else
+	\setbeamerfont{footline}
+		{parent=structure, size=\tiny, series=\fontseries{\savermmdseries}}
+\fi
 \setbeamercolor{footline}
 	{fg=SpotColor}
 
 %% Use the bm (= boldmath) package for better support of setting math in bold ==>
 %% Prevent the "Too many math fonts used" error:
-%\newcommand{\bmmax}{0}
-%\newcommand{\hmmax}{0}
+\newcommand{\bmmax}{0}
+\newcommand{\hmmax}{0}
 \usepackage{bm}
 %% <==
 
@@ -207,20 +143,20 @@
 % This makes the compilation fail in combination with tikz. See
 % https://tex.stackexchange.com/questions/89467/why-does-pdftex-hang-on-this-file.
 %% Inspired by https://tex.stackexchange.com/questions/251460/how-to-put-symbols-of-equal-size-on-top-of-each-other
-\newcommand{\succeqq}{%
-	\mathrel{%
-		\vcenter{\offinterlineskip
-			\ialign{##\cr$\succ$\cr\noalign{\kern 1pt}$=$\cr}%
-		}%
-	}%
-}
-\newcommand{\nsucceqq}{\mathrel{\not\succeqq}}
-\newcommand*{\coloneqq}{\mathrel{%
-		\mathrel{%
-			\raisebox{0.15ex}{\scalebox{0.85}{\ensuremath{:}}}\hspace{-0.2pt}%
-		}%
-		=%
-}}
+%\newcommand{\succeqq}{%
+%	\mathrel{%
+%		\vcenter{\offinterlineskip
+%			\ialign{##\cr$\succ$\cr\noalign{\kern 1pt}$=$\cr}%
+%		}%
+%	}%
+%}
+%\newcommand{\nsucceqq}{\mathrel{\not\succeqq}}
+%\newcommand*{\coloneqq}{\mathrel{%
+%		\mathrel{%
+%			\raisebox{0.15ex}{\scalebox{0.85}{\ensuremath{:}}}\hspace{-0.2pt}%
+%		}%
+%		=%
+%}}
 
 \input{../material/preamble/Preamble_Sansserif_math}
 
@@ -240,10 +176,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\linespread{1.1}
+
 \setbeamerfont{title}
 	{parent=structure, size=\LARGE}
-\setbeamerfont{subtitle}
-	{parent=structure, size=\Large, series=\mdseries}
+\ifnum \serifheadingfont=0
+	\setbeamerfont{subtitle}
+		{parent=structure, size=\Large, series=\mdseries}
+\else
+	\setbeamerfont{subtitle}
+		{parent=structure, size=\Large, series=\fontseries{\savermmdseries}}
+\fi
 \setbeamerfont{frametitle}
 	{parent=structure, size=\large}
 
@@ -299,11 +242,9 @@
 
 \setbeamerfont{alerted text}{series=\bfseries}
 
-%% Lorenz Götte's color scheme:
-%\usecolortheme{whale}
-%\definecolor{beamer@blendedblue}{rgb}{0.137,0.466,0.741}
-%\setbeamercolor{structure}{fg=beamer@blendedblue}
-%\definecolor{SpotColor}{rgb}{0.1,0.4,0.7} % Lorenz' Blue
+\definecolor{OSEBlue}	  {RGB}{  0,  76, 141}
+%\definecolor{OSEBlueLight}{RGB}{ 48, 188, 237}
+\definecolor{OSEBlueLight}{RGB}{ 51, 153, 204}
 \definecolor{UBonnBlue}   {RGB}{  7,  82, 154}
 \definecolor{UBonnYellow} {RGB}{234, 185,  12}
 \definecolor{UBonnGray}   {RGB}{144, 144, 133}
@@ -311,10 +252,31 @@
 \definecolor{darkred}     {RGB}{191,   0,   0}
 \definecolor{neutralgreen}{RGB}{ 28, 166,   0}
 
-\colorlet{SpotColor}   {UBonnBlue}
-\colorlet{AlertColor}  {darkred}
-\colorlet{ExampleColor}{neutralgreen}
-
+\colorlet{SpotColor}   {OSEBlue}
+\colorlet{AlertColor}  {OSEBlue}
+%\colorlet{ExampleColor}{neutralgreen}
+\colorlet{ExampleColor}{OSEBlueLight}
+\definecolor{darkgrey}{gray}{0.65}
+\definecolor{lightblue}{rgb}{0.8,0.85,1}
+\definecolor{darkgray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0,.35,.62}
+\definecolor{lightblue}{rgb}{0.8,0.85,1}
+\definecolor{lightgrey}{gray}{0.1}	%Farben mischen
+\definecolor{Gray}{gray}{0.9}
+\definecolor{mplorange}{HTML}{FF7F0E}
+\definecolor{mplred}{HTML}{D62728}
+\definecolor{mplblue}{HTML}{1F77B4}
+\definecolor{mplgreen}{HTML}{2CA02C}
+\definecolor{tabblue}{RGB}{31,119,180}  % usage: blue-collar occupation
+\definecolor{taborange}{RGB}{255, 127, 14}  % usage: school
+\definecolor{tabgreen}{RGB}{44, 160, 44}  % usage: home
+\definecolor{tabred}{RGB}{214, 39, 40}  % usage: white-collar occupation
+\definecolor{tabpurple}{RGB}{148, 103, 189}  % usage: military
+\definecolor{tabbrown}{RGB}{140, 86, 75}
+\definecolor{tabrose}{RGB}{227, 119, 194}
+\definecolor{tabgrey}{RGB}{127, 127, 127}
+\definecolor{tablime}{RGB}{188, 189, 34}
+\definecolor{tabcyan}{RGB}{23, 190, 207}
 \setbeamercolor{structure}{fg=SpotColor}
 \setbeamercolor{alerted text}{fg=AlertColor}
 \setbeamercolor{author in head/foot}{fg=white, bg=SpotColor}
@@ -328,9 +290,8 @@
 	\textbf{\usebeamerfont{structure}\usebeamercolor[fg]{frametitle}#1}%
 	\par%
 }
-\newcommand{\sigstar}{\highlight{*}}
 
-\renewcommand{\alert}[1]{\highlight{\textbf{#1}}}
+%\renewcommand{\alert}[1]{\highlight{\textbf{#1}}}
 
 \newlength{\rulelength}
 \setlength{\rulelength}{\paperwidth - \marginleft - \marginright}
@@ -358,7 +319,7 @@
 		\hspace{\marginleft}%
 		\sliderule \vspace{1.1ex} \linebreak
 		\mbox{\hspace{\marginleft}}%
-		\textmd{\insertshortauthor: \enquote{\insertshorttitle}}
+		\insertshortauthor: \enquote{\insertshorttitle}
 		\hfill%
 		\textbf{\insertframenumber/\inserttotalframenumber}%
 		\hspace{\marginright}%
@@ -513,52 +474,57 @@
 
 % \setbeamerfont{title} and \setbeamerfont{subtitle} already executed above!
 \setbeamerfont{author}
-	{parent=normal text, size=\large, series=\mdseries, shape=\upshape}
+{parent=normal text, size=\large, series=\mdseries, shape=\upshape}
 \setbeamercolor{author}
-	{parent=normal text}
+{parent=normal text}
 \setbeamerfont{institute}
-	{parent=normal text, size=\small, series=\mdseries, shape=\itshape}
+{parent=normal text, size=\small, series=\mdseries, shape=\itshape}
 \setbeamercolor{institute}
-	{parent=normal text}
+{parent=normal text}
+\ifnum \serifheadingfont=0
 \setbeamerfont{date}
-	{parent=structure, size=\normalsize, series=\bfseries}
+{parent=structure, size=\normalsize, series=\bfseries}
+\else
+\setbeamerfont{date}
+{parent=structure, size=\normalsize, series=\fontseries{semibold}}
+\fi
 \setbeamercolor{date}
-	{parent=normal text}
+{parent=normal text}
 
 \makeatletter
 \setbeamertemplate{title page}{
-	\begin{minipage}[c][6.5cm]{\textwidth}%
-		
-		\begingroup
-			\ifx\inserttitle\@empty\else%
-				\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
-			\fi
-			\ifx\insertsubtitle\@empty\else%
-				\medskip
-				\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par%
-			\fi
-			\ifx\beamer@shortauthor\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
-			\fi
-			\ifx\insertinstitute\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par%
-			\fi
-			\ifx\insertdate\@empty\else%
-				\vspace{\fill}
-				\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
-			\fi
-		\endgroup
+	\begin{minipage}[c][7.50cm]{\textwidth}%
 		\vfill
-		\vspace{0cm}  % For the \vfill to actually have an effect
-		\bottomleft%
+		\begingroup
+		\ifx\inserttitle\@empty\else%
+		\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
+		\fi
+		\ifx\insertsubtitle\@empty\else%
+		\medskip
+		\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par%
+		\fi
+		\ifx\beamer@shortauthor\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
+		\fi
+		\ifx\insertinstitute\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par%
+		\fi
+		\ifx\insertdate\@empty\else%
+		\vspace{\fill}
+		\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate%
+		\fi
+		\endgroup
+		
+		%\vspace{0cm}
+		\hspace{2.00cm}  
+		\raggedright%
 		\ifx\inserttitlegraphic\@empty\else%
 		\inserttitlegraphic%
 		\fi
-		\vfill
+		%\vfill% For the \vfill to actually have an effect
 	\end{minipage}%
-
 }
 \makeatother
 % <==
@@ -748,8 +714,16 @@
 %%%%%%%%%%%%%
 
 
-\AtBeginEnvironment{itemize}{\vspace{-\parskip}\setlength{\labelsep}{0.55em}}
-\AtBeginEnvironment{enumerate}{\vspace{-\parskip}\setlength{\labelsep}{0.5em}}
+\AtBeginEnvironment{itemize}{%
+	\vspace{-\parskip}%
+	\setlength{\labelsep}{0.55em}%
+	\setlength{\labelwidth}{\widthof{9.}}%
+}
+\AtBeginEnvironment{enumerate}{%
+	\vspace{-\parskip}%
+	\setlength{\labelsep}{0.5em}%
+	\setlength{\labelwidth}{\widthof{9.}}%
+}
 
 % Adjust spacing of lists ==>
 % Unfortunately, the ``enumitem'' package is incompatible with the ``beamer'' class.
@@ -897,14 +871,13 @@
 
 %\usepackage[round]{natbib}
 
-%\newlength{\bibindent}
-%\newlength{\bibitemsep}
-%\newlength{\bibsep}
+\newlength{\bibindent}
+\newlength{\bibitemsep}
+\newlength{\bibsep}
 
-\input{../material/preamble/Preamble_BibLaTeX_AER} 
-% \input{0_0_Preamble/Preamble_BibLaTeX_APA}
+\input{../material/preamble/Preamble_BibLaTeX_AER}
 \bibliography{../submodules/bibliography/literature}
-%\bibliographystyle{apacite}
+
 \renewcommand{\bibfont}{\scriptsize}
 
 \setbeamertemplate{bibliography item}{}
