@@ -7,39 +7,39 @@
 \section{Mathematical formulation}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Policy evaluation}
+\begin{frame}{Policy evaluation}
 %\textbf{Policy evaluation}\vspace{0.3cm}
 \begin{align*}
-  v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[ \sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \Bigm| \mathrm{I}_t \right]
+  v^\pi_t(s_t) = \E_{s_t}^\pi\left[ \sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \Bigm| \mathcal{I}_t \right]
 \end{align*}
 Inductive scheme
 \begin{align*}
-v^\pi_t(s_t) = u_t(s_t,  a^\pi_t(s_t)) + \delta\,E^\pi_{s_t} \left[ v^\pi_{t + 1}(s_{t + 1})  \bigm| \mathrm{I}_t \right]
+v^\pi_t(s_t) = u_t(s_t,  a^\pi_t(s_t)) + \delta\,E^\pi_{s_t} \left[ v^\pi_{t + 1}(s_{t + 1})  \bigm| \mathcal{I}_t \right]
 \end{align*}
-\textbf{\textcolor{red}{Why do you use $\mathrm{I}_t$ instead of $\mathcal{I}_t$ (which is what you use in the paper?)}}
+
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Optimality equations}
+\begin{frame}{Optimality equations}
 %\textbf{Optimality equations}\vspace{0.3cm}
 \begin{align*}
-v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathrm{I}_t\,\right] \right\}
+v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \right\}
 \end{align*}
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Backward induction algorithm}
+\begin{frame}{Backward induction algorithm}\vspace{0.25cm}
 	%\textbf{Backward induction algorithm}\vspace{0.5cm}
 
-\begin{algorithmic}\small
+\begin{algorithmic}
 \For{$t = T, \hdots, 1$}
     \If{t == T}
         \State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
     \Else
         \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
-        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathrm{I}_t\,\right] \bigg\}$
+        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \bigg\}$
         \State and set
-        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathrm{I}_t\,\right] \bigg\}$
+        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \bigg\}$
     \EndIf
 \EndFor
 \vspace{0.3cm}\end{algorithmic}

@@ -7,17 +7,17 @@
 \section{Calibration procedure}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Data}
+\begin{frame}{Data}\vspace{0.25cm}
 
-\textbf{Data}
+\textbf{Dataset}
 \begin{align*}
 	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}
 \end{align*}
 
-\textbf{State variables}
-\begin{itemize}
+\textbf{State variables}\vspace{0.25cm}
+\begin{itemize}\setlength\itemsep{1em}
 \item $s_t = (\bar{s}_t, \epsilon_t)$
-\begin{itemize}
+\begin{itemize}\setlength\itemsep{1em}
 	\item $\bar{s}_t$ observed
 	\item $\epsilon_t$ unobserved
 \end{itemize}
@@ -25,9 +25,8 @@
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Procedures}
-\textbf{Procedures}
-\begin{itemize}
+\begin{frame}{Procedures}\vspace{0.25cm}
+\begin{itemize}\setlength\itemsep{1em}
 \item Likelihood-based
 	\begin{align*}
 	  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
