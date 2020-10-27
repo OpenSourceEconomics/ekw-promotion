@@ -1,166 +1,135 @@
 % !TEX root = ../main.tex
-%\begin{frame}\begin{center}
-%\LARGE\textbf{Example}
-%\end{center}\end{frame}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
 \section{Example}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Seminal paper}
-	%\textbf{Seminal paper}\vspace{0.3cm}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Seminal paper}\vspace{0.25cm}
 \begin{itemize}
 	\item \fullcite{Keane.1997}.
 \end{itemize}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Model of occupational choice}
-	%\textbf{Model of occupational choice}\vspace{0.3cm}
-
-\begin{itemize}
-\item Life cycle histories
-\begin{itemize}
-\item School attendance
-\item Occupation-specific work status
-\item Wages
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Decision tree}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Decision tree}
 \begin{figure}
-  \scalebox{0.55}{\input{../material/fig-decision-tree}}
-  \caption{Decision tree}
+  \scalebox{0.60}{\input{../material/fig-decision-tree}}
 \end{figure}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Immediate utility}
-	%\textbf{Immediate utility}\vspace{0.3cm}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Immediate utility}\vspace{0.3cm}
+
+  \begin{multicols}{2}
 
   \begin{align*}
-  u(\cdot) =
+  u_t(s_t) =
   \begin{cases}
-      \zeta_a(\cdot)  + w_a(\cdot)                & \text{if}\, a \in \{1, 2, 3\}  \\
-      \zeta_a(\cdot)                                                  &  \text{if}\, a \in \{4, 5\}
+      \,\zeta_a(s_t)  + w_a(s_t)   & \text{if}\, a \in \{B, W, M\}  \\[0.2cm]
+      \,\zeta_a(s_t)                 &  \text{if}\, a \in \{S, H\}
   \end{cases}
   \end{align*}
 
-\begin{table}[]
-	\hskip1.5cm
-	\begin{tabular}{ll}
-	$\zeta_a(\cdot)$	& non-pecuniary utility \\[1.0em]
-	$w_a(\cdot) $	& wage component
-	\end{tabular}
-\end{table}
+  \columnbreak
 
-\textbf{\textcolor{red}{Mention that $A = \{1, 2, 3, 4, 5\}$ (why not $\mathcal{A}$ as in the paper?) and that $1 = \text{blue-collar}$, $2 = \dots$!}}
+
+  \heading{Informed by reduced-form evidence}\vspace{0.3cm}
+  \begin{itemize}\setlength\itemsep{1em}
+     \item Mincer equation
+     \item Sheepskin effects
+     \item Skill depreciation
+     \item Mobility and search costs
+     \item Monetary and psychic cost of schooling
+  \end{itemize}
+
+\end{multicols}
 
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Transitions}
-	%\textbf{Transitions}\vspace{0.3cm}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Transitions}\vspace{0.25cm}
 
   Work experience $\bm{k}_t$  and years of completed schooling $h_t$ evolve deterministically.
   \begin{align*}
-  k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
+  k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{B, W, M\} \\
   h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
   \end{align*}
 
-  Productivity shocks $\bm{e}_t$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
-  
-  \textbf{\textcolor{red}{The $\bm{e}_t$s only appear on slides~28/29. Why mention them here?!}}
+Productivity shocks $\bm{e}_t$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
+
+Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k}_t, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon}_t\}$.
 
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Non-pecuniary utility of blue-collar occupation}
-	%\textbf{Non-pecuniary utility of blue-collar occupation}\vspace{0.3cm}
-%
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Utility of blue-collar occupation}\vspace{0.25cm}
+
+	\begin{itemize}\setlength\itemsep{1em}
+	\item Non-pecuniary
   \begin{align*}
   \zeta_{1}(\cdot)  = \alpha_1 & + c_{1,1} \cdot \ind[a_{t-1} \neq 1] + c_{1,2} \cdot \ind[k_{1,t} = 0] \\
                               & + \vartheta_1 \cdot \ind[h_t \geq 12] + \vartheta_2 \cdot \ind[h_t \geq 16] + \vartheta_3 \cdot \ind[k_{3,t} = 1]
   \end{align*}
+
+	 \item Wage component
+	 \begin{align*}
+	 w_{a}(\cdot) & = r_{a} \, x_{a}(\cdot),
+	 \end{align*}
+where  $x_{a}(\cdot)$ is the occupation-specific skill level.
+ \end{itemize}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Wage component}
-	%\textbf{Wage component}\vspace{0.3cm}
-%
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Skill production for blue-collar occupation}
+
 \begin{align*}
-w_{a}(\cdot) & = r_{a} \, x_{a}(\cdot)
+	x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k}_t,  h_t, t, a_{t-1}, e_{j,1}) \cdot \epsilon_{1,t} \big)
 \end{align*}
-with skill production function
-\begin{align*}
-x_{1}(\cdot) & = \exp \big( \Gamma_{1}(\bm{k}_t,  h_t, t, a_{t-1}, e_{j,1}) \cdot \epsilon_{1,t} \big).
-\end{align*}
-\textbf{\textcolor{red}{What is $\epsilon_{1,t}$ all of a~sudden? It has been mentioned as a~``state variable'' before, but what is it?}}
-\end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Skill production for blue-collar occupation}
-	%\textbf{Skill production for blue-collar occupation}\vspace{0.3cm}
-%
+
+Parameterization of the deterministic component of the skill production function:\vspace{-0.5cm}
+
 \begin{align*}
      \Gamma_1(\cdot) = e_{j,1} & + \beta_{1,1} \cdot h_t + \beta_{1, 2} \cdot \ind[h_t \geq 12] + \beta_{1,3} \cdot \ind[h_t\geq 16]\\
                                    & + \gamma_{1, 1} \cdot  k_{1,t} + \gamma_{1,2} \cdot  (k_{1,t})^2 + \gamma_{1,3} \cdot  \ind[k_{1,t} > 0] \\
                                  & + \gamma_{1,4} \cdot  t + \gamma_{1,5} \cdot \ind[t < 18]\\
                                    & + \gamma_{1,6} \cdot \ind[a_{t-1} = 1] + \gamma_{1,7} \cdot  k_{2,t} + \gamma_{1,8} \cdot  k_{3,t}
 \end{align*}
-\textbf{\textcolor{red}{As already mentioned, the use of the indicator function is nonstandard.}}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-%\begin{frame}\begin{center}
-%		\LARGE\textit{Empirical data}
-%\end{center}\end{frame}
-\section{Empirical data}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: National Longitudinal Survey of Youth 1979}
-	%\textbf{National Longitudinal Survey of Youth 1979}\vspace{0.3cm}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{National Longitudinal Survey of Youth 1979}\vspace{0.25cm}
 
-\begin{itemize}
+	\begin{itemize}\setlength\itemsep{1em}
 	\item 1,373 individuals starting at age 16
-	\item Life cycle histories
-	\begin{itemize}
+	\item Life cycle histories\medskip
+	\begin{itemize}\setlength\itemsep{1em}
 		\item School attendance
 		\item Occupation-specific work status
 		\item Wages
 	\end{itemize}
 \end{itemize}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Choices}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Choices}
   \begin{figure}
-  \scalebox{0.25}{\includegraphics{fig-data-choice-all}}
-  \caption{Choices}
+  \scalebox{0.30}{\includegraphics{fig-data-choice-all}}
   \end{figure}
 \end{frame}
-
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection: Average wage}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Average wages}
   \begin{figure}
-  \scalebox{0.25}{\includegraphics{fig-data-wage-occupations}}
-  \caption{Average wage}
+  \scalebox{0.30}{\includegraphics{fig-data-wage-occupations}}
   \end{figure}
 \end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-%\begin{frame}\begin{center}
-%		\LARGE\textit{Economic insights}
-%\end{center}\end{frame}
-\section{Economic insights}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}{\insertsection}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Economic mechanism and policy forecast}
   \begin{figure}[h!]\centering
-  \subfloat[Time preference]{\scalebox{0.175}{\includegraphics{fig-economic-mechanism}}}\hspace{0.5cm}
-  \subfloat[Tuition subsidy]{\scalebox{0.175}{\includegraphics{fig-policy-forecast}}}
-  \caption{Economic mechanism and policy forecast}\label{Economic mechanism and policy forecast}
+  \subfloat[Time preference]{\scalebox{0.225}{\includegraphics{fig-economic-mechanism}}}\hspace{0.5cm}
+  \subfloat[Tuition subsidy]{\scalebox{0.225}{\includegraphics{fig-policy-forecast}}}
   \end{figure}
 \end{frame}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
