@@ -19,10 +19,9 @@ v^{\pi}_{t}(s_t, a_t) & = u_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}
 Let's consider an atemporal version of the typical integral from \citet{Keane.1997} as an example. As outlined earlier, individuals can choose among five alternatives. Each of the alternative-specific utilities is, in part, determined by a stochastic continuous state variable $\bm{\epsilon}$. The transition of all other state variables $x$ is deterministic. This results in a five-dimensional integral of the following form:
 %
 \begin{align*}
-   \int_{\bm{\epsilon}}\, \max_{a\in A} \bigg\{v^{\pi^*}(x, \bm{\epsilon}, a)\bigg\} \phi_{\bm{\mu}, \bm{\Sigma}}(\bm{\epsilon}) \diff\bm{\epsilon} \quad\forall\, x \in X,
+   \int \max_{a\in A} \bigg\{v^{\pi^*}(x, \bm{\epsilon}, a)\bigg\} \phi_{\bm{\mu}, \bm{\Sigma}}(\bm{\epsilon}) \diff\bm{\epsilon} \quad\forall\, x \in X,
 \end{align*}
 %
-\comment[id=HG]{Darf man das so schreiben?! Ich meine, darf man dieselbe Variable $\bm{\epsilon}$ als Integralgrenzen/\hspace{0pt}Menge, über die integriert wird, nehmen und dann in $\text{d}\bm{\epsilon}$ reinpacken?}%
 where $\bm{\epsilon}$ follows a multivariate normal distribution with mean $\bm{\mu}$, covariance matrix $\bm{\Sigma}$, and probability density function $\phi_{\bm{\mu}, \bm{\Sigma}}$.
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
