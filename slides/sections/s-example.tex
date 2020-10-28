@@ -4,18 +4,24 @@
 \section{Example}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Seminal paper}\vspace{0.25cm}
+\begin{frame}{Seminal paper}\vspace{0.75cm}
+\fullcite{Keane.1997}.\vspace{0.5cm}
+
 \begin{itemize}
-	\item \fullcite{Keane.1997}.
+	\item They follow individuals over their working life from young adulthood at age 16 to retirement at age 65 where the decision period $t = 16, \dots, 65$  is a school year. Individuals decide $a\in\mathcal{A}$ whether to work in a blue-collar or white-collar occupation ($a = 1, 2$), to serve in the military $(a = 3)$, to attend school $(a = 4)$, or to stay at home $(a = 5)$.
 \end{itemize}
+
+
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
 \begin{frame}{Decision tree}
+
 \begin{figure}
   \scalebox{0.60}{\input{../material/fig-decision-tree}}
 \end{figure}
 \end{frame}
+
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
 \begin{frame}\frametitle{Immediate utility}\vspace{0.3cm}
@@ -25,8 +31,8 @@
   \begin{align*}
   u_t(s_t) =
   \begin{cases}
-      \,\zeta_a(s_t)  + w_a(s_t)   & \text{if}\, a \in \{B, W, M\}  \\[0.2cm]
-      \,\zeta_a(s_t)                 &  \text{if}\, a \in \{S, H\}
+      \,\zeta_a(s_t)  + w_a(s_t)   & \text{if}\, a \in \{1, 2, 3\}  \\[0.2cm]
+      \,\zeta_a(s_t)                 &  \text{if}\, a \in \{4, 5\}
   \end{cases}
   \end{align*}
 
@@ -51,7 +57,7 @@
 
   Work experience $\bm{k}_t$  and years of completed schooling $h_t$ evolve deterministically.
   \begin{align*}
-  k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{B, W, M\} \\
+  k_{a,t+1} = k_{a,t} + \ind[a_t = a]  &\qquad \text{if}\, a \in \{1, 2, 3\} \\
   h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
   \end{align*}
 
@@ -73,9 +79,9 @@ Given the structure of the utility functions and the distribution of the shocks,
 
 	 \item Wage component
 	 \begin{align*}
-	 w_{a}(\cdot) & = r_{a} \, x_{a}(\cdot),
+	 w_{1}(\cdot) & = r_{1} \, x_{1}(\cdot),
 	 \end{align*}
-where  $x_{a}(\cdot)$ is the occupation-specific skill level.
+where  $x_{1}(\cdot)$ is the occupation-specific skill level.
  \end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
@@ -108,6 +114,13 @@ Parameterization of the deterministic component of the skill production function
 		\item Wages
 	\end{itemize}
 \end{itemize}
+\end{frame}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Sample size}
+  \begin{figure}
+  \scalebox{0.30}{\includegraphics{fig-data-sample-size}}
+  \end{figure}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------

@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.colors as mc
 import matplotlib.pyplot as plt
+import respy as rp
 
 from pathlib import Path
 
@@ -273,3 +274,20 @@ deltas = (
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_time(deltas, levels)
 plot_mechanism_time(deltas, levels, "bw")
+
+# TODO: This part was added after the fact for the presentation. Students turned out to be
+#  particularly interested in the sample size over time.
+df = rp.get_example_model("kw_97_extended", with_data=True)[2]
+
+fig, ax = plt.subplots()
+
+ax.xaxis.set_ticks(range(11))
+ax.get_yaxis().set_major_formatter(mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+ax.yaxis.get_major_ticks()[0].set_visible(False)
+ax.set_xlabel("Age")
+ax.set_ylabel("Sample size")
+ax.set_ylim(0, 1400)
+ax.bar(range(11), df.groupby("Period")["Choice"].count())
+
+fig.savefig("fig-data-sample-size.pdf")
