@@ -18,7 +18,7 @@ jobs:
     - name: install latex dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install texlive texlive-science texlive-latex-extra texlive-bibtex-extra texlive-fonts-extra texlive-lang-german texlive-latex-recommended
+        sudo apt-get install texlive-full
         sudo snap install pdftk
         sudo texhash
     - name: compile latex
