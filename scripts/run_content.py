@@ -48,11 +48,11 @@ if __name__ == "__main__":
         sp.check_call(["python", "run.py"])
         sp.check_call(["python", "kw_97_simulations.py"])
 
-   # if args.appendix or args.full:
+    if args.appendix or args.full:
 
-    #    compile_material("appendix")
+        compile_material("appendix")
 
-     #   shutil.copy("appendix/main.pdf", "ekw-appendix.pdf")
+        shutil.copy("appendix/main.pdf", "ekw-appendix.pdf")
 
     if args.paper or args.full:
 
