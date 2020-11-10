@@ -1,19 +1,17 @@
 % !TEX root = ../main.tex
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}\begin{center}
-		\LARGE\textit{Calibration procedure}
-\end{center}\end{frame}
-%-------------------------------------------------------------------------------
-%-------------------------------------------------------------------------------
-\begin{frame}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\section{Calibration procedure}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{frame}{Data}\vspace{0.25cm}
 
-\textbf{Data}\vspace{0.3cm}
+\textbf{Dataset}
 \begin{align*}
-	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}\\
+	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}
 \end{align*}
 
-\textbf{State variables}\vspace{0.3cm}
+\textbf{State variables}\vspace{0.25cm}
 \begin{itemize}\setlength\itemsep{1em}
 \item $s_t = (\bar{s}_t, \epsilon_t)$\medskip
 \begin{itemize}\setlength\itemsep{1em}
@@ -24,16 +22,17 @@
 \end{frame}
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
-\begin{frame}
-\textbf{Procedures}\vspace{0.5cm}
+\begin{frame}{Procedures}\vspace{0.25cm}
 \begin{itemize}\setlength\itemsep{1em}
-\item likelihood-based
-\begin{align*}
-  \hat{\theta} \equiv \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
-\end{align*}
-\item simulation-based
-\begin{align*}
-    \hat{\theta} \equiv \argmin_{\theta \in \Theta} (M_D - M_S(\theta))' W (M_D - M_S(\theta))
-\end{align*}
+\item Likelihood-based
+	\begin{align*}
+	  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
+	\end{align*}
+\item Simulation-based
+	\begin{align*}
+	    \hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \, \big(M_D - M_S(\theta)\big)
+	\end{align*}
 \end{itemize}
 \end{frame}
+%---------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------

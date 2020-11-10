@@ -1,13 +1,89 @@
-\input{sections/header}
+% !TeX document-id = {b4ed2942-570a-4bca-8c62-e711ae21c729}
+% !TeX TXS-program:compile = txs:///pdflatex/
+% !BIB program = biber
 
-\input{sections/titlepage}
+
+
+\documentclass[aspectratio=169, 11pt, t]{beamer}
+
+
+\input{../material/preamble/Preamble_Presentation}
+\input{../material/preamble/Preamble_Miscellaneous}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MISCELLANEOUS SETTINGS/COMMANDS  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Add separator slide to the beginning of each section ==>
+%% Blue on white:
+%\AtBeginSection[]{%
+%	\begin{frame}[standout, c]{~}
+%		%\vfill
+%		\usebeamerfont{title}%
+%		\textcolor{SpotColor}{\insertsectionhead}
+%		%\vfill
+%	\end{frame}%
+%}
+% White on blue:
+\AtBeginSection[]{{%
+	\setbeamercolor{background canvas}{bg=UBonnBlue, fg=white}%
+	\colorlet{SpotColor}{white}%
+	\begin{frame}[standout, c]{~}
+		%\vfill
+		\usebeamerfont{title}\hypersetup{linkcolor=white}%
+		\insertsection
+		%\vfill
+	\end{frame}%
+	\colorlet{SpotColor}{UBonnBlue}%
+}}
+%% Alternativelyy, add ``Outline'' slide to the beginning of each section ==>
+%\AtBeginSection[]{
+%	\begin{frame}[plain]{Outline}
+%		\tableofcontents[currentsection]
+%	\end{frame}
+%}
+%% <==
+
+%\subtitle{I~Prefer to Avoid Subtitles}
+
+\author[The OSE team]{%
+	%Philipp Eisenhauer%\inst{} %\and
+	% Set the name of the presenting coauthor in boldface:
+	%\alert{Janet Smith}\inst{b,\,c} \and
+	%Jeremiah Smith\inst{a}
+} % Author(s)
+
+%\institute{%
+	%\inst{}\,
+%	University of Bonn, Germany %\and
+	%\inst{b}\,University of Cologne, Germany \and
+	%\inst{c}\,Collaborative Research Center Transregio~224%
+%} % Institution(s)
+\titlegraphic{\begin{picture}(20,50)
+		\put(250,30){\scalebox{1.3}{\href{https://github.com/OpenSourceEconomics}{\includegraphics[height=1cm]{OSE_logo_RGB.pdf}}}}
+\end{picture}}
+%\date{%
+	%Name of the Inviting Institution/Seminar Series \\[\medskipamount]
+	%\textmd{\today}%
+%}
+
 
 \begin{document}
 
-\nobibliography*
-\bibliographystyle{apalike}
+
+%%%%%%%%%%%%%%%%%%%
+%%  TITLE SLIDE  %%
+%%%%%%%%%%%%%%%%%%%
 
 \input{sections/s-title}
+
+
+%%%%%%%%%%%%%%%%%
+%%  MAIN PART  %%
+%%%%%%%%%%%%%%%%%
 
 \input{sections/s-introduction}
 
@@ -19,10 +95,14 @@
 
 \input{sections/s-improvements}
 
-\input{sections/s-extensions}
-
 \input{sections/s-conclusion}
 
+
+%%%%%%%%%%%%%%%%
+%%  APPENDIX  %%
+%%%%%%%%%%%%%%%%
+
 \input{sections/s-appendix}
+
 
 \end{document}

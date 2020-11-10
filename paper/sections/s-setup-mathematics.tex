@@ -2,48 +2,51 @@
 %-------------------------------------------------------------------------------
 \subsection{Mathematical formulation}\label{Mathematics}
 %-------------------------------------------------------------------------------
-EKW models are set up as a standard Markov decision process (MDP) \citep{Puterman.1994, White.1993}. When making sequential decisions under uncertainty, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted utilities $v^{\pi^*}_1(s_1)$ as formalized in equation (\ref{Objective Risk}). In principle, this requires evaluating the performance of all policies based on all possible sequences of utilities, each weighted by the probability with which they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\footnote{Optimal decisions in an MDP are a deterministic function of the current state $s$ only, i.e., an optimal decision rule is always deterministic and Markovian. We restrict our notation to this special case right from the beginning.}\\
+EKW models are set up as a standard Markov decision process (MDP) \citep{Puterman.1994, White.1993}. When making sequential decisions under uncertainty, the task is to determine the optimal policy $\pi^*$ with the largest expected total discounted utilities $v^{\pi^*}_1(s_1)$ as formalized in equation~\eqref{Objective Risk}. In principle, this requires evaluating the performance of all policies based on all possible sequences of utilities, each weighted by the probability with which they occur. Fortunately, however, the multistage problem can be solved by a sequence of simpler inductively defined single-stage problems.\footnote{Optimal decisions in an MDP are a deterministic function of the current state $s$ only, i.e., an optimal decision rule is always deterministic and Markovian. We restrict our notation to this special case right from the beginning.}
 
-\noindent The value function $v^\pi_t(s_t)$ captures the expected total discounted utilities under policy $\pi$ from period $t$ onwards for an individual experiencing state $s_t$:
+The value function $v^\pi_t(s_t)$ captures the expected total discounted utilities under policy $\pi$ from period $t$ onwards for an individual experiencing state $s_t$:
 %
-\begin{align*}
-  v^\pi_t(s_t) \equiv \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right].
-\end{align*}
+\begin{equation*}
+  v^\pi_t(s_t) = \E_{s_t}^\pi\left[\left.\sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \,\right\vert\,\mathcal{I}_t\,\right].
+\end{equation*}
 %
-Then we can determine $v_1^\pi(s_1)$ for any policy by recursively evaluating equation (\ref{MDP Policy Equations}):
+Then we can determine $v_1^\pi(s_1)$ for any policy by recursively evaluating equation~\eqref{MDP Policy Equations}:
 %
-\begin{align}\label{MDP Policy Equations}
+\begin{equation}\label{MDP Policy Equations}
 v^\pi_t(s_t) = u_t(s_t,  a^\pi_t(s_t)) + \delta\,\E^\pi_{s_t} \left[\left.v^\pi_{t + 1}(s_{t + 1})  \,\right\vert\,\mathcal{I}_t\,\right].
-\end{align}
+\end{equation}
 %
-Equation (\ref{MDP Policy Equations}) expresses the total value $v^\pi_t(s_t)$ of adopting policy $\pi$ going forward as the sum of its immediate utility and all expected discounted future utilities.\\
+Equation~\eqref{MDP Policy Equations} expresses the total value $v^\pi_t(s_t)$ of adopting policy $\pi$ going forward as the sum of its immediate utility and all expected discounted future utilities.
 
-\noindent The principle of optimality \citep{Bellman.1954} allows to construct $\pi^*$ by solving the optimality equations (\ref{MPD Optimality})  for all $s$ and $t$ recursively:
+The principle of optimality \citep{Bellman.1954} allows to construct $\pi^*$ by solving the optimality equations \eqref{MPD Optimality} for all $s$ and $t$ recursively:
 %
-\begin{align}\label{MPD Optimality}
-v^{\pi^*}_t(s_t)  & = \max_{a_t \in A}\bigg\{ u_t(s_t, a_t) + \delta\, \E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \bigg\}.
-\end{align}
+\begin{equation}\label{MPD Optimality}
+	v^{\pi^*}_t(s_t) = \max_{a_t \in A}\bigg\{ u_t(s_t, a_t) + \delta\, \E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \bigg\}.
+\end{equation}
 
 \noindent The optimal value function $v^{\pi^*}_t$ is the sum of the expected discounted utilities in $t$ over the remaining time horizon assuming the optimal policy is implemented going forward. The optimal action is choosing the alternative with the highest total value:
 %
-\begin{align*}
-a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}.\\
-\end{align*}
+\begin{equation*}
+	a^{\pi^*}_t(s_t) = \argmax_{a_t\in A} \bigg\{ u_t(s_t, a_t) + \delta\,\E^{\pi^*}_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}.\\
+\end{equation*}
 
-\noindent Algorithm \ref{Backward induction procedure} allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account, and the optimal action is choosing the alternative with the highest immediate utilities in each state. With the decision rule for the final period at hand, the other optimal decisions can be determined recursively following equation (\ref{MPD Optimality}) as the calculation of their expected future utilities is straightforward given the relevant transition probabilities.
+\autoref{Backward induction procedure} allows to solve the MDP by a simple backward induction procedure. In the final period $T$, there is no future to take into account, and the optimal action is choosing the alternative with the highest immediate utilities in each state. With the decision rule for the final period at hand, the other optimal decisions can be determined recursively following equation \eqref{MPD Optimality} as the calculation of their expected future utilities is straightforward given the relevant transition probabilities.
 
-\vspace{0.5cm}\begin{algorithm}
-\caption{\strut Backward induction procedure}\label{Backward induction procedure}
-\begin{algorithmic}\vspace{0.3cm}
-\For{$t = T, \hdots, 1$}
-    \If{t == T}
-        \State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
-    \Else
-        \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
-        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
-        \State and set
-        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.
-    \EndIf
-\EndFor
-\vspace{0.3cm}\end{algorithmic}
+\floatname{algorithm}{\sffamily\small Algorithm}
+%\vspace{0.5cm}%
+\begin{algorithm}[t]
+	\caption{\small\!\textbf{.\:\:}\textsf{\strut Backward induction procedure}}\label{Backward induction procedure}
+	\begin{algorithmic}\vspace{0.3cm}
+		\For{$t = T, \hdots, 1$}
+		\If{t == T}
+		\State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
+		\Else
+		\State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
+		\State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1}) \:\right\vert\,\mathcal{I}_t\,\right] \bigg\}$
+		\State and set
+		\State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta\,\E^\pi_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1}) \:\right\vert\,\mathcal{I}_t\,\right] \bigg\}$.
+		\EndIf
+		\EndFor
+		\vspace{0.3cm}\end{algorithmic}
 \end{algorithm}\FloatBarrier
+

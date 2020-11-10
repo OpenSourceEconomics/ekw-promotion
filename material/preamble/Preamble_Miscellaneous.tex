@@ -1,0 +1,110 @@
+% !TeX TXS-program:compile = txs:///pdflatex/
+% !TeX TS-program = pdflatex
+% !TeX TXS-program:bibliography = txs:///biber
+% !BIB program = biber
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  OTHER PACKAGES AND COMMANDS  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Some math-related definitions
+
+%\newcommand*{\coloneqq}{\mathrel{%
+%	\mathrel{%
+%		\raisebox{0.18ex}{\scalebox{0.85}{\ensuremath{:}}\hspace{-0.2pt}%
+%	}%
+%	=%
+%}}
+% Provided by the mathtools package
+
+%\newcommand{\la}[1]{\lambda}
+
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Cov} {\operatorname{Cov}}
+\newcommand{\E}   {\operatorname{E}}
+\newcommand{\Var} {\operatorname{Var}}
+
+%\usepackage{physics}  % Provides differential d as \dd etc.
+\newcommand*{\dd}{\mathop{}\!\mathup{d}}
+\newcommand*{\e} {\mathup{e}}  % Euler's e
+
+\newcommand{\sigstar}{\raisebox{0.66ex}{\scalebox{0.95}{$\star$}}}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%\usepackage{algorithmicx}
+\usepackage{subfig}
+\usepackage[mathscr]{eucal}
+%\usepackage{todonotes}
+
+% Retrieved from header.tex				
+\newcommand*\diff{\mathop{}\!\mathup{d}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\thin}{\thinspace}
+\newcommand{\thick}{\thickspace}
+\newcommand{\N}{\mathcal{N}}	%Normal Distribution
+\newcommand{\U}{\mathrm{U}}	%Uniform Distribution
+\newcommand{\D}{\mathrm{D}}	%Dirichlet Distribution
+\newcommand{\W}{\mathrm{W}}	%Wishart Distribution
+\newcommand{\EE}{\mathrm{E}}		%Expectation
+%\newcommand{\Ind}{\mathbb{I}\,}	%Indicator Function
+\newcommand{\ind}{\mathrm{1}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\var}{\mathrm{var}\thin}
+\newcommand{\plim}{\mathrm{plim}\thin}
+\newcommand{\cov}{\mathrm{cov}\thin}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern5mu{#1#2}}}
+\newtheorem{Remark}{Remark}
+\usepackage{threeparttablex}
+%\def\title#1{\centerline{\LARGE\bf\Longstack{#1}}\vskip .5em}
+\usepackage[usestackEOL]{stackengine}
+\usepackage{xr}
+%\DeclareMathOperator*{\argmin}{arg\,min}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\argmax}{\arg\max}
+\newcommand{\argmin}{\arg\min}
+%\usepackage[labelfont=bf]{caption}
+\captionsetup[table]{skip=10pt}
+
+% OSE colors
+\definecolor{OSEBlue}	{RGB}{  0,  76, 141}
+\definecolor{OSEBlueLight}	{RGB}{ 48, 188, 237}
+% General colors
+\definecolor{lightgrey}{gray}{0.90}	%Farben mischen
+\definecolor{grey}{gray}{0.85}
+\definecolor{darkgrey}{gray}{0.65}
+\definecolor{lightblue}{rgb}{0.8,0.85,1}
+\definecolor{tabblue}{RGB}{31,119,180}  % usage: blue-collar occupation
+\definecolor{taborange}{RGB}{255, 127, 14}  % usage: school
+\definecolor{tabgreen}{RGB}{44, 160, 44}  % usage: home
+\definecolor{tabred}{RGB}{214, 39, 40}  % usage: white-collar occupation
+\definecolor{tabpurple}{RGB}{148, 103, 189}  % usage: military
+\definecolor{tabbrown}{RGB}{140, 86, 75}
+\definecolor{tabrose}{RGB}{227, 119, 194}
+\definecolor{tabgrey}{RGB}{127, 127, 127}
+\definecolor{tablime}{RGB}{188, 189, 34}
+\definecolor{tabcyan}{RGB}{23, 190, 207}
+
+% Black-and-white equivalents 
+\definecolor{bwtabblue}{RGB}{77, 77, 77} 
+\definecolor{bwtabred}{RGB}{42, 42, 42} 
+\definecolor{bwtabpurple}{RGB}{130, 130, 130} 
+\definecolor{bwtaborange}{RGB}{209, 209, 209} 
+\definecolor{bwtabgreen}{RGB}{187, 187, 187} 
+
+\usepackage{multicol}
+\usepackage{listings}
+
+\graphicspath{{../material/}}
+
+%% Do not use black-and-white equivalents
+%\colorlet{bwtabblue}{tabblue}
+%\colorlet{bwtabred}{tabred}
+%\colorlet{bwtabpurple}{tabpurple}
+%\colorlet{bwtaborange}{taborange}
+%\colorlet{bwtabgreen}{tabgreen}

@@ -6,9 +6,9 @@ The implementation of EKW models poses several computational challenges. Among t
 %-------------------------------------------------------------------------------
 \subsection{Numerical integration}
 %-------------------------------------------------------------------------------
-The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Eisenhauer.2020c}, we draw on the extensive literature on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of their solution. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.\\
+The solution of EKW models requires the evaluation of millions of integrals to determine the future value of each action in each state. In \citet{Eisenhauer.2020c}, we draw on the extensive literature on numerical integration \citep{Davis.2007, Gerstner.1998} to improve the precision and reliability of their solution. The current practice in economics is to implement a random Monte Carlo integration which introduces considerable numerical error and computational instabilities \citep{Judd.2011}.
 
-\noindent We consider the optimality equation in a generic time period $t$ to clarify the structure of the integral. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a_t$ in state $s_t$ while continuing with the optimal policy going forward.
+We consider the optimality equation in a generic time period $t$ to clarify the structure of the integral. Let $v^{\pi}_{t}(s_t, a_t)$ denote the action-specific value function of choosing action $a_t$ in state $s_t$ while continuing with the optimal policy going forward.
 %
 \begin{align*}
 v^{\pi}_{t}(s_t, a_t) & = u_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}_{t + 1}(s_{t + 1})\,\right\vert\,\mathcal{I}_t\,\right] \\
@@ -16,16 +16,16 @@ v^{\pi}_{t}(s_t, a_t) & = u_t(s_t, a_t) + \delta\,\E_{s_t} \left[\left.v^{\pi^*}
 & =  u_t(s_t, a_t) + \delta\, \int_S \max_{a_{t + 1} \in A}\bigg\{v^{\pi^*}_{t + 1}(s_{t + 1}, a_{t + 1})\bigg\}\diff p_t(a_t, s_t).
 \end{align*}
 
-\noindent Let's consider an atemporal version of the typical integral from \citet{Keane.1997} as an example. As outlined earlier, individuals can choose among five alternatives. Each of the alternative-specific utilities is, in part, determined by a stochastic continuous state variable $\epsilon$. The transition of all other state variables $x$ is deterministic. This results in a five-dimensional integral of the following form:
+Let's consider an atemporal version of the typical integral from \citet{Keane.1997} as an example. As outlined earlier, individuals can choose among five alternatives. Each of the alternative-specific utilities is, in part, determined by a stochastic continuous state variable $\bm{\epsilon}$. The transition of all other state variables $x$ is deterministic. This results in a five-dimensional integral of the following form:
 %
 \begin{align*}
-   \int_{\epsilon}\, \max_{a\in A} \bigg\{v^{\pi^*}(x, \epsilon, a)\bigg\} \phi_{\mu, \Sigma}(\epsilon) \diff\epsilon \quad\forall\, x \in X,
+   \int \max_{a\in A} \bigg\{v^{\pi^*}(x, \bm{\epsilon}, a)\bigg\} \phi_{\bm{\mu}, \bm{\Sigma}}(\bm{\epsilon}) \diff\bm{\epsilon} \quad\forall\, x \in X,
 \end{align*}
-
-\noindent where $\epsilon$ follows a multivariate normal distribution with mean $\mu$, covariance matrix $ \Sigma$, and probability density function $\phi_{\mu, \Sigma}$.
+%
+where $\bm{\epsilon}$ follows a multivariate normal distribution with mean $\bm{\mu}$, covariance matrix $\bm{\Sigma}$, and probability density function $\phi_{\bm{\mu}, \bm{\Sigma}}$.
 %-------------------------------------------------------------------------------
 \subsection{Global optimization}
 %-------------------------------------------------------------------------------
-The calibration of EKW models is challenging due to a large number of parameters and multiplicity of local minima. In \citet{Eisenhauer.2020b}, we draw on the literature on global optimization to assess and improve the reliability of the calibrations \citep{Locatelli.2013, Nocedal.2006}.\\
+The calibration of EKW models is challenging due to a large number of parameters and multiplicity of local minima. In \citet{Eisenhauer.2020b}, we draw on the literature on global optimization to assess and improve the reliability of the calibrations \citep{Locatelli.2013, Nocedal.2006}.
 
-\noindent We conduct a benchmarking exercise using \citet{Keane.1994, Keane.1997} as a well-known and empirically-grounded test case. Depending on the calibration procedure, particular challenges arise. For example, while likelihood-based calibration requires smoothing of the choice probabilities, simulation-based calibration involves the optimization of a noisy function. We provide guidelines for selecting the appropriate algorithm in each setting and showcase diagnostics to assess the reliability of the calibration results.
+We conduct a benchmarking exercise using \citet{Keane.1994, Keane.1997} as a well-known and empirically grounded test case. Depending on the calibration procedure, particular challenges arise. For example, while likelihood-based calibration requires smoothing of the choice probabilities, simulation-based calibration involves the optimization of a noisy function. We provide guidelines for selecting the appropriate algorithm in each setting and showcase diagnostics to assess the reliability of the calibration results.
