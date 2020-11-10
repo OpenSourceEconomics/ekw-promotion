@@ -282,7 +282,9 @@ df = rp.get_example_model("kw_97_extended", with_data=True)[2]
 fig, ax = plt.subplots()
 
 ax.xaxis.set_ticks(range(11))
-ax.get_yaxis().set_major_formatter(mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ","))
+)
 ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 ax.yaxis.get_major_ticks()[0].set_visible(False)
 ax.set_xlabel("Age")
