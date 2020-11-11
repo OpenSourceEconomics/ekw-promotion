@@ -26,7 +26,7 @@ v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}
 \begin{frame}{Backward induction algorithm}\vspace{0.25cm}
 \begin{algorithmic}
 \For{$t = T, \hdots, 1$}
-    \If{t == T}
+    \If{t = T}
         \State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
     \Else
         \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
