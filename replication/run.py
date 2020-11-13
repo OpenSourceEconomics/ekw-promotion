@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.colors as mc
 import matplotlib.pyplot as plt
+import respy as rp
 
 from pathlib import Path
 
@@ -84,10 +85,10 @@ def plot_decisions_by_age(df_subset, color="color"):
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
     )
 
-    ax.set_xlabel("Age")
+    ax.set_xlabel("Age", labelpad=5, fontsize=30)
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 
-    ax.set_ylabel("Share (in %)")
+    ax.set_ylabel("Share (in %)", fontsize=30)
     ax.set_ylim(0, 100)
     ax.yaxis.get_major_ticks()[0].set_visible(False)
 
@@ -96,6 +97,7 @@ def plot_decisions_by_age(df_subset, color="color"):
         loc="lower center",
         bbox_to_anchor=(0.5, 1.04),
         ncol=5,
+        prop={"size": 22.5},
     )
 
     plt.savefig(f"fig-data-choice-all{color_scheme[color]['extension']}")
@@ -119,13 +121,13 @@ def plot_average_wage(df_subset, color="colors"):
 
     ax.set_ylim(5, 30)
 
-    ax.set_xlabel("Age")
-    ax.legend()
+    ax.set_xlabel("Age", labelpad=5, fontsize=30)
+    ax.legend(prop={"size": 26})
     ax.xaxis.set_ticks(range(11))
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
 
-    ax.set_ylabel("Wage (in $1,000)", labelpad=20)
+    ax.set_ylabel("Wage (in $1,000)", labelpad=20, fontsize=30)
 
     fig.savefig(f"fig-data-wage-occupations{color_scheme[color]['extension']}")
 
@@ -140,11 +142,11 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
     )
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel("Average final schooling")
+    ax.set_ylabel("Average final schooling", labelpad=20, fontsize=30)
     ax.set_ylim([10, 16])
 
     ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
-    ax.set_xlabel("Tuition subsidy")
+    ax.set_xlabel("Tuition subsidy", labelpad=5, fontsize=30)
     ax.set_xlim([None, 4000])
 
     fig.savefig(f"fig-policy-forecast{color_scheme[color]['extension']}")
@@ -159,10 +161,11 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
     ax.xaxis.set_major_locator(plt.MaxNLocator(5))
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    ax.set_ylabel("Average final schooling")
+    ax.set_ylabel("Average final schooling", labelpad=20, fontsize=30)
     ax.set_ylim([10, 16])
 
-    ax.set_xlabel(r"$\delta$")
+    ax.set_xlabel(r"$\delta$", labelpad=5, fontsize=30)
+    ax.set_xlim([0.91, 0.95])
 
     fig.savefig(f"fig-economic-mechanism{color_scheme[color]['extension']}")
 
@@ -203,20 +206,20 @@ def plot_model_fit(df, color="color"):
             color=color_scheme[color]["school"],
         )
 
-        ax.legend(loc="upper left")
+        ax.legend(loc="upper left", prop={"size": 26})
 
-        ax.set_xlabel("Age")
+        ax.set_xlabel("Age", labelpad=5, fontsize=30)
         ax.xaxis.set_ticks(range(11))
         ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
         ax.yaxis.get_major_ticks()[0].set_visible(False)
 
         if label == "blue_collar":
-            ax.set_ylabel("Share (in %)")
+            ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
             ax.set_ylim(0, 100)
 
         if label == "all":
             ax.set_ylim(5, 30)
-            ax.set_ylabel("Wage (in $1,000)", labelpad=20)
+            ax.set_ylabel("Wage (in $1,000)", labelpad=20, fontsize=30)
 
         fig.savefig(fname.replace("_", "-"))
 
@@ -246,7 +249,7 @@ color_scheme = {
 labels = ["blue_collar", "white_collar", "military", "school", "home"]
 
 # We plot the model fit in and out of the support.
-df_descriptives = pd.read_pickle("data-descriptives.pkl")
+df_descriptives = pd.read_pickle("../material/data-descriptives.pkl")
 
 # We start with the empirical data only.
 for col_scheme in ["color", "bw"]:
@@ -258,7 +261,7 @@ for col_scheme in ["color", "bw"]:
     plot_model_fit(df_descriptives, col_scheme)
 
 # We plot the counterfactual predictions of the model.
-df_exploration = pd.read_pickle("model-exploration.pkl")
+df_exploration = pd.read_pickle("../material/model-exploration.pkl")
 
 subsidies = (
     df_exploration.loc["subsidy", :].index.get_level_values("Change").to_numpy(np.float)
@@ -273,3 +276,22 @@ deltas = (
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
 plot_mechanism_time(deltas, levels)
 plot_mechanism_time(deltas, levels, "bw")
+
+# TODO: This part was added after the fact for the presentation. Students turned out to be
+#  particularly interested in the sample size over time.
+df = rp.get_example_model("kw_97_extended", with_data=True)[2]
+
+fig, ax = plt.subplots()
+
+ax.xaxis.set_ticks(range(11))
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ","))
+)
+ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
+ax.yaxis.get_major_ticks()[0].set_visible(False)
+ax.set_xlabel("Age", labelpad=5, fontsize=30)
+ax.set_ylabel("Sample size", labelpad=20, fontsize=30)
+ax.set_ylim(0, 1400)
+ax.bar(range(11), df.groupby("Period")["Choice"].count())
+
+fig.savefig("fig-data-sample-size.pdf")

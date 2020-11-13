@@ -38,7 +38,7 @@ The principle of optimality \citep{Bellman.1954} allows to construct $\pi^*$ by 
 	\caption{\small\!\textbf{.\:\:}\textsf{\strut Backward induction procedure}}\label{Backward induction procedure}
 	\begin{algorithmic}\vspace{0.3cm}
 		\For{$t = T, \hdots, 1$}
-		\If{t == T}
+		\If{t = T}
 		\State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
 		\Else
 		\State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by

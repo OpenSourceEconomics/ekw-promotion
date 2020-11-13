@@ -62,6 +62,8 @@
 
 \input{sections/s-improvements}
 
+\input{sections/s-extensions}
+
 \clearpage
 
 \begin{refcontext}[sorting=nyt]  % Sort BIBLIOGRAPHY by alphabet (while CITATIONS are sorted by year)
@@ -70,17 +72,16 @@
 
 \clearpage
 
-%\begin{appendices}
-%\setcounter{page}{1}
-%\renewcommand{\thepage}{\thesection-\arabic{page}}
+\begin{appendices}
+\setcounter{page}{1}
+\renewcommand{\thepage}{\thesection-\arabic{page}}
 
-%\FloatBarrier\input{../appendix/sections/s-implementation}
+\FloatBarrier\input{../appendix/sections/s-implementation}
 
-%\clearpage
-%\setcounter{page}{1}
-%\FloatBarrier\input{../appendix/sections/s-data}
-%\newpage
-
-%\end{appendices}
+\clearpage
+\setcounter{page}{1}
+\FloatBarrier\input{../appendix/sections/s-data}
+\newpage
+\end{appendices}
 
 \end{document}
