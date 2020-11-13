@@ -165,6 +165,7 @@ def plot_mechanism_time(deltas, levels, color="color"):
     ax.set_ylim([10, 16])
 
     ax.set_xlabel(r"$\delta$", labelpad=5, fontsize=30)
+    ax.set_xlim([0.91, 0.95])
 
     fig.savefig(f"fig-economic-mechanism{color_scheme[color]['extension']}")
 
