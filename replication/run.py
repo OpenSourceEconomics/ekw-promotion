@@ -249,7 +249,7 @@ color_scheme = {
 labels = ["blue_collar", "white_collar", "military", "school", "home"]
 
 # We plot the model fit in and out of the support.
-df_descriptives = pd.read_pickle("data-descriptives.pkl")
+df_descriptives = pd.read_pickle("../material/data-descriptives.pkl")
 
 # We start with the empirical data only.
 for col_scheme in ["color", "bw"]:
@@ -261,7 +261,7 @@ for col_scheme in ["color", "bw"]:
     plot_model_fit(df_descriptives, col_scheme)
 
 # We plot the counterfactual predictions of the model.
-df_exploration = pd.read_pickle("model-exploration.pkl")
+df_exploration = pd.read_pickle("../material/model-exploration.pkl")
 
 subsidies = (
     df_exploration.loc["subsidy", :].index.get_level_values("Change").to_numpy(np.float)
