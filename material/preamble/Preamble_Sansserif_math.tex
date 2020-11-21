@@ -25,7 +25,10 @@
 \DeclareMathVersion{boldup}
 \DeclareMathVersion{sans}
 
-\SetSymbolFont{operators}   {normal}{OT1}{ntxtlf}{m}{n}
+\DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}
+
+\SetSymbolFont{operators}{normal}{OT1}{ntxtlf}{m}{n}
+\SetSymbolFont{operators}{bold}  {OT1}{ntxtlf}{bx}{n}
 
 %\SetSymbolFont{operators}{sans}{OT1}{jkpss}{m}{n}
 %	% From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
@@ -34,7 +37,7 @@
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}     {sans}{OML}{cmbrm}{m}{it}
 %\SetSymbolFont{symbols}     {sans}{OMS}{cmbrs}{m}{n}
-\SetSymbolFont{symbols}     {sans}{OMS}{jkp}  {m}{n}
+%\SetSymbolFont{symbols}     {sans}{OMS}{jkp}  {m}{n}
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 \DeclareSymbolFont{extrasymbols}  {OMS}{cmbrs}{m}{n}
 \SetSymbolFont{extrasymbols}{sans}{OMS}{cmbrs}{m}{n}
@@ -56,7 +59,7 @@
 
 \DeclareMathVersion{sansup}
 \SetSymbolFont{letters}  {sansup}{OML}{jkpss}{m}{it}
-\SetSymbolFont{symbols}  {sansup}{OMS}{jkp}  {m}{n}
+%\SetSymbolFont{symbols}  {sansup}{OMS}{jkp}  {m}{n}
 
 \DeclareMathVersion{boldsans}
 %\SetSymbolFont{operators}{boldsans}{OT1}{jkpss}{b}{n}
@@ -66,8 +69,10 @@
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
 %\SetSymbolFont{letters}  {boldsans}{OML}{mdbch}{bx}{it}
 %\SetSymbolFont{letters}{boldsans}{OML}{cmbrm}{b}{it}
-\SetSymbolFont{symbols}  {boldsans}{OMS}{jkp}  {bx}{n}
+%\SetSymbolFont{symbols}  {boldsans}{OMS}{jkp}  {bx}{n}
 % From http://mirrors.ctan.org/fonts/kpfonts/latex/kpfonts.sty
+\SetSymbolFont{symbols}{boldsans}{LMS}{ntxsy}{b}{n}
+	% From http://mirrors.ctan.org/fonts/newtx/tex/newtxmath.sty
 %\SetMathAlphabet{\mathrm}{boldsans}{OT1}{\savesffamily}{\savesfbfseries}{n}
 \SetMathAlphabet{\mathit} {boldsans}{OT1}{\savesffamily}{\savesfbfseries}{it}
 \SetMathAlphabet{\mathtt} {boldsans}{OT1}{cmtl}{b}{n}
@@ -81,10 +86,14 @@
 
 \DeclareMathVersion{boldsansup}
 \SetSymbolFont{letters}{boldsansup}{OML}{jkpss}{bx}{it}
-\SetSymbolFont{symbols}{boldsansup}{OMS}{jkp}  {bx}{n}
+%\SetSymbolFont{symbols}{boldsansup}{OMS}{jkp}  {bx}{n}
+\SetSymbolFont{symbols}{boldsansup}{LMS}{ntxsy}{b}{n}
+	% From http://mirrors.ctan.org/fonts/newtx/tex/newtxmath.sty
 
 % Using glyphs for math mode from the custom sansserif font
 \DeclareSymbolFont{uprightglyphs}{T1}{\savermfamily}{\savermmdseries}{n}
+%\DeclareSymbolFontAlphabet{\mathrm}{uprightglyphs}
+%\SetMathAlphabet{\mathrm}{normal}{OT1}{\savermfamily}{\savermmdseries}{n}
 \SetSymbolFont{uprightglyphs}{normal}    {T1}{\savermfamily}{\savermmdseries}{n}
 \SetSymbolFont{uprightglyphs}{normalup}  {T1}{\savermfamily}{\savermmdseries}{n}
 \SetSymbolFont{uprightglyphs}{bold}      {T1}{\savermfamily}{\savermbfseries}{n}
@@ -129,9 +138,11 @@
 \DeclareMathSymbol{8}{\mathalpha}{uprightglyphs}{`8}
 \DeclareMathSymbol{9}{\mathalpha}{uprightglyphs}{`9}
 % Operators and punctuation
-\DeclareMathSymbol{+}{\mathbin}  {operators}    {`+}
+%\DeclareMathSymbol{+}{\mathbin}  {operators}    {`+}
+%\DeclareMathSymbol{+}{\mathbin}{symbols}{207}
+	% From http://mirrors.ctan.org/fonts/newtx/tex/newtxmath.sty
 % Not from uprightglyphs due to bad spacing
-\DeclareMathSymbol{=}{\mathrel}  {operators}    {`=}
+%\DeclareMathSymbol{=}{\mathrel}  {operators}    {`=}
 % Not from uprightglyphs due to bad spacing
 \DeclareMathSymbol{.}{\mathord}  {uprightglyphs}{`.}
 \DeclareMathSymbol{,}{\mathpunct}{uprightglyphs}{`,}
@@ -548,6 +559,7 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 % Adjust \mathrm to the curretly active \mathversion.
 % We set it up such that also in sansserif mode, \mathrm activates the serif font.
 % ==>
+%\DeclareMathAlphabet{\mathrm}{OT1}{\savermfamily}{\savermmdseries}{n}
 \let \mathrmorig \mathrm
 \renewcommand{\mathrm}[1]{%
 	\IfInSansMode%
@@ -611,6 +623,7 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 	\else%
 		{\textup{%
 			\InUpModetrue%
+			\upgreekletters%
 			\IfInBoldMode%
 				\mathversion{boldup}%
 				\(#1\)%
@@ -629,6 +642,23 @@ Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,Digamma%
 	\fi\relax%
 }
 % <==
+
+%\SetMathAlphabet{\mathrm}{normal}{OT1}{\savermfamily}{\savermmdseries}{n}
+%\DeclareMathAlphabet{\mathrm}{OT1}{\savermfamily}{\savermmdseries}{n}
+\renewcommand{\mathrm}[1]{%
+	{\textup{%
+		\protect\InUpModetrue%
+		\IfInBoldMode%
+			\mathversion{boldup}%
+			\protect\upgreekletters%
+			\(#1\)%
+		\else%
+			\mathversion{normalup}%
+			\protect\upgreekletters%
+			\(#1\)%
+		\fi\relax%
+	 }}%
+}
 
 % Make the LaTeX-defined operators obey sansserif math
 % ==>
