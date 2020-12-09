@@ -8,7 +8,7 @@
 \fullcite{Keane.1997}.\vspace{0.5cm}
 
 \begin{itemize}
-	\item The study follows individuals over their working life from young adulthood at age 16 to retirement at age 65 where the decision period $t = 16, \dots, 65$  is a school year. 
+	\item The study follows individuals over their working life from young adulthood at age 16 to retirement at age 65 where the decision period $t = 16, \dots, 65$  is a school year.
 	\item Individuals decide $a\in\mathcal{A}$ whether to work in a blue-collar or white-collar occupation ($a = 1, 2$), to serve in the military $(a = 3)$, to attend school $(a = 4)$, or to stay at home $(a = 5)$.
 \end{itemize}
 
@@ -63,7 +63,7 @@
   h_{t + 1\phantom{,a}} = h_{t\phantom{,a}} +   \ind[a_t = 4]  &\qquad
   \end{align*}
 
-  
+
   \item Productivity shocks $\bm{e}_t$ are uncorrelated across time and follow a multivariate normal distribution with mean $\bm{0}$ and covariance matrix $\bm{\Sigma}$.
 
   \item Given the structure of the utility functions and the distribution of the shocks, the state at time $t$ is $s_t = \{\bm{k}_t, h_t, t, a_{t -1}, \bm{e},\bm{\epsilon}_t\}$.
@@ -130,21 +130,23 @@ where  $x_{1}(\cdot)$ is the occupation-specific skill level.
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Choices}
-  \begin{figure}
-  \scalebox{0.30}{\includegraphics{fig-data-choice-all}}
+\begin{frame}{Data descriptives}
+  \begin{figure}[h!]\centering
+  \subfloat[Choices]{\scalebox{0.225}{\includegraphics{fig-data-choice-all}}}\hspace{0.5cm}
+  \subfloat[Wages]{\scalebox{0.225}{\includegraphics{fig-data-wage-occupations}}}
   \end{figure}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Average wages}
-  \begin{figure}
-  \scalebox{0.30}{\includegraphics{fig-data-wage-occupations}}
+\begin{frame}{Calibration results}
+  \begin{figure}[h!]\centering
+  \subfloat[Average wage]{\scalebox{0.225}{\includegraphics{fig-model-fit-wage-all}}}\hspace{0.5cm}
+  \subfloat[Blue-collar]{\scalebox{0.225}{\includegraphics{fig-model-fit-choice-blue}}}
   \end{figure}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Economic mechanism and policy forecast}
+\begin{frame}{Economic insights}
   \begin{figure}[h!]\centering
   \subfloat[Time preference]{\scalebox{0.225}{\includegraphics{fig-economic-mechanism}}}\hspace{0.5cm}
   \subfloat[Tuition subsidy]{\scalebox{0.225}{\includegraphics{fig-policy-forecast}}}

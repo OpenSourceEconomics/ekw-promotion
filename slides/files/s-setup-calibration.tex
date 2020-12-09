@@ -6,12 +6,12 @@
 %---------------------------------------------------------------------------------------------------
 \begin{frame}{Data}\vspace{0.25cm}
 
-\textbf{Dataset}
+\heading{Dataset}\vspace{-0.75cm}
 \begin{align*}
 	\mathcal{D} = \{a_{it}, \bar{s}_{it}, \bar{u}_{it}: i = 1, \hdots, N; t = 1, \hdots, T_i\}
 \end{align*}
 
-\textbf{State variables}\vspace{0.25cm}
+\heading{State variables}\vspace{0.25cm}
 \begin{itemize}\setlength\itemsep{1em}
 \item $s_t = (\bar{s}_t, \epsilon_t)$\medskip
 \begin{itemize}\setlength\itemsep{1em}
@@ -23,16 +23,16 @@
 %-------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------
 \begin{frame}{Procedures}\vspace{0.25cm}
-\begin{itemize}\setlength\itemsep{1em}
-\item Likelihood-based
+
+\heading{Likelihood-based}\vspace{-0.75cm}
 	\begin{align*}
 	  \hat{\theta} = \argmax_{\theta \in \Theta} \prod^N_{i= 1} \prod^{T_i}_{t= 1}\, p_{it}(a_{it}, \bar{u}_{it} \mid \bar{s}_{it}, \theta)
 	\end{align*}
-\item Simulation-based
+
+\heading{Simulation-based}\vspace{-0.75cm}
 	\begin{align*}
 	    \hat{\theta} = \argmin_{\theta \in \Theta} \big(M_D - M_S(\theta)\big)' W \, \big(M_D - M_S(\theta)\big)
 	\end{align*}
-\end{itemize}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------

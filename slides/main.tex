@@ -12,6 +12,14 @@
 
 
 
+\newcommand{\explanation}[1]{%
+        \raisebox{0pt}[0pt][0pt]{%
+                \parbox[t]{0.75\textwidth}{%
+                        \textcolor{OSEBlue}{#1}%
+                }%
+        }%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  MISCELLANEOUS SETTINGS/COMMANDS  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,36 +81,20 @@
 
 \begin{document}
 
+\input{files/s-title}
 
-%%%%%%%%%%%%%%%%%%%
-%%  TITLE SLIDE  %%
-%%%%%%%%%%%%%%%%%%%
+\input{files/s-introduction}
 
-\input{sections/s-title}
+\input{files/s-setup}
 
+\input{files/s-example}
 
-%%%%%%%%%%%%%%%%%
-%%  MAIN PART  %%
-%%%%%%%%%%%%%%%%%
+\input{files/s-pipeline}
 
-\input{sections/s-introduction}
+\input{files/s-projects}
 
-\input{sections/s-setup}
+\input{files/s-conclusion}
 
-\input{sections/s-example}
-
-\input{sections/s-pipeline}
-
-\input{sections/s-improvements}
-
-\input{sections/s-conclusion}
-
-
-%%%%%%%%%%%%%%%%
-%%  APPENDIX  %%
-%%%%%%%%%%%%%%%%
-
-\input{sections/s-appendix}
-
+\input{files/s-appendix}
 
 \end{document}
