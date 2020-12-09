@@ -4,22 +4,16 @@
 \section{Mathematical formulation}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Policy evaluation}
+\begin{frame}{Dynamic programming}\vspace{0.25cm}
+\heading{Policy evaluation}
 \begin{align*}
   v^\pi_t(s_t) = \E_{s_t}^\pi\left[ \sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \Bigm| \mathcal{I}_t \right]
 \end{align*}
-Inductive scheme
+\heading{Optimality equations}
 \begin{align*}
-v^\pi_t(s_t) = u_t(s_t,  a^\pi_t(s_t)) + \delta\,E^\pi_{s_t} \left[ v^\pi_{t + 1}(s_{t + 1})  \bigm| \mathcal{I}_t \right]
+  v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \right\}
 \end{align*}
 
-\end{frame}
-%---------------------------------------------------------------------------------------------------
-%---------------------------------------------------------------------------------------------------
-\begin{frame}{Optimality equations}
-\begin{align*}
-v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \right\}
-\end{align*}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
