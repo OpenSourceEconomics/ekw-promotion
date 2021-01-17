@@ -1,19 +1,17 @@
 """Figures for the handout.
 
 This module creates all figures for the handout. They are all used in the illustrative example.
-
 """
-import os
 import colorsys
+import os
+from pathlib import Path
 
-import numpy as np
-import pandas as pd
 import matplotlib as mpl
 import matplotlib.colors as mc
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import respy as rp
-
-from pathlib import Path
 
 PROJECT_DIR = Path(os.environ["PROJECT_DIR"])
 
@@ -32,23 +30,21 @@ def make_grayscale_cmap(cmap):
     --------
     cmap: 'matplotlib.colors.LinearSegmentedColormap
         Grayscale version color map of the given non-grayscale color map.
-
     """
-
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
 
-    # Conversion of RGBA to grayscale lum by RGB_weight
-    # RGB_weight given by http://alienryderflex.com/hsp.html
-    RGB_weight = [0.299, 0.587, 0.114]
-    lum = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
+    # Conversion of RGBA to grayscale lum by rgb_weight
+    # rgb_weight given by http://alienryderflex.com/hsp.html
+    rgb_weight = [0.299, 0.587, 0.114]
+    lum = np.sqrt(np.dot(colors[:, :3] ** 2, rgb_weight))
     colors[:, :3] = lum[:, np.newaxis]
 
     return cmap.from_list(cmap.name + "_grayscale", colors, cmap.N)
 
 
 def make_color_lighter(color, amount=0.5):
-    """Returns a brightened (darkened) color.
+    """Return a brightened (darkened) color.
 
     Parameters:
     -----------
@@ -62,9 +58,7 @@ def make_color_lighter(color, amount=0.5):
     --------
     _color: matplotlib color string, hex string, RGB tuple
         Brightened-up color (same format).
-
     """
-
     try:
         _color = mc.cnames[color]
     except Exception:
@@ -76,7 +70,6 @@ def make_color_lighter(color, amount=0.5):
 
 def plot_decisions_by_age(df_subset, color="color"):
     """Share of individuals in each occupation at any period (age)."""
-
     fig, ax = plt.subplots()
 
     shares = df_subset.loc[("empirical", slice(10)), labels] * 100
@@ -105,7 +98,6 @@ def plot_decisions_by_age(df_subset, color="color"):
 
 def plot_average_wage(df_subset, color="colors"):
     """Average of wages at any period."""
-
     fig, ax = plt.subplots()
 
     for label in ["blue_collar", "white_collar", "military"]:
@@ -134,7 +126,6 @@ def plot_average_wage(df_subset, color="colors"):
 
 def plot_mechanism_subsidy(subsidies, levels, color="color"):
     """Effect tuition subsidy on average final schooling."""
-
     fig, ax = plt.subplots()
 
     ax.fill_between(
@@ -154,7 +145,6 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
 
 def plot_mechanism_time(deltas, levels, color="color"):
     """Effect time preferences on average final schooling."""
-
     fig, ax = plt.subplots()
 
     ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])

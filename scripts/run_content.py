@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """This script compiles the content of the repository."""
-import subprocess as sp
 import argparse
-import shutil
 import glob
 import os
+import shutil
+import subprocess as sp
 
 from PyPDF2 import PdfFileMerger
 

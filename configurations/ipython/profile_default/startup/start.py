@@ -1,5 +1,5 @@
-from IPython.display import Image
 from IPython import get_ipython
+from IPython.display import Image
 
 ipython = get_ipython()
 ipython.magic("matplotlib inline")

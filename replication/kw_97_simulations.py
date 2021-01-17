@@ -1,14 +1,12 @@
-""" This script simulates the input for the example section in the handout.
+"""This script simulates the input for the example section in the handout.
 
 This files creates the following files that are then used to create the proper plots for the
 handout.
-
 """
 from itertools import product
 
-import pandas as pd
 import numpy as np
-
+import pandas as pd
 import respy as rp
 
 NUM_POINTS = 10
