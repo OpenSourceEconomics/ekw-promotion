@@ -1,70 +1,93 @@
 %!TEX root = ../main.tex
-\begin{tikzpicture}[every node/.style={scale=0.7}]
 
-\tikzset{
-	eqblock/.style={text width=3.5cm,align=center}
-}
+\definecolor{light-gray}{gray}{0.85}
 
-% Nodes
-\node[xshift=-4.85cm, yshift=-1.75cm] (left) {};
-\node[below=3cm, xshift=6cm] (bottom_left) {};
-\node[node distance=5cm, right of=left, xshift=6cm] (right) {};
-\node[node distance=6cm, right of=bottom_left, xshift=6cm] (bottom_right) {};
 
-\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\Large$t$};
-\node[node distance=6cm, right of=bottom_left, yshift=-0.5cm] (t2) {\Large$t+1$};
+\begin{tikzpicture}[node distance=2cm]
+%define styles
+\tikzstyle{startstop} = [circle, rounded corners, minimum width=0.6cm, minimum height=0.3cm,text centered, draw=black]
+[
+->,
+>=stealth',
+auto,node distance=3cm,
+thick,
+main node/.style={circle, draw, font=\sffamily\Large\bfseries}
+]
+\tikzstyle{arrow} = [thick,->,>=stealth]]
+\tikzstyle{darrow} = [dotted,->,>=stealth]]
+%first and second column
 
-\node[eqblock, above of=left, xshift=2.5cm] (eq1) {\Large$\{u(s_t, a_t)\}_{a_t \in \mathcal{A}}$};
-\node[eqblock, above of=left, xshift=5.5cm, yshift=0.75cm] (eq2) {\Large$a_t$};
-\node[eqblock, above of=left, xshift=8.5cm] (eq3) {\Large$u(s_t, a_t)$};
-\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\Large$\{u(s_{t+1}, a_{t+1})\}_{a_{t+1} \in \mathcal{A}}$};
-\node[eqblock, above of=bottom_left, xshift=6cm, yshift=0.75cm] (eq6) {\Large$a_{t+1}$};
-\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\Large$u(s_{t+1}, a_{t+1})$};
+\node (r0) [startstop, xshift = -3cm, draw = none] {}; 
+\node (r999) [startstop, xshift = 13cm, draw = none] {}; 
 
-\node[above of=eq1, node distance=1cm] (text2) {\Large Learn};
-\node[above of=eq2, node distance=1cm] (text3) {\Large Choose};
-\node[above of=eq3, node distance=1cm] (text1) {\Large Receive};
-\node[above of=eq4, node distance=1cm] (text4) {\Large Learn};
-\node[above of=eq6, node distance=1cm] (text5) {\Large Choose};
-\node[above of=eq5, node distance=1cm] (text6) {\Large Receive};
+\node (r1) [startstop, xshift = -1cm] {\footnotesize $~\,s_t\,~$};
+\node (r2) [startstop, xshift = 5cm] {\footnotesize $s_{t+1}$};  %previously 4
+\node (r3) [startstop, xshift = 11cm] {\footnotesize $s_{t+2}$}; %previously 8
 
-% Lines
-\draw[|-|] (left) -- (right);
-\draw[|-|] (bottom_left.center) -- (bottom_right);
+\draw [arrow, dashed] (r0) -- node[anchor=south] {} (r1) ;
+\draw [arrow] (r1) -- node[anchor=south] {} (r2) ;
+\draw [arrow] (r2) -- node[anchor=south] {} (r3) ;
+\draw [arrow, dashed] (r3) -- node[anchor=south] {} (r999) ;
+
+\node (r4) [startstop, xshift = 0 cm, yshift = -2.5cm, inner sep = 0.08cm] {\footnotesize $~\,a_t\,~$ };
+\node (r5) [startstop, xshift = 3 cm, yshift = -2.5cm, inner sep = 0.08cm] {\footnotesize $~\,u_t\,~$ };
+\node (r6) [startstop, xshift = 6 cm, yshift = -2.5cm, inner sep = 0.08cm] {\footnotesize $a_{t+1}$ };
+\node (r7) [startstop, xshift = 9 cm, yshift = -2.5cm, inner sep = 0.08cm] {\footnotesize $u_{t+1}$ };
+
+\draw [arrow] (r1) -- node[anchor=south] {} (r4) ;
+\draw [arrow] (r2) -- node[anchor=south] {} (r6) ;
+
+\draw[ thick](0,-2.05).. controls (0.75, -0.2) and (0.8,0)..(1.5, 0);
+\draw[->, thick](1.5, 0).. controls (2.15, 0) and (2.25, -0.2)..(3, -2.05);
+\draw[ thick](6,-2.05).. controls (6.75, -0.2) and (6.85,0)..(7.5, 0);
+\draw[->, thick](7.5, 0).. controls (8.15, 0) and (8.25,-0.2)..(9, -2.05);
+
+\node(r8)[startstop, xshift = - 1.75cm, yshift = -1.3cm, draw =none, align=center] {\footnotesize Decision rule \\ \footnotesize $a_t^{\pi}(s_t)$ };
+\node(r9)[startstop, xshift= 4.2cm, yshift = -1.3cm, draw =none, align = center] {\footnotesize Decision rule \\ \footnotesize $a_{t+1}^{\pi}(s_{t+1})$ };
+%\node(r10)[startstop, yshift = 1cm, xshift = 2cm, draw =none, align=center ] {\footnotesize Transition probability\\ \footnotesize distribution \\ \footnotesize $p_t(s_t, a_t)$};
+%\node(r11)[startstop, yshift = 1cm, xshift = 8cm, draw =none, align=center ] { \footnotesize Transition probability\\ \footnotesize distribution \\ \footnotesize $p_{t+1}(s_{t+1}, a_{t+1})$};
+\node(r10)[startstop, yshift = 0.5cm, xshift = 2cm, draw =none, align=center ] {\footnotesize $p_t(s_t, a_t)$};
+\node(r11)[startstop, yshift = 0.5cm, xshift = 8cm, draw =none, align=center ] {\footnotesize $p_{t+1}(s_{t+1}, a_{t+1})$};
+\node(r12)[startstop, yshift = -1.3cm, xshift = 1.5cm, draw =none, align=center ] {\footnotesize Receive\\ \footnotesize  $u(s_t, a_t)$ };
+\node(r13)[startstop, yshift = -1.3cm, xshift = 7.5cm, draw =none, align=center ] {\footnotesize Receive\\ \footnotesize  $u(s_{t+1}, a_{t+1})$ };
 
 \end{tikzpicture}
 
-%\begin{tikzpicture}[every node/.style={scale=0.7}]
+
+% OLd figure timing of events
 %
-%\tikzset{
-%eqblock/.style={text width=3.5cm,align=center}
-%}
+%	\begin{tikzpicture}[scale=1.0, every node/.style={scale=0.8}]
 %
-%% Nodes
-%\node[xshift=-4.85cm, yshift=-1.75cm] (left) {};
-%\node[below=3cm, xshift=6cm] (bottom_left) {};
-%\node[node distance=5cm, right of=left, xshift=6cm] (right) {};
-%\node[node distance=6cm, right of=bottom_left, xshift=6cm] (bottom_right) {};
+%	\tikzset{
+%	eqblock/.style={text width=3.5cm,align=center}
+%	}
 %
-%\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\large$t$};
-%\node[node distance=6cm, right of=bottom_left, yshift=-0.5cm] (t2) {\large$t+1$};
+%	% Nodes
+%	\node[xshift=-6cm] (left) {};
+%	\node[below=3cm of left, xshift=6cm] (bottom_left) {};
+%	\node[node distance=6cm, right of=left, xshift=6cm] (right) {};
+%	\node[node distance=6cm, right of=bottom_left, xshift=6cm] (bottom_right) {};
 %
-%\node[eqblock, above of=left, xshift=2.5cm] (eq1) {\large$\{u_a(s_t)\}_{a \in \mathcal{A}}$};
-%\node[eqblock, above of=left, xshift=5.5cm, yshift=0.75cm] (eq2) {\large$a_t^{\pi}(s_t)$};
-%\node[eqblock, above of=left, xshift=8.5cm] (eq3) {\large$u_{a^{\pi}_t(s_t)}(s_t)$};
-%\node[eqblock, above of=bottom_left, xshift=3cm] (eq4) {\large$\{u_a(s_{t+1})\}_{a \in \mathcal{A}}$};
-%\node[eqblock, above of=bottom_left, xshift=6cm, yshift=0.75cm] (eq6) {\large$a_{t+1}^{\pi}(s_{t+1})$};
-%\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$u_{a^{\pi}_{t+1}(s_{t+1})}(s_{t+1})$};
+%	\node[node distance=6cm, right of=left, yshift=-.5cm] (t1) {\large$t$};
+%	\node[node distance=6cm, right of=bottom_left, yshift=-.5cm] (t2) {\large$t+1$};
 %
-%\node[above of=eq1, node distance=1cm] (text2) {\large Learn};
-%\node[above of=eq2, node distance=1cm] (text3) {\large Choose};
-%\node[above of=eq3, node distance=1cm] (text1) {\large Receive};
-%\node[above of=eq4, node distance=1cm] (text4) {\large Learn};
-%\node[above of=eq6, node distance=1cm] (text5) {\large Choose};
-%\node[above of=eq5, node distance=1cm] (text6) {\large Receive};
+%	\node[eqblock, above of=left, xshift=3cm] (eq1) {\large$\{u(s_t, a_t)\}_{a_t\in A}$};
+%	\node[eqblock, above of=left, xshift=6cm] (eq2) {\large$a_t$};
+%	\node[eqblock, above of=left, xshift=9cm] (eq3) {\large$u(s_t, a_t)$};
+%	\node[eqblock, above of=bottom_left, xshift=2cm] (eq4) {\large$\{u(s_{t + 1}, a_{t + 1}\noindent )\}_{a_{t + 1}\in A}$};
+%	\node[eqblock, above of=bottom_left, xshift=6cm] (eq6) {\large$a_{t + 1}$};
+%	\node[eqblock, above of=bottom_left, xshift=9cm] (eq5) {\large$u(s_{t + 1}, a_{t + 1})$};
 %
-%% Lines
-%\draw[|-|] (left) -- (right);
-%\draw[|-|] (bottom_left.center) -- (bottom_right);
+%	\node[above of=eq1, node distance=1cm] (text2) {\large Learn};
+%	\node[above of=eq2, node distance=1cm] (text3) {\large Choose};
+%	\node[above of=eq3, node distance=1cm] (text1) {\large Receive};
+%	\node[above of=eq4, node distance=1cm] (text4) {\large Learn};
+%	\node[above of=eq6, node distance=1cm] (text5) {\large Choose};
+%	\node[above of=eq5, node distance=1cm] (text6) {\large Receive};
 %
-%\end{tikzpicture}
+%	% Lines
+%	\draw[|-|] (left) -- (right);
+%	\draw[|-|] (bottom_left.center) -- (bottom_right);
+%
+%	\end{tikzpicture}
+

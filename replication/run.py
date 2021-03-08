@@ -162,13 +162,25 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
 def plot_model_fit(df, color="color"):
 
-    for label in ["blue_collar", "all"]:
+    for label in ["blue_collar", "white_collar", "military", "school", "home", "all"]:
 
         fig, ax = plt.subplots()
 
         if label == "blue_collar":
             df_subset = df["probs"]
             fname = f"fig-model-fit-choice-blue{color_scheme[color]['extension']}"
+        elif label == "white_collar":
+            df_subset = df["probs"]
+            fname = f"fig-model-fit-choice-white{color_scheme[color]['extension']}"
+        elif label == "military":
+            df_subset = df["probs"]
+            fname = f"fig-model-fit-choice-military{color_scheme[color]['extension']}"
+        elif label == "home":
+            df_subset = df["probs"]
+            fname = f"fig-model-fit-choice-home{color_scheme[color]['extension']}"
+        elif label == "school":
+            df_subset = df["probs"]
+            fname = f"fig-model-fit-choice-school{color_scheme[color]['extension']}"
         else:
             df_subset = df["mean"]
             fname = f"fig-model-fit-wage-all{color_scheme[color]['extension']}"
@@ -177,6 +189,18 @@ def plot_model_fit(df, color="color"):
         y_simulation = df_subset.loc[("simulated", slice(10)), label].values
 
         if label == "blue_collar":
+            y_empirical = y_empirical * 100
+            y_simulation *= 100
+        elif label == "white_collar":
+            y_empirical = y_empirical * 100
+            y_simulation *= 100
+        elif label == "military":
+            y_empirical = y_empirical * 100
+            y_simulation *= 100
+        elif label == "home":
+            y_empirical = y_empirical * 100
+            y_simulation *= 100
+        elif label == "school":
             y_empirical = y_empirical * 100
             y_simulation *= 100
         else:
@@ -196,7 +220,10 @@ def plot_model_fit(df, color="color"):
             color=color_scheme[color]["school"],
         )
 
-        ax.legend(loc="upper left", prop={"size": 26})
+        if label == "school":
+            ax.legend(loc="upper right", prop={"size": 26})
+        else:
+            ax.legend(loc="upper left", prop={"size": 26})
 
         ax.set_xlabel("Age", labelpad=5, fontsize=30)
         ax.xaxis.set_ticks(range(11))
@@ -206,7 +233,18 @@ def plot_model_fit(df, color="color"):
         if label == "blue_collar":
             ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
             ax.set_ylim(0, 100)
-
+        elif label == "white_collar":
+            ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
+            ax.set_ylim(0, 100)
+        elif label == "military":
+            ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
+            ax.set_ylim(0, 100)
+        elif label == "home":
+            ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
+            ax.set_ylim(0, 100)
+        elif label == "school":
+            ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
+            ax.set_ylim(0, 100)
         if label == "all":
             ax.set_ylim(5, 30)
             ax.set_ylabel("Wage (in $1,000)", labelpad=20, fontsize=30)
