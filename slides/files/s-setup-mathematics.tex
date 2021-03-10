@@ -7,11 +7,11 @@
 \begin{frame}{Dynamic programming}\vspace{0.25cm}
 \heading{Policy evaluation}
 \begin{align*}
-  v^\pi_t(s_t) = \E_{s_t}^\pi\left[ \sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \Bigm| \mathcal{I}_t \right]
+  v^\pi_t(s_t) = \E_{s_t}^\pi\left[ \sum^{T - t}_{j = 0}  \delta^j\, u_{t + j}(s_{t + j}, a^\pi_{t + j}(s_{t + j})) \right]
 \end{align*}
 \heading{Optimality equations}
 \begin{align*}
-  v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \right\}
+  v^{\pi^*}_t(s_t)  & = \max_{a_t \in A} \left\{ u_t(s_t, a_t) + \delta \E^{\pi^*}_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1})\,\right] \right\}
 \end{align*}
 
 \end{frame}
@@ -24,9 +24,9 @@
         \State $v^{\pi^*}_T(s_T) =  \underset{a_T\in A}{\max} \bigg\{ u_T(s_T, a_T) \bigg\}\qquad \forall\, s_T\in S$
     \Else
         \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
-        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \bigg\}$
+        \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \,\right] \bigg\}$
         \State and set
-        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \bigm| \mathcal{I}_t\,\right] \bigg\}$
+        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \,\right] \bigg\}$
     \EndIf
 \EndFor
 \vspace{0.3cm}\end{algorithmic}

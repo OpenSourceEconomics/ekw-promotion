@@ -19,10 +19,10 @@ A policy $\pi = (a^\pi_1(s_1), \hdots, a^\pi_T(s_T))$ provides the individual wi
 
 Individuals face uncertainty and they seek to maximize the expected total discounted utilities. An exponential discount factor ${0 < \delta < 1}$ parameterizes their time preference and captures a taste for immediate over future utilities.
 
-Equation~\eqref{Objective Risk} provides the formal representation of the individual's objective. Given an initial state $s_1$, individuals implement the policy $\pi$ from the set of all possible policies $\Pi$ that maximizes the expected total discounted utilities over all $T$ decision periods given the information in state $s_1$ available in the first period:
+Equation~\eqref{Objective Risk} provides the formal representation of the individual's objective. Given an initial state $s_1$, individuals implement the policy $\pi$ from the set of all possible policies $\Pi$ that maximizes the expected total discounted utilities over all $T$ decision periods given the information available in the first-period state, $s_1$:
 %
 \begin{align}\label{Objective Risk}
-	\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a^\pi_t(s_t))\right]\right.
+	\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a^\pi_t(s_t))\right]\right..
 \end{align}
 %
 The superscript of the expectation emphasizes that each policy $\pi$ induces a different probability distribution over the sequences of utilities.
