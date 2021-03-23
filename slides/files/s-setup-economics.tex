@@ -2,7 +2,7 @@
 \section{Economic model}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
-\begin{frame}{Decision Problem}
+\begin{frame}{Decision problem}
 \begin{align*}\begin{array}{ll}
 t = 1, \hdots, T& \text{decision period} \\[0.5em]
 s_t\in S & \text{state}  \\[0.5em]
@@ -14,8 +14,8 @@ u_t(s_t, a_t) & \text{immediate utility}\\[0.5em]
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
 \begin{frame}{Timing of events}
-\vspace{1.5cm}
-\scalebox{0.9}{\hspace{-0.2cm}\input{../material/fig-timing.tex}}
+\vspace{1cm}
+\scalebox{0.9}{\hspace{-0.2cm}\input{../material/fig-timing-events.tex}}
 \end{frame}
 %---------------------------------------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ p_t(s_t, a_t) & \text{conditional distribution}
 \begin{multicols}{2}
 
 \begin{align*}
-\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a^\pi_t(s_t))\,\right\vert\,\mathcal{I}_1\,\right]
+\max_{\pi \in\Pi} \E_{s_1}^\pi\left[\left.\sum^{T}_{t = 1}  \delta^{t - 1} u_t(s_t, a^\pi_t(s_t))\right]\right.
 \end{align*}
 
 \columnbreak
