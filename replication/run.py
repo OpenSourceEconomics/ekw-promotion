@@ -129,7 +129,9 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
     fig, ax = plt.subplots()
 
     ax.fill_between(
-        subsidies, levels, color=color_scheme[color]["blue_collar"],
+        subsidies,
+        levels,
+        color=color_scheme[color]["blue_collar"],
     )
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)

@@ -26,7 +26,7 @@
         \State Compute $v^{\pi^*}_t(s_t)$ for each $s_t\in S$ by
         \State $\qquad v^{\pi^*}_t(s_t) = \underset{a_t\in A}{\max} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \,\right] \bigg\}$
         \State and set
-        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1}) \,\right] \bigg\}$
+        \State $\qquad a^{\pi^*}_t(s_t) = \underset{a_t\in A}{\argmax} \bigg\{ u_t(s_t, a_t) + \delta \E^\pi_{s_t}\! \left[ v^{\pi^*}_{t + 1}(s_{t + 1})\,\right] \bigg\}$
     \EndIf
 \EndFor
 \vspace{0.3cm}\end{algorithmic}
