@@ -1,5 +1,4 @@
 """Auxiliary functions."""
-
 from IPython.display import display_html
 
 

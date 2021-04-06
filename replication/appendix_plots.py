@@ -22,17 +22,17 @@ from material.career_decisions_plot import plot_transition_heatmap
 
 from material.career_decisions_auxiliary import display_side_by_side
 
-coloring="color"
+coloring = "color"
 
 df = get_prepare_career_decisions_data("material/career-decisions.raw")
 df = df.groupby("Identifier").apply(lambda x: get_working_experience(x))
 
-df.head(5) #plot first 5 years
+df.head(5)  # plot first 5 years
 
 #
-plot_sample_size(df, coloring) #already there
+plot_sample_size(df, coloring)  # already there
 
-display_side_by_side(get_choices(df)["total"], get_choices(df)["share"]) 
+display_side_by_side(get_choices(df)["total"], get_choices(df)["share"])
 
 plot_decisions_by_age(df, coloring)
 
@@ -50,12 +50,11 @@ get_df_transition_probabilities(make_transition_matrix(df), "destination_from_or
 
 plot_transition_heatmap(make_transition_matrix(df), "origin_to_destination", coloring)
 
-#Important Note on Transition Probabilities
-make_transition_matrix(df, include_fifteen = True)
+# Important Note on Transition Probabilities
+make_transition_matrix(df, include_fifteen=True)
 
 get_df_transition_probabilities(
     make_transition_matrix(df, include_fifteen=True),
     "origin_to_destination",
     save_include_fifteen=True,
 )
-

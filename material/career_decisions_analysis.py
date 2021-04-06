@@ -1,11 +1,11 @@
 """Analysis functions for career decisions data."""
 import os
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 SAVEPATH = "material"
-#RAW_DATA = 
+# RAW_DATA =
 
 
 def get_prepare_career_decisions_data(file):
@@ -36,7 +36,13 @@ def get_prepare_career_decisions_data(file):
     df = pd.DataFrame(np.genfromtxt(file), columns=columns).astype(dtype)
     # Labeling different choice categories, introduction period, setting index
     df["Choice"] = df["Choice"].map(
-        {1.0: "schooling", 2.0: "home", 3.0: "white_collar", 4.0: "blue_collar", 5.0: "military"}
+        {
+            1.0: "schooling",
+            2.0: "home",
+            3.0: "white_collar",
+            4.0: "blue_collar",
+            5.0: "military",
+        }
     )
     df["Period"] = df["Age"] - 16
     df.set_index(["Identifier", "Period"], inplace=True, drop=True)
@@ -91,7 +97,9 @@ def get_choices(df):
         margins=True,
     )
     table_choices["total"] = table_choices["total"][crosstab_labels]
-    table_choices["total"].columns = [label.split("_")[0].capitalize() for label in crosstab_labels]
+    table_choices["total"].columns = [
+        label.split("_")[0].capitalize() for label in crosstab_labels
+    ]
 
     # Get the share of choices within each alternative
     table_choices["share"] = pd.crosstab(
@@ -158,7 +166,9 @@ def get_initial_schooling(df):
     initial_schooling = {}
 
     num_obs = df.groupby("Identifier").schooling_experience.min().count()
-    schooling_counts = df.groupby("Identifier").schooling_experience.min().value_counts().to_dict()
+    schooling_counts = (
+        df.groupby("Identifier").schooling_experience.min().value_counts().to_dict()
+    )
     years = sorted(schooling_counts.keys())
     edu_level_counts = [
         schooling_counts[edu_level] for edu_level in sorted(schooling_counts.keys())
@@ -172,7 +182,9 @@ def get_initial_schooling(df):
     }
 
     df_initial_schooling = pd.DataFrame.from_dict(initial_schooling)
-    df_initial_schooling.columns = [label.capitalize() for label in list(initial_schooling.keys())]
+    df_initial_schooling.columns = [
+        label.capitalize() for label in list(initial_schooling.keys())
+    ]
     df_initial_schooling.set_index("Years")
 
     df_initial_schooling.to_csv(f"{SAVEPATH}/initial-schooling.csv")
@@ -216,7 +228,9 @@ def get_initial_schooling_activity(df):
     """
 
     initial_schooling_activity = {}
-    counted_activities = df.groupby("Identifier", axis=0).apply(construct_activity_count)
+    counted_activities = df.groupby("Identifier", axis=0).apply(
+        construct_activity_count
+    )
 
     for year in get_initial_schooling(df)[1]["years"]:
         cond = df["schooling_experience"].loc[:] == year
@@ -228,7 +242,9 @@ def get_initial_schooling_activity(df):
         initial_schooling_activity[f"{year}"] = stats
 
     df_initial_schooling_activity = pd.DataFrame.from_dict(initial_schooling_activity)
-    df_initial_schooling_activity.index = [["Blue", "White", "Military", "School", "Home", "Total"]]
+    df_initial_schooling_activity.index = [
+        ["Blue", "White", "Military", "School", "Home", "Total"]
+    ]
 
     df_initial_schooling_activity.to_csv(f"{SAVEPATH}/initial-schooling-activity.csv")
 
@@ -267,7 +283,9 @@ def make_transition_matrix(df, include_fifteen=False):
         }
         _df["Identifier"] = _df.index.get_level_values(0)
 
-        _df = _df.groupby(_df["Identifier"]).apply(lambda x: x.append(new_row, ignore_index=True))
+        _df = _df.groupby(_df["Identifier"]).apply(
+            lambda x: x.append(new_row, ignore_index=True)
+        )
         _df["Identifier"] = _df["Identifier"].ffill()
         _df = _df.groupby(_df["Identifier"]).apply(lambda x: x.sort_values(by=["Age"]))
 
@@ -279,8 +297,12 @@ def make_transition_matrix(df, include_fifteen=False):
         _df.loc[cond_1 & cond_2, "Choice"] = "home"
 
     label_order = ["blue_collar", "white_collar", "military", "schooling", "home"]
-    _df["Choice_t_minus_one"] = _df["Choice"].groupby("Identifier").apply(lambda x: x.shift(1))
-    _df["Choice_t_plus_one"] = _df["Choice"].groupby("Identifier").apply(lambda x: x.shift(-1))
+    _df["Choice_t_minus_one"] = (
+        _df["Choice"].groupby("Identifier").apply(lambda x: x.shift(1))
+    )
+    _df["Choice_t_plus_one"] = (
+        _df["Choice"].groupby("Identifier").apply(lambda x: x.shift(-1))
+    )
 
     transition_matrix = {}
     row_order = label_order
@@ -305,7 +327,9 @@ def make_transition_matrix(df, include_fifteen=False):
         ).round(4)
 
         transition_matrix[f"{transition_direction}"] = (
-            transition_matrix[f"{transition_direction}"].loc[row_order, col_order].round(2)
+            transition_matrix[f"{transition_direction}"]
+            .loc[row_order, col_order]
+            .round(2)
         )
 
     return transition_matrix
@@ -343,7 +367,9 @@ def get_df_transition_probabilities(tm, direction, save_include_fifteen=False):
     if not save_include_fifteen:
         df_trans_probs.to_csv(f"{SAVEPATH}/transition-probabilties-{dir_save}.csv")
     elif save_include_fifteen:
-        df_trans_probs.to_csv(f"{SAVEPATH}/transition-probabilties-{dir_save}-fifteen.csv")
+        df_trans_probs.to_csv(
+            f"{SAVEPATH}/transition-probabilties-{dir_save}-fifteen.csv"
+        )
 
     return df_trans_probs
 
@@ -362,7 +388,9 @@ if __name__ == "__main__":
     get_initial_schooling_activity(df)
 
     get_df_transition_probabilities(make_transition_matrix(df), "origin_to_destination")
-    get_df_transition_probabilities(make_transition_matrix(df), "destination_from_origin")
+    get_df_transition_probabilities(
+        make_transition_matrix(df), "destination_from_origin"
+    )
     get_df_transition_probabilities(
         make_transition_matrix(df, include_fifteen=True), "origin_to_destination", True
     )

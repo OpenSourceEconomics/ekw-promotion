@@ -1,18 +1,18 @@
 """Figures for career decisions data."""
-import os
 import colorsys
+import os
+from itertools import compress
 
-import seaborn as sns
-import numpy as np
-import pandas as pd
 import matplotlib.colors as mc
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
-from itertools import compress
+import numpy as np
+import pandas as pd
+import seaborn as sns
 from scipy.signal import savgol_filter
 
 SAVEPATH = "material"
-#RAW_DATA = os.environ["PROJECT_ROOT"] + "/career-decisions/career-decisions.raw"
+# RAW_DATA = os.environ["PROJECT_ROOT"] + "/career-decisions/career-decisions.raw"
 
 
 def make_grayscale_cmap(cmap):
@@ -129,10 +129,14 @@ def plot_decisions_by_age(df, color="color"):
 
     fig, ax = plt.subplots()
 
-    shares = df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    shares = (
+        df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
+    )
     # Choices should be ordered: blue_collar, white_collar, military, school, home
     # Black white will be determined via colors here.
-    shares.plot.bar(stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1])
+    shares.plot.bar(
+        stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
+    )
 
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
@@ -147,7 +151,9 @@ def plot_decisions_by_age(df, color="color"):
         ncol=5,
     )
 
-    fig.savefig(f"{SAVEPATH}/fig-observed-data_choices{color_scheme[color]['extension']}.pdf")
+    fig.savefig(
+        f"{SAVEPATH}/fig-observed-data_choices{color_scheme[color]['extension']}.pdf"
+    )
 
 
 def plot_wage_moments(df, savgol=False, color="color"):
@@ -184,7 +190,9 @@ def plot_wage_moments(df, savgol=False, color="color"):
     minimum_observations = 10
     wage_categories = ["blue_collar", "white_collar", "military"]
 
-    wage_moments = df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
+    wage_moments = (
+        df.groupby(["Age", "Choice"])["Wage"].describe()[["mean", "std"]].unstack()
+    )
 
     for moment in ["mean", "std"]:
         fig, ax = plt.subplots()
@@ -200,9 +208,14 @@ def plot_wage_moments(df, savgol=False, color="color"):
 
             # Exlude wage categories with less than `minimum_observations` observations
             sufficient_boolean = list(
-                *[df.groupby(["Age"]).Choice.value_counts().unstack()[wc] >= minimum_observations]
+                *[
+                    df.groupby(["Age"]).Choice.value_counts().unstack()[wc]
+                    >= minimum_observations
+                ]
             )
-            non_sufficient_index = [i for i, bool in enumerate(sufficient_boolean) if bool is False]
+            non_sufficient_index = [
+                i for i, bool in enumerate(sufficient_boolean) if bool is False
+            ]
             _wage_moments = list(wage_moments[moment][wc])
             sufficient_wage_moments = list(compress(_wage_moments, sufficient_boolean))
 
@@ -238,7 +251,7 @@ def plot_wage_moments(df, savgol=False, color="color"):
 
         ax.set_ylabel(f"{moment_label} wage (in $ 1,000)", labelpad=20)
         ax.get_yaxis().set_major_formatter(
-            plt.FuncFormatter(lambda x, loc: "{0:0,}".format(int(x / 1000)))
+            plt.FuncFormatter(lambda x, loc: "{:0,}".format(int(x / 1000)))
         )
 
         fig.tight_layout()
@@ -278,10 +291,14 @@ def plot_initial_schooling(initial_schooling, color="color"):
     ax.set_ylabel("Share of Individuals")
     ax.yaxis.get_major_ticks()[0].set_visible(False)
 
-    fig.savefig(f"{SAVEPATH}/fig-initial-schooling{color_scheme[color]['extension']}.pdf")
+    fig.savefig(
+        f"{SAVEPATH}/fig-initial-schooling{color_scheme[color]['extension']}.pdf"
+    )
 
 
-def plot_transition_heatmap(tm, transition_direction="origin_to_destination", color="color"):
+def plot_transition_heatmap(
+    tm, transition_direction="origin_to_destination", color="color"
+):
     """Illustration of transition probability (od and do) in a heatmap.
 
     Parameters:
@@ -376,4 +393,6 @@ if __name__ == "__main__":
 
         plot_initial_schooling(get_initial_schooling(df)[1], coloring)
 
-        plot_transition_heatmap(make_transition_matrix(df), "origin_to_destination", coloring)
+        plot_transition_heatmap(
+            make_transition_matrix(df), "origin_to_destination", coloring
+        )
