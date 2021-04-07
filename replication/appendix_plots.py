@@ -17,7 +17,7 @@ from material.career_decisions_plot import plot_transition_heatmap
 from material.career_decisions_plot import plot_wage_moments
 
 sys.path.insert(0, "material/")
-coloring = "color"
+coloring = "bw"
 
 df = get_prepare_career_decisions_data("material/career-decisions.raw")
 df = df.groupby("Identifier").apply(lambda x: get_working_experience(x))
@@ -32,7 +32,7 @@ display_side_by_side(get_choices(df)["total"], get_choices(df)["share"])
 plot_decisions_by_age(df, coloring)
 
 get_average_wages(df)
-plot_wage_moments(df, savgol=True, color=coloring)
+plot_wage_moments(df, savgol=False, color=coloring)
 
 get_initial_schooling(df)[0]
 plot_initial_schooling(get_initial_schooling(df)[1], coloring)
