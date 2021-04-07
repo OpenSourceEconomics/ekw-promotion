@@ -17,7 +17,6 @@ def get_prepare_career_decisions_data(file):
     --------
         df: pd.DataFrame
             Reformatted and indexed DataFrame of career decisions data.
-
     """
 
     # Label and format columns
@@ -63,7 +62,7 @@ def get_working_experience(agent):
 
 
 def get_choices(df):
-    """Returns number of choices for each alternative at given age.
+    """Return number of choices for each alternative at given age.
 
     Parameters:
     -----------
@@ -74,7 +73,6 @@ def get_choices(df):
     --------
         table_choices: dict
             Dictionary with "total" choices and the "share" among all individuals.
-
     """
     crosstab_labels = [
         "blue_collar",
@@ -125,7 +123,6 @@ def get_average_wages(df):
     --------
         df: pd.DataFrame
             DataFrame with average wages for each occupation at any given period (age).
-
     """
 
     average_wages = pd.crosstab(
@@ -146,7 +143,7 @@ def get_average_wages(df):
 
 
 def get_initial_schooling(df):
-    """Returns information around the initial years of schooling.
+    """Return information around the initial years of schooling.
 
     Parameters:
     -----------
@@ -157,7 +154,6 @@ def get_initial_schooling(df):
     --------
         initial_schooling: pd.DataFrame
             DataFrame with "number" of inidividuals with "years" of education and its "frequency".
-
     """
 
     initial_schooling = {}
@@ -221,7 +217,6 @@ def get_initial_schooling_activity(df):
     --------
         df_initial_schooling_activity: pd.DataFrame
             DataFrame with each alternative and associated initial schooling.
-
     """
 
     initial_schooling_activity = {}
@@ -264,7 +259,6 @@ def make_transition_matrix(df, include_fifteen=False):
     --------
         transition_matrix: dict
             Dictionary of transition matrices for both directions.
-
     """
 
     _df = df.copy(deep="True")
@@ -309,13 +303,6 @@ def make_transition_matrix(df, include_fifteen=False):
         "destination_from_origin": "Choice_t_plus_one",
     }
 
-    # Origin to destination (t -> t+1)
-    # Corresponding to upper cell entry in KW97, p.487, Table 2
-
-    # Destination from origin (t <- t-1)
-    # Percentage in t who started from t-1
-    # Corresponding to lower cell entry in KW97, p.487, Table 2
-
     for transition_direction in ["origin_to_destination", "destination_from_origin"]:
         transition_matrix[f"{transition_direction}"] = pd.crosstab(
             index=_df[_relevant_choice[f"{transition_direction}"]],
@@ -351,7 +338,6 @@ def get_df_transition_probabilities(tm, direction, save_include_fifteen=False):
         df_trans_probs: pd.DataFrame
             DataFrame consisting of transition probabilities according
             to specified direction.
-
     """
 
     df_trans_probs = tm[direction]

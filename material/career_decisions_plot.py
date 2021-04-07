@@ -28,7 +28,6 @@ def make_grayscale_cmap(cmap):
     --------
     cmap: 'matplotlib.colors.LinearSegmentedColormap
         Grayscale version color map of the given non-grayscale color map.
-
     """
 
     cmap = plt.cm.get_cmap(cmap)
@@ -44,7 +43,7 @@ def make_grayscale_cmap(cmap):
 
 
 def make_color_lighter(color, amount=0.5):
-    """Returns a brightened (darkened) color.
+    """Return a brightened (darkened) color.
 
     Parameters:
     -----------
@@ -58,9 +57,7 @@ def make_color_lighter(color, amount=0.5):
     --------
     _color: matplotlib color string, hex string, RGB tuple
         Brightened-up color (same format).
-
     """
-
     try:
         _color = mc.cnames[color]
     except Exception:
@@ -86,7 +83,6 @@ def plot_sample_size(df, color="color"):
     --------
     savefig: pdf
         Figure saved as pdf file.
-
     """
 
     y = df.groupby("Period")["Age"].count().values
@@ -121,18 +117,14 @@ def plot_decisions_by_age(df, color="color"):
     --------
     savefig: pdf
         Figure saved as pdf file.
-
     """
-
-    # labels = ["blue_collar", "white_collar", "military", "schooling", "home"]
 
     fig, ax = plt.subplots()
 
     shares = (
         df.groupby("Age").Choice.value_counts(normalize=True).unstack()[labels] * 100
     )
-    # Choices should be ordered: blue_collar, white_collar, military, school, home
-    # Black white will be determined via colors here.
+
     shares.plot.bar(
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
     )
@@ -183,7 +175,6 @@ def plot_wage_moments(df, savgol=False, color="color"):
     .. [2] Numerical Recipes 3rd Edition: The Art of Scientific Computing
        W.H. Press, S.A. Teukolsky, W.T. Vetterling, B.P. Flannery
        Cambridge University Press ISBN-13: 9780521880688
-
     """
 
     minimum_observations = 10
@@ -205,7 +196,6 @@ def plot_wage_moments(df, savgol=False, color="color"):
 
         for wc in wage_categories:
 
-            # Exlude wage categories with less than `minimum_observations` observations
             sufficient_boolean = list(
                 *[
                     df.groupby(["Age"]).Choice.value_counts().unstack()[wc]
@@ -273,7 +263,6 @@ def plot_initial_schooling(initial_schooling, color="color"):
     --------
     savefig: pdf
         Figure saved as pdf file.
-
     """
 
     fig, ax = plt.subplots()
@@ -313,10 +302,9 @@ def plot_transition_heatmap(
     -------
     savefig: pdf
         Figure saved as pdf file.
-
     """
     label_order = ["blue_collar", "white_collar", "military", "schooling", "home"]
-    # Refactor the transition_matrix
+
     tm = tm[transition_direction]
     tm = tm.reindex(label_order[::-1])
 
@@ -346,8 +334,6 @@ def plot_transition_heatmap(
 
     fig.savefig(f"{SAVEPATH}/fig-heatmap-transitionprobs{ext}.pdf")
 
-
-# Definition of color schemes (Tableau 10 and grayscale based on copper)
 _cmap = make_grayscale_cmap("copper")
 color_scheme = {
     "bw": {
@@ -367,5 +353,5 @@ color_scheme = {
         "extension": "",
     },
 }
-# Ordering OSE convention: blue-collar, white-collar, military, school, home
+
 labels = ["blue_collar", "white_collar", "military", "schooling", "home"]
