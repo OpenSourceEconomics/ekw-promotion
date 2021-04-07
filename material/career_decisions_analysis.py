@@ -18,8 +18,6 @@ def get_prepare_career_decisions_data(file):
         df: pd.DataFrame
             Reformatted and indexed DataFrame of career decisions data.
     """
-
-    # Label and format columns
     columns = ["Identifier", "Age", "schooling_experience", "Choice", "Wage"]
     dtype = {
         "Identifier": np.int,
@@ -124,7 +122,6 @@ def get_average_wages(df):
         df: pd.DataFrame
             DataFrame with average wages for each occupation at any given period (age).
     """
-
     average_wages = pd.crosstab(
         index=df["Age"],
         columns=df["Choice"],
@@ -155,7 +152,6 @@ def get_initial_schooling(df):
         initial_schooling: pd.DataFrame
             DataFrame with "number" of inidividuals with "years" of education and its "frequency".
     """
-
     initial_schooling = {}
 
     num_obs = df.groupby("Identifier").schooling_experience.min().count()
@@ -186,7 +182,7 @@ def get_initial_schooling(df):
 
 
 def construct_activity_count(agent):
-    """Construction of an agent-specific activity count.
+    """Construct an agent-specific activity count.
 
     Parameters:
     -----------
@@ -194,7 +190,6 @@ def construct_activity_count(agent):
             pd.DataFrame with information on work experience.
 
     """
-
     agent["Count White"] = (agent["Choice"] == "white_collar").sum()
     agent["Count Blue"] = (agent["Choice"] == "blue_collar").sum()
     agent["Count School"] = (agent["Choice"] == "schooling").sum()
@@ -206,7 +201,7 @@ def construct_activity_count(agent):
 
 
 def get_initial_schooling_activity(df):
-    """Calculation of initial schooling by alternative choice.
+    """Calculate initial schooling by alternative choice.
 
     Parameters:
     -----------
@@ -218,7 +213,6 @@ def get_initial_schooling_activity(df):
         df_initial_schooling_activity: pd.DataFrame
             DataFrame with each alternative and associated initial schooling.
     """
-
     initial_schooling_activity = {}
     counted_activities = df.groupby("Identifier", axis=0).apply(
         construct_activity_count
@@ -244,7 +238,7 @@ def get_initial_schooling_activity(df):
 
 
 def make_transition_matrix(df, include_fifteen=False):
-    """Calculation of transition matrix.
+    """Calculate transition matrix.
 
     Parameters:
     -----------
@@ -260,7 +254,6 @@ def make_transition_matrix(df, include_fifteen=False):
         transition_matrix: dict
             Dictionary of transition matrices for both directions.
     """
-
     _df = df.copy(deep="True")
 
     if include_fifteen:
@@ -339,7 +332,6 @@ def get_df_transition_probabilities(tm, direction, save_include_fifteen=False):
             DataFrame consisting of transition probabilities according
             to specified direction.
     """
-
     df_trans_probs = tm[direction]
     df_trans_probs.columns, df_trans_probs.index = (
         [label.split("_")[0].capitalize() for label in list(df_trans_probs.columns)],

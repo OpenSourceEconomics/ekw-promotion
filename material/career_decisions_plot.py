@@ -11,7 +11,6 @@ import seaborn as sns
 from scipy.signal import savgol_filter
 
 SAVEPATH = "material"
-# RAW_DATA = os.environ["PROJECT_ROOT"] + "/career-decisions/career-decisions.raw"
 
 
 def make_grayscale_cmap(cmap):
@@ -29,14 +28,13 @@ def make_grayscale_cmap(cmap):
     cmap: 'matplotlib.colors.LinearSegmentedColormap
         Grayscale version color map of the given non-grayscale color map.
     """
-
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
 
     # Conversion of RGBA to grayscale lum by RGB_weight
     # RGB_weight given by http://alienryderflex.com/hsp.html
-    RGB_weight = [0.299, 0.587, 0.114]
-    lum = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
+    rgb_weight = [0.299, 0.587, 0.114]
+    lum = np.sqrt(np.dot(colors[:, :3] ** 2, rgb_weight))
     colors[:, :3] = lum[:, np.newaxis]
 
     return cmap.from_list(cmap.name + "_grayscale", colors, cmap.N)
@@ -84,7 +82,6 @@ def plot_sample_size(df, color="color"):
     savefig: pdf
         Figure saved as pdf file.
     """
-
     y = df.groupby("Period")["Age"].count().values
     x = df["Age"].unique()
 
@@ -118,7 +115,6 @@ def plot_decisions_by_age(df, color="color"):
     savefig: pdf
         Figure saved as pdf file.
     """
-
     fig, ax = plt.subplots()
 
     shares = (
@@ -176,7 +172,6 @@ def plot_wage_moments(df, savgol=False, color="color"):
        W.H. Press, S.A. Teukolsky, W.T. Vetterling, B.P. Flannery
        Cambridge University Press ISBN-13: 9780521880688
     """
-
     minimum_observations = 10
     wage_categories = ["blue_collar", "white_collar", "military"]
 
@@ -203,12 +198,11 @@ def plot_wage_moments(df, savgol=False, color="color"):
                 ]
             )
             non_sufficient_index = [
-                i for i, bool in enumerate(sufficient_boolean) if bool is False
+                i for i, bool_var in enumerate(sufficient_boolean) if bool_var is False
             ]
             _wage_moments = list(wage_moments[moment][wc])
             sufficient_wage_moments = list(compress(_wage_moments, sufficient_boolean))
 
-            # Application of savgol_filter
             if savgol:
                 y = list(savgol_filter(sufficient_wage_moments, 7, 3))
                 ext_sg = "-savgol"
@@ -264,7 +258,6 @@ def plot_initial_schooling(initial_schooling, color="color"):
     savefig: pdf
         Figure saved as pdf file.
     """
-
     fig, ax = plt.subplots()
     ax.bar(
         initial_schooling["years"],
