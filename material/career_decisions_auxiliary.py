@@ -3,7 +3,7 @@ from IPython.display import display_html
 
 
 def display_side_by_side(*args):
-    """Displays pd.DataFrames side by side in Jupyter notebooks"""
+    """Display pd.DataFrames side by side in Jupyter notebooks."""
 
     html_str = ""
     for df in args:
