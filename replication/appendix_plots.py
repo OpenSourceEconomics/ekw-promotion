@@ -1,4 +1,4 @@
-""""Plots for data appendix."""
+"""Plots for data appendix."""
 import sys
 
 from material.career_decisions_analysis import get_average_wages

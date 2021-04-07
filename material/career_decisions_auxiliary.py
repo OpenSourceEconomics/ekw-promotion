@@ -4,7 +4,6 @@ from IPython.display import display_html
 
 def display_side_by_side(*args):
     """Display pd.DataFrames side by side in Jupyter notebooks."""
-
     html_str = ""
     for df in args:
         html_str += df.to_html()
