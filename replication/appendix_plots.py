@@ -1,10 +1,5 @@
 import sys
 
-sys.path.insert(0, "material/")
-
-
-import pandas as pd
-
 from material.career_decisions_analysis import get_prepare_career_decisions_data
 from material.career_decisions_analysis import get_working_experience
 from material.career_decisions_analysis import get_choices
@@ -22,6 +17,7 @@ from material.career_decisions_plot import plot_transition_heatmap
 
 from material.career_decisions_auxiliary import display_side_by_side
 
+sys.path.insert(0, "material/")
 coloring = "color"
 
 df = get_prepare_career_decisions_data("material/career-decisions.raw")

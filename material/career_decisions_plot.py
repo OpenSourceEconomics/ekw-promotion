@@ -1,6 +1,5 @@
 """Figures for career decisions data."""
 import colorsys
-import os
 from itertools import compress
 
 import matplotlib.colors as mc
@@ -370,29 +369,3 @@ color_scheme = {
 }
 # Ordering OSE convention: blue-collar, white-collar, military, school, home
 labels = ["blue_collar", "white_collar", "military", "schooling", "home"]
-
-
-# Stand-alone creation of figures
-if __name__ == "__main__":
-    from career_decisions_analysis import get_prepare_career_decisions_data
-    from career_decisions_analysis import get_working_experience
-    from career_decisions_analysis import get_initial_schooling
-    from career_decisions_analysis import make_transition_matrix
-
-    df = get_prepare_career_decisions_data(RAW_DATA)
-    df = df.groupby("Identifier").apply(lambda x: get_working_experience(x))
-
-    for coloring in ["color", "bw"]:
-
-        plot_sample_size(df, coloring)
-
-        plot_decisions_by_age(df, coloring)
-
-        plot_wage_moments(df, savgol=True, color=coloring)
-        plot_wage_moments(df, savgol=False, color=coloring)
-
-        plot_initial_schooling(get_initial_schooling(df)[1], coloring)
-
-        plot_transition_heatmap(
-            make_transition_matrix(df), "origin_to_destination", coloring
-        )

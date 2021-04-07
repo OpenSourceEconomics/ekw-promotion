@@ -1,11 +1,8 @@
 """Analysis functions for career decisions data."""
-import os
-
 import numpy as np
 import pandas as pd
 
 SAVEPATH = "material"
-# RAW_DATA =
 
 
 def get_prepare_career_decisions_data(file):
@@ -372,25 +369,3 @@ def get_df_transition_probabilities(tm, direction, save_include_fifteen=False):
         )
 
     return df_trans_probs
-
-
-# Stand-alone export of tables
-if __name__ == "__main__":
-
-    df = get_prepare_career_decisions_data(RAW_DATA)
-    df = df.groupby("Identifier").apply(lambda x: get_working_experience(x))
-
-    get_choices(df)
-
-    get_average_wages(df)
-
-    get_initial_schooling(df)
-    get_initial_schooling_activity(df)
-
-    get_df_transition_probabilities(make_transition_matrix(df), "origin_to_destination")
-    get_df_transition_probabilities(
-        make_transition_matrix(df), "destination_from_origin"
-    )
-    get_df_transition_probabilities(
-        make_transition_matrix(df, include_fifteen=True), "origin_to_destination", True
-    )
