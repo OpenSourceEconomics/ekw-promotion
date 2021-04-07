@@ -334,6 +334,7 @@ def plot_transition_heatmap(
 
     fig.savefig(f"{SAVEPATH}/fig-heatmap-transitionprobs{ext}.pdf")
 
+
 _cmap = make_grayscale_cmap("copper")
 color_scheme = {
     "bw": {
