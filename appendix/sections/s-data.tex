@@ -55,7 +55,7 @@ The average wages in the blue-collar occupation are initially highest with about
 \subsubsection*{Initial schooling}
 
 Individuals that enter the model differ with respect to their unobservable type $\{e_{a,t}\}_{a \in \mathcal{A}}$ and the level of initial schooling. The following table and figure illustrate the distribution of initial schooling. Two-thirds of individuals ($67.15\%$) enter with 10 years of schooling, while $20.18 + 4.22 + 0.01 = 24.41\%$ of individuals have less than 10 years of schooling, and $7.5\%$ of individuals were 11 years in school. The average years of initial schooling in the sample amounts to 9.76 years.
-\input{../material/material-appendix/tab-initial-schooling}
+%\input{../material/material-appendix/tab-initial-schooling}
 \begin{figure}[h]\centering
 \caption{Distribution of initial schooling.}\label{fig:InitialSchooling}
 \includegraphics[scale=0.6]{material-appendix/fig-initial-schooling-bw}
@@ -65,17 +65,29 @@ The amount of schooling an individual obtains is an important determinant for li
 \input{../material/material-appendix/tab-initial-schooling-activity}
 Years spent in blue-collar occupations decrease with the initial level of schooling. While individuals with 7 years of initial schooling work on average 4.15 in a blue-collar occupation, individuals that have 11 years of schooling spend only 3.19 years in a blue-collar occupation. Years spent in white-collar occupations increase with the initial level of schooling. In particular, nearly no individual with only 7 years of schooling is occupied in a white-collar job. While individuals at the top distribution spend on average 1.21 years in white-collar ocucpations. The initial level of schooling is a strong predictor for additional schooling. While individuals who enter the model with only 7 years of schooling do not even spend 2 more month in school (on average), those with 11 years of initial schooling add on average 2.5 years. Notably, the descriptives are derived under the instance that the average duration of individuals in the sample differs by the level of initial schooling. Individuals with 7 years of initial schooling are observed for 9.4 periods, while individuals with 10 years of initial schooling are only observed for 9.16 years.
 
+\newpage
 \subsubsection*{Transition matrix}
-We illustrate two directions of transition probabilities. Table \ref{tab:TransitionProbabilitiesOriginToDestination} depicts the transition probabilities from the choice origin to the choice destination, this is to say, the percentage of individuals who are in an originating alternative in period $t$ (column) and will be in a destination alternative in period $t+1$ (row).
-\input{../material/material-appendix/tab-transition-probabilities-origin-to-destination}
-Table \ref{tab:TransitionProbabilitiesDestinationToOrigin} depicts the transition probabilities from the choice destination to the choice origin, this is to say, the percentage of individuals who are in a destinating alternative in period $t$ (column) and were in a certain originating alternative in period $t-1$ (row).
-\input{../material/material-appendix/tab-transition-probabilities-destination-to-origin}
+We illustrate two directions of transition probabilities. Table \ref{fig:TransitionProbabilitiesOriginToDestination} depicts the transition probabilities from the choice origin to the choice destination, this is to say, the percentage of individuals who are in an originating alternative in period $t$ (column) and will be in a destination alternative in period $t+1$ (row).
+\begin{figure}[h]\centering
+\caption{Transition probabilities from origin to destination.}\label{fig:TransitionProbabilitiesOriginToDestination}
+\includegraphics[scale=0.6]{material-appendix/fig-heatmap-transitionprobs-bw}
+\end{figure}
+%\input{../material/material-appendix/tab-transition-probabilities-origin-to-destination}
+Table \ref{fig:TransitionProbabilitiesDestinationToOrigin} depicts the transition probabilities from the choice destination to the choice origin, this is to say, the percentage of individuals who are in a destinating alternative in period $t$ (column) and were in a certain originating alternative in period $t-1$ (row).
+\begin{figure}[h]\centering
+\caption{Transition probabilities from destination to origin.}\label{fig:TransitionProbabilitiesDestinationToOrigin}
+\includegraphics[scale=0.6]{material-appendix/fig-heatmap-transitionprobs-from-origin-bw}
+\end{figure}
+%\input{../material/material-appendix/tab-transition-probabilities-destination-to-origin}
 The diagonal indicates that choices are quite persistent. There is limited mobility between white and blue collar occupations. However, more people transition from a white-collar to a blue-collar occupation than from a white-collar to a blue-collar occupation. Blue-collar workers are twice more likely to transition into home than white-collar workers. Individuals who are not in school at a certain will most likely not return to school.
 
 
 In the original data set choices at age 15 are not available. Consequently, the transition probabilities reported in Table 2 from \citet{Keane.1997} cannot be replicated. However, their transition probabilities can be approximated by imputing schooling exprience for individuals at age 15. We use the following rule: If an individual at age 16 has 9 or more years of schooling, then he was in school at age 15. If an individual at age 16 has less than 9 years of schooling, then he was not in school at age 15. The new transition probabilities for schooling are closer to those reported in \citet{Keane.1997}.
-\input{../material/material-appendix/tab-transition-probabilities-imputing}
-
+\begin{figure}[h]\centering
+\caption{Transition probabilities from origin to destination with imputed schooling exprience for individuals at age 15.}\label{fig:TransitionProbabilitiesImputing}
+\includegraphics[scale=0.6]{material-appendix/fig-heatmap-transitionprobs-bw-15-included}
+\end{figure}
+%\input{../material/material-appendix/tab-transition-probabilities-imputing}
 
 \newpage
 \subsection{Model fit}
