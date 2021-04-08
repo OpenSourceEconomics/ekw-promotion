@@ -44,6 +44,8 @@ get_df_transition_probabilities(make_transition_matrix(df), "origin_to_destinati
 get_df_transition_probabilities(make_transition_matrix(df), "destination_from_origin")
 
 plot_transition_heatmap(make_transition_matrix(df), "origin_to_destination", coloring)
+plot_transition_heatmap(make_transition_matrix(df), "destination_from_origin", coloring)
+
 
 # Important Note on Transition Probabilities
 make_transition_matrix(df, include_fifteen=True)
@@ -52,4 +54,8 @@ get_df_transition_probabilities(
     make_transition_matrix(df, include_fifteen=True),
     "origin_to_destination",
     save_include_fifteen=True,
+)
+
+plot_transition_heatmap(
+    make_transition_matrix(df, include_fifteen=True), "origin_to_destination", coloring
 )
