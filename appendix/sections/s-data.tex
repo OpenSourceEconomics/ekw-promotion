@@ -9,14 +9,14 @@ Within Figure \ref{fig:SampleSizePerAge} we depict the sample sizes with respect
 
 \begin{figure}[h]\centering
 \caption{Sample size with respect to the age.}\label{fig:SampleSizePerAge}
-\includegraphics[scale=0.6]{fig-sample-size-bw}
+\includegraphics[scale=0.6]{material-appendix/fig-sample-size-bw}
 \end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Basic structure}
 %-------------------------------------------------------------------------------
 First we explore the basic structure of the dataset. All individuals enter the model initially at the same age and are then observed for a varying number of consecutive years. Each year, the individual’s decision to work in either a white or blue collar occupation, attend school, enroll in the military, or remain at home is recorded. If working, the dataset potentially also contains that year’s wage as a full-time equivalent. We show the data structure for an exemplary individual in Table \ref{tab:BasicDataStructure}.
-\input{../material/tab-basic-data-structure}
+\input{../material/material-appendix/tab-basic-data-structure}
 
 %-------------------------------------------------------------------------------
 \subsection{Basic descriptives}
@@ -26,8 +26,8 @@ We are able to reproduce the descriptive statistics from \citet{Keane.1997} and 
 \subsubsection*{Choices}
 Table \ref{tab:TotalChoices} depicts the total and Table \ref{tab:RelativeChoices} the relative choice frequencies of the individuals clustered by age. %Figure \ref{fig:RelativeChoices} shows a more visually appealing version of the relative choice frequencies. 
 
-\input{../material/tab-total-choices}
-\input{../material/tab-relative-choices}
+\input{../material/material-appendix/tab-total-choices}
+\input{../material/material-appendix/tab-relative-choices}
 %\begin{figure}[h]\centering
 %\caption{Sample size with respect to the age.}\label{fig:RelativeChoices}
 %\includegraphics[scale=0.6]{fig-observed-data_choices}
@@ -39,42 +39,42 @@ We reproduce the average real wages by occupation in Table \ref{tab:AverageWages
 
 The average wages in the blue-collar occupation are initially highest with about \$10,286, while wages in the white-collar occupation and military start around \$9,000. However, wages in the white-collar occupation increase steeper over time and overtake blue-collar wages around age 21. At the end of the observation period, wages in the white-collar occupation are about $50\%$ higher compared to blue-collar wages with \$32,756 as opposed to only \$20,739. Military wages remain lowest throughout.
 \newpage
-\input{../material/tab-average-wages}
+\input{../material/material-appendix/tab-average-wages}
 %\begin{figure}[h]\centering
 %	\caption{Wage moments by age.}\label{fig:WageMoments}
-%	\subfloat[White-collar]{\scalebox{0.38}{\includegraphics{fig-observed-wage-mean}}}\hspace{0.3cm}
-%	\subfloat[Military]{\scalebox{0.38}{\includegraphics{fig-observed-wage-std}}} 
+%	\subfloat[White-collar]{\scalebox{0.38}{\includegraphics{material-appendix/fig-observed-wage-mean}}}\hspace{0.3cm}
+%	\subfloat[Military]{\scalebox{0.38}{\includegraphics{material-appendix/fig-observed-wage-std}}} 
 %	\floatfoot{\footnotesize \textbf{Note}: In the calculation of wage moments we have excluded data points (age) for which only less than 10 observations were available.}\\
 %\end{figure}
 \begin{figure}[h]\centering
 \caption{Wage standard deviation by age.}\label{fig:WageMoments}
-\includegraphics[scale=0.6]{fig-observed-wage-std-bw}
+\includegraphics[scale=0.6]{material-appendix/fig-observed-wage-std-bw}
 \floatfoot{\footnotesize \textbf{Note}: In the calculation of wage moments we have excluded data points (age) for which only less than 10 observations were available.}
 \end{figure}
 
 \subsubsection*{Initial schooling}
 
 Individuals that enter the model differ with respect to their unobservable type $\{e_{a,t}\}_{a \in \mathcal{A}}$ and the level of initial schooling. The following table and figure illustrate the distribution of initial schooling. Two-thirds of individuals ($67.15\%$) enter with 10 years of schooling, while $20.18 + 4.22 + 0.01 = 24.41\%$ of individuals have less than 10 years of schooling, and $7.5\%$ of individuals were 11 years in school. The average years of initial schooling in the sample amounts to 9.76 years.
-\input{../material/tab-initial-schooling}
+\input{../material/material-appendix/tab-initial-schooling}
 \begin{figure}[h]\centering
 \caption{Distribution of initial schooling.}\label{fig:InitialSchooling}
-\includegraphics[scale=0.6]{fig-initial-schooling-bw}
+\includegraphics[scale=0.6]{material-appendix/fig-initial-schooling-bw}
 \end{figure}
 
 The amount of schooling an individual obtains is an important determinant for life cycle decisions. The following table illustrates the years spent on each activity by the initial level of schooling.
-\input{../material/tab-initial-schooling-activity}
+\input{../material/material-appendix/tab-initial-schooling-activity}
 Years spent in blue-collar occupations decrease with the initial level of schooling. While individuals with 7 years of initial schooling work on average 4.15 in a blue-collar occupation, individuals that have 11 years of schooling spend only 3.19 years in a blue-collar occupation. Years spent in white-collar occupations increase with the initial level of schooling. In particular, nearly no individual with only 7 years of schooling is occupied in a white-collar job. While individuals at the top distribution spend on average 1.21 years in white-collar ocucpations. The initial level of schooling is a strong predictor for additional schooling. While individuals who enter the model with only 7 years of schooling do not even spend 2 more month in school (on average), those with 11 years of initial schooling add on average 2.5 years. Notably, the descriptives are derived under the instance that the average duration of individuals in the sample differs by the level of initial schooling. Individuals with 7 years of initial schooling are observed for 9.4 periods, while individuals with 10 years of initial schooling are only observed for 9.16 years.
 
 \subsubsection*{Transition matrix}
 We illustrate two directions of transition probabilities. Table \ref{tab:TransitionProbabilitiesOriginToDestination} depicts the transition probabilities from the choice origin to the choice destination, this is to say, the percentage of individuals who are in an originating alternative in period $t$ (column) and will be in a destination alternative in period $t+1$ (row).
-\input{../material/tab-transition-probabilities-origin-to-destination}
+\input{../material/material-appendix/tab-transition-probabilities-origin-to-destination}
 Table \ref{tab:TransitionProbabilitiesDestinationToOrigin} depicts the transition probabilities from the choice destination to the choice origin, this is to say, the percentage of individuals who are in a destinating alternative in period $t$ (column) and were in a certain originating alternative in period $t-1$ (row).
-\input{../material/tab-transition-probabilities-destination-to-origin}
+\input{../material/material-appendix/tab-transition-probabilities-destination-to-origin}
 The diagonal indicates that choices are quite persistent. There is limited mobility between white and blue collar occupations. However, more people transition from a white-collar to a blue-collar occupation than from a white-collar to a blue-collar occupation. Blue-collar workers are twice more likely to transition into home than white-collar workers. Individuals who are not in school at a certain will most likely not return to school.
 
 
 In the original data set choices at age 15 are not available. Consequently, the transition probabilities reported in Table 2 from \citet{Keane.1997} cannot be replicated. However, their transition probabilities can be approximated by imputing schooling exprience for individuals at age 15. We use the following rule: If an individual at age 16 has 9 or more years of schooling, then he was in school at age 15. If an individual at age 16 has less than 9 years of schooling, then he was not in school at age 15. The new transition probabilities for schooling are closer to those reported in \citet{Keane.1997}.
-\input{../material/tab-transition-probabilities-imputing}
+\input{../material/material-appendix/tab-transition-probabilities-imputing}
 
 
 \newpage
