@@ -1,0 +1,100 @@
+
+\makeatletter
+\newcommand{\Tw}{\strip@pt\textwidth}
+\makeatother
+\titlegraphic{%
+	\makebox(\Tw,0)[rt]{%
+		\makebox(\Tw,185.5)[rb]{%
+			\includegraphics[height=1.33cm]{ose-logo-rgb.pdf}\:\:%
+		}%
+	}%
+	\vspace{-12pt}%
+}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
+
+
+\usepackage{subfloat}
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{verbatim}
+
+%\newcommand{\U}{\mathcal{U}}	%Uniform Distribution
+\newcommand{\G}{\mathcal{G}}
+% \newcommand{\dd}{\mathup{d}}  % Differential d
+\usepackage{physics}  % Provides, among others, a \dd command for derivatives/differentials
+\renewcommand{\diffd}{\mathup{d}}
+
+%\newcommand{\explanation}[1]{%
+%        \raisebox{0pt}[0pt][0pt]{%
+%                \parbox[t]{0.75\textwidth}{%
+%                        \textcolor{OSEBlue}{#1}%
+%                }%
+%        }%
+%}
+
+% Shape of \theta
+% Inspired by https://tex.stackexchange.com/questions/251888/slant-character-manually-in-tex-coding -->
+\newcommand{\slanted}[1]{{%
+    \tikz[baseline=(fakeitalic.base), xslant=tan(11.25)]%
+        \node[inner sep=0pt, xslant=tan(11.25)](fakeitalic){#1};%
+}}
+\renewcommand{\thetaLGR}{{%
+    \mathord{\textup{\fontencoding{LGR}\selectfont{\kern-0.075em}\slanted{j}{\kern-0.075em}}}%
+}}
+\renewcommand{\vartheta}{{%
+    \mathord{\textformath{\fontencoding{LGR}\selectfont j}}%
+}}
+% <--
+
+\AtBeginSection[]{{%
+	\setbeamercolor{background canvas}{bg=OSEBlue, fg=white}%
+	\colorlet{SpotColor}{white}%
+	\begin{frame}[standout, c]{~}
+		%\vfill
+		\usebeamerfont{title}\hypersetup{linkcolor=white}%
+		\insertsection
+		%\vfill
+	\end{frame}%
+	\colorlet{SpotColor}{OSEBlue}%
+}}
+
+
+%\newcommand{\E}{\mathrm{E}}		%Expectation
+\newcommand{\Ind}{\,\mathbb{I}\,}	%Indicator Function
+%\newcommand{\ind}{{\textbf{I}}}
+\newcommand{\btheta}{\bm{\theta}}
+\newcommand{\bTheta}{\bm{\Theta}}
+%\newcommand{\N}{\mathcal{N}}		%Expectation
+
+\usepackage{algorithmicx}
+\usepackage{algpseudocode,tabularx,ragged2e}
+\newcolumntype{C}{>{\centering\arraybackslash}X} % centered "X" column
+\newcolumntype{L}{>{\arraybackslash}X} % centered "X" column
+\newcommand{\M}{\mathcal{M}}
+
+\usepackage{algorithmicx}
+
+\usepackage{algorithm}
+
+\let\Algorithm\algorithm
+\renewcommand\algorithm[1][]{\Algorithm[#1]\setstretch{1.5}}
+
+% OSE colors
+
+%\newcommand{\argmin}{\arg\min}
+%\newcommand{\argmax}{\arg\max}
+
+\usepackage{tikz}
+\usetikzlibrary{trees,shapes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+\tikzset{forestyle/.style = {rectangle, thick, minimum width = 5cm, minimum height = 0.5cm, text width = 4.5cm, outer sep = 1mm},
+	pre/.style={<-, shorten <=1pt, >=stealth, ultra thick},
+	extend/.style={<-,dashed, shorten <=1pt, >=stealth, ultra thick}}

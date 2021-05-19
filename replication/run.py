@@ -78,10 +78,10 @@ def plot_decisions_by_age(df_subset, color="color"):
         stacked=True, ax=ax, width=0.8, color=list(color_scheme[color].values())[:-1]
     )
 
-    ax.set_xlabel("Age", labelpad=5, fontsize=30)
+    ax.set_xlabel("Age", labelpad=20, fontsize=30)
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 
-    ax.set_ylabel("Share (in %)", fontsize=30)
+    ax.set_ylabel("Share (in %)", labelpad=20, fontsize=30)
     ax.set_ylim(0, 100)
     ax.yaxis.get_major_ticks()[0].set_visible(False)
 
@@ -113,7 +113,7 @@ def plot_average_wage(df_subset, color="colors"):
 
     ax.set_ylim(5, 30)
 
-    ax.set_xlabel("Age", labelpad=5, fontsize=30)
+    ax.set_xlabel("Age", labelpad=20, fontsize=30)
     ax.legend(prop={"size": 26})
     ax.xaxis.set_ticks(range(11))
     ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
@@ -139,8 +139,8 @@ def plot_mechanism_subsidy(subsidies, levels, color="color"):
     ax.set_ylim([10, 16])
 
     ax.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter("{x:,.0f}"))
-    ax.set_xlabel("Tuition subsidy", labelpad=5, fontsize=30)
-    ax.set_xlim([None, 4000])
+    ax.set_xlabel("Tuition subsidy", labelpad=20, fontsize=30)
+    ax.set_xlim([None, 4150])
 
     fig.savefig(f"fig-policy-forecast{color_scheme[color]['extension']}")
 
@@ -151,13 +151,13 @@ def plot_mechanism_time(deltas, levels, color="color"):
 
     ax.fill_between(deltas, levels, color=color_scheme[color]["blue_collar"])
 
-    ax.xaxis.set_major_locator(plt.MaxNLocator(5))
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.set_ylabel("Average final schooling", labelpad=20, fontsize=30)
     ax.set_ylim([10, 16])
 
-    ax.set_xlabel(r"$\delta$", labelpad=5, fontsize=30)
-    ax.set_xlim([0.91, 0.95])
+    ax.xaxis.set_major_locator(plt.MaxNLocator(5))
+    ax.set_xlabel(r"$\delta$", labelpad=20, fontsize=30)
+    ax.set_xlim([0.9075, 0.9575])
 
     fig.savefig(f"fig-economic-mechanism{color_scheme[color]['extension']}")
 
@@ -227,7 +227,7 @@ def plot_model_fit(df, color="color"):
         else:
             ax.legend(loc="upper left", prop={"size": 26})
 
-        ax.set_xlabel("Age", labelpad=5, fontsize=30)
+        ax.set_xlabel("Age", labelpad=20, fontsize=30)
         ax.xaxis.set_ticks(range(11))
         ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
         ax.yaxis.get_major_ticks()[0].set_visible(False)
@@ -303,10 +303,11 @@ plot_mechanism_subsidy(subsidies, levels, "bw")
 deltas = (
     df_exploration.loc["delta", :].index.get_level_values("Change").to_numpy(np.float)
 )
+deltas = deltas[deltas != 0.96]
 levels = df_exploration.loc[("delta", slice(None)), "level"].to_numpy(np.float)
+levels = levels[levels != 16.5442]
 plot_mechanism_time(deltas, levels)
 plot_mechanism_time(deltas, levels, "bw")
-
 # TODO: This part was added after the fact for the presentation. Students turned out to be
 #  particularly interested in the sample size over time.
 df = rp.get_example_model("kw_97_extended", with_data=True)[2]
@@ -319,7 +320,7 @@ ax.get_yaxis().set_major_formatter(
 )
 ax.set_xticklabels(np.arange(16, 27, 1), rotation="horizontal")
 ax.yaxis.get_major_ticks()[0].set_visible(False)
-ax.set_xlabel("Age", labelpad=5, fontsize=30)
+ax.set_xlabel("Age", labelpad=20, fontsize=30)
 ax.set_ylabel("Sample size", labelpad=20, fontsize=30)
 ax.set_ylim(0, 1400)
 ax.bar(range(11), df.groupby("Period")["Choice"].count())
