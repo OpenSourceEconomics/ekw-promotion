@@ -1,4 +1,4 @@
-.. |logo| image:: https://raw.githubusercontent.com/OpenSourceEconomics/ose-corporate-design/master/logos/OSE_logo_no_type_RGB.svg
+.. |logo| image:: https://raw.githubusercontent.com/OpenSourceEconomics/ose-logos/main/OSE_logo_no_type_RGB.svg
    :height: 25px
 
 |logo| EKW promotion
@@ -30,6 +30,6 @@ This material is under constant development but you can access its most recent v
 Supported by
 ------------
 
-.. image:: https://raw.githubusercontent.com/OpenSourceEconomics/ose-corporate-design/master/logos/OSE_logo_RGB.svg
+.. image:: https://raw.githubusercontent.com/OpenSourceEconomics/ose-logos/main/OSE_logo_RGB.svg
     :width: 22 %
     :target: https://github.com/OpenSourceEconomics

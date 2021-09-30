@@ -13,14 +13,15 @@ jobs:
       with:
            activate-environment: ekw-promotion
            environment-file: configurations/environment.yml
-           python-version: 3.6
            auto-activate-base: false
+           
     - name: install latex dependencies
       run: |
         sudo apt-get update
         sudo apt-get install texlive-full
         sudo snap install pdftk
         sudo texhash
+        
     - name: compile latex
       shell: bash -l {0}
       run: |
